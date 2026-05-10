@@ -16,24 +16,24 @@
 
 export const siteConfig = {
   companyName: "Your Company",
-  tagline: "Engineered for Mission Outcomes",
+  tagline: "AI Systems for Mission Outcomes",
 
   hero: {
-    eyebrow: "Enterprise Mission Delivery",
-    headline: "Engineered for National Mission Outcomes",
+    eyebrow: "AI-Enabled Mission Delivery",
+    headline: "Operational AI for Critical Programs",
     subtext:
-      "Integrated professional services, engineering delivery, and mission support logistics for organizations requiring precision, speed, and accountability.",
+      "We design, deploy, and operate secure AI-enabled systems that accelerate decisions, improve resilience, and deliver measurable outcomes across complex government and enterprise missions.",
     trustBadge:
-      "Procurement-ready delivery teams trusted by mission-critical stakeholders",
+      "Procurement-ready AI delivery teams trusted by mission-critical stakeholders",
     ctaPrimary: "Get in Touch",
     ctaSecondary: "Explore Capabilities",
   },
 
   about: {
     missionStatement:
-      "Deliver trusted, secure, and high-performance services that improve mission outcomes.",
+      "Deliver secure, responsible, and high-performance AI services that improve mission outcomes.",
     visionStatement:
-      "Be the partner known for precision execution, innovation, and operational resilience.",
+      "Be the trusted partner for AI-enabled transformation, precision execution, and operational resilience.",
     values: [
       "Integrity",
       "Stewardship",
@@ -42,10 +42,10 @@ export const siteConfig = {
       "Collaboration",
     ],
     paragraphs: [
-      "Your Company is a mission-oriented enterprise delivering technical and operational excellence across complex environments.",
-      "Our teams bring disciplined execution, transparent reporting, and measurable performance outcomes to every engagement.",
-      "From acquisition support to engineering modernization and logistics readiness, we align each workstream to client mission priorities.",
-      "We are built to scale responsibly with a culture rooted in accountability and stewardship.",
+      "Your Company is a mission-oriented enterprise delivering AI, data, and engineering excellence across complex environments.",
+      "Our teams combine machine intelligence with disciplined program execution, transparent reporting, and measurable performance outcomes.",
+      "From acquisition support and engineering modernization to logistics readiness, we embed AI where it creates clear operational value.",
+      "We scale responsibly through accountable governance, human oversight, and security-first delivery practices.",
     ],
   },
 
@@ -55,21 +55,38 @@ export const siteConfig = {
     address: "123 Enterprise Way, Washington, DC 20001",
   },
 
+  media: {
+    aboutHeroImageUrl:
+      "https://images.unsplash.com/photo-1485827404703-89b55fcc595e?auto=format&fit=crop&w=1800&q=80",
+    caseStudiesHeroImageUrl:
+      "https://images.unsplash.com/photo-1518773553398-650c184e0bb3?auto=format&fit=crop&w=1800&q=80",
+    caseStudyDetailFallbackImageUrl:
+      "https://images.unsplash.com/photo-1677442136019-21780ecad995?auto=format&fit=crop&w=1800&q=80",
+    careersHeroImageUrl:
+      "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=1800&q=80",
+    contactHeroImageUrl:
+      "https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&w=1800&q=80",
+    contractsHeroImageUrl:
+      "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&fit=crop&w=1800&q=80",
+    privacyHeroImageUrl:
+      "https://images.unsplash.com/photo-1563013544-824ae1b704d3?auto=format&fit=crop&w=1800&q=80",
+  },
+
   social: {
     linkedin: "#",
   },
 
   footer: {
-    statement: "Mission-grade delivery for enterprise operations.",
+    statement: "AI-enabled delivery for mission-critical operations.",
     ctaHeadline:
-      "Connect with Your Company to align procurement-ready teams to mission-critical outcomes.",
+      "Connect with Your Company to align procurement-ready AI teams to mission-critical outcomes.",
     ctaButtonLabel: "Schedule Briefing",
   },
 
   globalImpact: {
-    eyebrow: "Global Impact",
-    headline: "Operational Reach Across High-Consequence Environments",
-    body: "Our teams support operations across multi-location programs, integrating local execution with centralized controls and contract-level transparency.",
+    eyebrow: "AI Impact",
+    headline: "Operational Intelligence Across High-Consequence Environments",
+    body: "Our teams deliver AI-powered operations across distributed programs, combining local execution with centralized intelligence, governance, and contract-level transparency.",
     stats: [
       { label: "Countries", value: "22" },
       { label: "Operating Sites", value: "64" },
@@ -79,15 +96,15 @@ export const siteConfig = {
 
   whoWeAre: {
     eyebrow: "Who We Are",
-    headline: "A High-Trust Enterprise Delivery Partner",
-    body: "We combine enterprise program leadership, secure engineering execution, and mission logistics capabilities into one accountable operating model. Every engagement is built around measurable outcomes, contract confidence, and mission continuity.",
+    headline: "A High-Trust AI Delivery Partner",
+    body: "We combine enterprise program leadership, secure AI engineering, and mission logistics into one accountable operating model. Every engagement is built around measurable outcomes, contract confidence, and mission continuity.",
     linkLabel: "Learn More About Us",
   },
 
   careers: {
     headline: "Careers",
     subtext:
-      "Join a team that builds mission-ready systems and supports programs that matter.",
+      "Join a team building secure AI systems and mission-ready operations that matter.",
     perks: [
       "Competitive Compensation",
       "Health Benefits",
@@ -97,8 +114,8 @@ export const siteConfig = {
   },
 
   meta: {
-    title: "Ghost Enterprise Authority Platform",
+    title: "Ghost AI Mission Platform",
     description:
-      "Enterprise-grade authority website and admin platform for mission-focused organizations.",
+      "AI-forward authority website and admin platform for mission-focused organizations.",
   },
 };

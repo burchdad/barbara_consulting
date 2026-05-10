@@ -1,6 +1,7 @@
 import bcrypt from "bcryptjs";
 import { PrismaClient } from "@prisma/client";
 import { siteConfig } from "../lib/config/site";
+import { backgroundConfig } from "../lib/config/background";
 import { leadershipSeed } from "../lib/data/leadership";
 import { caseStudiesSeed } from "../lib/data/caseStudies";
 import { contractsSeed } from "../lib/data/contracts";
@@ -35,8 +36,21 @@ async function main() {
       address: siteConfig.contact.address,
       linkedInUrl: siteConfig.social.linkedin,
       footerStatement: siteConfig.footer.statement,
+      heroEyebrow: siteConfig.hero.eyebrow,
       heroHeadline: siteConfig.hero.headline,
+      heroTrustBadge: siteConfig.hero.trustBadge,
       heroSubheadline: siteConfig.hero.subtext,
+      aboutHeroImageUrl: siteConfig.media.aboutHeroImageUrl,
+      caseStudiesHeroImageUrl: siteConfig.media.caseStudiesHeroImageUrl,
+      caseStudyDetailFallbackImageUrl: siteConfig.media.caseStudyDetailFallbackImageUrl,
+      careersHeroImageUrl: siteConfig.media.careersHeroImageUrl,
+      contactHeroImageUrl: siteConfig.media.contactHeroImageUrl,
+      contractsHeroImageUrl: siteConfig.media.contractsHeroImageUrl,
+      privacyHeroImageUrl: siteConfig.media.privacyHeroImageUrl,
+      homepageSceneType: backgroundConfig.type,
+      homepageSceneGlow: backgroundConfig.glow,
+      homepageSceneParticles: backgroundConfig.particles,
+      homepageSceneParallax: backgroundConfig.parallax,
     },
   });
 

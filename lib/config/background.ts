@@ -11,11 +11,25 @@
  *   "mesh"        – abstract gradient mesh (future)
  */
 
+export const sceneTypes = ["earth", "grid", "cityscape", "mesh"] as const;
+export type SceneType = (typeof sceneTypes)[number];
+
+export const sceneGlows = ["red", "blue", "green", "gold"] as const;
+export type SceneGlow = (typeof sceneGlows)[number];
+
+export function normalizeSceneType(value: string | null | undefined): SceneType {
+  return sceneTypes.includes(value as SceneType) ? (value as SceneType) : "grid";
+}
+
+export function normalizeSceneGlow(value: string | null | undefined): SceneGlow {
+  return sceneGlows.includes(value as SceneGlow) ? (value as SceneGlow) : "blue";
+}
+
 export const backgroundConfig = {
-  type: "earth" as "earth" | "grid" | "cityscape" | "mesh",
+  type: "grid" as SceneType,
 
   /** Primary glow / accent color injected into the scene. */
-  glow: "red" as "red" | "blue" | "green" | "gold",
+  glow: "blue" as SceneGlow,
 
   /** Show animated floating particles. */
   particles: true,

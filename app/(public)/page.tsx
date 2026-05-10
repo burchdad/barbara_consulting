@@ -69,9 +69,18 @@ export default async function HomePage() {
 
   const servicesToRender = services.length ? services : fallbackServices;
   const partnersToRender = partners.length ? partners : fallbackPartners;
+  const heroEyebrow = settings?.heroEyebrow ?? siteConfig.hero.eyebrow;
+  const heroTrustBadge = settings?.heroTrustBadge ?? siteConfig.hero.trustBadge;
 
   return (
-    <HomepageCinematicScene>
+    <HomepageCinematicScene
+      sceneSettings={{
+        type: settings?.homepageSceneType,
+        glow: settings?.homepageSceneGlow,
+        particles: settings?.homepageSceneParticles,
+        parallax: settings?.homepageSceneParallax,
+      }}
+    >
       <section className="relative isolate border-b border-white/10">
         <div className="absolute inset-0 bg-gradient-to-b from-black/48 via-black/70 to-black/32" />
         <Section className="relative z-10 py-20 lg:py-24">
@@ -79,7 +88,7 @@ export default async function HomePage() {
             <div className="hero-parallax-group max-w-5xl">
               <div className="hero-hud-grid" />
               <p className="text-xs font-semibold uppercase tracking-[0.34em] text-red-400">
-                {siteConfig.hero.eyebrow}
+                {heroEyebrow}
               </p>
               <h1 className="mt-4 text-5xl font-black uppercase leading-[0.95] text-white sm:text-6xl lg:text-7xl">
                 {settings?.heroHeadline ?? siteConfig.hero.headline}
@@ -104,7 +113,7 @@ export default async function HomePage() {
 
               <div className="mt-8 inline-flex items-center gap-2 rounded-full border border-white/20 bg-black/60 px-4 py-2 text-xs text-zinc-200">
                 <BadgeCheck size={14} className="text-red-400" />
-                {siteConfig.hero.trustBadge}
+                {heroTrustBadge}
               </div>
 
               <div className="mt-10 flex items-center gap-2 text-xs uppercase tracking-[0.18em] text-zinc-400">
@@ -333,10 +342,10 @@ export default async function HomePage() {
 
       <Section className="py-12 lg:py-14">
         <Reveal>
-          <p className="text-xs uppercase tracking-[0.22em] text-red-400">Trusted Execution Ecosystem</p>
-          <h2 className="mt-2 text-4xl font-black uppercase">Mission Partners</h2>
+          <p className="text-xs uppercase tracking-[0.22em] text-red-400">AI Execution Ecosystem</p>
+          <h2 className="mt-2 text-4xl font-black uppercase">Mission and AI Partners</h2>
           <p className="mt-2 max-w-3xl text-sm text-zinc-300">
-            Alliance-backed delivery network supporting federal modernization, sustainment, and mission continuity.
+            Alliance-backed delivery network supporting AI modernization, sustainment, and mission continuity.
           </p>
           <div className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
             {partnersToRender.map((partner, index) => (

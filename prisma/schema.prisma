@@ -12,6 +12,20 @@ enum SubmissionStatus {
   read
 }
 
+enum SceneType {
+  earth
+  grid
+  cityscape
+  mesh
+}
+
+enum SceneGlow {
+  red
+  blue
+  green
+  gold
+}
+
 model User {
   id           String   @id @default(cuid())
   email        String   @unique
@@ -145,8 +159,21 @@ model GlobalSetting {
   address        String
   linkedInUrl    String?
   footerStatement String
+  heroEyebrow    String
   heroHeadline   String
+  heroTrustBadge String
   heroSubheadline String
+  aboutHeroImageUrl String?
+  caseStudiesHeroImageUrl String?
+  caseStudyDetailFallbackImageUrl String?
+  careersHeroImageUrl String?
+  contactHeroImageUrl String?
+  contractsHeroImageUrl String?
+  privacyHeroImageUrl String?
+  homepageSceneType SceneType @default(grid)
+  homepageSceneGlow SceneGlow @default(blue)
+  homepageSceneParticles Boolean @default(true)
+  homepageSceneParallax Boolean @default(true)
   createdAt      DateTime @default(now())
   updatedAt      DateTime @updatedAt
 }

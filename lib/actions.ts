@@ -350,8 +350,21 @@ export async function updateGlobalSettingsAction(formData: FormData) {
     address: formData.get("address"),
     linkedInUrl: String(formData.get("linkedInUrl") || ""),
     footerStatement: formData.get("footerStatement"),
+    heroEyebrow: formData.get("heroEyebrow"),
     heroHeadline: formData.get("heroHeadline"),
+    heroTrustBadge: formData.get("heroTrustBadge"),
     heroSubheadline: formData.get("heroSubheadline"),
+    aboutHeroImageUrl: String(formData.get("aboutHeroImageUrl") || ""),
+    caseStudiesHeroImageUrl: String(formData.get("caseStudiesHeroImageUrl") || ""),
+    caseStudyDetailFallbackImageUrl: String(formData.get("caseStudyDetailFallbackImageUrl") || ""),
+    careersHeroImageUrl: String(formData.get("careersHeroImageUrl") || ""),
+    contactHeroImageUrl: String(formData.get("contactHeroImageUrl") || ""),
+    contractsHeroImageUrl: String(formData.get("contractsHeroImageUrl") || ""),
+    privacyHeroImageUrl: String(formData.get("privacyHeroImageUrl") || ""),
+    homepageSceneType: String(formData.get("homepageSceneType") || "grid"),
+    homepageSceneGlow: String(formData.get("homepageSceneGlow") || "blue"),
+    homepageSceneParticles: toBool(formData.get("homepageSceneParticles")),
+    homepageSceneParallax: toBool(formData.get("homepageSceneParallax")),
   });
   if (!parsed.success) return;
 
@@ -363,5 +376,9 @@ export async function updateGlobalSettingsAction(formData: FormData) {
   }
 
   revalidatePath("/");
+  revalidatePath("/about");
+  revalidatePath("/case-studies");
+  revalidatePath("/careers");
+  revalidatePath("/contact");
   revalidatePath("/admin/settings");
 }

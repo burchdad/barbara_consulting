@@ -81,12 +81,17 @@ Prisma models implemented:
 Copy `.env.example` to `.env` and configure:
 
 ```bash
-DATABASE_URL="postgresql://postgres:postgres@localhost:5432/consult_prototype?schema=public"
-NEXTAUTH_SECRET="replace-with-strong-random-string"
-NEXTAUTH_URL="http://localhost:3000"
+DATABASE_URL="postgresql://postgres:postgres@localhost:5432/ghost_enterprise?schema=public"
+ADMIN_SESSION_SECRET="replace-with-strong-random-string"
 ADMIN_EMAIL="admin@company.com"
 ADMIN_PASSWORD="ChangeMe123!"
+NODE_ENV="development"
 ```
+
+Notes:
+
+- `ADMIN_SESSION_SECRET` is used to sign admin session cookies.
+- `NEXTAUTH_SECRET` is still accepted as a fallback for backward compatibility, but `ADMIN_SESSION_SECRET` is recommended.
 
 ## Local Development
 
@@ -120,6 +125,18 @@ npm run db:seed
 npm run dev
 ```
 
+6. Health check endpoint:
+
+```bash
+curl http://localhost:3000/api/health
+```
+
+7. Run deployment preflight checks:
+
+```bash
+npm run preflight
+```
+
 ## Deployment Notes
 
 ### Vercel (frontend)
@@ -130,6 +147,57 @@ npm run dev
 - Prisma Client is generated automatically during install/build via `postinstall` and the `build` script.
 - Build command: `npm run build`
 - Start command: `npm run start`
+
+### Railway (app + backend)
+
+Use this flow when you deploy this app and Postgres in Railway:
+
+1. Provision PostgreSQL in Railway.
+2. Set environment variables in Railway service:
+
+```bash
+DATABASE_URL=<railway-postgres-url>
+ADMIN_SESSION_SECRET=<strong-random-value>
+ADMIN_EMAIL=<admin-email>
+ADMIN_PASSWORD=<admin-password>
+NODE_ENV=production
+```
+
+3. Build command:
+
+```bash
+npm run build
+```
+
+4. Start command:
+
+```bash
+npm run start
+```
+
+5. Run one-time DB initialization after first deploy:
+
+```bash
+npm run db:bootstrap
+```
+
+6. Use health check endpoint in Railway:
+
+```bash
+/api/health
+```
+
+7. For later schema changes, run:
+
+```bash
+npm run db:push
+```
+
+8. Run preflight checks in Railway shell before promoting deploy:
+
+```bash
+npm run preflight
+```
 
 ### PostgreSQL (Railway/Supabase/Neon/etc.)
 
@@ -153,3 +221,4 @@ npm run lint
 - This implementation intentionally uses original content and placeholder media.
 - Public pages are data-driven and render from database-seeded content.
 - Admin login credentials are seeded from `ADMIN_EMAIL` and `ADMIN_PASSWORD`.
+- Public and deployment readiness check is available at `/api/health`.

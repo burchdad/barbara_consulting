@@ -111,8 +111,21 @@ export const globalSettingSchema = z.object({
   address: z.string().min(5),
   linkedInUrl: z.string().url().optional().or(z.literal("")),
   footerStatement: z.string().min(10),
+  heroEyebrow: z.string().min(3),
   heroHeadline: z.string().min(10),
+  heroTrustBadge: z.string().min(10),
   heroSubheadline: z.string().min(10),
+  aboutHeroImageUrl: z.string().url().optional().or(z.literal("")),
+  caseStudiesHeroImageUrl: z.string().url().optional().or(z.literal("")),
+  caseStudyDetailFallbackImageUrl: z.string().url().optional().or(z.literal("")),
+  careersHeroImageUrl: z.string().url().optional().or(z.literal("")),
+  contactHeroImageUrl: z.string().url().optional().or(z.literal("")),
+  contractsHeroImageUrl: z.string().url().optional().or(z.literal("")),
+  privacyHeroImageUrl: z.string().url().optional().or(z.literal("")),
+  homepageSceneType: z.enum(["earth", "grid", "cityscape", "mesh"]).default("grid"),
+  homepageSceneGlow: z.enum(["red", "blue", "green", "gold"]).default("blue"),
+  homepageSceneParticles: z.boolean().default(true),
+  homepageSceneParallax: z.boolean().default(true),
 });
 
 export function toList(value: FormDataEntryValue | null): string[] {

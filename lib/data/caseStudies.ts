@@ -9,20 +9,21 @@ export const caseStudiesSeed = [
     title: "Modernizing Cross-Agency Data Pipelines",
     slug: "cross-agency-data-modernization",
     summary:
-      "Unified reporting across multiple mission systems with secure data exchange and measurable uptime gains.",
+      "Unified reporting across mission systems with secure AI-driven data exchange and measurable uptime gains.",
     iconUrl: "https://images.unsplash.com/photo-1523961131990-5ea7c61b2107",
     imageUrl: "https://images.unsplash.com/photo-1451187580459-43490279c0fa",
     highlights: [
       "99.97% platform availability",
       "Reduced reporting cycle by 61%",
+      "AI-assisted anomaly detection",
       "FedRAMP-compatible controls",
     ],
     challenge:
       "The client operated disconnected reporting systems that delayed operational decisions.",
     solution:
-      "Implemented a governed integration fabric with automated validation, lineage, and role-based access.",
+      "Implemented a governed integration fabric with automated validation, AI-assisted anomaly triage, lineage, and role-based access.",
     results:
-      "Decision makers received near real-time dashboards with reduced reconciliation effort.",
+      "Decision makers received near real-time AI-enhanced dashboards with reduced reconciliation effort.",
     metrics: [
       "61% faster reporting",
       "$4.3M annualized cost avoidance",
@@ -36,11 +37,12 @@ export const caseStudiesSeed = [
     title: "Enterprise Service Desk Stabilization",
     slug: "service-desk-stabilization",
     summary:
-      "Rebuilt ITSM workflows and SLAs to restore confidence for a high-volume enterprise support environment.",
+      "Rebuilt ITSM workflows with AI triage and SLA automation to restore confidence in a high-volume support environment.",
     iconUrl: "https://images.unsplash.com/photo-1518770660439-4636190af475",
     imageUrl: "https://images.unsplash.com/photo-1527443154391-507e9dc6c5cc",
     highlights: [
       "42% faster ticket resolution",
+      "AI-assisted issue classification",
       "Increased first-call resolution",
       "Improved end-user satisfaction",
     ],
@@ -58,18 +60,19 @@ export const caseStudiesSeed = [
     title: "Rapid Logistics Readiness Program",
     slug: "rapid-logistics-readiness",
     summary:
-      "Improved mission readiness through smarter inventory controls and partner coordination.",
+      "Improved mission readiness through AI-enhanced inventory controls and partner coordination.",
     iconUrl: "https://images.unsplash.com/photo-1489515217757-5fd1be406fef",
     imageUrl: "https://images.unsplash.com/photo-1473448912268-2022ce9509d8",
     highlights: [
       "Reduced stockout events",
+      "Predictive replenishment alerts",
       "Faster mobilization cycles",
       "Audit-ready records",
     ],
     challenge:
       "Fragmented logistics visibility caused delays in critical operations.",
     solution:
-      "Introduced centralized readiness dashboards and predictive replenishment workflows.",
+      "Introduced centralized readiness dashboards, AI demand forecasting, and predictive replenishment workflows.",
     results:
       "Program improved readiness confidence and decreased emergency procurement events.",
     metrics: [
