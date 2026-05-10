@@ -1,0 +1,152 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum SubmissionStatus {
+  unread
+  read
+}
+
+model User {
+  id           String   @id @default(cuid())
+  email        String   @unique
+  name         String?
+  passwordHash String
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+}
+
+model Job {
+  id              String   @id @default(cuid())
+  title           String
+  slug            String   @unique
+  department      String
+  location        String
+  jobType         String
+  employmentType  String
+  description     String
+  responsibilities Json
+  requirements    Json
+  benefits        Json
+  applyUrl        String?
+  isPublished     Boolean  @default(false)
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+}
+
+model CaseStudy {
+  id          String   @id @default(cuid())
+  title       String
+  slug        String   @unique
+  summary     String
+  iconUrl     String?
+  imageUrl    String?
+  highlights  Json
+  challenge   String
+  solution    String
+  results     String
+  metrics     Json
+  isFeatured  Boolean  @default(false)
+  isPublished Boolean  @default(false)
+  displayOrder Int     @default(0)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model Contract {
+  id             String   @id @default(cuid())
+  name           String
+  contractNumber String
+  agency         String
+  period         String
+  contractType   String
+  availability   String
+  programManager String
+  email          String
+  phone          String
+  summary        String
+  scope          String
+  isPublished    Boolean  @default(true)
+  displayOrder   Int      @default(0)
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+}
+
+model LeadershipMember {
+  id          String   @id @default(cuid())
+  name        String
+  title       String
+  photoUrl    String?
+  shortBio    String
+  fullBio     String
+  linkedInUrl String?
+  displayOrder Int     @default(0)
+  isPublished Boolean  @default(true)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model Testimonial {
+  id          String   @id @default(cuid())
+  quote       String
+  authorName  String
+  authorTitle String
+  organization String
+  isPublished Boolean  @default(true)
+  displayOrder Int     @default(0)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model ServiceItem {
+  id          String   @id @default(cuid())
+  category    String
+  title       String
+  description String
+  bulletItems Json
+  displayOrder Int     @default(0)
+  isPublished Boolean  @default(true)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model MissionPartner {
+  id          String   @id @default(cuid())
+  name        String
+  logoUrl     String?
+  websiteUrl  String?
+  displayOrder Int     @default(0)
+  isPublished Boolean  @default(true)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model ContactSubmission {
+  id        String           @id @default(cuid())
+  name      String
+  email     String
+  phone     String?
+  message   String
+  status    SubmissionStatus @default(unread)
+  createdAt DateTime         @default(now())
+}
+
+model GlobalSetting {
+  id             String   @id @default(cuid())
+  companyName    String
+  tagline        String
+  email          String
+  phone          String
+  address        String
+  linkedInUrl    String?
+  footerStatement String
+  heroHeadline   String
+  heroSubheadline String
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+}
