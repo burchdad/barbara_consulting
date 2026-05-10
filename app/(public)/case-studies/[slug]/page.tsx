@@ -1,15 +1,12 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { Section } from "@/components/ui/section";
-import { prisma } from "@/lib/prisma";
 import { siteConfig } from "@/lib/config/site";
+import { getPublicCaseStudyDetailData } from "@/lib/site-data";
 
 export default async function CaseStudyDetailPage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
-  const [study, settings] = await Promise.all([
-    prisma.caseStudy.findUnique({ where: { slug } }),
-    prisma.globalSetting.findFirst(),
-  ]);
+  const { study, settings } = await getPublicCaseStudyDetailData(slug);
 
   if (!study || !study.isPublished) {
     notFound();

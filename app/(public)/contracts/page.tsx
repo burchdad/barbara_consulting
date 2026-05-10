@@ -1,12 +1,9 @@
 import { Section } from "@/components/ui/section";
-import { prisma } from "@/lib/prisma";
 import { siteConfig } from "@/lib/config/site";
+import { getPublicContractsPageData } from "@/lib/site-data";
 
 export default async function ContractsPage() {
-  const [contracts, settings] = await Promise.all([
-    prisma.contract.findMany({ where: { isPublished: true }, orderBy: { displayOrder: "asc" } }),
-    prisma.globalSetting.findFirst(),
-  ]);
+  const { contracts, settings } = await getPublicContractsPageData();
   const heroImageUrl = settings?.contractsHeroImageUrl || siteConfig.media.contractsHeroImageUrl;
 
   return (

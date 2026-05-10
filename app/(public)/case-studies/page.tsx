@@ -1,17 +1,11 @@
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import { Section } from "@/components/ui/section";
-import { prisma } from "@/lib/prisma";
 import { siteConfig } from "@/lib/config/site";
+import { getPublicCaseStudiesPageData } from "@/lib/site-data";
 
 export default async function CaseStudiesPage() {
-  const [studies, settings] = await Promise.all([
-    prisma.caseStudy.findMany({
-      where: { isPublished: true },
-      orderBy: { displayOrder: "asc" },
-    }),
-    prisma.globalSetting.findFirst(),
-  ]);
+  const { studies, settings } = await getPublicCaseStudiesPageData();
   const heroImageUrl = settings?.caseStudiesHeroImageUrl || siteConfig.media.caseStudiesHeroImageUrl;
 
   return (

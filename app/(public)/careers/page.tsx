@@ -1,25 +1,10 @@
 import { Section } from "@/components/ui/section";
 import { CareersClient } from "@/components/public/careers-client";
-import { prisma } from "@/lib/prisma";
 import { siteConfig } from "@/lib/config/site";
+import { getPublicCareersPageData } from "@/lib/site-data";
 
 export default async function CareersPage() {
-  const [jobs, settings] = await Promise.all([
-    prisma.job.findMany({
-      where: { isPublished: true },
-      orderBy: { createdAt: "desc" },
-      select: {
-        id: true,
-        title: true,
-        location: true,
-        jobType: true,
-        employmentType: true,
-        applyUrl: true,
-        description: true,
-      },
-    }),
-    prisma.globalSetting.findFirst(),
-  ]);
+  const { jobs, settings } = await getPublicCareersPageData();
   const heroImageUrl = settings?.careersHeroImageUrl || siteConfig.media.careersHeroImageUrl;
 
   return (
