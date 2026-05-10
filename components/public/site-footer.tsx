@@ -1,11 +1,11 @@
 import Link from "next/link";
 import { Globe, Mail, MapPin, Phone } from "lucide-react";
 import { Reveal } from "@/components/public/reveal";
-import { prisma } from "@/lib/prisma";
+import { getGlobalSettings } from "@/lib/site-data";
 import { siteConfig } from "@/lib/config/site";
 
 export async function SiteFooter() {
-  const settings = await prisma.globalSetting.findFirst();
+  const settings = await getGlobalSettings();
 
   return (
     <footer className="relative border-t border-red-500/20 bg-[#050505]">
