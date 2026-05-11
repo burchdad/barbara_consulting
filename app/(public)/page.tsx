@@ -63,13 +63,14 @@ export default async function HomePage() {
 
   return (
     <HomepageCinematicScene sceneSettings={{ type: "mesh", glow: "blue", particles: true, parallax: true }}>
-      <section className="relative isolate min-h-screen overflow-hidden border-b border-white/10">
+      <section className="relative isolate min-h-screen overflow-hidden">
         <video className="absolute inset-0 h-full w-full object-cover" autoPlay muted loop playsInline preload="metadata">
           <source src="/greyaivideo.mp4" type="video/mp4" />
         </video>
         <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(2,6,23,0.96)_0%,rgba(2,6,23,0.80)_44%,rgba(2,6,23,0.46)_100%)]" />
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_78%_22%,rgba(34,211,238,0.20),transparent_30%),radial-gradient(circle_at_18%_78%,rgba(168,85,247,0.16),transparent_28%)]" />
-        <Section className="relative z-10 flex min-h-screen items-end pb-16 pt-36 lg:pb-24">
+        <div className="absolute inset-x-0 bottom-0 h-56 bg-gradient-to-b from-transparent via-slate-950/70 to-slate-950" />
+        <Section className="relative z-10 flex min-h-screen items-end pb-24 pt-36 lg:pb-32">
           <Reveal>
             <div className="max-w-6xl">
               <img src="/greylogo.png" alt="Gray Matters Technology - Sage Tech Solutions" className="mb-10 h-auto w-[220px] sm:w-[300px] lg:w-[420px]" />
@@ -83,9 +84,15 @@ export default async function HomePage() {
         </Section>
       </section>
 
-      <Section className="py-8 lg:py-10"><Reveal staggerChildren><div className="grid gap-3 sm:grid-cols-2 xl:grid-cols-6">{metrics.map((item, index) => <Reveal key={item.label} delay={0.04 + index * 0.03}><article className="ai-glass-card rounded-2xl border border-white/10 p-5"><p className="text-[11px] uppercase tracking-[0.16em] text-cyan-100/60">{item.label}</p><p className="mt-3 text-4xl font-black text-white"><AnimatedCounter value={item.value} prefix={item.prefix} suffix={item.suffix} /></p><p className="mt-2 text-[10px] uppercase tracking-[0.18em] text-slate-500">{item.meta}</p></article></Reveal>)}</div></Reveal></Section>
+      <Section className="-mt-24 pb-10 pt-0 lg:-mt-28 lg:pb-14">
+        <Reveal staggerChildren>
+          <div className="relative z-20 grid gap-3 border-y border-cyan-200/10 bg-slate-950/35 py-5 backdrop-blur-md sm:grid-cols-2 xl:grid-cols-6">
+            {metrics.map((item, index) => <Reveal key={item.label} delay={0.04 + index * 0.03}><article className="px-5 py-4"><p className="text-[11px] uppercase tracking-[0.16em] text-cyan-100/60">{item.label}</p><p className="mt-3 text-4xl font-black text-white"><AnimatedCounter value={item.value} prefix={item.prefix} suffix={item.suffix} /></p><p className="mt-2 text-[10px] uppercase tracking-[0.18em] text-slate-500">{item.meta}</p></article></Reveal>)}
+          </div>
+        </Reveal>
+      </Section>
 
-      <Section className="grid gap-12 py-20 lg:grid-cols-[.8fr_1.2fr] lg:py-28">
+      <Section className="grid gap-12 pt-10 lg:grid-cols-[.8fr_1.2fr] lg:pt-14 lg:pb-28">
         <Reveal><p className="text-xs uppercase tracking-[0.32em] text-cyan-300">AI-Native Public Sector Innovation</p><h2 className="mt-4 text-5xl font-black uppercase leading-[0.95] sm:text-6xl">Where government experience meets intelligent modernization.</h2></Reveal>
         <Reveal delay={0.05}><div className="grid gap-5 text-lg leading-8 text-slate-300"><p>Gray Matters Technology Services helps agencies and mission-driven organizations design intelligent systems that improve decisions, reduce operational friction, and modernize high-value workflows.</p><p>The experience is intentionally structured, scannable, and procurement-friendly while still feeling like a modern AI technology firm.</p><div className="mt-4 grid gap-3 sm:grid-cols-3"><span className="rounded-full border border-cyan-200/20 px-4 py-3 text-center text-xs uppercase tracking-[0.16em] text-cyan-100">AI Readiness</span><span className="rounded-full border border-cyan-200/20 px-4 py-3 text-center text-xs uppercase tracking-[0.16em] text-cyan-100">Secure Automation</span><span className="rounded-full border border-cyan-200/20 px-4 py-3 text-center text-xs uppercase tracking-[0.16em] text-cyan-100">Mission ROI</span></div></div></Reveal>
       </Section>
