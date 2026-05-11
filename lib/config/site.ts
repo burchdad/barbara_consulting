@@ -1,26 +1,14 @@
 /**
  * Global site configuration.
- *
- * This is the single source of truth for all static branding,
- * copy, and contact details used as fallbacks when the database
- * GlobalSetting record is not yet populated.
- *
- * HOW TO REBRAND FOR A NEW CLIENT
- * --------------------------------
- * 1. Update every field below with the client's real values.
- * 2. Run `npm run db:seed` to push the values into the database
- *    so the admin CMS reflects the new data immediately.
- * 3. Swap /public/images/logo.* with the client logo.
- * 4. Adjust the `primary` color token in globals.css if needed.
  */
 
 export const siteConfig = {
-  companyName: "Your Company",
+  companyName: "Gray Matters Technology- Sage Tech Solutions",
   tagline: "AI Systems for Mission Outcomes",
 
   hero: {
     eyebrow: "AI-Enabled Mission Delivery",
-    headline: "Operational AI for Critical Programs",
+    headline: "We help create intelligent systems",
     subtext:
       "We design, deploy, and operate secure AI-enabled systems that accelerate decisions, improve resilience, and deliver measurable outcomes across complex government and enterprise missions.",
     trustBadge:
@@ -42,7 +30,7 @@ export const siteConfig = {
       "Collaboration",
     ],
     paragraphs: [
-      "Your Company is a mission-oriented enterprise delivering AI, data, and engineering excellence across complex environments.",
+      "Gray Matters Technology- Sage Tech Solutions is a mission-oriented enterprise delivering AI, data, and engineering excellence across complex environments.",
       "Our teams combine machine intelligence with disciplined program execution, transparent reporting, and measurable performance outcomes.",
       "From acquisition support and engineering modernization to logistics readiness, we embed AI where it creates clear operational value.",
       "We scale responsibly through accountable governance, human oversight, and security-first delivery practices.",
@@ -79,7 +67,7 @@ export const siteConfig = {
   footer: {
     statement: "AI-enabled delivery for mission-critical operations.",
     ctaHeadline:
-      "Connect with Your Company to align procurement-ready AI teams to mission-critical outcomes.",
+      "Connect with Gray Matters Technology- Sage Tech Solutions to align procurement-ready AI teams to mission-critical outcomes.",
     ctaButtonLabel: "Schedule Briefing",
   },
 
@@ -114,7 +102,7 @@ export const siteConfig = {
   },
 
   meta: {
-    title: "Ghost AI Mission Platform",
+    title: "Gray Matters Technology- Sage Tech Solutions",
     description:
       "AI-forward authority website and admin platform for mission-focused organizations.",
   },
