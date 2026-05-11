@@ -48,7 +48,10 @@ export default async function HomePage() {
   return (
     <HomepageCinematicScene sceneSettings={{ type: "mesh", glow: "blue", particles: true, parallax: true }}>
       <section className="relative isolate min-h-screen overflow-hidden border-b border-white/10">
-        <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(2,6,23,0.94)_0%,rgba(2,6,23,0.74)_44%,rgba(2,6,23,0.34)_100%),url('https://images.unsplash.com/photo-1497366754035-f200968a6e72?auto=format&fit=crop&w=2200&q=80')] bg-cover bg-center" />
+        <video className="absolute inset-0 h-full w-full object-cover" autoPlay muted loop playsInline preload="metadata">
+          <source src="/greyvideo.mp4" type="video/mp4" />
+        </video>
+        <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(2,6,23,0.96)_0%,rgba(2,6,23,0.80)_44%,rgba(2,6,23,0.46)_100%)]" />
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_78%_22%,rgba(34,211,238,0.20),transparent_30%),radial-gradient(circle_at_18%_78%,rgba(168,85,247,0.16),transparent_28%)]" />
         <Section className="relative z-10 grid min-h-screen items-end gap-12 pb-16 pt-36 lg:grid-cols-[1.1fr_.9fr] lg:pb-24">
           <Reveal>
