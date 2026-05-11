@@ -79,7 +79,41 @@ export default async function HomePage() {
 
       <Section className="py-20 lg:py-28"><Reveal><div className="rounded-[2.5rem] border border-white/10 bg-[linear-gradient(120deg,rgba(15,23,42,0.92),rgba(2,6,23,0.76)),url('https://images.unsplash.com/photo-1551836022-d5d88e9218df?auto=format&fit=crop&w=2200&q=80')] bg-cover bg-center p-8 sm:p-14 lg:p-20"><div className="max-w-4xl"><p className="text-xs uppercase tracking-[0.3em] text-cyan-200">Management Team</p><h2 className="mt-4 text-5xl font-black uppercase leading-[0.95] sm:text-7xl">Leadership with public-sector depth and AI-forward vision.</h2><Link href="/about" className="mt-8 inline-flex items-center gap-2 text-sm font-black uppercase tracking-[0.18em] text-cyan-200 hover:text-white">Meet Leadership <ArrowRight size={16} /></Link></div></div></Reveal><div className="mt-8 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">{leadership.slice(0, 4).map((leader, index) => <Reveal key={leader.id} delay={0.05 + index * 0.04}><article className="overflow-hidden rounded-[1.5rem] border border-white/10 bg-white/[0.035]"><div className="h-72 bg-cover bg-center grayscale transition duration-500 hover:grayscale-0" style={{ backgroundImage: `url(${leader.photoUrl || "https://images.unsplash.com/photo-1521119989659-a83eee488004"})` }} /><div className="p-5"><p className="text-xl font-bold uppercase text-white">{leader.name}</p><p className="text-sm text-cyan-100/60">{leader.title}</p><p className="mt-3 text-sm leading-6 text-slate-300">{leader.shortBio}</p></div></article></Reveal>)}</div></Section>
 
-      <Section className="py-20 lg:py-28"><Reveal><div className="grid gap-8 lg:grid-cols-2"><div><p className="text-xs uppercase tracking-[0.3em] text-cyan-300">Growth Timeline</p><h2 className="mt-3 text-5xl font-black uppercase sm:text-6xl">Built for the next era of government technology.</h2></div><div className="space-y-4">{timeline.map((item) => <article key={item.year} className="rounded-2xl border border-white/10 bg-white/[0.035] p-5"><p className="text-sm font-bold text-cyan-200">{item.year}</p><h3 className="mt-1 text-2xl font-bold uppercase text-white">{item.title}</h3><p className="mt-2 text-sm leading-6 text-slate-300">{item.detail}</p></article>)}</div></div></Reveal></Section>
+      <Section className="relative overflow-hidden py-24 lg:py-32">
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_18%_18%,rgba(34,211,238,0.12),transparent_28%),linear-gradient(180deg,rgba(2,6,23,0.25),rgba(0,0,0,0.72))]" />
+        <Reveal>
+          <div className="relative mx-auto max-w-7xl">
+            <p className="text-xs uppercase tracking-[0.38em] text-cyan-300">Company History</p>
+            <h2 className="mt-4 text-5xl font-black uppercase leading-none text-white sm:text-7xl">Growth Timeline</h2>
+            <div className="mt-14 hidden lg:block">
+              <div className="relative h-px bg-white/15">
+                <div className="absolute left-0 top-0 h-px w-1/2 bg-gradient-to-r from-cyan-300/70 to-transparent" />
+                {timeline.map((item, index) => (
+                  <div key={item.year} className="absolute top-1/2 -translate-y-1/2" style={{ left: `${(index / Math.max(timeline.length - 1, 1)) * 100}%` }}>
+                    <div className="h-4 w-4 rounded-full border border-cyan-200/60 bg-slate-950 shadow-[0_0_28px_rgba(34,211,238,0.45)]" />
+                    <p className="mt-4 -translate-x-1/3 text-sm font-bold tracking-[0.18em] text-slate-400">{item.year}</p>
+                  </div>
+                ))}
+              </div>
+            </div>
+            <div className="mt-20 grid gap-12 lg:grid-cols-[.38fr_.62fr] lg:items-center">
+              <div>
+                <p className="text-[8rem] font-black leading-none tracking-tight text-cyan-300/12 sm:text-[11rem] lg:text-[13rem]">{timeline[2]?.year ?? timeline[0]?.year}</p>
+                <h3 className="-mt-10 text-4xl font-black uppercase leading-tight text-white sm:text-5xl">{timeline[2]?.title ?? timeline[0]?.title}</h3>
+                <div className="mt-8 h-px w-full bg-gradient-to-r from-cyan-300/70 to-transparent" />
+              </div>
+              <div>
+                <p className="max-w-3xl text-2xl leading-10 text-slate-200">{timeline[2]?.detail ?? timeline[0]?.detail}</p>
+                <div className="mt-8 flex gap-4">
+                  <button className="rounded-full border border-white/15 px-6 py-2 text-xs font-bold uppercase tracking-[0.2em] text-slate-300">← Prev</button>
+                  <button className="rounded-full border border-white/15 px-6 py-2 text-xs font-bold uppercase tracking-[0.2em] text-slate-300">Next →</button>
+                  <span className="ml-auto text-sm tracking-[0.2em] text-slate-500">03 / 06</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </Reveal>
+      </Section>
 
       <Section className="py-20 lg:py-28"><Reveal><div className="grid gap-5 lg:grid-cols-2"><div className="rounded-[2rem] border border-white/10 bg-white/[0.04] p-8"><Landmark className="text-cyan-200" /><h2 className="mt-5 text-5xl font-black uppercase">Contract Vehicles</h2><div className="mt-8 space-y-4">{contracts.slice(0, 3).map((contract) => <div key={contract.id} className="border-t border-white/10 pt-4"><h3 className="text-xl font-bold uppercase text-white">{contract.name}</h3><p className="text-sm text-slate-300">{contract.agency}</p></div>)}</div><Link href="/contracts" className="mt-8 inline-flex items-center gap-2 text-sm font-black uppercase tracking-[0.16em] text-cyan-200">View Contracts <ArrowRight size={14} /></Link></div><div className="rounded-[2rem] border border-white/10 bg-white/[0.04] p-8"><Network className="text-cyan-200" /><h2 className="mt-5 text-5xl font-black uppercase">Case Studies</h2><div className="mt-8 space-y-4">{cases.slice(0, 3).map((study) => <div key={study.id} className="border-t border-white/10 pt-4"><p className="text-xs uppercase tracking-[0.14em] text-cyan-200">{caseOutcomeBadge(study)}</p><h3 className="mt-1 text-xl font-bold uppercase text-white">{study.title}</h3><p className="mt-2 text-sm text-slate-300">{study.summary}</p></div>)}</div><Link href="/case-studies" className="mt-8 inline-flex items-center gap-2 text-sm font-black uppercase tracking-[0.16em] text-cyan-200">Explore Results <ArrowRight size={14} /></Link></div></div></Reveal></Section>
 
