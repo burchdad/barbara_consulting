@@ -1,7 +1,6 @@
 import Link from "next/link";
 import {
   ArrowRight,
-  BadgeCheck,
   BriefcaseBusiness,
   CircuitBoard,
   Landmark,
@@ -42,8 +41,7 @@ export default async function HomePage() {
   const { settings, services, partners, contracts, cases, leadership, testimonials } = await getPublishedData();
   const servicesToRender = services.length ? services : fallbackServices;
   const partnersToRender = partners.length ? partners : fallbackPartners;
-  const heroHeadline = settings?.heroHeadline ?? "AI Strategy for the Agencies Moving America Forward";
-  const heroSubheadline = settings?.heroSubheadline ?? "Gray Matters Technology Services brings executive strategy, AI modernization, acquisition insight, and cost-saving innovation to federal and state government missions.";
+  const heroHeadline = "We help create intelligent systems";
 
   return (
     <HomepageCinematicScene sceneSettings={{ type: "mesh", glow: "blue", particles: true, parallax: true }}>
@@ -53,27 +51,14 @@ export default async function HomePage() {
         </video>
         <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(2,6,23,0.96)_0%,rgba(2,6,23,0.80)_44%,rgba(2,6,23,0.46)_100%)]" />
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_78%_22%,rgba(34,211,238,0.20),transparent_30%),radial-gradient(circle_at_18%_78%,rgba(168,85,247,0.16),transparent_28%)]" />
-        <Section className="relative z-10 grid min-h-screen items-end gap-12 pb-16 pt-36 lg:grid-cols-[1.1fr_.9fr] lg:pb-24">
+        <Section className="relative z-10 flex min-h-screen items-end pb-16 pt-36 lg:pb-24">
           <Reveal>
             <div className="max-w-6xl">
-              <p className="text-xs font-semibold uppercase tracking-[0.42em] text-cyan-200">SDVOSB • Woman-Owned • AI Modernization</p>
-              <h1 className="mt-6 max-w-7xl text-6xl font-black uppercase leading-[0.88] text-white sm:text-7xl lg:text-8xl 2xl:text-[9rem]">{heroHeadline}</h1>
-              <p className="mt-8 max-w-3xl text-xl leading-8 text-slate-200">{heroSubheadline}</p>
+              <h1 className="max-w-7xl text-6xl font-black uppercase leading-[0.88] text-white sm:text-7xl lg:text-8xl 2xl:text-[9rem]">{heroHeadline}</h1>
               <div className="mt-10 flex flex-wrap gap-4">
                 <Link href="/contact" className="premium-button rounded-full bg-white px-8 py-4 text-sm font-black uppercase tracking-[0.18em] text-slate-950 transition hover:bg-cyan-200">Start a Strategic Conversation</Link>
                 <Link href="/case-studies" className="premium-button rounded-full border border-white/35 bg-white/5 px-8 py-4 text-sm font-black uppercase tracking-[0.18em] text-white backdrop-blur transition hover:border-cyan-200 hover:text-cyan-100">Explore Capabilities</Link>
               </div>
-            </div>
-          </Reveal>
-          <Reveal delay={0.08}>
-            <div className="rounded-[2rem] border border-white/15 bg-white/[0.07] p-6 shadow-2xl backdrop-blur-xl">
-              <p className="text-xs uppercase tracking-[0.28em] text-cyan-200">Executive AI Brief</p>
-              <div className="mt-6 grid gap-4">
-                {["AI strategy and readiness", "Federal acquisition intelligence", "Cost-saving modernization", "Secure mission operations"].map((item) => (
-                  <div key={item} className="flex items-center gap-3 border-b border-white/10 pb-4 text-lg font-semibold text-white"><BadgeCheck className="text-cyan-200" size={18} />{item}</div>
-                ))}
-              </div>
-              <p className="mt-6 text-sm leading-6 text-slate-300">A premium consulting experience for agencies and partners ready to modernize with clarity, governance, and measurable outcomes.</p>
             </div>
           </Reveal>
         </Section>
