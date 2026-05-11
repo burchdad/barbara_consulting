@@ -4,7 +4,6 @@ import {
   BriefcaseBusiness,
   CircuitBoard,
   Landmark,
-  Network,
   Quote,
   ShieldCheck,
   Sparkles,
@@ -28,17 +27,8 @@ function categoryIcon(category: string) {
   return <BriefcaseBusiness size={18} />;
 }
 
-function caseOutcomeBadge(study: { metrics: unknown; results: string }) {
-  if (study.metrics && typeof study.metrics === "object" && !Array.isArray(study.metrics)) {
-    const [firstKey] = Object.keys(study.metrics as Record<string, unknown>);
-    if (firstKey) return firstKey;
-  }
-  const trimmed = study.results.split(".")[0]?.trim();
-  return trimmed.length > 48 ? "Documented Outcomes" : trimmed || "Documented Outcomes";
-}
-
 export default async function HomePage() {
-  const { settings, services, partners, contracts, cases, leadership, testimonials } = await getPublishedData();
+  const { settings, services, partners, contracts, leadership, testimonials } = await getPublishedData();
   const servicesToRender = services.length ? services : fallbackServices;
   const partnersToRender = partners.length ? partners : fallbackPartners;
   const heroHeadline = "We help create intelligent systems";
@@ -58,7 +48,7 @@ export default async function HomePage() {
               <h1 className="max-w-7xl text-6xl font-black uppercase leading-[0.88] text-white sm:text-7xl lg:text-8xl 2xl:text-[9rem]">{heroHeadline}</h1>
               <div className="mt-10 flex flex-wrap gap-4">
                 <Link href="/contact" className="premium-button rounded-full bg-white px-8 py-4 text-sm font-black uppercase tracking-[0.18em] text-slate-950 transition hover:bg-cyan-200">Start a Strategic Conversation</Link>
-                <Link href="/case-studies" className="premium-button rounded-full border border-white/35 bg-white/5 px-8 py-4 text-sm font-black uppercase tracking-[0.18em] text-white backdrop-blur transition hover:border-cyan-200 hover:text-cyan-100">Explore Capabilities</Link>
+                <Link href="/services" className="premium-button rounded-full border border-white/35 bg-white/5 px-8 py-4 text-sm font-black uppercase tracking-[0.18em] text-white backdrop-blur transition hover:border-cyan-200 hover:text-cyan-100">Explore Capabilities</Link>
               </div>
             </div>
           </Reveal>
@@ -85,37 +75,13 @@ export default async function HomePage() {
           <div className="relative mx-auto max-w-7xl">
             <p className="text-xs uppercase tracking-[0.38em] text-cyan-300">Company History</p>
             <h2 className="mt-4 text-5xl font-black uppercase leading-none text-white sm:text-7xl">Growth Timeline</h2>
-            <div className="mt-14 hidden lg:block">
-              <div className="relative h-px bg-white/15">
-                <div className="absolute left-0 top-0 h-px w-1/2 bg-gradient-to-r from-cyan-300/70 to-transparent" />
-                {timeline.map((item, index) => (
-                  <div key={item.year} className="absolute top-1/2 -translate-y-1/2" style={{ left: `${(index / Math.max(timeline.length - 1, 1)) * 100}%` }}>
-                    <div className="h-4 w-4 rounded-full border border-cyan-200/60 bg-slate-950 shadow-[0_0_28px_rgba(34,211,238,0.45)]" />
-                    <p className="mt-4 -translate-x-1/3 text-sm font-bold tracking-[0.18em] text-slate-400">{item.year}</p>
-                  </div>
-                ))}
-              </div>
-            </div>
-            <div className="mt-20 grid gap-12 lg:grid-cols-[.38fr_.62fr] lg:items-center">
-              <div>
-                <p className="text-[8rem] font-black leading-none tracking-tight text-cyan-300/12 sm:text-[11rem] lg:text-[13rem]">{timeline[2]?.year ?? timeline[0]?.year}</p>
-                <h3 className="-mt-10 text-4xl font-black uppercase leading-tight text-white sm:text-5xl">{timeline[2]?.title ?? timeline[0]?.title}</h3>
-                <div className="mt-8 h-px w-full bg-gradient-to-r from-cyan-300/70 to-transparent" />
-              </div>
-              <div>
-                <p className="max-w-3xl text-2xl leading-10 text-slate-200">{timeline[2]?.detail ?? timeline[0]?.detail}</p>
-                <div className="mt-8 flex gap-4">
-                  <button className="rounded-full border border-white/15 px-6 py-2 text-xs font-bold uppercase tracking-[0.2em] text-slate-300">← Prev</button>
-                  <button className="rounded-full border border-white/15 px-6 py-2 text-xs font-bold uppercase tracking-[0.2em] text-slate-300">Next →</button>
-                  <span className="ml-auto text-sm tracking-[0.2em] text-slate-500">03 / 06</span>
-                </div>
-              </div>
-            </div>
+            <div className="mt-14 hidden lg:block"><div className="relative h-px bg-white/15"><div className="absolute left-0 top-0 h-px w-1/2 bg-gradient-to-r from-cyan-300/70 to-transparent" />{timeline.map((item, index) => <div key={item.year} className="absolute top-1/2 -translate-y-1/2" style={{ left: `${(index / Math.max(timeline.length - 1, 1)) * 100}%` }}><div className="h-4 w-4 rounded-full border border-cyan-200/60 bg-slate-950 shadow-[0_0_28px_rgba(34,211,238,0.45)]" /><p className="mt-4 -translate-x-1/3 text-sm font-bold tracking-[0.18em] text-slate-400">{item.year}</p></div>)}</div></div>
+            <div className="mt-20 grid gap-12 lg:grid-cols-[.38fr_.62fr] lg:items-center"><div><p className="text-[8rem] font-black leading-none tracking-tight text-cyan-300/12 sm:text-[11rem] lg:text-[13rem]">{timeline[2]?.year ?? timeline[0]?.year}</p><h3 className="-mt-10 text-4xl font-black uppercase leading-tight text-white sm:text-5xl">{timeline[2]?.title ?? timeline[0]?.title}</h3><div className="mt-8 h-px w-full bg-gradient-to-r from-cyan-300/70 to-transparent" /></div><div><p className="max-w-3xl text-2xl leading-10 text-slate-200">{timeline[2]?.detail ?? timeline[0]?.detail}</p><div className="mt-8 flex gap-4"><button className="rounded-full border border-white/15 px-6 py-2 text-xs font-bold uppercase tracking-[0.2em] text-slate-300">← Prev</button><button className="rounded-full border border-white/15 px-6 py-2 text-xs font-bold uppercase tracking-[0.2em] text-slate-300">Next →</button><span className="ml-auto text-sm tracking-[0.2em] text-slate-500">03 / 06</span></div></div></div>
           </div>
         </Reveal>
       </Section>
 
-      <Section className="py-20 lg:py-28"><Reveal><div className="grid gap-5 lg:grid-cols-2"><div className="rounded-[2rem] border border-white/10 bg-white/[0.04] p-8"><Landmark className="text-cyan-200" /><h2 className="mt-5 text-5xl font-black uppercase">Contract Vehicles</h2><div className="mt-8 space-y-4">{contracts.slice(0, 3).map((contract) => <div key={contract.id} className="border-t border-white/10 pt-4"><h3 className="text-xl font-bold uppercase text-white">{contract.name}</h3><p className="text-sm text-slate-300">{contract.agency}</p></div>)}</div><Link href="/contracts" className="mt-8 inline-flex items-center gap-2 text-sm font-black uppercase tracking-[0.16em] text-cyan-200">View Contracts <ArrowRight size={14} /></Link></div><div className="rounded-[2rem] border border-white/10 bg-white/[0.04] p-8"><Network className="text-cyan-200" /><h2 className="mt-5 text-5xl font-black uppercase">Case Studies</h2><div className="mt-8 space-y-4">{cases.slice(0, 3).map((study) => <div key={study.id} className="border-t border-white/10 pt-4"><p className="text-xs uppercase tracking-[0.14em] text-cyan-200">{caseOutcomeBadge(study)}</p><h3 className="mt-1 text-xl font-bold uppercase text-white">{study.title}</h3><p className="mt-2 text-sm text-slate-300">{study.summary}</p></div>)}</div><Link href="/case-studies" className="mt-8 inline-flex items-center gap-2 text-sm font-black uppercase tracking-[0.16em] text-cyan-200">Explore Results <ArrowRight size={14} /></Link></div></div></Reveal></Section>
+      <Section className="py-20 lg:py-28"><Reveal><div className="rounded-[2.5rem] border border-white/10 bg-white/[0.035] p-8 sm:p-12 lg:p-16"><div className="grid gap-10 lg:grid-cols-[.7fr_1.3fr] lg:items-center"><div><Landmark className="text-cyan-200" /><p className="mt-5 text-xs uppercase tracking-[0.28em] text-cyan-300">Procurement Pathways</p><h2 className="mt-3 text-5xl font-black uppercase leading-none text-white sm:text-6xl">Contract Vehicles</h2><p className="mt-5 text-slate-300">For agencies and partners who need a clear acquisition route, contract vehicle details belong one level deeper where procurement teams can review the full record.</p><Link href="/contracts" className="mt-8 inline-flex items-center gap-2 text-sm font-black uppercase tracking-[0.16em] text-cyan-200">View Contract Vehicles <ArrowRight size={14} /></Link></div><div className="grid gap-4 sm:grid-cols-3">{contracts.slice(0, 3).map((contract) => <article key={contract.id} className="rounded-2xl border border-white/10 bg-black/25 p-5"><h3 className="text-lg font-bold uppercase text-white">{contract.name}</h3><p className="mt-2 text-sm text-slate-400">{contract.agency}</p></article>)}</div></div></div></Reveal></Section>
 
       <Section className="py-20 lg:py-28"><Reveal><p className="text-xs uppercase tracking-[0.28em] text-cyan-300">Trusted Ecosystem</p><h2 className="mt-3 text-5xl font-black uppercase sm:text-6xl">Mission and AI Partners</h2><div className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">{partnersToRender.map((partner, index) => <Reveal key={partner.id} delay={0.04 + index * 0.04}><a href={partner.websiteUrl || "#"} className="flex h-28 items-center justify-center rounded-2xl border border-white/10 bg-white/[0.035] p-4 transition hover:border-cyan-200/40">{partner.logoUrl ? <img src={partner.logoUrl} alt={partner.name} className="h-10 w-auto grayscale brightness-75 transition hover:grayscale-0 hover:brightness-100" /> : <span className="uppercase tracking-[0.1em] text-slate-300">{partner.name}</span>}</a></Reveal>)}</div></Reveal></Section>
 
