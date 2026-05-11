@@ -54,6 +54,7 @@ export default async function HomePage() {
         <Section className="relative z-10 flex min-h-screen items-end pb-16 pt-36 lg:pb-24">
           <Reveal>
             <div className="max-w-6xl">
+              <img src="/greylogo.png" alt="Gray Matters Technology - Sage Tech Solutions" className="mb-10 h-auto w-[220px] sm:w-[300px] lg:w-[420px]" />
               <h1 className="max-w-7xl text-6xl font-black uppercase leading-[0.88] text-white sm:text-7xl lg:text-8xl 2xl:text-[9rem]">{heroHeadline}</h1>
               <div className="mt-10 flex flex-wrap gap-4">
                 <Link href="/contact" className="premium-button rounded-full bg-white px-8 py-4 text-sm font-black uppercase tracking-[0.18em] text-slate-950 transition hover:bg-cyan-200">Start a Strategic Conversation</Link>
