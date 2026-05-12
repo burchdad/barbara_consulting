@@ -18,6 +18,7 @@ import { Section } from "@/components/ui/section";
 import { AnimatedCounter } from "@/components/public/animated-counter";
 import { Reveal } from "@/components/public/reveal";
 import { HomepageCinematicScene } from "@/components/public/homepage-cinematic-scene";
+import { AgentSwarm, type SwarmNode } from "@/components/public/agent-swarm";
 import { getPublishedData } from "@/lib/site-data";
 import { siteConfig } from "@/lib/config/site";
 import { timeline } from "@/lib/data/timeline";
@@ -46,6 +47,29 @@ const capabilityMatrix = [
   { title: "Data Intelligence & Analytics", icon: DatabaseZap },
   { title: "Compliance Readiness", icon: ShieldCheck },
   { title: "Program & Acquisition Support", icon: Layers3 },
+];
+
+const swarmNodes: SwarmNode[] = [
+  ...metrics.map((item, index) => ({
+    id: `metric-${index}`,
+    title: `${item.prefix ?? ""}${item.value}${item.suffix}`,
+    subtitle: item.label,
+    description: item.meta,
+    position: {
+      top: `${8 + Math.floor(index / 3) * 19}%`,
+      left: `${8 + (index % 3) * 30}%`,
+    },
+  })),
+  ...capabilityMatrix.map((item, index) => ({
+    id: `cap-${index}`,
+    title: item.title,
+    subtitle: "Capability",
+    description: `Focus area: ${item.title}.`,
+    position: {
+      top: `${55 + Math.floor(index / 3) * 19}%`,
+      left: `${8 + (index % 3) * 30}%`,
+    },
+  })),
 ];
 
 function categoryIcon(category: string) {
@@ -84,17 +108,24 @@ export default async function HomePage() {
         </Section>
       </section>
 
-      <Section className="-mt-24 pb-10 pt-0 lg:-mt-28 lg:pb-14">
-        <Reveal staggerChildren>
-          <div className="relative z-20 grid gap-3 border-y border-cyan-200/10 bg-slate-950/35 py-5 backdrop-blur-md sm:grid-cols-2 xl:grid-cols-6">
-            {metrics.map((item, index) => <Reveal key={item.label} delay={0.04 + index * 0.03}><article className="px-5 py-4"><p className="text-[11px] uppercase tracking-[0.16em] text-cyan-100/60">{item.label}</p><p className="mt-3 text-4xl font-black text-white"><AnimatedCounter value={item.value} prefix={item.prefix} suffix={item.suffix} /></p><p className="mt-2 text-[10px] uppercase tracking-[0.18em] text-slate-500">{item.meta}</p></article></Reveal>)}
+      <Section className="grid gap-12 pt-10 lg:grid-cols-[.9fr_1.1fr] lg:pt-14 lg:pb-28">
+        <Reveal>
+          <div className="grid gap-5 text-lg leading-8 text-slate-300">
+            <p className="text-xs uppercase tracking-[0.32em] text-cyan-300">AI-Native Public Sector Innovation</p>
+            <h2 className="mt-4 text-5xl font-black uppercase leading-[0.95] sm:text-6xl">Where government experience meets intelligent modernization.</h2>
+            <p>Gray Matters Technology Services helps agencies and mission-driven organizations design intelligent systems that improve decisions, reduce operational friction, and modernize high-value workflows.</p>
+            <p>The experience is intentionally structured, scannable, and procurement-friendly while still feeling like a modern AI technology firm.</p>
+            <div className="mt-4 grid gap-3 sm:grid-cols-3">
+              <span className="rounded-full border border-cyan-200/20 px-4 py-3 text-center text-xs uppercase tracking-[0.16em] text-cyan-100">AI Readiness</span>
+              <span className="rounded-full border border-cyan-200/20 px-4 py-3 text-center text-xs uppercase tracking-[0.16em] text-cyan-100">Secure Automation</span>
+              <span className="rounded-full border border-cyan-200/20 px-4 py-3 text-center text-xs uppercase tracking-[0.16em] text-cyan-100">Mission ROI</span>
+            </div>
           </div>
         </Reveal>
-      </Section>
 
-      <Section className="grid gap-12 pt-10 lg:grid-cols-[.8fr_1.2fr] lg:pt-14 lg:pb-28">
-        <Reveal><p className="text-xs uppercase tracking-[0.32em] text-cyan-300">AI-Native Public Sector Innovation</p><h2 className="mt-4 text-5xl font-black uppercase leading-[0.95] sm:text-6xl">Where government experience meets intelligent modernization.</h2></Reveal>
-        <Reveal delay={0.05}><div className="grid gap-5 text-lg leading-8 text-slate-300"><p>Gray Matters Technology Services helps agencies and mission-driven organizations design intelligent systems that improve decisions, reduce operational friction, and modernize high-value workflows.</p><p>The experience is intentionally structured, scannable, and procurement-friendly while still feeling like a modern AI technology firm.</p><div className="mt-4 grid gap-3 sm:grid-cols-3"><span className="rounded-full border border-cyan-200/20 px-4 py-3 text-center text-xs uppercase tracking-[0.16em] text-cyan-100">AI Readiness</span><span className="rounded-full border border-cyan-200/20 px-4 py-3 text-center text-xs uppercase tracking-[0.16em] text-cyan-100">Secure Automation</span><span className="rounded-full border border-cyan-200/20 px-4 py-3 text-center text-xs uppercase tracking-[0.16em] text-cyan-100">Mission ROI</span></div></div></Reveal>
+        <Reveal delay={0.05}>
+          <AgentSwarm nodes={swarmNodes} />
+        </Reveal>
       </Section>
 
       <Section className="py-20 lg:py-28"><Reveal><div className="mb-10 flex flex-col justify-between gap-5 lg:flex-row lg:items-end"><div><p className="text-xs uppercase tracking-[0.3em] text-cyan-300">Who We Serve</p><h2 className="mt-3 text-5xl font-black uppercase sm:text-7xl">Built for complex organizations.</h2></div><p className="max-w-xl text-slate-300">Clear audience pathways help government and enterprise buyers quickly understand where Gray Matters fits.</p></div></Reveal><div className="grid gap-5 md:grid-cols-2 xl:grid-cols-4">{audienceSegments.map(({ title, body, icon: Icon }, index) => <Reveal key={title} delay={0.05 + index * 0.04}><article className="group min-h-[280px] rounded-[2rem] border border-white/10 bg-white/[0.035] p-7 transition hover:-translate-y-2 hover:border-cyan-200/40 hover:bg-white/[0.055]"><Icon className="text-cyan-200" size={24} /><h3 className="mt-10 text-2xl font-black uppercase leading-tight text-white">{title}</h3><p className="mt-4 text-sm leading-6 text-slate-300">{body}</p></article></Reveal>)}</div></Section>
