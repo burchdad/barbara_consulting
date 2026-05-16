@@ -44,6 +44,51 @@ function categoryIcon(category: string) {
   return <BriefcaseBusiness size={18} />;
 }
 
+function FloatingReadinessGraph() {
+  const nodes = [
+    "left-[12%] top-[48%]",
+    "left-[34%] top-[30%]",
+    "right-[28%] top-[42%]",
+    "right-[15%] bottom-[27%]",
+    "left-[46%] bottom-[20%]",
+  ];
+
+  return (
+    <div
+      aria-hidden
+      className="relative min-h-[22rem] overflow-hidden rounded-[2rem] border border-cyan-200/20 bg-[linear-gradient(135deg,rgba(8,47,73,0.55),rgba(2,6,23,0.9))] shadow-[0_30px_90px_rgba(34,211,238,0.12)]"
+    >
+      <div className="absolute inset-8 border border-white/10 bg-[linear-gradient(to_right,rgba(34,211,238,0.18)_1px,transparent_1px),linear-gradient(to_bottom,rgba(34,211,238,0.14)_1px,transparent_1px)] bg-[length:5.5rem_5.5rem] opacity-70" />
+
+      <div className="absolute inset-14">
+        <div className="absolute inset-[22%_10%_22%_6%] skew-y-[-12deg] border border-emerald-200/25" />
+        <div className="absolute inset-[14%_20%_32%_21%] skew-y-[15deg] border border-cyan-200/25" />
+
+        {nodes.map((position) => (
+          <span
+            key={position}
+            className={`absolute h-3 w-3 rounded-full bg-cyan-300 shadow-[0_0_24px_rgba(34,211,238,0.85)] ${position}`}
+          />
+        ))}
+      </div>
+
+      <div className="absolute right-8 top-8 rounded-2xl border border-white/15 bg-black/60 p-5 shadow-2xl backdrop-blur">
+        <p className="text-xs font-black uppercase tracking-[0.18em] text-slate-400">
+          Readiness
+        </p>
+        <p className="mt-2 text-4xl font-black text-white">84%</p>
+      </div>
+
+      <div className="absolute bottom-8 left-8 rounded-2xl border border-white/15 bg-black/60 p-5 shadow-2xl backdrop-blur">
+        <p className="text-xs font-black uppercase tracking-[0.18em] text-slate-400">
+          Workflow Load
+        </p>
+        <p className="mt-2 text-4xl font-black text-white">-32%</p>
+      </div>
+    </div>
+  );
+}
+
 export default async function HomePage() {
   const { services, contracts, leadership, testimonials } = await getPublishedData();
 
@@ -137,32 +182,36 @@ export default async function HomePage() {
           </Reveal>
 
           <Reveal delay={0.05}>
-            <div className="rounded-[2rem] border border-white/10 bg-white/[0.035] p-8 shadow-[0_0_80px_rgba(34,211,238,0.06)] sm:p-10">
-              <p className="text-lg leading-8 text-slate-300">
-                Gray Matters Technology- Sage Tech Solutions supports
-                organizations with AI readiness, responsible adoption,
-                workflow automation strategy, and secure modernization. The
-                goal is simple: help teams make better decisions, reduce
-                manual friction, and move forward with measurable confidence.
-              </p>
+            <div className="grid gap-5">
+              <FloatingReadinessGraph />
 
-              <div className="mt-8 grid gap-3 sm:grid-cols-3">
-                {featuredAudience.map((item) => (
-                  <span
-                    key={item}
-                    className="rounded-full border border-cyan-200/20 px-4 py-3 text-center text-xs uppercase tracking-[0.16em] text-cyan-100"
-                  >
-                    {item}
-                  </span>
-                ))}
+              <div className="rounded-[2rem] border border-white/10 bg-white/[0.035] p-8 shadow-[0_0_80px_rgba(34,211,238,0.06)] sm:p-10">
+                <p className="text-lg leading-8 text-slate-300">
+                  Gray Matters Technology- Sage Tech Solutions supports
+                  organizations with AI readiness, responsible adoption,
+                  workflow automation strategy, and secure modernization. The
+                  goal is simple: help teams make better decisions, reduce
+                  manual friction, and move forward with measurable confidence.
+                </p>
+
+                <div className="mt-8 grid gap-3 sm:grid-cols-3">
+                  {featuredAudience.map((item) => (
+                    <span
+                      key={item}
+                      className="rounded-full border border-cyan-200/20 px-4 py-3 text-center text-xs uppercase tracking-[0.16em] text-cyan-100"
+                    >
+                      {item}
+                    </span>
+                  ))}
+                </div>
+
+                <Link
+                  href="/about"
+                  className="mt-8 inline-flex items-center gap-2 text-sm font-black uppercase tracking-[0.18em] text-cyan-200 transition hover:text-white"
+                >
+                  Learn About the Firm <ArrowRight size={16} />
+                </Link>
               </div>
-
-              <Link
-                href="/about"
-                className="mt-8 inline-flex items-center gap-2 text-sm font-black uppercase tracking-[0.18em] text-cyan-200 transition hover:text-white"
-              >
-                Learn About the Firm <ArrowRight size={16} />
-              </Link>
             </div>
           </Reveal>
         </div>
