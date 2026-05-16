@@ -90,7 +90,7 @@ function FloatingReadinessGraph() {
 }
 
 export default async function HomePage() {
-  const { services, contracts, leadership, testimonials } = await getPublishedData();
+  const { services, contracts, testimonials } = await getPublishedData();
 
   const servicesToRender = services.length ? services : fallbackServices;
 
@@ -276,64 +276,6 @@ export default async function HomePage() {
             </Link>
           </div>
         </Reveal>
-      </Section>
-
-      {/* LEADERSHIP PREVIEW */}
-      <Section className="py-20 lg:py-28">
-        <Reveal>
-          <div className="rounded-[2.5rem] border border-white/10 bg-[linear-gradient(120deg,rgba(15,23,42,0.92),rgba(2,6,23,0.7)),url('https://images.unsplash.com/photo-1620712943543-bcc4688e7485?auto=format&fit=crop&w=2200&q=85')] bg-cover bg-center p-8 sm:p-14 lg:p-20">
-            <div className="max-w-4xl">
-              <p className="text-xs uppercase tracking-[0.3em] text-cyan-200">
-                Leadership
-              </p>
-
-              <h2 className="mt-4 text-5xl font-black uppercase leading-[0.95] text-white sm:text-7xl">
-                AI-forward guidance for complex organizations.
-              </h2>
-
-              <p className="mt-6 max-w-3xl text-lg leading-8 text-slate-200">
-                Built for organizations that need practical AI strategy,
-                secure modernization guidance, workflow intelligence, and
-                trusted support through change.
-              </p>
-
-              <Link
-                href="/about"
-                className="mt-8 inline-flex items-center gap-2 text-sm font-black uppercase tracking-[0.18em] text-cyan-200 transition hover:text-white"
-              >
-                Meet Leadership <ArrowRight size={16} />
-              </Link>
-            </div>
-          </div>
-        </Reveal>
-
-        {leadership.length > 0 && (
-          <Reveal delay={0.08}>
-            <div className="mt-6 rounded-[2rem] border border-white/10 bg-white/[0.025] p-6">
-              <div className="flex flex-col justify-between gap-4 md:flex-row md:items-center">
-                <div>
-                  <p className="text-sm uppercase tracking-[0.22em] text-cyan-200">
-                    Featured Leadership
-                  </p>
-
-                  <p className="mt-2 text-xl font-bold text-white">
-                    {leadership[0].name}
-                  </p>
-
-                  <p className="text-sm text-slate-400">
-                    {leadership[0].title}
-                  </p>
-                </div>
-
-                {leadership[0].shortBio && (
-                  <p className="max-w-2xl text-sm leading-6 text-slate-300">
-                    {leadership[0].shortBio}
-                  </p>
-                )}
-              </div>
-            </div>
-          </Reveal>
-        )}
       </Section>
 
       {/* PROCUREMENT / CONTRACTS TEASER */}
