@@ -368,11 +368,16 @@ export async function updateGlobalSettingsAction(formData: FormData) {
   });
   if (!parsed.success) return;
 
+  const data = {
+    ...parsed.data,
+    phone: parsed.data.phone ?? "",
+  };
+
   const existing = await prisma.globalSetting.findFirst();
   if (existing) {
-    await prisma.globalSetting.update({ where: { id: existing.id }, data: parsed.data });
+    await prisma.globalSetting.update({ where: { id: existing.id }, data });
   } else {
-    await prisma.globalSetting.create({ data: parsed.data });
+    await prisma.globalSetting.create({ data });
   }
 
   revalidatePath("/");
