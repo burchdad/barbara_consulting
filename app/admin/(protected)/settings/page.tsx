@@ -15,13 +15,13 @@ export default async function AdminSettingsPage() {
           <AdminField label="Company Name" name="companyName" defaultValue={settings?.companyName} required />
           <AdminField label="Tagline" name="tagline" defaultValue={settings?.tagline} required />
           <AdminField label="Email" name="email" type="email" defaultValue={settings?.email} required />
-          <AdminField label="Phone" name="phone" defaultValue={settings?.phone} required />
+          <AdminField label="Phone" name="phone" defaultValue={settings?.phone} />
           <div className="md:col-span-2"><AdminField label="Address" name="address" defaultValue={settings?.address} required /></div>
           <AdminField label="LinkedIn URL" name="linkedInUrl" defaultValue={settings?.linkedInUrl} />
-          <div className="md:col-span-2"><AdminTextArea label="Hero Eyebrow" name="heroEyebrow" defaultValue={settings?.heroEyebrow ?? "AI-Enabled Mission Delivery"} required rows={2} /></div>
+          <div className="md:col-span-2"><AdminTextArea label="Hero Eyebrow" name="heroEyebrow" defaultValue={settings?.heroEyebrow ?? siteConfig.hero.eyebrow} required rows={2} /></div>
           <div className="md:col-span-2"><AdminTextArea label="Footer Statement" name="footerStatement" defaultValue={settings?.footerStatement} required /></div>
           <div className="md:col-span-2"><AdminTextArea label="Hero Headline" name="heroHeadline" defaultValue={settings?.heroHeadline} required /></div>
-          <div className="md:col-span-2"><AdminTextArea label="Hero Trust Badge" name="heroTrustBadge" defaultValue={settings?.heroTrustBadge ?? "Procurement-ready AI delivery teams trusted by mission-critical stakeholders"} required rows={2} /></div>
+          <div className="md:col-span-2"><AdminTextArea label="Hero Trust Badge" name="heroTrustBadge" defaultValue={settings?.heroTrustBadge ?? siteConfig.hero.trustBadge} required rows={2} /></div>
           <div className="md:col-span-2"><AdminTextArea label="Hero Subheadline" name="heroSubheadline" defaultValue={settings?.heroSubheadline} required /></div>
           <div className="md:col-span-2"><AdminField label="About Hero Image URL" name="aboutHeroImageUrl" defaultValue={settings?.aboutHeroImageUrl ?? siteConfig.media.aboutHeroImageUrl} type="url" /></div>
           <div className="md:col-span-2"><AdminField label="Case Studies Hero Image URL" name="caseStudiesHeroImageUrl" defaultValue={settings?.caseStudiesHeroImageUrl ?? siteConfig.media.caseStudiesHeroImageUrl} type="url" /></div>

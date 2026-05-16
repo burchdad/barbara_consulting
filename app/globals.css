@@ -216,7 +216,7 @@ a {
 }
 
 .scene-theme-earth .homepage-visual-layer {
-  background-image: url("https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&w=2200&q=80");
+  background-image: url("https://images.unsplash.com/photo-1639322537228-f710d846310a?auto=format&fit=crop&w=2200&q=85");
   background-position: 69% 45%;
 }
 
@@ -225,7 +225,7 @@ a {
     linear-gradient(120deg, rgba(var(--scene-primary-rgb), 0.14), rgba(var(--scene-primary-rgb), 0) 34%),
     linear-gradient(to right, rgba(var(--scene-secondary-rgb), 0.03) 1px, transparent 1px),
     linear-gradient(to bottom, rgba(var(--scene-secondary-rgb), 0.03) 1px, transparent 1px),
-    url("https://images.unsplash.com/photo-1518773553398-650c184e0bb3?auto=format&fit=crop&w=2200&q=80");
+    url("https://images.unsplash.com/photo-1620712943543-bcc4688e7485?auto=format&fit=crop&w=2200&q=85");
   background-size: 100% 100%, 38px 38px, 38px 38px, cover;
   background-position: center, center, center, center;
 }
@@ -233,7 +233,7 @@ a {
 .scene-theme-cityscape .homepage-visual-layer {
   background-image:
     linear-gradient(115deg, rgba(var(--scene-primary-rgb), 0.24), rgba(var(--scene-primary-rgb), 0) 36%),
-    url("https://images.unsplash.com/photo-1460723237483-7a6dc9d0b212?auto=format&fit=crop&w=2200&q=80");
+    url("https://images.unsplash.com/photo-1519389950473-47ba0277781c?auto=format&fit=crop&w=2200&q=85");
 }
 
 .scene-theme-mesh .homepage-visual-layer {
@@ -241,7 +241,7 @@ a {
     radial-gradient(circle at 16% 28%, rgba(var(--scene-primary-rgb), 0.28), rgba(var(--scene-primary-rgb), 0) 33%),
     radial-gradient(circle at 80% 68%, rgba(var(--scene-primary-rgb), 0.16), rgba(var(--scene-primary-rgb), 0) 36%),
     radial-gradient(circle at 55% 26%, rgba(var(--scene-secondary-rgb), 0.1), rgba(var(--scene-secondary-rgb), 0) 42%),
-    url("https://images.unsplash.com/photo-1677442136019-21780ecad995?auto=format&fit=crop&w=2200&q=80");
+    url("https://images.unsplash.com/photo-1677442136019-21780ecad995?auto=format&fit=crop&w=2200&q=85");
 }
 
 .homepage-atmosphere-layer {

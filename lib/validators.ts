@@ -107,7 +107,7 @@ export const globalSettingSchema = z.object({
   companyName: z.string().min(2),
   tagline: z.string().min(2),
   email: z.string().email(),
-  phone: z.string().min(6),
+  phone: z.string().max(30).optional().or(z.literal("")),
   address: z.string().min(5),
   linkedInUrl: z.string().url().optional().or(z.literal("")),
   footerStatement: z.string().min(10),

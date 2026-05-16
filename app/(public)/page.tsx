@@ -17,9 +17,9 @@ import { getPublishedData } from "@/lib/site-data";
 import { fallbackServices } from "@/lib/data/services";
 
 const featuredAudience = [
-  "Public-sector modernization",
-  "Secure AI strategy",
-  "Workflow intelligence",
+  "AI readiness",
+  "Workflow automation",
+  "Secure modernization",
 ];
 
 function categoryIcon(category: string) {
@@ -50,7 +50,7 @@ export default async function HomePage() {
   const servicesToRender = services.length ? services : fallbackServices;
 
   const heroHeadline =
-    "Modern technology for mission-driven organizations.";
+    "AI consulting for smarter operations and secure growth.";
 
   return (
     <HomepageCinematicScene
@@ -88,7 +88,7 @@ export default async function HomePage() {
               />
 
               <p className="mb-5 text-xs font-bold uppercase tracking-[0.35em] text-cyan-200">
-                AI Strategy • Secure Systems • Public-Sector Modernization
+                AI Strategy • Workflow Automation • Secure Systems
               </p>
 
               <h1 className="max-w-7xl text-5xl font-black uppercase leading-[0.92] text-white sm:text-7xl lg:text-8xl 2xl:text-[8.5rem]">
@@ -96,9 +96,9 @@ export default async function HomePage() {
               </h1>
 
               <p className="mt-8 max-w-3xl text-lg leading-8 text-slate-200 sm:text-xl">
-                Gray Matters Technology Services helps government, enterprise,
-                and mission-focused teams modernize systems, strengthen
-                cybersecurity, and apply AI with clarity and confidence.
+                Gray Matters Technology- Sage Tech Solutions helps teams
+                identify practical AI opportunities, modernize workflows,
+                strengthen secure systems, and move from ideas to execution.
               </p>
 
               <div className="mt-10 flex flex-wrap gap-4">
@@ -127,11 +127,11 @@ export default async function HomePage() {
           <Reveal>
             <div>
               <p className="text-xs uppercase tracking-[0.32em] text-cyan-300">
-                AI-Native Public Sector Innovation
+                AI-Native Consulting and Automation
               </p>
 
               <h2 className="mt-4 text-5xl font-black uppercase leading-[0.95] text-white sm:text-6xl">
-                Where government experience meets intelligent modernization.
+                Where operational experience meets intelligent modernization.
               </h2>
             </div>
           </Reveal>
@@ -139,11 +139,11 @@ export default async function HomePage() {
           <Reveal delay={0.05}>
             <div className="rounded-[2rem] border border-white/10 bg-white/[0.035] p-8 shadow-[0_0_80px_rgba(34,211,238,0.06)] sm:p-10">
               <p className="text-lg leading-8 text-slate-300">
-                Gray Matters Technology Services supports agencies and
-                mission-driven organizations with practical strategy, secure
-                modernization, and intelligent workflow design. The goal is
-                simple: help teams make better decisions, reduce operational
-                friction, and move forward with measurable confidence.
+                Gray Matters Technology- Sage Tech Solutions supports
+                organizations with AI readiness, responsible adoption,
+                workflow automation strategy, and secure modernization. The
+                goal is simple: help teams make better decisions, reduce
+                manual friction, and move forward with measurable confidence.
               </p>
 
               <div className="mt-8 grid gap-3 sm:grid-cols-3">
@@ -183,8 +183,8 @@ export default async function HomePage() {
             </div>
 
             <p className="max-w-xl text-slate-300">
-              A streamlined view of the firm’s highest-value service areas,
-              with deeper capability details available on the services page.
+              A streamlined view of the firm's highest-value AI consulting,
+              automation, and secure modernization services.
             </p>
           </div>
         </Reveal>
@@ -232,20 +232,20 @@ export default async function HomePage() {
       {/* LEADERSHIP PREVIEW */}
       <Section className="py-20 lg:py-28">
         <Reveal>
-          <div className="rounded-[2.5rem] border border-white/10 bg-[linear-gradient(120deg,rgba(15,23,42,0.92),rgba(2,6,23,0.76)),url('https://images.unsplash.com/photo-1551836022-d5d88e9218df?auto=format&fit=crop&w=2200&q=80')] bg-cover bg-center p-8 sm:p-14 lg:p-20">
+          <div className="rounded-[2.5rem] border border-white/10 bg-[linear-gradient(120deg,rgba(15,23,42,0.92),rgba(2,6,23,0.7)),url('https://images.unsplash.com/photo-1620712943543-bcc4688e7485?auto=format&fit=crop&w=2200&q=85')] bg-cover bg-center p-8 sm:p-14 lg:p-20">
             <div className="max-w-4xl">
               <p className="text-xs uppercase tracking-[0.3em] text-cyan-200">
                 Leadership
               </p>
 
               <h2 className="mt-4 text-5xl font-black uppercase leading-[0.95] text-white sm:text-7xl">
-                Public-sector depth with an AI-forward vision.
+                AI-forward guidance for complex organizations.
               </h2>
 
               <p className="mt-6 max-w-3xl text-lg leading-8 text-slate-200">
-                Built for organizations that need practical technology
-                leadership, secure modernization strategy, and trusted guidance
-                through complex operational environments.
+                Built for organizations that need practical AI strategy,
+                secure modernization guidance, workflow intelligence, and
+                trusted support through change.
               </p>
 
               <Link
@@ -428,9 +428,9 @@ export default async function HomePage() {
             </h2>
 
             <p className="mx-auto mt-5 max-w-3xl text-lg text-slate-200">
-              Partner with a technology firm designed for AI strategy, secure
-              modernization, mission continuity, and measurable operational
-              improvement.
+              Partner with a technology firm designed for AI strategy,
+              workflow automation, secure modernization, and measurable
+              operational improvement.
             </p>
 
             <Link

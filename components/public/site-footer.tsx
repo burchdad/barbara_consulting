@@ -6,6 +6,12 @@ import { siteConfig } from "@/lib/config/site";
 
 export async function SiteFooter() {
   const settings = await getGlobalSettings();
+  const companyName = settings?.companyName ?? siteConfig.companyName;
+  const footerStatement = settings?.footerStatement ?? siteConfig.footer.statement;
+  const email = settings?.email ?? siteConfig.contact.email;
+  const phone = settings?.phone ?? siteConfig.contact.phone;
+  const address = settings?.address ?? siteConfig.contact.address;
+  const linkedInUrl = settings?.linkedInUrl || siteConfig.social.linkedin;
 
   return (
     <footer className="relative border-t border-red-500/20 bg-[#050505]">
@@ -32,12 +38,12 @@ export async function SiteFooter() {
       </div>
       <div className="relative mx-auto grid w-full max-w-7xl gap-10 px-4 py-14 sm:px-6 lg:grid-cols-[1.2fr_1fr_1fr_1fr] lg:px-8">
         <div className="space-y-4">
-          <p className="text-xs uppercase tracking-[0.35em] text-red-500">{settings?.companyName ?? "Enterprise Platform"}</p>
-          <p className="max-w-md text-sm text-zinc-300">{settings?.footerStatement ?? "Mission-grade delivery for federal operations."}</p>
+          <p className="text-xs uppercase tracking-[0.35em] text-red-500">{companyName}</p>
+          <p className="max-w-md text-sm text-zinc-300">{footerStatement}</p>
           <div className="space-y-2 text-sm text-zinc-400">
-            <p className="inline-flex items-center gap-2"><MapPin size={14} className="text-red-400" />{settings?.address}</p>
-            <p className="inline-flex items-center gap-2"><Mail size={14} className="text-red-400" />{settings?.email}</p>
-            <p className="inline-flex items-center gap-2"><Phone size={14} className="text-red-400" />{settings?.phone}</p>
+            {address ? <p className="inline-flex items-center gap-2"><MapPin size={14} className="text-red-400" />{address}</p> : null}
+            {email ? <p className="inline-flex items-center gap-2"><Mail size={14} className="text-red-400" />{email}</p> : null}
+            {phone ? <p className="inline-flex items-center gap-2"><Phone size={14} className="text-red-400" />{phone}</p> : null}
           </div>
         </div>
 
@@ -65,7 +71,7 @@ export async function SiteFooter() {
           <p className="text-xs uppercase tracking-[0.2em] text-zinc-500">Follow</p>
           <div className="mt-4 flex items-center gap-3 text-zinc-300">
             <a
-              href={settings?.linkedInUrl || "https://www.linkedin.com"}
+              href={linkedInUrl}
               target="_blank"
               rel="noreferrer"
               className="rounded-md border border-white/15 p-2 transition hover:border-red-500/50 hover:text-red-300"
@@ -79,7 +85,7 @@ export async function SiteFooter() {
 
       <div className="relative overflow-hidden border-t border-white/10">
         <p className="mx-auto max-w-7xl px-4 py-2 text-[72px] font-black uppercase tracking-[0.16em] text-white/8 sm:text-[96px] lg:px-8 lg:text-[124px]">
-          AUTHORITY
+          AI STRATEGY
         </p>
       </div>
     </footer>

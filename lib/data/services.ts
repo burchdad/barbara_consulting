@@ -14,41 +14,41 @@ export type FallbackService = {
 export const fallbackServices: FallbackService[] = [
   {
     id: "fallback-service-1",
-    category: "Professional Services",
-    title: "Program and Acquisition Support",
+    category: "AI Strategy",
+    title: "AI Readiness and Roadmaps",
     description:
-      "Enterprise program oversight, acquisition planning, and performance management support for complex portfolios.",
+      "Clear advisory support to identify where AI can improve operations, reduce friction, and create measurable value.",
     bulletItems: [
-      "PMO governance",
-      "Acquisition support",
-      "Performance analytics",
-      "Compliance management",
+      "AI opportunity assessment",
+      "Use case prioritization",
+      "Adoption roadmap",
+      "Responsible AI planning",
     ],
   },
   {
     id: "fallback-service-2",
-    category: "Engineering & Technology Services",
-    title: "Mission Engineering and Cyber",
+    category: "Workflow Automation",
+    title: "Intelligent Process Design",
     description:
-      "Secure architecture, DevSecOps, and data modernization services aligned to mission risk and resilience requirements.",
+      "Workflow analysis and automation planning for teams ready to save time, improve consistency, and modernize service delivery.",
     bulletItems: [
-      "Cloud modernization",
-      "DevSecOps pipelines",
-      "Zero-trust security",
-      "Data interoperability",
+      "Process mapping",
+      "Automation strategy",
+      "AI assistant planning",
+      "Tool selection guidance",
     ],
   },
   {
     id: "fallback-service-3",
-    category: "Mission Support & Logistics",
-    title: "Readiness and Sustainment",
+    category: "Training & Enablement",
+    title: "AI Training for Teams",
     description:
-      "Operational sustainment capabilities across planning, supply chain readiness, and field support operations.",
+      "Practical AI education that helps leaders and staff understand, evaluate, and use AI tools responsibly.",
     bulletItems: [
-      "Readiness analytics",
-      "Supply chain support",
-      "Field logistics",
-      "Lifecycle sustainment",
+      "Executive AI briefings",
+      "Team workshops",
+      "Prompting fundamentals",
+      "Governance awareness",
     ],
   },
 ];

@@ -10,8 +10,8 @@ export const caseStudiesSeed = [
     slug: "cross-agency-data-modernization",
     summary:
       "Unified reporting across mission systems with secure AI-driven data exchange and measurable uptime gains.",
-    iconUrl: "https://images.unsplash.com/photo-1523961131990-5ea7c61b2107",
-    imageUrl: "https://images.unsplash.com/photo-1451187580459-43490279c0fa",
+    iconUrl: "https://images.unsplash.com/photo-1620712943543-bcc4688e7485",
+    imageUrl: "https://images.unsplash.com/photo-1639322537228-f710d846310a",
     highlights: [
       "99.97% platform availability",
       "Reduced reporting cycle by 61%",
@@ -39,7 +39,7 @@ export const caseStudiesSeed = [
     summary:
       "Rebuilt ITSM workflows with AI triage and SLA automation to restore confidence in a high-volume support environment.",
     iconUrl: "https://images.unsplash.com/photo-1518770660439-4636190af475",
-    imageUrl: "https://images.unsplash.com/photo-1527443154391-507e9dc6c5cc",
+    imageUrl: "https://images.unsplash.com/photo-1677442136019-21780ecad995",
     highlights: [
       "42% faster ticket resolution",
       "AI-assisted issue classification",
@@ -61,8 +61,8 @@ export const caseStudiesSeed = [
     slug: "rapid-logistics-readiness",
     summary:
       "Improved mission readiness through AI-enhanced inventory controls and partner coordination.",
-    iconUrl: "https://images.unsplash.com/photo-1489515217757-5fd1be406fef",
-    imageUrl: "https://images.unsplash.com/photo-1473448912268-2022ce9509d8",
+    iconUrl: "https://images.unsplash.com/photo-1550751827-4bd374c3f58b",
+    imageUrl: "https://images.unsplash.com/photo-1519389950473-47ba0277781c",
     highlights: [
       "Reduced stockout events",
       "Predictive replenishment alerts",

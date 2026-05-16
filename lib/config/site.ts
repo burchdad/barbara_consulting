@@ -4,24 +4,24 @@
 
 export const siteConfig = {
   companyName: "Gray Matters Technology- Sage Tech Solutions",
-  tagline: "AI Systems for Mission Outcomes",
+  tagline: "AI Consulting for Smarter Operations",
 
   hero: {
-    eyebrow: "AI-Enabled Mission Delivery",
-    headline: "We help create intelligent systems",
+    eyebrow: "AI Strategy, Automation, and Advisory",
+    headline: "AI consulting for smarter operations, automation, and growth.",
     subtext:
-      "We design, deploy, and operate secure AI-enabled systems that accelerate decisions, improve resilience, and deliver measurable outcomes across complex government and enterprise missions.",
+      "Gray Matters Technology- Sage Tech Solutions helps organizations identify practical AI opportunities, streamline workflows, strengthen secure systems, and adopt intelligent tools with clarity, confidence, and responsible oversight.",
     trustBadge:
-      "Procurement-ready AI delivery teams trusted by mission-critical stakeholders",
+      "Practical AI guidance for teams ready to modernize how work gets done",
     ctaPrimary: "Get in Touch",
     ctaSecondary: "Explore Capabilities",
   },
 
   about: {
     missionStatement:
-      "Deliver secure, responsible, and high-performance AI services that improve mission outcomes.",
+      "Help organizations use AI responsibly to simplify work, improve decisions, and create measurable operational value.",
     visionStatement:
-      "Be the trusted partner for AI-enabled transformation, precision execution, and operational resilience.",
+      "Be a trusted AI consulting partner for leaders who want practical modernization without unnecessary complexity.",
     values: [
       "Integrity",
       "Stewardship",
@@ -30,69 +30,69 @@ export const siteConfig = {
       "Collaboration",
     ],
     paragraphs: [
-      "Gray Matters Technology- Sage Tech Solutions is a mission-oriented enterprise delivering AI, data, and engineering excellence across complex environments.",
-      "Our teams combine machine intelligence with disciplined program execution, transparent reporting, and measurable performance outcomes.",
-      "From acquisition support and engineering modernization to logistics readiness, we embed AI where it creates clear operational value.",
-      "We scale responsibly through accountable governance, human oversight, and security-first delivery practices.",
+      "Gray Matters Technology- Sage Tech Solutions is an AI consulting and technology advisory firm helping organizations turn emerging technology into practical business advantage.",
+      "The work begins with understanding how teams operate today, where friction slows progress, and where AI can create the clearest return.",
+      "From AI readiness assessments and workflow automation to custom assistant strategy and team training, every engagement is grounded in usefulness, adoption, and measurable outcomes.",
+      "Gray Matters Technology- Sage Tech Solutions emphasizes responsible AI, human oversight, data awareness, and clear implementation plans so leaders can modernize with confidence.",
     ],
   },
 
   contact: {
-    email: "info@company.com",
-    phone: "+1-800-000-0000",
-    address: "123 Enterprise Way, Washington, DC 20001",
+    email: "info@graymatterstechnology.com",
+    phone: "",
+    address: "Washington, DC",
   },
 
   media: {
     aboutHeroImageUrl:
-      "https://images.unsplash.com/photo-1485827404703-89b55fcc595e?auto=format&fit=crop&w=1800&q=80",
+      "https://images.unsplash.com/photo-1677442136019-21780ecad995?auto=format&fit=crop&w=2200&q=85",
     caseStudiesHeroImageUrl:
-      "https://images.unsplash.com/photo-1518773553398-650c184e0bb3?auto=format&fit=crop&w=1800&q=80",
+      "https://images.unsplash.com/photo-1620712943543-bcc4688e7485?auto=format&fit=crop&w=2200&q=85",
     caseStudyDetailFallbackImageUrl:
-      "https://images.unsplash.com/photo-1677442136019-21780ecad995?auto=format&fit=crop&w=1800&q=80",
+      "https://images.unsplash.com/photo-1639322537228-f710d846310a?auto=format&fit=crop&w=2200&q=85",
     careersHeroImageUrl:
-      "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=1800&q=80",
+      "https://images.unsplash.com/photo-1519389950473-47ba0277781c?auto=format&fit=crop&w=2200&q=85",
     contactHeroImageUrl:
-      "https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&w=1800&q=80",
+      "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&fit=crop&w=2200&q=85",
     contractsHeroImageUrl:
-      "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&fit=crop&w=1800&q=80",
+      "https://images.unsplash.com/photo-1518773553398-650c184e0bb3?auto=format&fit=crop&w=2200&q=85",
     privacyHeroImageUrl:
-      "https://images.unsplash.com/photo-1563013544-824ae1b704d3?auto=format&fit=crop&w=1800&q=80",
+      "https://images.unsplash.com/photo-1563986768494-4dee2763ff3f?auto=format&fit=crop&w=2200&q=85",
   },
 
   social: {
-    linkedin: "#",
+    linkedin: "https://www.linkedin.com",
   },
 
   footer: {
-    statement: "AI-enabled delivery for mission-critical operations.",
+    statement: "Practical AI strategy, automation, and training for modern teams.",
     ctaHeadline:
-      "Connect with Gray Matters Technology- Sage Tech Solutions to align procurement-ready AI teams to mission-critical outcomes.",
-    ctaButtonLabel: "Schedule Briefing",
+      "Connect with Gray Matters Technology- Sage Tech Solutions to identify practical AI opportunities and build a clear modernization path.",
+    ctaButtonLabel: "Schedule a Consultation",
   },
 
   globalImpact: {
     eyebrow: "AI Impact",
-    headline: "Operational Intelligence Across High-Consequence Environments",
-    body: "Our teams deliver AI-powered operations across distributed programs, combining local execution with centralized intelligence, governance, and contract-level transparency.",
+    headline: "Practical Intelligence for Everyday Operations",
+    body: "Gray Matters Technology- Sage Tech Solutions helps leaders move from AI curiosity to useful adoption through strategy, process clarity, automation planning, and team enablement.",
     stats: [
-      { label: "Countries", value: "22" },
-      { label: "Operating Sites", value: "64" },
-      { label: "Mission Programs", value: "35" },
+      { label: "Core Service Areas", value: "6" },
+      { label: "Advisory Focus", value: "AI" },
+      { label: "Implementation Path", value: "Clear" },
     ],
   },
 
   whoWeAre: {
     eyebrow: "Who We Are",
-    headline: "A High-Trust AI Delivery Partner",
-    body: "We combine enterprise program leadership, secure AI engineering, and mission logistics into one accountable operating model. Every engagement is built around measurable outcomes, contract confidence, and mission continuity.",
+    headline: "A Practical AI Consulting Partner",
+    body: "We combine AI strategy, process improvement, responsible adoption, and hands-on enablement so organizations can modernize with confidence.",
     linkLabel: "Learn More About Us",
   },
 
   careers: {
     headline: "Careers",
     subtext:
-      "Join a team building secure AI systems and mission-ready operations that matter.",
+      "Join a team helping organizations use AI with clarity, responsibility, and real operational value.",
     perks: [
       "Competitive Compensation",
       "Health Benefits",
@@ -102,8 +102,8 @@ export const siteConfig = {
   },
 
   meta: {
-    title: "Gray Matters Technology- Sage Tech Solutions",
+    title: "Gray Matters Technology- Sage Tech Solutions | AI Consulting",
     description:
-      "AI-forward authority website and admin platform for mission-focused organizations.",
+      "AI consulting for strategy, workflow automation, team training, responsible adoption, and practical modernization.",
   },
 };

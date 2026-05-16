@@ -78,6 +78,9 @@ function categoryIcon(category: string) {
   const normalized = category.toLowerCase();
 
   if (
+    normalized.includes("ai") ||
+    normalized.includes("automation") ||
+    normalized.includes("training") ||
     normalized.includes("engineering") ||
     normalized.includes("technology") ||
     normalized.includes("cyber")
@@ -109,6 +112,13 @@ export default async function ServicesPage() {
     <main className="overflow-hidden">
       {/* HERO */}
       <Section className="relative isolate overflow-hidden py-24 lg:py-32">
+        <div
+          className="absolute inset-0 -z-20 bg-cover bg-center opacity-40"
+          style={{
+            backgroundImage:
+              "linear-gradient(to bottom, rgba(2, 6, 23, 0.1), rgba(2, 6, 23, 0.94)), url(https://images.unsplash.com/photo-1620712943543-bcc4688e7485?auto=format&fit=crop&w=2200&q=85)",
+          }}
+        />
         <div className="absolute inset-0 -z-10 bg-[radial-gradient(circle_at_22%_18%,rgba(34,211,238,0.24),transparent_30%),radial-gradient(circle_at_78%_20%,rgba(168,85,247,0.14),transparent_28%),linear-gradient(135deg,rgba(2,6,23,0.98),rgba(2,6,23,0.78))]" />
         <div className="absolute inset-0 -z-10 bg-[linear-gradient(to_right,rgba(255,255,255,0.045)_1px,transparent_1px),linear-gradient(to_bottom,rgba(255,255,255,0.045)_1px,transparent_1px)] bg-[size:40px_40px] opacity-20" />
 
@@ -119,14 +129,14 @@ export default async function ServicesPage() {
             </p>
 
             <h1 className="mt-5 max-w-6xl text-5xl font-black uppercase leading-[0.92] text-white sm:text-7xl lg:text-8xl">
-              Strategy, systems, security, and AI modernization.
+              AI strategy, workflow automation, and secure modernization.
             </h1>
 
             <p className="mt-8 max-w-4xl text-lg leading-8 text-slate-200 sm:text-xl">
-              Gray Matters Technology Services helps mission-driven
-              organizations assess needs, design practical modernization
-              strategies, implement intelligent workflows, and strengthen
-              operational performance.
+              Gray Matters Technology- Sage Tech Solutions helps
+              organizations assess AI readiness, design practical automation
+              strategies, train teams, implement intelligent workflows, and
+              strengthen operational performance.
             </p>
 
             <div className="mt-10 flex flex-wrap gap-4">
@@ -237,13 +247,13 @@ export default async function ServicesPage() {
               </p>
 
               <h2 className="mt-3 text-5xl font-black uppercase text-white sm:text-7xl">
-                Designed for modern government.
+              Designed for modern organizations.
               </h2>
             </div>
 
             <p className="max-w-xl text-slate-300">
-              Service areas are structured for clarity, procurement review, and
-              practical execution across complex operating environments.
+              Service areas are structured for clarity, responsible adoption,
+              and practical execution across complex operating environments.
             </p>
           </div>
         </Reveal>
@@ -331,9 +341,9 @@ export default async function ServicesPage() {
             </h2>
 
             <p className="mx-auto mt-5 max-w-3xl text-lg text-slate-200">
-              Partner with a technology firm designed for AI strategy, secure
-              modernization, mission continuity, and measurable operational
-              improvement.
+              Partner with a technology firm designed for AI strategy,
+              workflow automation, secure modernization, and measurable
+              operational improvement.
             </p>
 
             <Link
