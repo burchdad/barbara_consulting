@@ -183,7 +183,7 @@ export default async function HomePage() {
             </div>
 
             <p className="max-w-xl text-slate-300">
-              A streamlined view of the firm's highest-value AI consulting,
+              A streamlined view of the firm&apos;s highest-value AI consulting,
               automation, and secure modernization services.
             </p>
           </div>
