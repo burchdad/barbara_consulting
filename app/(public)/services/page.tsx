@@ -247,13 +247,14 @@ export default async function ServicesPage() {
               </p>
 
               <h2 className="mt-3 text-5xl font-black uppercase text-white sm:text-7xl">
-              Designed for modern organizations.
+                Focused capabilities for modern teams.
               </h2>
             </div>
 
             <p className="max-w-xl text-slate-300">
-              Service areas are structured for clarity, responsible adoption,
-              and practical execution across complex operating environments.
+              The firm&apos;s highest-value AI consulting, automation, and secure
+              modernization services now live here as the dedicated services
+              destination.
             </p>
           </div>
         </Reveal>

@@ -1,8 +1,6 @@
 import Link from "next/link";
 import {
   ArrowRight,
-  BriefcaseBusiness,
-  CircuitBoard,
   Landmark,
   Layers3,
   Quote,
@@ -14,35 +12,12 @@ import { Section } from "@/components/ui/section";
 import { Reveal } from "@/components/public/reveal";
 import { HomepageCinematicScene } from "@/components/public/homepage-cinematic-scene";
 import { getPublishedData } from "@/lib/site-data";
-import { fallbackServices } from "@/lib/data/services";
 
 const featuredAudience = [
   "AI readiness",
   "Workflow automation",
   "Secure modernization",
 ];
-
-function categoryIcon(category: string) {
-  const normalized = category.toLowerCase();
-
-  if (
-    normalized.includes("engineering") ||
-    normalized.includes("technology") ||
-    normalized.includes("cyber")
-  ) {
-    return <CircuitBoard size={18} />;
-  }
-
-  if (
-    normalized.includes("mission") ||
-    normalized.includes("program") ||
-    normalized.includes("acquisition")
-  ) {
-    return <Layers3 size={18} />;
-  }
-
-  return <BriefcaseBusiness size={18} />;
-}
 
 function FloatingReadinessGraph() {
   const nodes = [
@@ -90,9 +65,7 @@ function FloatingReadinessGraph() {
 }
 
 export default async function HomePage() {
-  const { services, contracts, testimonials } = await getPublishedData();
-
-  const servicesToRender = services.length ? services : fallbackServices;
+  const { contracts, testimonials } = await getPublishedData();
 
   const heroHeadline =
     "AI consulting for smarter operations and secure growth.";
@@ -215,67 +188,6 @@ export default async function HomePage() {
             </div>
           </Reveal>
         </div>
-      </Section>
-
-      {/* SERVICES PREVIEW */}
-      <Section id="services" className="py-20 lg:py-28">
-        <Reveal>
-          <div className="mb-12 flex flex-col justify-between gap-5 lg:flex-row lg:items-end">
-            <div>
-              <p className="text-xs uppercase tracking-[0.3em] text-cyan-300">
-                Core Services
-              </p>
-
-              <h2 className="mt-3 text-5xl font-black uppercase text-white sm:text-7xl">
-                Focused capabilities for modern teams.
-              </h2>
-            </div>
-
-            <p className="max-w-xl text-slate-300">
-              A streamlined view of the firm&apos;s highest-value AI consulting,
-              automation, and secure modernization services.
-            </p>
-          </div>
-        </Reveal>
-
-        <div className="grid gap-5 lg:grid-cols-3">
-          {servicesToRender.slice(0, 3).map((service, index) => (
-            <Reveal key={service.id} delay={0.05 + index * 0.04}>
-              <article className="group flex min-h-[340px] flex-col rounded-[2rem] border border-white/10 bg-[linear-gradient(145deg,rgba(255,255,255,0.08),rgba(255,255,255,0.025))] p-7 backdrop-blur transition hover:-translate-y-2 hover:border-cyan-200/40">
-                <div className="inline-flex w-fit items-center gap-2 rounded-full border border-cyan-200/20 px-3 py-1 text-xs text-cyan-100">
-                  {categoryIcon(service.category)}
-                  {service.category}
-                </div>
-
-                <h3 className="mt-8 text-3xl font-black uppercase leading-tight text-white">
-                  {service.title}
-                </h3>
-
-                <p className="mt-4 text-sm leading-6 text-slate-300">
-                  {service.description}
-                </p>
-
-                <div className="mt-auto pt-8">
-                  <div className="h-px bg-gradient-to-r from-cyan-300/40 to-transparent" />
-                  <p className="mt-4 text-xs uppercase tracking-[0.18em] text-cyan-200">
-                    Strategic capability 0{index + 1}
-                  </p>
-                </div>
-              </article>
-            </Reveal>
-          ))}
-        </div>
-
-        <Reveal delay={0.12}>
-          <div className="mt-10 text-center">
-            <Link
-              href="/services"
-              className="premium-button inline-flex rounded-full border border-cyan-200/30 bg-white/[0.03] px-8 py-4 text-sm font-black uppercase tracking-[0.18em] text-cyan-100 transition hover:border-cyan-200 hover:bg-cyan-200/10"
-            >
-              View All Services
-            </Link>
-          </div>
-        </Reveal>
       </Section>
 
       {/* PROCUREMENT / CONTRACTS TEASER */}
