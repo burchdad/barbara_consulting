@@ -803,6 +803,114 @@ footer .relative.overflow-hidden {
   animation: footer-wordmark-drift 26s ease-in-out infinite;
 }
 
+.readiness-graph-shell {
+  clip-path: polygon(3% 0, 100% 0, 97% 100%, 0 100%);
+}
+
+.readiness-graph-shell::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(112deg, transparent 0%, rgba(255, 255, 255, 0.12) 46%, transparent 58%),
+    linear-gradient(180deg, rgba(34, 211, 238, 0.08), transparent 48%);
+  opacity: 0.45;
+  pointer-events: none;
+  transform: translateX(-28%);
+  animation: angled-hud-sweep 5.8s ease-in-out infinite;
+}
+
+.about-angle-field {
+  position: absolute;
+  inset: 4rem 0 2rem;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.about-angle-plane {
+  position: absolute;
+  border: 1px solid rgba(103, 232, 249, 0.16);
+  background:
+    linear-gradient(135deg, rgba(8, 47, 73, 0.22), rgba(2, 6, 23, 0.08)),
+    linear-gradient(to right, rgba(34, 211, 238, 0.08) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(34, 211, 238, 0.06) 1px, transparent 1px);
+  background-size: 100% 100%, 48px 48px, 48px 48px;
+  box-shadow:
+    0 28px 90px rgba(34, 211, 238, 0.08),
+    inset 0 1px 0 rgba(255, 255, 255, 0.05);
+  clip-path: polygon(7% 0, 100% 10%, 92% 100%, 0 88%);
+}
+
+.about-angle-plane-a {
+  left: -5%;
+  top: 3%;
+  width: 58%;
+  height: 70%;
+  transform: rotate(-8deg) skewX(-5deg);
+  opacity: 0.52;
+}
+
+.about-angle-plane-b {
+  right: 1%;
+  top: 0;
+  width: 52%;
+  height: 62%;
+  transform: rotate(5deg) skewX(6deg);
+  opacity: 0.64;
+}
+
+.about-angle-plane-c {
+  bottom: -8%;
+  left: 27%;
+  width: 49%;
+  height: 45%;
+  transform: rotate(-3deg) skewX(10deg);
+  opacity: 0.42;
+}
+
+.about-title-rail {
+  position: absolute;
+  left: -1rem;
+  top: -1.2rem;
+  width: min(22rem, 64vw);
+  height: 1px;
+  background: linear-gradient(to right, rgba(34, 211, 238, 0), rgba(34, 211, 238, 0.9), rgba(255, 255, 255, 0.35), rgba(34, 211, 238, 0));
+  transform: rotate(-8deg);
+  box-shadow: 0 0 22px rgba(34, 211, 238, 0.55);
+}
+
+.about-copy-float::before {
+  content: "";
+  position: absolute;
+  inset: -0.4rem -0.2rem;
+  z-index: -1;
+  border: 1px solid rgba(103, 232, 249, 0.12);
+  background:
+    radial-gradient(circle at 12% 12%, rgba(34, 211, 238, 0.14), transparent 36%),
+    linear-gradient(135deg, rgba(2, 6, 23, 0.58), rgba(15, 23, 42, 0.28));
+  clip-path: polygon(4% 0, 100% 8%, 95% 100%, 0 91%);
+  filter: drop-shadow(0 24px 60px rgba(0, 0, 0, 0.24));
+}
+
+.homepage-cinematic-content > section:not(:first-of-type) {
+  border: 0;
+  background: transparent;
+  backdrop-filter: none;
+  border-radius: 0;
+  box-shadow: none;
+  overflow: visible;
+}
+
+.homepage-cinematic-content > section:not(:first-of-type)::before,
+.homepage-cinematic-content > section:not(:first-of-type)::after {
+  display: none;
+}
+
+.homepage-cinematic-content > section:nth-of-type(odd):not(:first-of-type) {
+  background: transparent;
+  box-shadow: none;
+}
+
 @keyframes footer-wordmark-drift {
   0%,
   100% {
@@ -810,6 +918,19 @@ footer .relative.overflow-hidden {
   }
   50% {
     transform: translateX(2%);
+  }
+}
+
+@keyframes angled-hud-sweep {
+  0%,
+  48%,
+  100% {
+    transform: translateX(-42%);
+    opacity: 0;
+  }
+  62% {
+    transform: translateX(56%);
+    opacity: 0.4;
   }
 }
 
@@ -881,6 +1002,39 @@ footer .relative.overflow-hidden {
   .homepage-scene-release {
     height: 34vh;
   }
+
+  .homepage-cinematic-content > section:not(:first-of-type) {
+    border: 0;
+    background: transparent;
+    backdrop-filter: none;
+    box-shadow: none;
+    overflow: visible;
+  }
+
+  .about-angle-field {
+    inset: 2rem -0.5rem 1rem;
+  }
+
+  .about-angle-plane-a {
+    left: -18%;
+    top: 2%;
+    width: 92%;
+    height: 48%;
+  }
+
+  .about-angle-plane-b {
+    right: -18%;
+    top: 30%;
+    width: 94%;
+    height: 44%;
+  }
+
+  .about-angle-plane-c {
+    left: 5%;
+    bottom: 0;
+    width: 82%;
+    height: 34%;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -921,5 +1075,9 @@ footer .relative.overflow-hidden {
     animation: none;
     transform: rotate(0deg);
     opacity: 0.08;
+  }
+
+  .readiness-graph-shell::after {
+    animation: none;
   }
 }

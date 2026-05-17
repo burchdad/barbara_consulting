@@ -31,7 +31,7 @@ function FloatingReadinessGraph() {
   return (
     <div
       aria-hidden
-      className="relative min-h-[22rem] overflow-hidden rounded-[2rem] border border-cyan-200/20 bg-[linear-gradient(135deg,rgba(8,47,73,0.55),rgba(2,6,23,0.9))] shadow-[0_30px_90px_rgba(34,211,238,0.12)]"
+      className="readiness-graph-shell relative min-h-[22rem] overflow-hidden border border-cyan-200/20 bg-[linear-gradient(135deg,rgba(8,47,73,0.5),rgba(2,6,23,0.88))] shadow-[0_34px_110px_rgba(34,211,238,0.16)]"
     >
       <div className="absolute inset-8 border border-white/10 bg-[linear-gradient(to_right,rgba(34,211,238,0.18)_1px,transparent_1px),linear-gradient(to_bottom,rgba(34,211,238,0.14)_1px,transparent_1px)] bg-[length:5.5rem_5.5rem] opacity-70" />
 
@@ -140,10 +140,17 @@ export default async function HomePage() {
       </section>
 
       {/* POSITIONING / ABOUT PREVIEW */}
-      <Section className="py-20 lg:py-28">
-        <div className="grid gap-12 lg:grid-cols-[0.95fr_1.05fr] lg:items-center">
-          <Reveal>
-            <div>
+      <Section className="relative overflow-visible py-24 lg:py-32">
+        <div aria-hidden className="about-angle-field">
+          <div className="about-angle-plane about-angle-plane-a" />
+          <div className="about-angle-plane about-angle-plane-b" />
+          <div className="about-angle-plane about-angle-plane-c" />
+        </div>
+
+        <div className="relative z-10 grid gap-12 lg:grid-cols-[0.95fr_1.05fr] lg:items-center">
+          <Reveal variant="angleLeft">
+            <div className="relative">
+              <div aria-hidden className="about-title-rail" />
               <p className="text-xs uppercase tracking-[0.32em] text-cyan-300">
                 AI-Native Consulting and Automation
               </p>
@@ -154,11 +161,11 @@ export default async function HomePage() {
             </div>
           </Reveal>
 
-          <Reveal delay={0.05}>
+          <Reveal delay={0.05} variant="tiltRight">
             <div className="grid gap-5">
               <FloatingReadinessGraph />
 
-              <div className="rounded-[2rem] border border-white/10 bg-white/[0.035] p-8 shadow-[0_0_80px_rgba(34,211,238,0.06)] sm:p-10">
+              <div className="about-copy-float relative p-6 sm:p-8">
                 <p className="text-lg leading-8 text-slate-300">
                   Gray Matters Technology- Sage Tech Solutions supports
                   organizations with AI readiness, responsible adoption,
