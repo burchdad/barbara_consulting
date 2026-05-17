@@ -80,7 +80,7 @@ export default async function HomePage() {
       }}
     >
       {/* HERO */}
-      <section className="relative isolate min-h-screen overflow-hidden">
+      <section className="home-hero relative isolate min-h-screen overflow-hidden">
         <video
           className="absolute inset-0 h-full w-full object-cover"
           autoPlay
@@ -94,7 +94,7 @@ export default async function HomePage() {
 
         <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(2,6,23,0.96)_0%,rgba(2,6,23,0.82)_44%,rgba(2,6,23,0.52)_100%)]" />
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_78%_22%,rgba(34,211,238,0.22),transparent_30%),radial-gradient(circle_at_18%_78%,rgba(168,85,247,0.14),transparent_28%)]" />
-        <div className="absolute inset-x-0 bottom-0 h-56 bg-gradient-to-b from-transparent via-slate-950/70 to-slate-950" />
+        <div className="hero-section-dissolve absolute inset-x-0 bottom-0" />
 
         <Section className="relative z-10 flex min-h-screen items-end pb-24 pt-36 lg:pb-32">
           <Reveal>
@@ -140,7 +140,7 @@ export default async function HomePage() {
       </section>
 
       {/* POSITIONING / ABOUT PREVIEW */}
-      <Section className="relative overflow-visible py-24 lg:py-32">
+      <Section className="home-about-transition relative overflow-visible py-24 lg:py-32">
         <div aria-hidden className="about-angle-field">
           <div className="about-angle-plane about-angle-plane-a" />
           <div className="about-angle-plane about-angle-plane-b" />
@@ -162,7 +162,7 @@ export default async function HomePage() {
           </Reveal>
 
           <Reveal delay={0.05} variant="tiltRight">
-            <div className="grid gap-5">
+            <div className="about-graph-stack grid gap-5">
               <FloatingReadinessGraph />
 
               <div className="about-copy-float relative p-6 sm:p-8">

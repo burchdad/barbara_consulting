@@ -803,6 +803,75 @@ footer .relative.overflow-hidden {
   animation: footer-wordmark-drift 26s ease-in-out infinite;
 }
 
+.home-hero {
+  min-height: 112vh;
+}
+
+.home-hero::after {
+  content: "";
+  position: absolute;
+  left: -8%;
+  right: -8%;
+  bottom: -1px;
+  height: 20rem;
+  z-index: 2;
+  pointer-events: none;
+  background:
+    linear-gradient(106deg, transparent 0 36%, rgba(34, 211, 238, 0.08) 45%, transparent 58%),
+    linear-gradient(to bottom, rgba(2, 6, 23, 0), rgba(2, 6, 23, 0.68) 58%, rgba(2, 6, 23, 0.94) 100%);
+  clip-path: polygon(0 30%, 100% 0, 100% 100%, 0 100%);
+}
+
+.hero-section-dissolve {
+  height: 32rem;
+  z-index: 1;
+  pointer-events: none;
+  background:
+    radial-gradient(circle at 68% 34%, rgba(34, 211, 238, 0.18), transparent 34%),
+    linear-gradient(to bottom, rgba(2, 6, 23, 0), rgba(2, 6, 23, 0.36) 32%, rgba(2, 6, 23, 0.86) 74%, rgba(2, 6, 23, 0.96) 100%);
+}
+
+.homepage-cinematic-content > section.home-about-transition:not(:first-of-type) {
+  margin-top: -14rem;
+  padding-top: 15rem;
+}
+
+.homepage-cinematic-content > section.home-about-transition:not(:first-of-type)::before {
+  content: "";
+  position: absolute;
+  left: -6vw;
+  right: -6vw;
+  top: 3.5rem;
+  height: 18rem;
+  z-index: 0;
+  pointer-events: none;
+  background:
+    linear-gradient(104deg, rgba(34, 211, 238, 0), rgba(34, 211, 238, 0.12) 44%, rgba(255, 255, 255, 0.06) 49%, rgba(34, 211, 238, 0) 62%),
+    linear-gradient(to bottom, rgba(2, 6, 23, 0), rgba(2, 6, 23, 0.46) 58%, rgba(2, 6, 23, 0));
+  clip-path: polygon(0 42%, 100% 10%, 100% 100%, 0 100%);
+}
+
+.homepage-cinematic-content > section.home-about-transition:not(:first-of-type)::after {
+  content: "";
+  display: block;
+  position: absolute;
+  left: -6vw;
+  right: -6vw;
+  top: 8rem;
+  height: 18rem;
+  z-index: 1;
+  pointer-events: none;
+  background:
+    radial-gradient(circle at 58% 30%, rgba(34, 211, 238, 0.14), transparent 35%),
+    linear-gradient(103deg, rgba(2, 6, 23, 0), rgba(2, 6, 23, 0.64) 35%, rgba(2, 6, 23, 0.9) 68%, rgba(2, 6, 23, 0.18)),
+    linear-gradient(to bottom, rgba(2, 6, 23, 0), rgba(2, 6, 23, 0.82) 54%, rgba(2, 6, 23, 0));
+  clip-path: polygon(0 34%, 100% 0, 100% 100%, 0 100%);
+}
+
+.about-graph-stack {
+  transform: translateY(-3.5rem);
+}
+
 .readiness-graph-shell {
   clip-path: polygon(3% 0, 100% 0, 97% 100%, 0 100%);
 }
@@ -822,7 +891,7 @@ footer .relative.overflow-hidden {
 
 .about-angle-field {
   position: absolute;
-  inset: 4rem 0 2rem;
+  inset: 0 0 2rem;
   pointer-events: none;
   z-index: 0;
 }
