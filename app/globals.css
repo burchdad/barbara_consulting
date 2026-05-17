@@ -970,6 +970,24 @@ footer .relative.overflow-hidden {
   clip-path: polygon(4% 0, 100% 6%, 96% 100%, 0 91%);
 }
 
+.service-command-map {
+  clip-path: polygon(4% 0, 100% 6%, 96% 100%, 0 91%);
+  transform: perspective(1200px) rotateY(3deg);
+}
+
+.service-command-map::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(112deg, transparent 0%, rgba(255, 255, 255, 0.12) 46%, transparent 58%),
+    linear-gradient(180deg, rgba(34, 211, 238, 0.08), transparent 48%);
+  opacity: 0.45;
+  pointer-events: none;
+  transform: translateX(-28%);
+  animation: angled-hud-sweep 5.8s ease-in-out infinite;
+}
+
 .about-signal-graph::after {
   content: "";
   position: absolute;
