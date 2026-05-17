@@ -117,58 +117,83 @@ export default async function AboutPage() {
       }}
     >
       {/* HERO */}
-      <section className="about-hero relative isolate min-h-screen overflow-hidden">
-        <video
-          className="absolute inset-0 h-full w-full object-cover"
-          autoPlay
-          muted
-          loop
-          playsInline
-          preload="metadata"
-        >
-          <source src="/greyaivideo.mp4" type="video/mp4" />
-        </video>
-
-        <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(2,6,23,0.96)_0%,rgba(2,6,23,0.86)_48%,rgba(2,6,23,0.58)_100%)]" />
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_78%_22%,rgba(34,211,238,0.2),transparent_30%),radial-gradient(circle_at_20%_82%,rgba(14,165,233,0.12),transparent_32%)]" />
+      <section className="about-hero relative isolate overflow-hidden">
+        <div className="absolute inset-0 bg-[linear-gradient(120deg,rgba(2,6,23,0.98)_0%,rgba(2,6,23,0.9)_50%,rgba(8,47,73,0.62)_100%)]" />
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_72%_28%,rgba(34,211,238,0.18),transparent_30%),linear-gradient(to_right,rgba(255,255,255,0.035)_1px,transparent_1px),linear-gradient(to_bottom,rgba(255,255,255,0.026)_1px,transparent_1px)] bg-[length:100%_100%,64px_64px,64px_64px]" />
         <div className="about-hero-dissolve absolute inset-x-0 bottom-0" />
 
-        <Section className="relative z-10 flex min-h-screen items-end pb-24 pt-36 lg:pb-32">
+        <Section className="relative z-10 flex min-h-[82vh] items-center pb-24 pt-36 lg:pb-28">
           <Reveal variant="angleLeft">
-            <div className="max-w-6xl">
-              <img
-                src="/greylogo.png"
-                alt="Gray Matters Technology - Sage Tech Solutions"
-                className="mb-6 h-auto w-[150px] sm:w-[210px] lg:w-[280px]"
-              />
+            <div className="grid w-full gap-12 lg:grid-cols-[0.9fr_1.1fr] lg:items-center">
+              <div className="max-w-4xl">
+                <p className="mb-5 text-xs font-bold uppercase tracking-[0.35em] text-cyan-200">
+                  About {companyName}
+                </p>
 
-              <p className="mb-5 text-xs font-bold uppercase tracking-[0.35em] text-cyan-200">
-                About {companyName}
-              </p>
+                <h1 className="max-w-5xl text-5xl font-black uppercase leading-[0.92] text-white sm:text-6xl lg:text-7xl">
+                  Practical AI leadership built around mission, security, and
+                  execution.
+                </h1>
 
-              <h1 className="max-w-7xl text-5xl font-black uppercase leading-[0.92] text-white sm:text-6xl lg:text-7xl 2xl:text-8xl">
-                AI delivery leadership for mission-driven organizations.
-              </h1>
+                <p className="mt-8 max-w-3xl text-lg leading-8 text-slate-200 sm:text-xl">
+                  Gray Matters Technology- Sage Tech Solutions helps leaders
+                  turn emerging technology into responsible, useful operating
+                  capability without losing sight of people, process, or risk.
+                </p>
 
-              <p className="mt-8 max-w-3xl text-lg leading-8 text-slate-200 sm:text-xl">
-                Strategy, security, workflow modernization, and responsible AI
-                adoption shaped into one practical execution partner.
-              </p>
+                <div className="mt-10 flex flex-wrap gap-4">
+                  <Link
+                    href="#firm-overview"
+                    className="premium-button rounded-full bg-white px-8 py-4 text-sm font-black uppercase tracking-[0.18em] text-slate-950 transition hover:bg-cyan-200"
+                  >
+                    Read the Firm Profile
+                  </Link>
 
-              <div className="mt-10 flex flex-wrap gap-4">
-                <Link
-                  href="/contact"
-                  className="premium-button rounded-full bg-white px-8 py-4 text-sm font-black uppercase tracking-[0.18em] text-slate-950 transition hover:bg-cyan-200"
-                >
-                  Start a Conversation
-                </Link>
+                  <Link
+                    href="/contact"
+                    className="premium-button rounded-full border border-white/35 bg-white/5 px-8 py-4 text-sm font-black uppercase tracking-[0.18em] text-white backdrop-blur transition hover:border-cyan-200 hover:text-cyan-100"
+                  >
+                    Start a Conversation
+                  </Link>
+                </div>
+              </div>
 
-                <Link
-                  href="/services"
-                  className="premium-button rounded-full border border-white/35 bg-white/5 px-8 py-4 text-sm font-black uppercase tracking-[0.18em] text-white backdrop-blur transition hover:border-cyan-200 hover:text-cyan-100"
-                >
-                  Explore Services
-                </Link>
+              <div className="about-hero-profile relative hidden min-h-[34rem] overflow-hidden lg:block">
+                <div
+                  className="absolute inset-0 bg-cover bg-center opacity-70"
+                  style={{ backgroundImage: `url(${aboutHeroImageUrl})` }}
+                />
+                <div className="absolute inset-0 bg-[linear-gradient(135deg,rgba(2,6,23,0.3),rgba(2,6,23,0.92)_64%,rgba(8,47,73,0.86))]" />
+                <div className="absolute inset-8 border border-cyan-200/15 bg-[linear-gradient(to_right,rgba(34,211,238,0.11)_1px,transparent_1px),linear-gradient(to_bottom,rgba(34,211,238,0.08)_1px,transparent_1px)] bg-[length:4.5rem_4.5rem]" />
+
+                <div className="absolute left-8 top-8 max-w-[17rem] border border-white/15 bg-black/50 p-5 backdrop-blur">
+                  <p className="text-xs font-black uppercase tracking-[0.2em] text-cyan-200">
+                    Firm Role
+                  </p>
+                  <p className="mt-3 text-2xl font-black uppercase leading-tight text-white">
+                    Strategy partner for responsible AI modernization.
+                  </p>
+                </div>
+
+                <div className="absolute bottom-8 right-8 grid w-[20rem] gap-3">
+                  {[
+                    "AI readiness",
+                    "Secure systems",
+                    "Workflow execution",
+                  ].map((item, index) => (
+                    <div
+                      key={item}
+                      className="flex items-center justify-between border border-cyan-200/18 bg-black/48 px-4 py-3 backdrop-blur"
+                    >
+                      <span className="text-xs font-black uppercase tracking-[0.18em] text-slate-300">
+                        0{index + 1}
+                      </span>
+                      <span className="text-sm font-black uppercase tracking-[0.14em] text-white">
+                        {item}
+                      </span>
+                    </div>
+                  ))}
+                </div>
               </div>
             </div>
           </Reveal>
@@ -176,7 +201,10 @@ export default async function AboutPage() {
       </section>
 
       {/* POSITIONING */}
-      <Section className="about-command-section relative overflow-visible py-24 lg:py-32">
+      <Section
+        id="firm-overview"
+        className="about-command-section relative overflow-visible py-24 lg:py-32"
+      >
         <div aria-hidden className="about-angle-field">
           <div className="about-angle-plane about-angle-plane-a" />
           <div className="about-angle-plane about-angle-plane-b" />
