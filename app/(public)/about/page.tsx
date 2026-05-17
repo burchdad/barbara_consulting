@@ -5,18 +5,19 @@ import {
   CheckCircle2,
   Compass,
   Eye,
-  Landmark,
   Layers3,
+  Radar,
   ShieldCheck,
   Sparkles,
   Target,
   UsersRound,
 } from "lucide-react";
 
-import { Section } from "@/components/ui/section";
 import { Reveal } from "@/components/public/reveal";
-import { getPublishedData } from "@/lib/site-data";
+import { HomepageCinematicScene } from "@/components/public/homepage-cinematic-scene";
+import { Section } from "@/components/ui/section";
 import { siteConfig } from "@/lib/config/site";
+import { getPublishedData } from "@/lib/site-data";
 
 const leadershipPrinciples = [
   {
@@ -41,14 +42,63 @@ const leadershipPrinciples = [
   },
 ];
 
-const impactAreas = [
-  "AI Strategy",
-  "Cyber Readiness",
-  "Workflow Modernization",
-  "Program Support",
-  "Data Intelligence",
-  "Public-Sector Delivery",
+const operatingSignals = [
+  "AI readiness",
+  "Workflow modernization",
+  "Cyber readiness",
+  "Program support",
+  "Data intelligence",
+  "Public-sector delivery",
 ];
+
+const clarityPath = [
+  "Discover operational friction",
+  "Map responsible AI opportunities",
+  "Prioritize secure modernization",
+  "Move from plan to execution",
+];
+
+function AboutSignalGraph() {
+  const nodes = [
+    "left-[11%] top-[34%]",
+    "left-[32%] top-[58%]",
+    "left-[52%] top-[25%]",
+    "right-[24%] top-[51%]",
+    "right-[10%] bottom-[23%]",
+  ];
+
+  return (
+    <div
+      aria-hidden
+      className="about-signal-graph relative min-h-[24rem] overflow-hidden border border-cyan-200/20 bg-[linear-gradient(135deg,rgba(8,47,73,0.52),rgba(2,6,23,0.9))] shadow-[0_32px_110px_rgba(34,211,238,0.14)]"
+    >
+      <div className="absolute inset-7 border border-white/10 bg-[linear-gradient(to_right,rgba(34,211,238,0.14)_1px,transparent_1px),linear-gradient(to_bottom,rgba(34,211,238,0.1)_1px,transparent_1px)] bg-[length:4.75rem_4.75rem]" />
+      <div className="absolute inset-[18%_8%_20%] skew-y-[-13deg] border border-cyan-200/25" />
+      <div className="absolute inset-[27%_16%_16%_20%] skew-y-[12deg] border border-white/15" />
+
+      {nodes.map((position) => (
+        <span
+          key={position}
+          className={`absolute h-3 w-3 rounded-full bg-cyan-300 shadow-[0_0_28px_rgba(34,211,238,0.92)] ${position}`}
+        />
+      ))}
+
+      <div className="absolute left-7 top-7 border border-white/15 bg-black/60 p-5 shadow-2xl backdrop-blur">
+        <p className="text-xs font-black uppercase tracking-[0.18em] text-slate-400">
+          Adoption Risk
+        </p>
+        <p className="mt-2 text-4xl font-black text-white">Low</p>
+      </div>
+
+      <div className="absolute bottom-7 right-7 border border-white/15 bg-black/60 p-5 shadow-2xl backdrop-blur">
+        <p className="text-xs font-black uppercase tracking-[0.18em] text-slate-400">
+          Clarity Index
+        </p>
+        <p className="mt-2 text-4xl font-black text-white">92%</p>
+      </div>
+    </div>
+  );
+}
 
 export default async function AboutPage() {
   const { settings, leadership } = await getPublishedData();
@@ -58,62 +108,86 @@ export default async function AboutPage() {
     settings?.aboutHeroImageUrl || siteConfig.media.aboutHeroImageUrl;
 
   return (
-    <main className="overflow-hidden">
+    <HomepageCinematicScene
+      sceneSettings={{
+        type: "mesh",
+        glow: "blue",
+        particles: true,
+        parallax: true,
+      }}
+    >
       {/* HERO */}
-      <Section className="relative isolate overflow-hidden py-20 lg:py-28">
-        <div
-          className="absolute inset-0 -z-20 bg-cover bg-center opacity-40"
-          style={{
-            backgroundImage: `linear-gradient(to bottom, rgba(2, 6, 23, 0.18), rgba(2, 6, 23, 0.92)), url(${aboutHeroImageUrl})`,
-          }}
-        />
+      <section className="about-hero relative isolate min-h-screen overflow-hidden">
+        <video
+          className="absolute inset-0 h-full w-full object-cover"
+          autoPlay
+          muted
+          loop
+          playsInline
+          preload="metadata"
+        >
+          <source src="/greyaivideo.mp4" type="video/mp4" />
+        </video>
 
-        <div className="absolute inset-0 -z-10 bg-[radial-gradient(circle_at_22%_18%,rgba(34,211,238,0.24),transparent_30%),radial-gradient(circle_at_80%_20%,rgba(168,85,247,0.14),transparent_28%),linear-gradient(135deg,rgba(2,6,23,0.96),rgba(2,6,23,0.68))]" />
+        <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(2,6,23,0.96)_0%,rgba(2,6,23,0.86)_48%,rgba(2,6,23,0.58)_100%)]" />
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_78%_22%,rgba(34,211,238,0.2),transparent_30%),radial-gradient(circle_at_20%_82%,rgba(14,165,233,0.12),transparent_32%)]" />
+        <div className="about-hero-dissolve absolute inset-x-0 bottom-0" />
 
-        <div className="absolute inset-0 -z-10 bg-[linear-gradient(to_right,rgba(255,255,255,0.045)_1px,transparent_1px),linear-gradient(to_bottom,rgba(255,255,255,0.045)_1px,transparent_1px)] bg-[size:40px_40px] opacity-20" />
+        <Section className="relative z-10 flex min-h-screen items-end pb-24 pt-36 lg:pb-32">
+          <Reveal variant="angleLeft">
+            <div className="max-w-6xl">
+              <img
+                src="/greylogo.png"
+                alt="Gray Matters Technology - Sage Tech Solutions"
+                className="mb-6 h-auto w-[150px] sm:w-[210px] lg:w-[280px]"
+              />
 
-        <Reveal>
-          <div className="max-w-6xl">
-            <p className="text-xs font-bold uppercase tracking-[0.36em] text-cyan-300">
-              About {companyName}
-            </p>
+              <p className="mb-5 text-xs font-bold uppercase tracking-[0.35em] text-cyan-200">
+                About {companyName}
+              </p>
 
-            <h1 className="mt-5 max-w-6xl text-5xl font-black uppercase leading-[0.92] text-white sm:text-7xl lg:text-8xl">
-              AI delivery leadership for mission-driven organizations.
-            </h1>
+              <h1 className="max-w-7xl text-5xl font-black uppercase leading-[0.92] text-white sm:text-6xl lg:text-7xl 2xl:text-8xl">
+                AI delivery leadership for mission-driven organizations.
+              </h1>
 
-            <p className="mt-8 max-w-4xl text-lg leading-8 text-slate-200 sm:text-xl">
-              {companyName} helps public-sector, enterprise, and
-              mission-focused teams modernize systems, strengthen operational
-              clarity, and apply intelligent technology with responsible
-              execution.
-            </p>
+              <p className="mt-8 max-w-3xl text-lg leading-8 text-slate-200 sm:text-xl">
+                Strategy, security, workflow modernization, and responsible AI
+                adoption shaped into one practical execution partner.
+              </p>
 
-            <div className="mt-10 flex flex-wrap gap-4">
-              <Link
-                href="/services"
-                className="premium-button rounded-full bg-white px-8 py-4 text-sm font-black uppercase tracking-[0.18em] text-slate-950 transition hover:bg-cyan-200"
-              >
-                Explore Services
-              </Link>
+              <div className="mt-10 flex flex-wrap gap-4">
+                <Link
+                  href="/contact"
+                  className="premium-button rounded-full bg-white px-8 py-4 text-sm font-black uppercase tracking-[0.18em] text-slate-950 transition hover:bg-cyan-200"
+                >
+                  Start a Conversation
+                </Link>
 
-              <Link
-                href="/contact"
-                className="premium-button rounded-full border border-white/35 bg-white/5 px-8 py-4 text-sm font-black uppercase tracking-[0.18em] text-white backdrop-blur transition hover:border-cyan-200 hover:text-cyan-100"
-              >
-                Start a Conversation
-              </Link>
+                <Link
+                  href="/services"
+                  className="premium-button rounded-full border border-white/35 bg-white/5 px-8 py-4 text-sm font-black uppercase tracking-[0.18em] text-white backdrop-blur transition hover:border-cyan-200 hover:text-cyan-100"
+                >
+                  Explore Services
+                </Link>
+              </div>
             </div>
-          </div>
-        </Reveal>
-      </Section>
+          </Reveal>
+        </Section>
+      </section>
 
       {/* POSITIONING */}
-      <Section className="py-20 lg:py-28">
-        <div className="grid gap-12 lg:grid-cols-[0.9fr_1.1fr] lg:items-start">
-          <Reveal>
-            <div>
-              <p className="text-xs uppercase tracking-[0.3em] text-cyan-300">
+      <Section className="about-command-section relative overflow-visible py-24 lg:py-32">
+        <div aria-hidden className="about-angle-field">
+          <div className="about-angle-plane about-angle-plane-a" />
+          <div className="about-angle-plane about-angle-plane-b" />
+          <div className="about-angle-plane about-angle-plane-c" />
+        </div>
+
+        <div className="relative z-10 grid gap-12 lg:grid-cols-[0.92fr_1.08fr] lg:items-center">
+          <Reveal variant="angleLeft">
+            <div className="relative">
+              <div aria-hidden className="about-title-rail" />
+              <p className="text-xs uppercase tracking-[0.32em] text-cyan-300">
                 Firm Overview
               </p>
 
@@ -124,20 +198,22 @@ export default async function AboutPage() {
             </div>
           </Reveal>
 
-          <Reveal delay={0.05}>
-            <div className="space-y-5 rounded-[2rem] border border-white/10 bg-white/[0.035] p-8 text-lg leading-8 text-slate-300 shadow-[0_0_80px_rgba(34,211,238,0.06)] sm:p-10">
-              {siteConfig.about.paragraphs.map((paragraph) => (
-                <p key={paragraph}>{paragraph}</p>
-              ))}
+          <Reveal delay={0.06} variant="tiltRight">
+            <div className="about-overview-panel relative p-6 sm:p-8 lg:p-10">
+              <div className="space-y-5 text-lg leading-8 text-slate-300">
+                {siteConfig.about.paragraphs.map((paragraph) => (
+                  <p key={paragraph}>{paragraph}</p>
+                ))}
+              </div>
 
-              <div className="grid gap-3 pt-4 sm:grid-cols-2 lg:grid-cols-3">
-                {impactAreas.map((area) => (
-                  <div
-                    key={area}
-                    className="rounded-full border border-cyan-200/20 bg-cyan-200/[0.03] px-4 py-3 text-center text-xs font-bold uppercase tracking-[0.16em] text-cyan-100"
+              <div className="mt-8 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+                {operatingSignals.map((signal) => (
+                  <span
+                    key={signal}
+                    className="border border-cyan-200/20 bg-cyan-200/[0.03] px-4 py-3 text-center text-xs font-bold uppercase tracking-[0.16em] text-cyan-100"
                   >
-                    {area}
-                  </div>
+                    {signal}
+                  </span>
                 ))}
               </div>
             </div>
@@ -145,94 +221,103 @@ export default async function AboutPage() {
         </div>
       </Section>
 
-      {/* MISSION / VISION / PURPOSE */}
-      <Section className="py-20 lg:py-28">
-        <Reveal>
-          <div className="mb-10">
-            <p className="text-xs uppercase tracking-[0.3em] text-cyan-300">
-              Direction
-            </p>
-
-            <h2 className="mt-3 text-5xl font-black uppercase text-white sm:text-7xl">
-              Mission, vision, and purpose.
-            </h2>
-          </div>
-        </Reveal>
-
-        <div className="grid gap-5 lg:grid-cols-3">
-          <Reveal delay={0.03}>
-            <article className="group min-h-[320px] rounded-[2rem] border border-white/10 bg-[linear-gradient(145deg,rgba(255,255,255,0.08),rgba(255,255,255,0.025))] p-8 transition hover:-translate-y-2 hover:border-cyan-200/40">
-              <Target className="text-cyan-200" size={28} />
-
-              <h3 className="mt-10 text-3xl font-black uppercase text-white">
-                Mission
-              </h3>
-
-              <p className="mt-5 text-base leading-7 text-slate-300">
-                {siteConfig.about.missionStatement}
-              </p>
-            </article>
+      {/* MISSION SYSTEM */}
+      <Section className="about-mission-section relative py-24 lg:py-32">
+        <div className="grid gap-12 lg:grid-cols-[1.02fr_0.98fr] lg:items-center">
+          <Reveal variant="tiltLeft">
+            <AboutSignalGraph />
           </Reveal>
 
-          <Reveal delay={0.06}>
-            <article className="group min-h-[320px] rounded-[2rem] border border-white/10 bg-[linear-gradient(145deg,rgba(255,255,255,0.08),rgba(255,255,255,0.025))] p-8 transition hover:-translate-y-2 hover:border-cyan-200/40">
-              <Eye className="text-cyan-200" size={28} />
+          <Reveal delay={0.07} variant="angleRight">
+            <div className="relative">
+              <div className="inline-flex h-12 w-12 items-center justify-center border border-cyan-200/25 bg-cyan-200/5 text-cyan-200">
+                <Radar size={23} />
+              </div>
 
-              <h3 className="mt-10 text-3xl font-black uppercase text-white">
-                Vision
-              </h3>
-
-              <p className="mt-5 text-base leading-7 text-slate-300">
-                {siteConfig.about.visionStatement}
+              <p className="mt-6 text-xs uppercase tracking-[0.32em] text-cyan-300">
+                Direction
               </p>
-            </article>
-          </Reveal>
 
-          <Reveal delay={0.09}>
-            <article className="group min-h-[320px] rounded-[2rem] border border-cyan-200/20 bg-[radial-gradient(circle_at_20%_10%,rgba(34,211,238,0.18),transparent_32%),linear-gradient(145deg,rgba(15,23,42,0.94),rgba(2,6,23,0.88))] p-8 transition hover:-translate-y-2 hover:border-cyan-200/50">
-              <Compass className="text-cyan-200" size={28} />
+              <h2 className="mt-4 max-w-3xl text-5xl font-black uppercase leading-[0.92] text-white sm:text-6xl">
+                Mission, vision, and purpose working as one operating model.
+              </h2>
 
-              <h3 className="mt-10 text-3xl font-black uppercase text-white">
-                Purpose
-              </h3>
-
-              <p className="mt-5 text-base leading-7 text-slate-300">
-                To help organizations move beyond outdated systems and
-                fragmented workflows into a future where strategy, security,
-                intelligence, and execution work together.
+              <p className="mt-6 max-w-2xl text-base leading-7 text-slate-300">
+                The about page should feel like a command-level view of the
+                firm: clear priorities, secure judgment, and implementation
+                discipline from first conversation to practical delivery.
               </p>
-            </article>
+            </div>
           </Reveal>
+        </div>
+
+        <div className="mt-14 grid gap-5 lg:grid-cols-3">
+          {[
+            {
+              title: "Mission",
+              body: siteConfig.about.missionStatement,
+              Icon: Target,
+            },
+            {
+              title: "Vision",
+              body: siteConfig.about.visionStatement,
+              Icon: Eye,
+            },
+            {
+              title: "Purpose",
+              body: "To help organizations move beyond outdated systems and fragmented workflows into a future where strategy, security, intelligence, and execution work together.",
+              Icon: Compass,
+            },
+          ].map(({ title, body, Icon }, index) => (
+            <Reveal key={title} delay={0.04 + index * 0.04} variant="angleLeft">
+              <article className="about-system-card min-h-[19rem] p-7">
+                <Icon className="text-cyan-200" size={28} />
+
+                <h3 className="mt-10 text-3xl font-black uppercase text-white">
+                  {title}
+                </h3>
+
+                <p className="mt-5 text-base leading-7 text-slate-300">
+                  {body}
+                </p>
+              </article>
+            </Reveal>
+          ))}
         </div>
       </Section>
 
-      {/* VALUES */}
-      <Section className="py-20 lg:py-28">
-        <div className="grid gap-10 lg:grid-cols-[0.7fr_1.3fr] lg:items-center">
-          <Reveal>
+      {/* VALUES / CLARITY PATH */}
+      <Section className="about-values-section relative overflow-visible py-24 lg:py-32">
+        <div aria-hidden className="about-route-field">
+          <div className="about-route-outline" />
+          <div className="about-route-beam" />
+        </div>
+
+        <div className="relative z-10 grid gap-12 lg:grid-cols-[0.78fr_1.22fr] lg:items-center">
+          <Reveal variant="angleLeft">
             <div>
-              <p className="text-xs uppercase tracking-[0.3em] text-cyan-300">
+              <p className="text-xs uppercase tracking-[0.32em] text-cyan-300">
                 Core Values
               </p>
 
-              <h2 className="mt-3 text-5xl font-black uppercase leading-none text-white sm:text-6xl">
-                Principles that guide the work.
+              <h2 className="mt-4 text-5xl font-black uppercase leading-[0.95] text-white sm:text-6xl">
+                Principles that keep the work grounded.
               </h2>
 
-              <p className="mt-5 text-lg leading-8 text-slate-300">
-                The firm’s values shape how strategy is developed, how
+              <p className="mt-6 max-w-xl text-lg leading-8 text-slate-300">
+                The firm&apos;s values shape how strategy is developed, how
                 technology is introduced, and how modernization efforts are
                 carried from vision into execution.
               </p>
             </div>
           </Reveal>
 
-          <Reveal delay={0.05}>
+          <Reveal delay={0.06} variant="tiltRight">
             <div className="grid gap-4 sm:grid-cols-2">
               {siteConfig.about.values.map((value, index) => (
                 <div
                   key={value}
-                  className="flex min-h-[96px] items-center gap-4 rounded-2xl border border-white/10 bg-black/25 p-5 transition hover:border-cyan-200/40 hover:bg-cyan-200/[0.04]"
+                  className="about-value-chip flex min-h-[6rem] items-center gap-4 p-5"
                 >
                   <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-cyan-200/30 bg-cyan-200/[0.06] text-sm font-black text-cyan-200">
                     0{index + 1}
@@ -246,12 +331,26 @@ export default async function AboutPage() {
             </div>
           </Reveal>
         </div>
+
+        <div className="relative z-10 mt-16 grid gap-5 md:grid-cols-2 xl:grid-cols-4">
+          {clarityPath.map((item, index) => (
+            <Reveal key={item} delay={0.04 + index * 0.04} variant="tiltLeft">
+              <article className={`about-path-node about-path-node-${index + 1}`}>
+                <span className="about-path-node-index">0{index + 1}</span>
+                <CheckCircle2 className="text-cyan-200" size={22} />
+                <h3 className="mt-5 text-base font-black uppercase leading-tight text-white">
+                  {item}
+                </h3>
+              </article>
+            </Reveal>
+          ))}
+        </div>
       </Section>
 
       {/* HOW WE LEAD */}
-      <Section className="py-20 lg:py-28">
+      <Section className="py-24 lg:py-32">
         <Reveal>
-          <div className="rounded-[2.5rem] border border-cyan-200/15 bg-[radial-gradient(circle_at_18%_20%,rgba(34,211,238,0.14),transparent_30%),linear-gradient(135deg,rgba(15,23,42,0.76),rgba(2,6,23,0.9))] p-8 sm:p-12 lg:p-16">
+          <div className="about-lead-panel p-8 sm:p-12 lg:p-16">
             <div className="mb-10 max-w-4xl">
               <p className="text-xs uppercase tracking-[0.3em] text-cyan-300">
                 How We Lead
@@ -271,7 +370,7 @@ export default async function AboutPage() {
             <div className="grid gap-5 md:grid-cols-2 xl:grid-cols-4">
               {leadershipPrinciples.map(({ title, body, icon: Icon }, index) => (
                 <Reveal key={title} delay={0.04 + index * 0.04}>
-                  <article className="min-h-[280px] rounded-[2rem] border border-white/10 bg-black/25 p-7 transition hover:-translate-y-2 hover:border-cyan-200/40">
+                  <article className="about-lead-card min-h-[17rem] p-7">
                     <Icon className="text-cyan-200" size={26} />
 
                     <h3 className="mt-10 text-2xl font-black uppercase leading-tight text-white">
@@ -290,7 +389,7 @@ export default async function AboutPage() {
       </Section>
 
       {/* LEADERSHIP TEAM */}
-      <Section className="py-20 lg:py-28">
+      <Section className="py-24 lg:py-32">
         <Reveal>
           <div className="mb-12 flex flex-col justify-between gap-5 lg:flex-row lg:items-end">
             <div>
@@ -298,7 +397,7 @@ export default async function AboutPage() {
                 Leadership Team
               </p>
 
-              <h2 className="mt-3 text-5xl font-black uppercase text-white sm:text-7xl">
+              <h2 className="mt-3 text-5xl font-black uppercase leading-[0.95] text-white sm:text-7xl">
                 Experienced guidance for complex environments.
               </h2>
             </div>
@@ -315,13 +414,12 @@ export default async function AboutPage() {
           <div className="grid gap-6">
             {leadership.map((leader, index) => (
               <Reveal key={leader.id} delay={0.05 + index * 0.04}>
-                <article className="grid gap-6 overflow-hidden rounded-[2rem] border border-white/10 bg-white/[0.035] p-5 transition hover:border-cyan-200/30 md:grid-cols-[280px_1fr]">
+                <article className="about-leader-card grid gap-6 overflow-hidden p-5 md:grid-cols-[280px_1fr]">
                   <div
-                    className="min-h-[320px] rounded-[1.5rem] bg-cover bg-center grayscale transition duration-500 hover:grayscale-0"
+                    className="min-h-[320px] bg-cover bg-center grayscale transition duration-500 hover:grayscale-0"
                     style={{
                       backgroundImage: `url(${
-                        leader.photoUrl ||
-                        "https://images.unsplash.com/photo-1521119989659-a83eee488004?auto=format&fit=crop&w=900&q=80"
+                        leader.photoUrl || aboutHeroImageUrl
                       })`,
                     }}
                   />
@@ -349,7 +447,7 @@ export default async function AboutPage() {
           </div>
         ) : (
           <Reveal>
-            <div className="rounded-[2rem] border border-white/10 bg-white/[0.035] p-8 text-center">
+            <div className="about-empty-leadership p-8 text-center">
               <UsersRound className="mx-auto text-cyan-300" size={30} />
 
               <h3 className="mt-5 text-3xl font-black uppercase text-white">
@@ -366,9 +464,9 @@ export default async function AboutPage() {
       </Section>
 
       {/* CTA */}
-      <Section className="py-20 lg:py-28">
-        <Reveal>
-          <div className="rounded-[2.5rem] border border-cyan-200/20 bg-[radial-gradient(circle_at_50%_0%,rgba(34,211,238,0.18),transparent_36%),linear-gradient(135deg,rgba(15,23,42,0.92),rgba(2,6,23,0.92))] p-10 text-center sm:p-16">
+      <Section className="py-24 lg:py-32">
+        <Reveal variant="tiltRight">
+          <div className="about-final-cta p-10 text-center sm:p-16">
             <Sparkles className="mx-auto text-cyan-300" size={28} />
 
             <p className="mt-4 text-xs uppercase tracking-[0.28em] text-cyan-200">
@@ -387,13 +485,13 @@ export default async function AboutPage() {
 
             <Link
               href="/contact"
-              className="premium-button mt-8 inline-flex rounded-full bg-white px-8 py-4 text-sm font-black uppercase tracking-[0.18em] text-slate-950 transition hover:bg-cyan-200"
+              className="premium-button mt-8 inline-flex items-center gap-2 rounded-full bg-white px-8 py-4 text-sm font-black uppercase tracking-[0.18em] text-slate-950 transition hover:bg-cyan-200"
             >
-              Contact Our Team
+              Contact Our Team <ArrowRight size={16} />
             </Link>
           </div>
         </Reveal>
       </Section>
-    </main>
+    </HomepageCinematicScene>
   );
 }
