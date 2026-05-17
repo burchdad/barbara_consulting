@@ -8,7 +8,6 @@ import {
   Radar,
   ShieldCheck,
   Target,
-  UsersRound,
 } from "lucide-react";
 
 import { Reveal } from "@/components/public/reveal";
@@ -54,6 +53,51 @@ const clarityPath = [
   "Map responsible AI opportunities",
   "Prioritize secure modernization",
   "Move from plan to execution",
+];
+
+const fallbackLeadership = [
+  {
+    id: "danielle-carr",
+    name: "Danielle Carr",
+    title: "Chief Executive Officer",
+    credential: "MBA; M.S., Acquisition and Supply Chain Management",
+    bio: [
+      "Danielle Carr was named CEO of Gray Matters Technology Services in January 2025 after serving as CEO of Sage Tech Solutions for the past five years. The merged capabilities of the two companies bring AI strategy, cost-saving innovation, and public-sector delivery experience to federal and state government clients through a Service-Disabled Veteran-Owned Small Business and Woman-Owned Small Business platform.",
+      "Her career spans work with NASA, the Department of Defense, HHS, international agencies, and other mission-focused organizations. Recognition for her leadership with the National Contract Management Association underscores her commitment to developing the next generation of procurement professionals and building strong relationships that support organizational growth.",
+      "Ms. Carr holds an MBA and a Master of Science in Acquisition and Supply Chain Management from the University of Maryland, College Park. She also holds multiple professional certifications and has served as Education Chair and Past President of the NCMA Bethesda Chapter.",
+    ],
+  },
+  {
+    id: "barbara-gray",
+    name: "Barbara A. Gray",
+    title: "President",
+    credential: "M.S., Information Technology; AI Strategy, PMP, ITIL, CISSP, SQL, and Oracle certifications",
+    bio: [
+      "Barbara A. Gray, former CEO of Gray Matters Technology Services, managed and operated GMTS for more than 23 years as CEO and technology thought leader. She currently serves as President of Integrated Solutions.",
+      "Earlier in her career, Ms. Gray served in roles of increasing responsibility while supporting SAIC, Raytheon, Booz Allen, and Houston Associates across 20 collective years of technology and mission support experience.",
+      "Ms. Gray holds a Master of Information Technology from Williamsburg University and maintains certifications spanning AI strategy, project management, IT service management, cybersecurity, SQL, and Oracle administration.",
+    ],
+  },
+  {
+    id: "alexis-muse",
+    name: "Alexis Muse",
+    title: "Senior Contracts Manager",
+    credential: "B.S., Finance, University of Maryland",
+    bio: [
+      "Alexis Muse serves as Senior Contracts Manager, supporting federal contract operations across GMTS and Sage Tech Solutions.",
+      "She holds a bachelor's degree in finance from the University of Maryland and brings more than 15 years of experience supporting federal government contracts.",
+    ],
+  },
+  {
+    id: "gary-fitch",
+    name: "Gary Fitch",
+    title: "Senior Pricing Manager",
+    credential: "Master of Business Administration",
+    bio: [
+      "Gary Fitch serves as Senior Pricing Manager and brings more than 30 years of pricing and business operations experience.",
+      "He has supported GMTS for the past 10 years and holds a Master of Business Administration.",
+    ],
+  },
 ];
 
 function AboutSignalGraph() {
@@ -104,6 +148,16 @@ export default async function AboutPage() {
   const companyName = settings?.companyName ?? siteConfig.companyName;
   const aboutHeroImageUrl =
     settings?.aboutHeroImageUrl || siteConfig.media.aboutHeroImageUrl;
+  const leadersToRender =
+    leadership.length > 0
+      ? leadership.map((leader) => ({
+          id: leader.id,
+          name: leader.name,
+          title: leader.title,
+          credential: "Executive Leadership",
+          bio: [leader.fullBio || leader.shortBio].filter(Boolean),
+        }))
+      : fallbackLeadership;
 
   return (
     <HomepageCinematicScene
@@ -128,7 +182,7 @@ export default async function AboutPage() {
                   About {companyName}
                 </p>
 
-                <h1 className="max-w-5xl text-5xl font-black uppercase leading-[0.92] text-white sm:text-6xl lg:text-7xl">
+                <h1 className="max-w-5xl text-5xl font-black uppercase leading-[0.92] text-white sm:text-6xl lg:text-[4.9rem]">
                   Practical AI leadership built around mission, security, and
                   execution.
                 </h1>
@@ -201,7 +255,7 @@ export default async function AboutPage() {
       {/* POSITIONING */}
       <Section
         id="firm-overview"
-        className="about-command-section relative overflow-visible py-24 lg:py-32"
+        className="about-command-section relative overflow-visible py-20 lg:py-28"
       >
         <div aria-hidden className="about-angle-field">
           <div className="about-angle-plane about-angle-plane-a" />
@@ -264,14 +318,14 @@ export default async function AboutPage() {
                 Direction
               </p>
 
-              <h2 className="mt-4 max-w-3xl text-5xl font-black uppercase leading-[0.92] text-white sm:text-6xl">
+              <h2 className="mt-4 max-w-3xl text-4xl font-black uppercase leading-[0.95] text-white sm:text-5xl lg:text-6xl">
                 Mission, vision, and purpose working as one operating model.
               </h2>
 
               <p className="mt-6 max-w-2xl text-base leading-7 text-slate-300">
-                The about page should feel like a command-level view of the
-                firm: clear priorities, secure judgment, and implementation
-                discipline from first conversation to practical delivery.
+                The firm brings clear priorities, secure judgment, and
+                implementation discipline to organizations modernizing critical
+                workflows with responsible AI.
               </p>
             </div>
           </Reveal>
@@ -423,7 +477,7 @@ export default async function AboutPage() {
                 Leadership Team
               </p>
 
-              <h2 className="mt-3 text-5xl font-black uppercase leading-[0.95] text-white sm:text-7xl">
+              <h2 className="mt-3 text-5xl font-black uppercase leading-[0.95] text-white sm:text-6xl">
                 Experienced guidance for complex environments.
               </h2>
             </div>
@@ -436,57 +490,49 @@ export default async function AboutPage() {
           </div>
         </Reveal>
 
-        {leadership.length > 0 ? (
-          <div className="grid gap-6">
-            {leadership.map((leader, index) => (
+        <div className="grid gap-6 lg:grid-cols-2">
+            {leadersToRender.map((leader, index) => (
               <Reveal key={leader.id} delay={0.05 + index * 0.04}>
-                <article className="about-leader-card grid gap-6 overflow-hidden p-5 md:grid-cols-[280px_1fr]">
-                  <div
-                    className="min-h-[320px] bg-cover bg-center grayscale transition duration-500 hover:grayscale-0"
-                    style={{
-                      backgroundImage: `url(${
-                        leader.photoUrl || aboutHeroImageUrl
-                      })`,
-                    }}
-                  />
+                <article className="about-leader-card overflow-hidden p-7 sm:p-8">
+                  <div className="flex flex-col gap-5 sm:flex-row sm:items-start sm:justify-between">
+                    <div>
+                      <p className="text-xs uppercase tracking-[0.24em] text-cyan-300">
+                        Executive Leadership
+                      </p>
 
-                  <div className="flex flex-col justify-center p-2 md:p-6">
-                    <p className="text-xs uppercase tracking-[0.24em] text-cyan-300">
-                      Executive Leadership
-                    </p>
+                      <h3 className="mt-3 text-4xl font-black uppercase leading-tight text-white">
+                        {leader.name}
+                      </h3>
 
-                    <h3 className="mt-3 text-4xl font-black uppercase leading-tight text-white">
-                      {leader.name}
-                    </h3>
+                      <p className="mt-2 text-sm font-semibold uppercase tracking-[0.18em] text-cyan-100/70">
+                        {leader.title}
+                      </p>
+                    </div>
 
-                    <p className="mt-2 text-sm font-semibold uppercase tracking-[0.18em] text-cyan-100/70">
-                      {leader.title}
-                    </p>
+                    <div className="flex h-16 w-16 shrink-0 items-center justify-center rounded-full border border-cyan-200/25 bg-cyan-200/[0.06] text-xl font-black text-cyan-100">
+                      {leader.name
+                        .split(" ")
+                        .map((part) => part[0])
+                        .join("")
+                        .slice(0, 2)}
+                    </div>
+                  </div>
 
-                    <p className="mt-6 text-base leading-8 text-slate-300">
-                      {leader.fullBio || leader.shortBio}
-                    </p>
+                  <div className="mt-6 h-px bg-gradient-to-r from-cyan-300/35 to-transparent" />
+
+                  <p className="mt-5 text-xs font-bold uppercase tracking-[0.18em] text-cyan-200/80">
+                    {leader.credential}
+                  </p>
+
+                  <div className="mt-5 space-y-4 text-sm leading-7 text-slate-300">
+                    {leader.bio.map((paragraph) => (
+                      <p key={paragraph}>{paragraph}</p>
+                    ))}
                   </div>
                 </article>
               </Reveal>
             ))}
-          </div>
-        ) : (
-          <Reveal>
-            <div className="about-empty-leadership p-8 text-center">
-              <UsersRound className="mx-auto text-cyan-300" size={30} />
-
-              <h3 className="mt-5 text-3xl font-black uppercase text-white">
-                Leadership information coming soon.
-              </h3>
-
-              <p className="mx-auto mt-4 max-w-2xl text-slate-300">
-                The leadership section is ready to display executive profiles
-                once team information is published.
-              </p>
-            </div>
-          </Reveal>
-        )}
+        </div>
       </Section>
 
     </HomepageCinematicScene>
