@@ -967,9 +967,30 @@ footer .relative.overflow-hidden {
 
 .procurement-route-field {
   position: absolute;
-  inset: 4rem 0 3rem;
+  inset: 1rem 0 1rem;
   z-index: 0;
   pointer-events: none;
+}
+
+.procurement-route-outline {
+  position: absolute;
+  left: -16%;
+  top: 25%;
+  width: 138%;
+  height: 24rem;
+  border: 2px solid rgba(103, 232, 249, 0.5);
+  background: transparent;
+  transform: rotate(-18deg) skewX(-5deg);
+  box-shadow:
+    0 0 64px rgba(34, 211, 238, 0.22),
+    inset 0 0 48px rgba(34, 211, 238, 0.08);
+}
+
+.procurement-route-outline::before {
+  content: "";
+  position: absolute;
+  inset: 1.1rem;
+  border: 1px solid rgba(103, 232, 249, 0.2);
 }
 
 .procurement-route-plane {
@@ -986,9 +1007,9 @@ footer .relative.overflow-hidden {
 }
 
 .procurement-route-plane-a {
-  left: 8%;
-  top: 2%;
-  width: 72%;
+  left: 2%;
+  top: 10%;
+  width: 76%;
   height: 74%;
   opacity: 0.48;
   transform: rotate(-5deg) skewX(-8deg);
@@ -996,8 +1017,8 @@ footer .relative.overflow-hidden {
 }
 
 .procurement-route-plane-b {
-  right: -2%;
-  top: 18%;
+  right: 15%;
+  top: 22%;
   width: 58%;
   height: 62%;
   opacity: 0.58;
@@ -1007,9 +1028,9 @@ footer .relative.overflow-hidden {
 
 .procurement-route-beam {
   position: absolute;
-  left: 22%;
-  right: 2%;
-  top: 46%;
+  left: 4%;
+  right: 18%;
+  top: 50%;
   height: 1px;
   background: linear-gradient(to right, transparent, rgba(103, 232, 249, 0.2), rgba(103, 232, 249, 0.74), rgba(255, 255, 255, 0.28), transparent);
   box-shadow: 0 0 28px rgba(34, 211, 238, 0.34);
@@ -1029,16 +1050,16 @@ footer .relative.overflow-hidden {
 }
 
 .procurement-route-map {
-  min-height: 28rem;
-  transform: perspective(1200px) rotateY(-4deg);
+  min-height: 31rem;
+  transform: perspective(1200px) rotateY(4deg);
 }
 
 .procurement-route-line {
   position: absolute;
-  left: 4%;
-  right: 0;
+  left: 1%;
+  right: 2%;
   top: 48%;
-  height: 9rem;
+  height: 10.5rem;
   border-top: 1px solid rgba(103, 232, 249, 0.42);
   border-right: 1px solid rgba(103, 232, 249, 0.3);
   border-bottom: 1px solid rgba(103, 232, 249, 0.2);
@@ -1089,16 +1110,16 @@ footer .relative.overflow-hidden {
   position: relative;
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 1.1rem;
+  gap: 1.45rem;
   align-items: center;
-  min-height: 28rem;
+  min-height: 31rem;
 }
 
 .procurement-node {
   position: relative;
   overflow: hidden;
-  min-height: 13.5rem;
-  padding: 1.45rem;
+  min-height: 16rem;
+  padding: 1.85rem;
   border: 1px solid rgba(103, 232, 249, 0.16);
   background:
     radial-gradient(circle at 10% 0%, rgba(34, 211, 238, 0.16), transparent 34%),
@@ -1134,27 +1155,27 @@ footer .relative.overflow-hidden {
 }
 
 .procurement-node-1 {
-  transform: translateY(1.75rem) rotate(-1.4deg);
+  transform: translateY(2.15rem) rotate(-1.4deg);
 }
 
 .procurement-node-2 {
-  transform: translateY(-2.75rem) rotate(1.3deg);
+  transform: translateY(-3.15rem) rotate(1.3deg);
 }
 
 .procurement-node-3 {
-  transform: translateY(2.5rem) rotate(-0.7deg);
+  transform: translateY(2.9rem) rotate(-0.7deg);
 }
 
 .procurement-node-1:hover {
-  transform: translateY(0.85rem) rotate(-2deg);
+  transform: translateY(1.25rem) rotate(-2deg);
 }
 
 .procurement-node-2:hover {
-  transform: translateY(-3.65rem) rotate(0.7deg);
+  transform: translateY(-4.05rem) rotate(0.7deg);
 }
 
 .procurement-node-3:hover {
-  transform: translateY(1.6rem) rotate(-1.3deg);
+  transform: translateY(2rem) rotate(-1.3deg);
 }
 
 .procurement-node-index {

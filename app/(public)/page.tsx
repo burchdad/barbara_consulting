@@ -228,42 +228,14 @@ export default async function HomePage() {
       {/* PROCUREMENT / CONTRACTS TEASER */}
       <Section className="procurement-route-section relative overflow-visible py-28 lg:py-36">
         <div aria-hidden className="procurement-route-field">
+          <div className="procurement-route-outline" />
           <div className="procurement-route-plane procurement-route-plane-a" />
           <div className="procurement-route-plane procurement-route-plane-b" />
           <div className="procurement-route-beam" />
         </div>
 
-        <div className="relative z-10 grid gap-12 lg:grid-cols-[0.78fr_1.22fr] lg:items-center">
-          <Reveal variant="tiltLeft">
-            <div className="procurement-copy relative">
-              <div className="inline-flex h-12 w-12 items-center justify-center border border-cyan-200/25 bg-cyan-200/5 text-cyan-200">
-                <Landmark size={23} />
-              </div>
-
-              <p className="mt-6 text-xs uppercase tracking-[0.32em] text-cyan-300">
-                Acquisition Channel
-              </p>
-
-              <h2 className="mt-4 max-w-2xl text-5xl font-black uppercase leading-[0.92] text-white sm:text-6xl">
-                Clear pathways for public-sector partners.
-              </h2>
-
-              <p className="mt-6 max-w-xl text-base leading-7 text-slate-300">
-                For agencies and partners who need a direct acquisition route,
-                contract vehicle and procurement details are organized as one
-                focused access layer.
-              </p>
-
-              <Link
-                href="/contracts"
-                className="mt-8 inline-flex items-center gap-2 text-sm font-black uppercase tracking-[0.18em] text-cyan-200 transition hover:text-white"
-              >
-                View Contract Vehicles <ArrowRight size={16} />
-              </Link>
-            </div>
-          </Reveal>
-
-          <Reveal delay={0.08} variant="angleRight">
+        <div className="relative z-10 grid gap-12 lg:grid-cols-[1.18fr_0.82fr] lg:items-center">
+          <Reveal variant="angleLeft">
             <div className="procurement-route-map relative">
               <div aria-hidden className="procurement-route-line">
                 <span className="procurement-route-pulse procurement-route-pulse-a" />
@@ -289,6 +261,35 @@ export default async function HomePage() {
                   </article>
                 ))}
               </div>
+            </div>
+          </Reveal>
+
+          <Reveal delay={0.08} variant="tiltRight">
+            <div className="procurement-copy relative lg:justify-self-end">
+              <div className="inline-flex h-12 w-12 items-center justify-center border border-cyan-200/25 bg-cyan-200/5 text-cyan-200">
+                <Landmark size={23} />
+              </div>
+
+              <p className="mt-6 text-xs uppercase tracking-[0.32em] text-cyan-300">
+                Acquisition Channel
+              </p>
+
+              <h2 className="mt-4 max-w-2xl text-5xl font-black uppercase leading-[0.92] text-white sm:text-6xl">
+                Clear pathways for public-sector partners.
+              </h2>
+
+              <p className="mt-6 max-w-xl text-base leading-7 text-slate-300">
+                For agencies and partners who need a direct acquisition route,
+                contract vehicle and procurement details are organized as one
+                focused access layer.
+              </p>
+
+              <Link
+                href="/contracts"
+                className="mt-8 inline-flex items-center gap-2 text-sm font-black uppercase tracking-[0.18em] text-cyan-200 transition hover:text-white"
+              >
+                View Contract Vehicles <ArrowRight size={16} />
+              </Link>
             </div>
           </Reveal>
         </div>
