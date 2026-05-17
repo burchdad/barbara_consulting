@@ -1,6 +1,5 @@
 import Link from "next/link";
 import {
-  ArrowRight,
   BrainCircuit,
   CheckCircle2,
   Compass,
@@ -8,7 +7,6 @@ import {
   Layers3,
   Radar,
   ShieldCheck,
-  Sparkles,
   Target,
   UsersRound,
 } from "lucide-react";
@@ -491,35 +489,6 @@ export default async function AboutPage() {
         )}
       </Section>
 
-      {/* CTA */}
-      <Section className="py-24 lg:py-32">
-        <Reveal variant="tiltRight">
-          <div className="about-final-cta p-10 text-center sm:p-16">
-            <Sparkles className="mx-auto text-cyan-300" size={28} />
-
-            <p className="mt-4 text-xs uppercase tracking-[0.28em] text-cyan-200">
-              Move Forward with Clarity
-            </p>
-
-            <h2 className="mx-auto mt-4 max-w-5xl text-5xl font-black uppercase leading-[0.92] text-white sm:text-7xl">
-              Bring strategy, systems, security, and intelligence into
-              alignment.
-            </h2>
-
-            <p className="mx-auto mt-5 max-w-3xl text-lg text-slate-200">
-              Partner with a firm designed to help mission-driven teams
-              modernize responsibly and execute with confidence.
-            </p>
-
-            <Link
-              href="/contact"
-              className="premium-button mt-8 inline-flex items-center gap-2 rounded-full bg-white px-8 py-4 text-sm font-black uppercase tracking-[0.18em] text-slate-950 transition hover:bg-cyan-200"
-            >
-              Contact Our Team <ArrowRight size={16} />
-            </Link>
-          </div>
-        </Reveal>
-      </Section>
     </HomepageCinematicScene>
   );
 }

@@ -327,35 +327,6 @@ export default async function ServicesPage() {
         </Reveal>
       </Section>
 
-      {/* CTA */}
-      <Section className="py-20 lg:py-28">
-        <Reveal>
-          <div className="rounded-[2.5rem] border border-cyan-200/20 bg-[radial-gradient(circle_at_50%_0%,rgba(34,211,238,0.18),transparent_36%),linear-gradient(135deg,rgba(15,23,42,0.92),rgba(2,6,23,0.92))] p-10 text-center sm:p-16">
-            <Sparkles className="mx-auto text-cyan-300" size={28} />
-
-            <p className="mt-4 text-xs uppercase tracking-[0.28em] text-cyan-200">
-              Start the Conversation
-            </p>
-
-            <h2 className="mx-auto mt-4 max-w-5xl text-5xl font-black uppercase leading-[0.92] text-white sm:text-7xl">
-              Build smarter systems with clarity and confidence.
-            </h2>
-
-            <p className="mx-auto mt-5 max-w-3xl text-lg text-slate-200">
-              Partner with a technology firm designed for AI strategy,
-              workflow automation, secure modernization, and measurable
-              operational improvement.
-            </p>
-
-            <Link
-              href="/contact"
-              className="premium-button mt-8 inline-flex rounded-full bg-white px-8 py-4 text-sm font-black uppercase tracking-[0.18em] text-slate-950 transition hover:bg-cyan-200"
-            >
-              Contact Our Team
-            </Link>
-          </div>
-        </Reveal>
-      </Section>
     </main>
   );
 }

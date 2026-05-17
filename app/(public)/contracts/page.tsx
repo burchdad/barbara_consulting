@@ -1,6 +1,5 @@
 import Link from "next/link";
 import {
-  ArrowRight,
   Building2,
   CheckCircle2,
   ClipboardCheck,
@@ -9,7 +8,6 @@ import {
   Mail,
   Phone,
   ShieldCheck,
-  Sparkles,
 } from "lucide-react";
 
 import { Section } from "@/components/ui/section";
@@ -345,36 +343,6 @@ export default async function ContractsPage() {
         )}
       </Section>
 
-      {/* PROCUREMENT CTA */}
-      <Section className="py-20 lg:py-28">
-        <Reveal>
-          <div className="rounded-[2.5rem] border border-cyan-200/20 bg-[radial-gradient(circle_at_50%_0%,rgba(34,211,238,0.18),transparent_36%),linear-gradient(135deg,rgba(15,23,42,0.92),rgba(2,6,23,0.92))] p-10 text-center sm:p-16">
-            <Sparkles className="mx-auto text-cyan-300" size={28} />
-
-            <p className="mt-4 text-xs uppercase tracking-[0.28em] text-cyan-200">
-              Procurement Conversation
-            </p>
-
-            <h2 className="mx-auto mt-4 max-w-5xl text-5xl font-black uppercase leading-[0.92] text-white sm:text-7xl">
-              Need help identifying the right engagement path?
-            </h2>
-
-            <p className="mx-auto mt-5 max-w-3xl text-lg text-slate-200">
-              Start with a focused conversation around agency needs, contract
-              availability, mission priorities, and the most practical path
-              forward.
-            </p>
-
-            <Link
-              href="/contact"
-              className="premium-button mt-8 inline-flex items-center gap-2 rounded-full bg-white px-8 py-4 text-sm font-black uppercase tracking-[0.18em] text-slate-950 transition hover:bg-cyan-200"
-            >
-              Contact the Team
-              <ArrowRight size={16} />
-            </Link>
-          </div>
-        </Reveal>
-      </Section>
     </main>
   );
 }

@@ -6,7 +6,6 @@ import {
   LockKeyhole,
   Mail,
   ShieldCheck,
-  Sparkles,
   UserCheck,
 } from "lucide-react";
 
@@ -277,27 +276,6 @@ export default async function PrivacyPage() {
         </Reveal>
       </Section>
 
-      {/* CTA */}
-      <Section className="py-20 lg:py-28">
-        <Reveal>
-          <div className="rounded-[2.5rem] border border-cyan-200/20 bg-[radial-gradient(circle_at_50%_0%,rgba(34,211,238,0.18),transparent_36%),linear-gradient(135deg,rgba(15,23,42,0.92),rgba(2,6,23,0.92))] p-10 text-center sm:p-16">
-            <Sparkles className="mx-auto text-cyan-300" size={28} />
-
-            <p className="mt-4 text-xs uppercase tracking-[0.28em] text-cyan-200">
-              Responsible Technology
-            </p>
-
-            <h2 className="mx-auto mt-4 max-w-5xl text-5xl font-black uppercase leading-[0.92] text-white sm:text-7xl">
-              Trust begins with clear data handling.
-            </h2>
-
-            <p className="mx-auto mt-5 max-w-3xl text-lg text-slate-200">
-              The firm’s approach to technology, AI, and operations is grounded
-              in responsible use, security awareness, and practical governance.
-            </p>
-          </div>
-        </Reveal>
-      </Section>
     </main>
   );
 }

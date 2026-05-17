@@ -892,7 +892,6 @@ footer .relative.overflow-hidden {
 .about-lead-card,
 .about-leader-card,
 .about-empty-leadership,
-.about-final-cta,
 .about-value-chip {
   position: relative;
   overflow: hidden;
@@ -913,7 +912,6 @@ footer .relative.overflow-hidden {
 }
 
 .about-lead-panel,
-.about-final-cta,
 .about-empty-leadership,
 .about-leader-card {
   border-radius: 1rem;
@@ -922,8 +920,7 @@ footer .relative.overflow-hidden {
 .about-overview-panel::after,
 .about-system-card::after,
 .about-lead-card::after,
-.about-value-chip::after,
-.about-final-cta::after {
+.about-value-chip::after {
   content: "";
   position: absolute;
   inset: -140% auto auto -70%;
@@ -953,8 +950,7 @@ footer .relative.overflow-hidden {
 .about-overview-panel:hover::after,
 .about-system-card:hover::after,
 .about-lead-card:hover::after,
-.about-value-chip:hover::after,
-.about-final-cta:hover::after {
+.about-value-chip:hover::after {
   transform: rotate(22deg) translateX(420%);
 }
 
