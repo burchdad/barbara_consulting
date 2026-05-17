@@ -19,6 +19,26 @@ const featuredAudience = [
   "Secure modernization",
 ];
 
+const procurementFallbackNodes = [
+  {
+    title: "Public-Sector Ready",
+    body: "Structured for government and enterprise review.",
+    Icon: ShieldCheck,
+  },
+  {
+    title: "Mission Aligned",
+    body: "Designed around operational goals and measurable value.",
+    Icon: Layers3,
+  },
+  {
+    title: "AI Forward",
+    body: "Practical modernization without unnecessary complexity.",
+    Icon: Sparkles,
+  },
+];
+
+const procurementIcons = [ShieldCheck, Layers3, Sparkles];
+
 function FloatingReadinessGraph() {
   const nodes = [
     "left-[12%] top-[48%]",
@@ -66,6 +86,14 @@ function FloatingReadinessGraph() {
 
 export default async function HomePage() {
   const { contracts, testimonials } = await getPublishedData();
+  const procurementNodes =
+    contracts.length > 0
+      ? contracts.slice(0, 3).map((contract, index) => ({
+          title: contract.name,
+          body: contract.agency,
+          Icon: procurementIcons[index] ?? ShieldCheck,
+        }))
+      : procurementFallbackNodes;
 
   const heroHeadline =
     "AI consulting for smarter operations and secure growth.";
@@ -198,88 +226,72 @@ export default async function HomePage() {
       </Section>
 
       {/* PROCUREMENT / CONTRACTS TEASER */}
-      <Section className="py-20 lg:py-28">
-        <Reveal>
-          <div className="rounded-[2.5rem] border border-white/10 bg-white/[0.035] p-8 sm:p-12 lg:p-16">
-            <div className="grid gap-10 lg:grid-cols-[0.8fr_1.2fr] lg:items-center">
-              <div>
-                <Landmark className="text-cyan-200" size={28} />
+      <Section className="procurement-route-section relative overflow-visible py-28 lg:py-36">
+        <div aria-hidden className="procurement-route-field">
+          <div className="procurement-route-plane procurement-route-plane-a" />
+          <div className="procurement-route-plane procurement-route-plane-b" />
+          <div className="procurement-route-beam" />
+        </div>
 
-                <p className="mt-5 text-xs uppercase tracking-[0.28em] text-cyan-300">
-                  Procurement Ready
-                </p>
-
-                <h2 className="mt-3 text-5xl font-black uppercase leading-none text-white sm:text-6xl">
-                  Clear pathways for public-sector partners.
-                </h2>
-
-                <p className="mt-5 text-slate-300">
-                  For agencies and partners who need a clear acquisition route,
-                  contract vehicle and procurement details are available in one
-                  focused location.
-                </p>
-
-                <Link
-                  href="/contracts"
-                  className="mt-8 inline-flex items-center gap-2 text-sm font-black uppercase tracking-[0.16em] text-cyan-200 transition hover:text-white"
-                >
-                  View Contract Vehicles <ArrowRight size={14} />
-                </Link>
+        <div className="relative z-10 grid gap-12 lg:grid-cols-[0.78fr_1.22fr] lg:items-center">
+          <Reveal variant="tiltLeft">
+            <div className="procurement-copy relative">
+              <div className="inline-flex h-12 w-12 items-center justify-center border border-cyan-200/25 bg-cyan-200/5 text-cyan-200">
+                <Landmark size={23} />
               </div>
 
-              <div className="grid gap-4 sm:grid-cols-3">
-                {contracts.slice(0, 3).map((contract) => (
-                  <article
-                    key={contract.id}
-                    className="rounded-2xl border border-white/10 bg-black/25 p-5"
-                  >
-                    <h3 className="text-lg font-bold uppercase text-white">
-                      {contract.name}
-                    </h3>
+              <p className="mt-6 text-xs uppercase tracking-[0.32em] text-cyan-300">
+                Acquisition Channel
+              </p>
 
-                    <p className="mt-2 text-sm text-slate-400">
-                      {contract.agency}
+              <h2 className="mt-4 max-w-2xl text-5xl font-black uppercase leading-[0.92] text-white sm:text-6xl">
+                Clear pathways for public-sector partners.
+              </h2>
+
+              <p className="mt-6 max-w-xl text-base leading-7 text-slate-300">
+                For agencies and partners who need a direct acquisition route,
+                contract vehicle and procurement details are organized as one
+                focused access layer.
+              </p>
+
+              <Link
+                href="/contracts"
+                className="mt-8 inline-flex items-center gap-2 text-sm font-black uppercase tracking-[0.18em] text-cyan-200 transition hover:text-white"
+              >
+                View Contract Vehicles <ArrowRight size={16} />
+              </Link>
+            </div>
+          </Reveal>
+
+          <Reveal delay={0.08} variant="angleRight">
+            <div className="procurement-route-map relative">
+              <div aria-hidden className="procurement-route-line">
+                <span className="procurement-route-pulse procurement-route-pulse-a" />
+                <span className="procurement-route-pulse procurement-route-pulse-b" />
+              </div>
+
+              <div className="procurement-node-grid">
+                {procurementNodes.map(({ title, body, Icon }, index) => (
+                  <article
+                    key={title}
+                    className={`procurement-node procurement-node-${index + 1}`}
+                  >
+                    <span className="procurement-node-index">
+                      0{index + 1}
+                    </span>
+                    <Icon className="text-cyan-200" size={22} />
+                    <h3 className="mt-5 text-base font-black uppercase leading-tight text-white">
+                      {title}
+                    </h3>
+                    <p className="mt-3 text-sm leading-6 text-slate-400">
+                      {body}
                     </p>
                   </article>
                 ))}
-
-                {contracts.length === 0 && (
-                  <>
-                    <article className="rounded-2xl border border-white/10 bg-black/25 p-5">
-                      <ShieldCheck className="text-cyan-200" size={22} />
-                      <h3 className="mt-5 text-lg font-bold uppercase text-white">
-                        Public-Sector Ready
-                      </h3>
-                      <p className="mt-2 text-sm text-slate-400">
-                        Structured for government and enterprise review.
-                      </p>
-                    </article>
-
-                    <article className="rounded-2xl border border-white/10 bg-black/25 p-5">
-                      <Layers3 className="text-cyan-200" size={22} />
-                      <h3 className="mt-5 text-lg font-bold uppercase text-white">
-                        Mission Aligned
-                      </h3>
-                      <p className="mt-2 text-sm text-slate-400">
-                        Designed around operational goals and measurable value.
-                      </p>
-                    </article>
-
-                    <article className="rounded-2xl border border-white/10 bg-black/25 p-5">
-                      <Sparkles className="text-cyan-200" size={22} />
-                      <h3 className="mt-5 text-lg font-bold uppercase text-white">
-                        AI Forward
-                      </h3>
-                      <p className="mt-2 text-sm text-slate-400">
-                        Practical modernization without unnecessary complexity.
-                      </p>
-                    </article>
-                  </>
-                )}
               </div>
             </div>
-          </div>
-        </Reveal>
+          </Reveal>
+        </div>
       </Section>
 
       {/* TESTIMONIALS - ONLY SHOW IF REAL TESTIMONIALS EXIST */}
