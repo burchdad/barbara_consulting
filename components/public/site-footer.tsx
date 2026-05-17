@@ -60,7 +60,7 @@ export async function SiteFooter() {
         <div>
           <p className="text-xs uppercase tracking-[0.2em] text-zinc-500">Capabilities</p>
           <nav className="mt-4 grid gap-2 text-sm text-zinc-300">
-            <Link href="/#services" className="hover:text-red-300">Services</Link>
+            <Link href="/services" className="hover:text-red-300">Services</Link>
             <Link href="/contracts" className="hover:text-red-300">Contracts</Link>
             <Link href="/case-studies" className="hover:text-red-300">Case Studies</Link>
             <Link href="/privacy" className="hover:text-red-300">Privacy</Link>

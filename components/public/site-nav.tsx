@@ -9,7 +9,7 @@ import { Logo } from "@/components/ui/Logo";
 const navItems = [
   { href: "/", label: "Home" },
   { href: "/about", label: "About" },
-  { href: "/#services", label: "Services" },
+  { href: "/services", label: "Services" },
   { href: "/case-studies", label: "Case Studies" },
   { href: "/contracts", label: "Contracts" },
   { href: "/careers", label: "Careers" },
