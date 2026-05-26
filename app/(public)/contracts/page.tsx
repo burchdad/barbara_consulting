@@ -1,7 +1,6 @@
 import Link from "next/link";
 import {
   Building2,
-  CheckCircle2,
   ClipboardCheck,
   FileText,
   Landmark,
@@ -18,29 +17,67 @@ import { getPublicContractsPageData } from "@/lib/site-data";
 
 const procurementPoints = [
   {
-    title: "Rapid Engagement",
-    body: "Structured contract details help agencies and partners understand available paths to engage quickly.",
+    title: "Certified Access",
+    body: "WOSB and SDVOSB status, partner channels, and relevant NAICS alignment support practical acquisition conversations.",
     icon: ClipboardCheck,
   },
   {
     title: "Mission Alignment",
-    body: "Contract vehicles are positioned around operational support, technology modernization, and measurable outcomes.",
+    body: "Capabilities are positioned around AI modernization, federal IT delivery, cybersecurity readiness, cloud, data, and mission operations.",
     icon: Landmark,
   },
   {
     title: "Trusted Delivery",
-    body: "The contract portfolio supports clear procurement conversations with public-sector and mission partners.",
+    body: "More than two decades of federal performance support clear procurement conversations with agencies and teaming partners.",
     icon: ShieldCheck,
   },
 ];
 
 const supportAreas = [
   "AI strategy",
-  "Mission technology",
-  "Secure workflow modernization",
-  "Program support",
-  "Cyber readiness",
-  "Operational resilience",
+  "AI-agile software",
+  "Application modernization",
+  "Cloud services",
+  "Cybersecurity and ATO",
+  "ServiceNow and help desk",
+  "Data reporting",
+  "Low-code automation",
+  "Logistics support",
+];
+
+const procurementSignals = [
+  "Certified WOSB",
+  "Certified SDVOSB",
+  "8(a) partner channels",
+  "MBE - State of Maryland",
+  "NAICS 541512",
+  "NAICS 541511",
+  "NAICS 541190",
+];
+
+const agencyExperience = [
+  "Department of State",
+  "HHS-ACF",
+  "USDA",
+  "SSA",
+  "Department of Education",
+  "Department of Labor",
+  "DoD mission environments",
+];
+
+const leadershipContacts = [
+  {
+    name: "Danielle Carr",
+    title: "CEO / Chief Strategy Officer",
+    email: "Dcarr@graymatterstech.com",
+    phone: "240-784-7418",
+  },
+  {
+    name: "Barbara A. Gray",
+    title: "President / Enterprise Solutions",
+    email: "Bgray@graymatterstech.com",
+    phone: "202-420-1767",
+  },
 ];
 
 export default async function ContractsPage() {
@@ -77,10 +114,10 @@ export default async function ContractsPage() {
                 </h1>
 
                 <p className="mt-8 max-w-3xl text-lg leading-8 text-slate-200 sm:text-xl">
-                  Review available contract vehicles, acquisition pathways,
-                  and engagement details for agencies and partners seeking
-                  trusted support across AI modernization, secure systems, and
-                  operational delivery.
+                  Review acquisition pathways, certification signals, and
+                  engagement details for agencies and partners seeking trusted
+                  support across AI modernization, secure systems, cloud, data,
+                  and operational delivery.
                 </p>
 
                 <div className="mt-10 flex flex-wrap gap-4">
@@ -185,10 +222,10 @@ export default async function ContractsPage() {
           <Reveal delay={0.05} variant="tiltRight">
             <div className="about-overview-panel relative p-8 sm:p-10">
               <p className="text-lg leading-8 text-slate-300">
-                Contract vehicle information helps procurement teams,
-                government stakeholders, and partner organizations understand
-                availability, scope, points of contact, and alignment with
-                mission-focused technology needs.
+                Procurement information helps government stakeholders and
+                partner organizations understand small-business access, scope,
+                points of contact, and alignment with mission-focused
+                technology needs.
               </p>
 
               <div className="mt-8 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
@@ -201,9 +238,85 @@ export default async function ContractsPage() {
                   </span>
                 ))}
               </div>
+
+              <div className="mt-8 grid gap-6 lg:grid-cols-2">
+                <div>
+                  <p className="text-xs font-bold uppercase tracking-[0.22em] text-cyan-300">
+                    Certification Signals
+                  </p>
+                  <div className="mt-4 grid gap-3">
+                    {procurementSignals.map((signal) => (
+                      <span
+                        key={signal}
+                        className="border border-white/10 bg-black/25 px-4 py-3 text-xs font-bold uppercase tracking-[0.14em] text-slate-200"
+                      >
+                        {signal}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+
+                <div>
+                  <p className="text-xs font-bold uppercase tracking-[0.22em] text-cyan-300">
+                    Federal Experience
+                  </p>
+                  <div className="mt-4 grid gap-3">
+                    {agencyExperience.map((agency) => (
+                      <span
+                        key={agency}
+                        className="border border-white/10 bg-black/25 px-4 py-3 text-xs font-bold uppercase tracking-[0.14em] text-slate-200"
+                      >
+                        {agency}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+              </div>
             </div>
           </Reveal>
         </div>
+      </Section>
+
+      {/* PROCUREMENT CONTACTS */}
+      <Section className="py-20 lg:py-28">
+        <Reveal>
+          <div className="about-lead-panel p-8 sm:p-12">
+            <p className="text-xs uppercase tracking-[0.3em] text-cyan-300">
+              Procurement Contacts
+            </p>
+
+            <h2 className="mt-3 text-5xl font-black uppercase leading-[0.95] text-white sm:text-6xl">
+              Direct contacts for teaming and bid conversations.
+            </h2>
+
+            <div className="mt-10 grid gap-5 lg:grid-cols-2">
+              {leadershipContacts.map((contact) => (
+                <article
+                  key={contact.email}
+                  className="border border-cyan-200/15 bg-black/25 p-6"
+                >
+                  <h3 className="text-3xl font-black uppercase leading-tight text-white">
+                    {contact.name}
+                  </h3>
+                  <p className="mt-2 text-xs font-bold uppercase tracking-[0.18em] text-cyan-200">
+                    {contact.title}
+                  </p>
+
+                  <div className="mt-5 grid gap-3 text-sm text-slate-300">
+                    <p className="flex items-center gap-3 break-words">
+                      <Mail className="shrink-0 text-cyan-300" size={16} />
+                      {contact.email}
+                    </p>
+                    <p className="flex items-center gap-3">
+                      <Phone className="shrink-0 text-cyan-300" size={16} />
+                      {contact.phone}
+                    </p>
+                  </div>
+                </article>
+              ))}
+            </div>
+          </div>
+        </Reveal>
       </Section>
 
       {/* CONTRACT VEHICLES */}

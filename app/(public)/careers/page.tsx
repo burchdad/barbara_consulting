@@ -1,10 +1,8 @@
 import {
   BrainCircuit,
-  CheckCircle2,
   GraduationCap,
   ShieldCheck,
   Target,
-  UsersRound,
 } from "lucide-react";
 
 import { HomepageCinematicScene } from "@/components/public/homepage-cinematic-scene";
@@ -17,7 +15,7 @@ import { getPublicCareersPageData } from "@/lib/site-data";
 const careerPrinciples = [
   {
     title: "Mission-Driven Work",
-    body: "Support organizations modernizing high-value workflows with responsible AI, secure systems, and practical delivery.",
+    body: "Support agencies and partners modernizing high-value workflows with responsible AI, secure systems, and practical federal delivery.",
     icon: Target,
   },
   {
@@ -34,11 +32,23 @@ const careerPrinciples = [
 
 const teamSignals = [
   "AI strategy",
+  "AI-agile development",
   "Workflow automation",
-  "Secure modernization",
-  "Program support",
+  "Cloud services",
+  "Cyber readiness",
   "Data intelligence",
-  "Responsible adoption",
+  "ServiceNow support",
+  "Low-code platforms",
+  "Mission operations",
+];
+
+const cultureSignals = [
+  "Innovation culture",
+  "Cross-functional delivery",
+  "Low staff turnover",
+  "High utilization",
+  "Certification growth",
+  "Inclusive collaboration",
 ];
 
 export default async function CareersPage() {
@@ -66,11 +76,11 @@ export default async function CareersPage() {
             <div className="grid w-full gap-12 lg:grid-cols-[0.95fr_1.05fr] lg:items-center">
               <div className="max-w-5xl">
                 <p className="mb-5 text-xs font-bold uppercase tracking-[0.35em] text-cyan-200">
-                  AI Careers
+                  AI-Forward Careers
                 </p>
 
                 <h1 className="max-w-6xl text-5xl font-black uppercase leading-[0.92] text-white sm:text-6xl lg:text-[4.9rem]">
-                  Careers for builders of secure, practical AI systems.
+                  Careers for builders of secure, practical mission systems.
                 </h1>
 
                 <p className="mt-8 max-w-3xl text-lg leading-8 text-slate-200 sm:text-xl">
@@ -155,8 +165,9 @@ export default async function CareersPage() {
             <div className="about-overview-panel relative p-8 sm:p-10">
               <p className="text-lg leading-8 text-slate-300">
                 Join teams building decision support, resilient data pipelines,
-                secure automation, and high-trust AI workflows in environments
-                where quality, accountability, and outcomes matter.
+                secure automation, cloud-enabled applications, and high-trust AI
+                workflows in environments where quality, accountability, and
+                outcomes matter.
               </p>
 
               <div className="mt-8 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
@@ -168,6 +179,22 @@ export default async function CareersPage() {
                     {signal}
                   </span>
                 ))}
+              </div>
+
+              <div className="mt-8">
+                <p className="text-xs font-bold uppercase tracking-[0.22em] text-cyan-300">
+                  Culture Signals
+                </p>
+                <div className="mt-4 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+                  {cultureSignals.map((signal) => (
+                    <span
+                      key={signal}
+                      className="border border-white/10 bg-black/25 px-4 py-3 text-center text-xs font-bold uppercase tracking-[0.14em] text-slate-200"
+                    >
+                      {signal}
+                    </span>
+                  ))}
+                </div>
               </div>
             </div>
           </Reveal>

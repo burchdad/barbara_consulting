@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import {
   BrainCircuit,
   CheckCircle2,
@@ -59,8 +60,9 @@ const fallbackLeadership = [
   {
     id: "danielle-carr",
     name: "Danielle Carr",
-    title: "Chief Executive Officer",
+    title: "Chief Executive Officer / Chief Strategy Officer",
     credential: "MBA; M.S., Acquisition and Supply Chain Management",
+    photoUrl: "/leadership/danielle-carr.webp",
     bio: [
       "Danielle Carr was named CEO of Gray Matters Technology Services in January 2025 after serving as CEO of Sage Tech Solutions for the past five years. The merged capabilities of the two companies bring AI strategy, cost-saving innovation, and public-sector delivery experience to federal and state government clients through a Service-Disabled Veteran-Owned Small Business and Woman-Owned Small Business platform.",
       "Her career spans work with NASA, the Department of Defense, HHS, international agencies, and other mission-focused organizations. Recognition for her leadership with the National Contract Management Association underscores her commitment to developing the next generation of procurement professionals and building strong relationships that support organizational growth.",
@@ -70,8 +72,9 @@ const fallbackLeadership = [
   {
     id: "barbara-gray",
     name: "Barbara A. Gray",
-    title: "President",
+    title: "President of Operations",
     credential: "M.S., Information Technology; AI Strategy, PMP, ITIL, CISSP, SQL, and Oracle certifications",
+    photoUrl: "/leadership/barbara-gray.webp",
     bio: [
       "Barbara A. Gray, former CEO of Gray Matters Technology Services, managed and operated GMTS for more than 23 years as CEO and technology thought leader. She currently serves as President of Integrated Solutions.",
       "Earlier in her career, Ms. Gray served in roles of increasing responsibility while supporting SAIC, Raytheon, Booz Allen, and Houston Associates across 20 collective years of technology and mission support experience.",
@@ -81,21 +84,62 @@ const fallbackLeadership = [
   {
     id: "alexis-muse",
     name: "Alexis Muse",
-    title: "Senior Contracts Manager",
+    title: "Director of Contracts",
     credential: "B.S., Finance, University of Maryland",
+    photoUrl: "/leadership/alexis-muse.webp",
     bio: [
       "Alexis Muse serves as Senior Contracts Manager, supporting federal contract operations across GMTS and Sage Tech Solutions.",
       "She holds a bachelor's degree in finance from the University of Maryland and brings more than 15 years of experience supporting federal government contracts.",
     ],
   },
   {
-    id: "gary-fitch",
-    name: "Gary Fitch",
-    title: "Senior Pricing Manager",
-    credential: "Master of Business Administration",
+    id: "bill-pratt",
+    name: "Bill Pratt",
+    title: "Chief Technology Officer",
+    credential: "Former CTO, Department of Homeland Security",
+    photoUrl: "/leadership/bill-pratt.webp",
     bio: [
-      "Gary Fitch serves as Senior Pricing Manager and brings more than 30 years of pricing and business operations experience.",
-      "He has supported GMTS for the past 10 years and holds a Master of Business Administration.",
+      "Bill Pratt supports the firm as Chief Technology Officer, bringing senior federal technology leadership experience to modernization, architecture, and secure delivery efforts.",
+    ],
+  },
+  {
+    id: "royce-allen",
+    name: "Royce Allen",
+    title: "Cybersecurity Executive",
+    credential: "Former cybersecurity executive",
+    photoUrl: "/leadership/royce-allen.webp",
+    bio: [
+      "Royce Allen strengthens the firm's cybersecurity bench for programs that require risk awareness, compliance readiness, and disciplined protection of mission systems.",
+    ],
+  },
+  {
+    id: "torreon-creekmore",
+    name: "Torreon Creekmore",
+    title: "Chief Data Officer",
+    credential: "Data strategy and analytics leadership",
+    photoUrl: "/leadership/torreon-creekmore.webp",
+    bio: [
+      "Torreon Creekmore leads data capability alignment across reporting, analytics, performance management, and decision support initiatives.",
+    ],
+  },
+  {
+    id: "tushar-rathod",
+    name: "Tushar Rathod",
+    title: "Chief AI Officer",
+    credential: "University of Maryland AI Lab",
+    photoUrl: "/leadership/tushar-rathod.webp",
+    bio: [
+      "Tushar Rathod supports the firm's AI capability with applied expertise in intelligent systems, AI-enabled delivery, and responsible adoption pathways.",
+    ],
+  },
+  {
+    id: "phillip-katner",
+    name: "Phillip C. Katner",
+    title: "Director of Compliance & Security",
+    credential: "Compliance and security leadership",
+    photoUrl: "/leadership/phillip-katner.webp",
+    bio: [
+      "Phillip C. Katner supports compliance and security planning for regulated technology programs and mission environments.",
     ],
   },
 ];
@@ -155,6 +199,7 @@ export default async function AboutPage() {
           name: leader.name,
           title: leader.title,
           credential: "Executive Leadership",
+          photoUrl: leader.photoUrl,
           bio: [leader.fullBio || leader.shortBio].filter(Boolean),
         }))
       : fallbackLeadership;
@@ -183,14 +228,15 @@ export default async function AboutPage() {
                 </p>
 
                 <h1 className="max-w-5xl text-5xl font-black uppercase leading-[0.92] text-white sm:text-6xl lg:text-[4.9rem]">
-                  Practical AI leadership built around mission, security, and
-                  execution.
+                  AI-forward federal technology leadership built around mission,
+                  security, and execution.
                 </h1>
 
                 <p className="mt-8 max-w-3xl text-lg leading-8 text-slate-200 sm:text-xl">
                   Gray Matters Technology- Sage Tech Solutions helps leaders
-                  turn emerging technology into responsible, useful operating
-                  capability without losing sight of people, process, or risk.
+                  turn emerging technology, secure systems, and federal delivery
+                  experience into responsible operating capability without
+                  losing sight of people, process, or risk.
                 </p>
 
                 <div className="mt-10 flex flex-wrap gap-4">
@@ -437,7 +483,7 @@ export default async function AboutPage() {
               </p>
 
               <h2 className="mt-3 text-5xl font-black uppercase leading-none text-white sm:text-6xl">
-                Practical modernization without unnecessary complexity.
+                AI-forward modernization without unnecessary complexity.
               </h2>
 
               <p className="mt-5 text-lg leading-8 text-slate-300">
@@ -483,9 +529,9 @@ export default async function AboutPage() {
             </div>
 
             <p className="max-w-xl text-slate-300">
-              Leadership combines mission awareness, technology strategy, and
-              practical delivery experience to support organizations through
-              modernization and change.
+              Leadership combines federal delivery experience, technology
+              strategy, cybersecurity, data, AI, contracts, and practical
+              operations support for complex modernization efforts.
             </p>
           </div>
         </Reveal>
@@ -509,13 +555,25 @@ export default async function AboutPage() {
                       </p>
                     </div>
 
-                    <div className="flex h-16 w-16 shrink-0 items-center justify-center rounded-full border border-cyan-200/25 bg-cyan-200/[0.06] text-xl font-black text-cyan-100">
-                      {leader.name
-                        .split(" ")
-                        .map((part) => part[0])
-                        .join("")
-                        .slice(0, 2)}
-                    </div>
+                    {leader.photoUrl ? (
+                      <div className="relative h-20 w-20 shrink-0 overflow-hidden rounded-full border border-cyan-200/30 bg-cyan-200/[0.06] shadow-[0_0_38px_rgba(34,211,238,0.16)]">
+                        <Image
+                          src={leader.photoUrl}
+                          alt={`${leader.name} headshot`}
+                          fill
+                          sizes="80px"
+                          className="object-cover"
+                        />
+                      </div>
+                    ) : (
+                      <div className="flex h-16 w-16 shrink-0 items-center justify-center rounded-full border border-cyan-200/25 bg-cyan-200/[0.06] text-xl font-black text-cyan-100">
+                        {leader.name
+                          .split(" ")
+                          .map((part) => part[0])
+                          .join("")
+                          .slice(0, 2)}
+                      </div>
+                    )}
                   </div>
 
                   <div className="mt-6 h-px bg-gradient-to-r from-cyan-300/35 to-transparent" />

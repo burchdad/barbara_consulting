@@ -15,7 +15,7 @@ import { getPublishedData } from "@/lib/site-data";
 
 const featuredAudience = [
   "AI readiness",
-  "Workflow automation",
+  "Federal IT modernization",
   "Secure modernization",
 ];
 
@@ -96,7 +96,7 @@ export default async function HomePage() {
       : procurementFallbackNodes;
 
   const heroHeadline =
-    "AI consulting for smarter operations and secure growth.";
+    "AI-forward technology delivery for mission teams.";
 
   return (
     <HomepageCinematicScene
@@ -134,7 +134,7 @@ export default async function HomePage() {
               />
 
               <p className="mb-5 text-xs font-bold uppercase tracking-[0.35em] text-cyan-200">
-                AI Strategy • Workflow Automation • Secure Systems
+                AI Strategy | Federal IT | Secure Systems
               </p>
 
               <h1 className="max-w-7xl text-5xl font-black uppercase leading-[0.92] text-white sm:text-7xl lg:text-8xl 2xl:text-[8.5rem]">
@@ -143,8 +143,9 @@ export default async function HomePage() {
 
               <p className="mt-8 max-w-3xl text-lg leading-8 text-slate-200 sm:text-xl">
                 Gray Matters Technology- Sage Tech Solutions helps teams
-                identify practical AI opportunities, modernize workflows,
-                strengthen secure systems, and move from ideas to execution.
+                identify practical AI opportunities, modernize applications,
+                strengthen secure systems, and move from ideas to measurable
+                mission execution.
               </p>
 
               <div className="mt-10 flex flex-wrap gap-4">
@@ -197,9 +198,10 @@ export default async function HomePage() {
                 <p className="text-lg leading-8 text-slate-300">
                   Gray Matters Technology- Sage Tech Solutions supports
                   organizations with AI readiness, responsible adoption,
-                  workflow automation strategy, and secure modernization. The
-                  goal is simple: help teams make better decisions, reduce
-                  manual friction, and move forward with measurable confidence.
+                  workflow automation, application modernization, cloud, data,
+                  cyber readiness, and secure federal IT delivery. The goal is
+                  simple: help teams make better decisions, reduce manual
+                  friction, and move forward with measurable confidence.
                 </p>
 
                 <div className="mt-8 grid gap-3 sm:grid-cols-3">

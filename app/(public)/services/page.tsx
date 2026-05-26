@@ -44,11 +44,36 @@ const audienceSegments = [
 
 const capabilityMatrix = [
   { title: "AI Strategy & Governance", icon: Sparkles },
-  { title: "Secure Workflow Automation", icon: Workflow },
-  { title: "Cloud & System Modernization", icon: CloudCog },
+  { title: "AI-Agile Software Development", icon: CircuitBoard },
+  { title: "Low-Code Workflow Automation", icon: Workflow },
+  { title: "Cloud & Enterprise Operations", icon: CloudCog },
   { title: "Data Intelligence & Analytics", icon: DatabaseZap },
-  { title: "Compliance Readiness", icon: ShieldCheck },
-  { title: "Program & Acquisition Support", icon: Layers3 },
+  { title: "Cybersecurity & ATO Readiness", icon: ShieldCheck },
+  { title: "Program, Logistics & Acquisition Support", icon: Layers3 },
+  { title: "ServiceNow, Help Desk & O&M", icon: BriefcaseBusiness },
+  { title: "Training & Change Enablement", icon: UsersRound },
+];
+
+const certificationSignals = [
+  "Certified WOSB",
+  "Certified SDVOSB",
+  "8(a) partner channels",
+  "MBE - State of Maryland",
+  "NAICS 541512",
+  "NAICS 541511",
+  "NAICS 541190",
+];
+
+const technologyStack = [
+  "AWS",
+  "Azure DevOps",
+  "Power Platform",
+  "Appian",
+  "ServiceNow",
+  "C# / .NET",
+  "SQL / MySQL / PostgreSQL",
+  "Power BI / SSRS",
+  "Qualys / Burp Suite / Rapid7",
 ];
 
 const modernizationSteps = [
@@ -193,14 +218,15 @@ export default async function ServicesPage() {
                 </p>
 
                 <h1 className="max-w-6xl text-5xl font-black uppercase leading-[0.92] text-white sm:text-6xl lg:text-[4.9rem]">
-                  AI strategy, workflow automation, and secure modernization.
+                  AI strategy, federal IT modernization, and secure mission delivery.
                 </h1>
 
                 <p className="mt-8 max-w-3xl text-lg leading-8 text-slate-200 sm:text-xl">
                   Gray Matters Technology- Sage Tech Solutions helps
-                  organizations assess AI readiness, design practical
-                  automation strategies, train teams, implement intelligent
-                  workflows, and strengthen operational performance.
+                  organizations assess AI readiness, modernize applications,
+                  automate workflows, strengthen cybersecurity and ATO
+                  readiness, operate cloud-enabled systems, and improve mission
+                  performance.
                 </p>
 
                 <div className="mt-10 flex flex-wrap gap-4">
@@ -328,13 +354,13 @@ export default async function ServicesPage() {
               </p>
 
               <h2 className="mt-4 max-w-3xl text-4xl font-black uppercase leading-[0.95] text-white sm:text-5xl lg:text-6xl">
-                Systems, data, security, and workflow intelligence.
+                AI, systems, data, security, and mission operations.
               </h2>
 
               <p className="mt-6 max-w-2xl text-base leading-7 text-slate-300">
-                The firm supports the strategy and implementation layers
-                required to move from scattered tools into coordinated,
-                intelligent operating systems.
+                The firm supports the strategy, engineering, compliance, and
+                operations layers required to move from scattered tools into
+                coordinated, intelligent operating systems.
               </p>
             </div>
           </Reveal>
@@ -352,6 +378,69 @@ export default async function ServicesPage() {
               </article>
             </Reveal>
           ))}
+        </div>
+      </Section>
+
+      {/* CERTIFICATIONS / STACK */}
+      <Section className="py-20 lg:py-28">
+        <div className="grid gap-12 lg:grid-cols-[0.85fr_1.15fr] lg:items-start">
+          <Reveal variant="angleLeft">
+            <div className="relative">
+              <div aria-hidden className="about-title-rail" />
+              <p className="text-xs uppercase tracking-[0.3em] text-cyan-300">
+                Certifications & Technology
+              </p>
+
+              <h2 className="mt-4 text-5xl font-black uppercase leading-[0.95] text-white sm:text-6xl">
+                Small-business access with enterprise-grade delivery.
+              </h2>
+
+              <p className="mt-6 max-w-xl text-lg leading-8 text-slate-300">
+                The team brings certified small-business pathways, federal IT
+                performance, and practical implementation experience across
+                cloud, AI, cybersecurity, low-code platforms, and enterprise
+                support environments.
+              </p>
+            </div>
+          </Reveal>
+
+          <Reveal delay={0.05} variant="tiltRight">
+            <div className="about-overview-panel grid gap-8 p-8 sm:p-10">
+              <div>
+                <p className="text-xs font-bold uppercase tracking-[0.22em] text-cyan-300">
+                  Procurement Signals
+                </p>
+
+                <div className="mt-5 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+                  {certificationSignals.map((signal) => (
+                    <span
+                      key={signal}
+                      className="border border-cyan-200/20 bg-cyan-200/[0.03] px-4 py-3 text-center text-xs font-bold uppercase tracking-[0.16em] text-cyan-100"
+                    >
+                      {signal}
+                    </span>
+                  ))}
+                </div>
+              </div>
+
+              <div>
+                <p className="text-xs font-bold uppercase tracking-[0.22em] text-cyan-300">
+                  Delivery Stack
+                </p>
+
+                <div className="mt-5 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+                  {technologyStack.map((item) => (
+                    <span
+                      key={item}
+                      className="border border-white/10 bg-black/25 px-4 py-3 text-center text-xs font-bold uppercase tracking-[0.14em] text-slate-200"
+                    >
+                      {item}
+                    </span>
+                  ))}
+                </div>
+              </div>
+            </div>
+          </Reveal>
         </div>
       </Section>
 
@@ -375,14 +464,14 @@ export default async function ServicesPage() {
             </div>
 
             <p className="max-w-xl text-base leading-7 text-slate-300">
-              The firm&apos;s highest-value AI consulting, automation, and secure
-              modernization services now live here as the dedicated services
-              destination.
+              The firm&apos;s highest-value AI consulting, software modernization,
+              automation, cloud, cyber, data, and mission operations services
+              now live here as the dedicated services destination.
             </p>
           </div>
         </Reveal>
 
-        <div className="grid gap-5 lg:grid-cols-3">
+        <div className="grid gap-5 md:grid-cols-2 xl:grid-cols-4">
           {servicesToRender.map((service, index) => (
             <Reveal key={service.id} delay={0.04 + index * 0.035} variant="tiltLeft">
               <article className="about-lead-card relative flex min-h-[22rem] flex-col p-7">

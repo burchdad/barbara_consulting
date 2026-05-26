@@ -19,6 +19,22 @@ const contactReasons = [
   "Secure workflow automation",
   "Public-sector delivery support",
   "Cybersecurity and compliance readiness",
+  "Cloud, data, and systems integration",
+];
+
+const leadershipContacts = [
+  {
+    name: "Danielle Carr",
+    title: "CEO / Chief Strategy Officer",
+    email: "Dcarr@graymatterstech.com",
+    phone: "240-784-7418",
+  },
+  {
+    name: "Barbara A. Gray",
+    title: "President / Enterprise Solutions",
+    email: "Bgray@graymatterstech.com",
+    phone: "202-420-1767",
+  },
 ];
 
 const responseSteps = [
@@ -66,7 +82,7 @@ export default async function ContactPage() {
             <div className="grid w-full gap-12 lg:grid-cols-[0.95fr_1.05fr] lg:items-center">
               <div className="max-w-5xl">
                 <p className="mb-5 text-xs font-bold uppercase tracking-[0.35em] text-cyan-200">
-                  Contact the AI Delivery Team
+                  Contact the AI-Forward Delivery Team
                 </p>
 
                 <h1 className="max-w-6xl text-5xl font-black uppercase leading-[0.92] text-white sm:text-6xl lg:text-[4.9rem]">
@@ -75,9 +91,9 @@ export default async function ContactPage() {
 
                 <p className="mt-8 max-w-3xl text-lg leading-8 text-slate-200 sm:text-xl">
                   Share the mission outcome, modernization goal, operational
-                  challenge, or AI opportunity you want to move forward. The
-                  team will review your request and respond with a practical
-                  next step.
+                  challenge, procurement path, or AI opportunity you want to
+                  move forward. The team will review your request and respond
+                  with a practical next step.
                 </p>
               </div>
 
@@ -140,9 +156,9 @@ export default async function ContactPage() {
               </h2>
 
               <p className="mt-5 max-w-xl text-lg leading-8 text-slate-300">
-                From AI modernization to operational support, engagements are
-                designed around speed, security, mission alignment, and
-                measurable impact.
+                From AI modernization to federal IT operations, engagements are
+                designed around speed, security, mission alignment, acquisition
+                fit, and measurable impact.
               </p>
 
               <div className="mt-8 grid gap-3">
@@ -158,6 +174,38 @@ export default async function ContactPage() {
                     </p>
                   </div>
                 ))}
+              </div>
+
+              <div className="mt-8 border border-cyan-200/15 bg-cyan-200/[0.03] p-5">
+                <p className="text-xs font-bold uppercase tracking-[0.22em] text-cyan-300">
+                  Leadership Points of Contact
+                </p>
+
+                <div className="mt-5 grid gap-4">
+                  {leadershipContacts.map((contact) => (
+                    <div
+                      key={contact.email}
+                      className="border border-white/10 bg-black/25 p-4"
+                    >
+                      <p className="text-base font-black uppercase text-white">
+                        {contact.name}
+                      </p>
+                      <p className="mt-1 text-xs uppercase tracking-[0.16em] text-slate-400">
+                        {contact.title}
+                      </p>
+                      <div className="mt-4 grid gap-2 text-sm text-slate-300">
+                        <p className="flex items-center gap-3 break-words">
+                          <Mail className="shrink-0 text-cyan-300" size={15} />
+                          {contact.email}
+                        </p>
+                        <p className="flex items-center gap-3">
+                          <Phone className="shrink-0 text-cyan-300" size={15} />
+                          {contact.phone}
+                        </p>
+                      </div>
+                    </div>
+                  ))}
+                </div>
               </div>
 
               <div className="mt-8 grid gap-3 text-sm text-slate-300">

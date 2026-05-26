@@ -6,9 +6,9 @@
 export const servicesSeed = [
   {
     category: "AI Strategy",
-    title: "AI Readiness and Roadmaps",
+    title: "AI Readiness, Governance, and Roadmaps",
     description:
-      "Strategic advisory support to identify practical AI use cases, prioritize value, and create a clear adoption roadmap.",
+      "Strategic advisory support to identify practical AI use cases, establish responsible governance, prioritize value, and create a clear adoption roadmap.",
     bulletItems: [
       "AI opportunity assessment",
       "Use case prioritization",
@@ -19,17 +19,87 @@ export const servicesSeed = [
     isPublished: true,
   },
   {
-    category: "Workflow Automation",
-    title: "Intelligent Process Design",
+    category: "AI-Agile Software Development",
+    title: "Application Modernization",
     description:
-      "Workflow modernization and automation planning for teams ready to reduce manual work and improve consistency.",
+      "AI-assisted agile development, modernization, and integration support for web applications, enterprise systems, and mission platforms.",
     bulletItems: [
-      "Process mapping and redesign",
-      "AI assistant strategy",
-      "Automation tool selection",
-      "Implementation planning",
+      "AI-assisted development",
+      "Systems integration",
+      "API and data exchange",
+      "Application sustainment",
     ],
     displayOrder: 2,
+    isPublished: true,
+  },
+  {
+    category: "Workflow Automation",
+    title: "Low-Code and Process Automation",
+    description:
+      "Power Platform, SharePoint, Appian, and low-code modernization support to replace fragmented tools and streamline work.",
+    bulletItems: [
+      "Power Apps and Power Automate",
+      "SharePoint automation",
+      "Appian forms and workflows",
+      "Process redesign",
+    ],
+    displayOrder: 3,
+    isPublished: true,
+  },
+  {
+    category: "Cloud & Infrastructure",
+    title: "Cloud Solutions and Enterprise Support",
+    description:
+      "Cloud, infrastructure, help desk, and operations support for organizations modernizing secure service delivery.",
+    bulletItems: [
+      "AWS cloud services",
+      "SaaS and IaaS support",
+      "Tier 2 and Tier 3 help desk",
+      "ServiceNow operations",
+    ],
+    displayOrder: 4,
+    isPublished: true,
+  },
+  {
+    category: "Cybersecurity & Compliance",
+    title: "Cyber Readiness and ATO Support",
+    description:
+      "Cybersecurity, risk assessment, compliance, and authority-to-operate support for regulated mission environments.",
+    bulletItems: [
+      "Risk assessments",
+      "ATO readiness",
+      "Security testing support",
+      "Compliance documentation",
+    ],
+    displayOrder: 5,
+    isPublished: true,
+  },
+  {
+    category: "Data Intelligence",
+    title: "Reporting, Analytics, and Data Operations",
+    description:
+      "Data analysis, reporting, performance management, and dashboard support for teams that need better operational visibility.",
+    bulletItems: [
+      "Power BI and SSRS",
+      "Database analysis",
+      "Performance reporting",
+      "Decision support dashboards",
+    ],
+    displayOrder: 6,
+    isPublished: true,
+  },
+  {
+    category: "Mission Support",
+    title: "Logistics and Program Operations",
+    description:
+      "Operational support across logistics, performance management, staffing, and mission program execution.",
+    bulletItems: [
+      "Logistics support",
+      "Program management",
+      "Staff augmentation",
+      "Operational sustainment",
+    ],
+    displayOrder: 7,
     isPublished: true,
   },
   {
@@ -43,7 +113,7 @@ export const servicesSeed = [
       "Prompting and productivity training",
       "Responsible use guidance",
     ],
-    displayOrder: 3,
+    displayOrder: 8,
     isPublished: true,
   },
 ];

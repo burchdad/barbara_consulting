@@ -1,52 +1,78 @@
 /**
- * Seed-level leadership data.
- * These neutral placeholders are used by prisma/seed.ts.
- * Replace with real client leadership before deploying.
+ * Seed-level leadership data used by prisma/seed.ts.
  */
 
 export const leadershipSeed = [
   {
-    name: "Morgan Hale",
-    title: "Chief Executive Officer",
-    photoUrl: "https://images.unsplash.com/photo-1560250097-0b93528c311a",
-    shortBio: "Leads enterprise mission strategy and client outcomes.",
+    name: "Danielle Carr",
+    title: "CEO / Chief Strategy Officer",
+    photoUrl: "/leadership/danielle-carr.webp",
+    shortBio:
+      "Sets strategic direction for the combined Gray Matters Technology Services and Sage Tech Solutions platform.",
     fullBio:
-      "Morgan has led mission programs for over two decades, scaling delivery teams and strategic partnerships. Focuses on disciplined execution, transparent governance, and long-term mission impact.",
+      "Danielle Carr serves as CEO and Chief Strategy Officer, leading market expansion, AI-forward growth, and federal delivery alignment for Gray Matters Technology Services and Sage Tech Solutions.",
     linkedInUrl: "https://www.linkedin.com",
     displayOrder: 1,
     isPublished: true,
   },
   {
-    name: "Taylor Brooks",
-    title: "Chief Operating Officer",
-    photoUrl: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d",
-    shortBio: "Owns program operations and quality delivery standards.",
+    name: "Barbara A. Gray",
+    title: "President of Operations",
+    photoUrl: "/leadership/barbara-gray.webp",
+    shortBio:
+      "Leads operations, enterprise solutions, financial systems, and federal technology delivery.",
     fullBio:
-      "Taylor oversees enterprise operations, ensuring contract performance aligns with mission priorities and compliance obligations. Has driven operational turnarounds for complex portfolios.",
+      "Barbara A. Gray serves as President of Operations, bringing decades of technology leadership, enterprise solutions experience, financial systems knowledge, and federal delivery discipline.",
     linkedInUrl: "https://www.linkedin.com",
     displayOrder: 2,
     isPublished: true,
   },
   {
-    name: "Jordan Quinn",
+    name: "Bill Pratt",
     title: "Chief Technology Officer",
-    photoUrl: "https://images.unsplash.com/photo-1541534401786-2077eed87a72",
-    shortBio: "Directs cloud, cyber, and data engineering innovation.",
+    photoUrl: "/leadership/bill-pratt.webp",
+    shortBio:
+      "Supports modernization strategy, technical architecture, and secure federal delivery.",
     fullBio:
-      "Jordan leads engineering and innovation programs spanning cloud migration, secure software delivery, and data modernization. Brings deep experience architecting mission-grade systems for regulated environments.",
+      "Bill Pratt supports the firm as Chief Technology Officer, bringing senior federal technology leadership experience to modernization, architecture, and secure delivery efforts.",
     linkedInUrl: "https://www.linkedin.com",
     displayOrder: 3,
     isPublished: true,
   },
   {
-    name: "Avery Reed",
-    title: "Vice President, Mission Support",
-    photoUrl: "https://images.unsplash.com/photo-1494790108377-be9c29b29330",
-    shortBio: "Leads logistics and field support readiness programs.",
+    name: "Torreon Creekmore",
+    title: "Chief Data Officer",
+    photoUrl: "/leadership/torreon-creekmore.webp",
+    shortBio:
+      "Leads data capability alignment across analytics, reporting, and decision support.",
     fullBio:
-      "Avery has delivered mission support and logistics capabilities across global deployments, with emphasis on readiness analytics and operational continuity for critical programs.",
+      "Torreon Creekmore leads data capability alignment across reporting, analytics, performance management, and decision support initiatives.",
     linkedInUrl: "https://www.linkedin.com",
     displayOrder: 4,
+    isPublished: true,
+  },
+  {
+    name: "Tushar Rathod",
+    title: "Chief AI Officer",
+    photoUrl: "/leadership/tushar-rathod.webp",
+    shortBio:
+      "Supports AI capability development, intelligent systems, and responsible adoption pathways.",
+    fullBio:
+      "Tushar Rathod supports the firm's AI capability with applied expertise in intelligent systems, AI-enabled delivery, and responsible adoption pathways.",
+    linkedInUrl: "https://www.linkedin.com",
+    displayOrder: 5,
+    isPublished: true,
+  },
+  {
+    name: "Alexis Muse",
+    title: "Director of Contracts",
+    photoUrl: "/leadership/alexis-muse.webp",
+    shortBio:
+      "Supports contract operations, procurement coordination, and federal business administration.",
+    fullBio:
+      "Alexis Muse supports federal contract operations across Gray Matters Technology Services and Sage Tech Solutions, helping align procurement, compliance, and delivery needs.",
+    linkedInUrl: "https://www.linkedin.com",
+    displayOrder: 6,
     isPublished: true,
   },
 ];
