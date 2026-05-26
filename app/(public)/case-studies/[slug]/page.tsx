@@ -11,6 +11,7 @@ import {
   Workflow,
 } from "lucide-react";
 
+import { HomepageCinematicScene } from "@/components/public/homepage-cinematic-scene";
 import { Section } from "@/components/ui/section";
 import { Reveal } from "@/components/public/reveal";
 import { siteConfig } from "@/lib/config/site";
@@ -45,66 +46,94 @@ export default async function CaseStudyDetailPage({
   const metrics = normalizeList(study.metrics);
 
   return (
-    <main className="overflow-hidden">
+    <HomepageCinematicScene
+      sceneSettings={{
+        type: "mesh",
+        glow: "blue",
+        particles: true,
+        parallax: true,
+      }}
+    >
       {/* HERO */}
-      <Section className="relative isolate overflow-hidden py-24 lg:py-32">
-        <div
-          className="absolute inset-0 -z-20 bg-cover bg-center opacity-40"
-          style={{
-            backgroundImage: `linear-gradient(to bottom, rgba(2,6,23,0.12), rgba(2,6,23,0.94)), url(${heroImageUrl})`,
-          }}
-        />
+      <section className="about-hero relative isolate overflow-hidden">
+        <div className="absolute inset-0 bg-[linear-gradient(120deg,rgba(2,6,23,0.98)_0%,rgba(2,6,23,0.9)_50%,rgba(8,47,73,0.62)_100%)]" />
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_72%_28%,rgba(34,211,238,0.18),transparent_30%),linear-gradient(to_right,rgba(255,255,255,0.035)_1px,transparent_1px),linear-gradient(to_bottom,rgba(255,255,255,0.026)_1px,transparent_1px)] bg-[length:100%_100%,64px_64px,64px_64px]" />
+        <div className="about-hero-dissolve absolute inset-x-0 bottom-0" />
 
-        <div className="absolute inset-0 -z-10 bg-[radial-gradient(circle_at_82%_28%,rgba(34,211,238,0.24),transparent_32%),radial-gradient(circle_at_18%_72%,rgba(168,85,247,0.13),transparent_30%),linear-gradient(135deg,rgba(2,6,23,0.96),rgba(2,6,23,0.72))]" />
+        <Section className="relative z-10 flex min-h-[82vh] items-center pb-24 pt-36 lg:pb-28">
+          <Reveal variant="angleLeft">
+            <div className="grid w-full gap-12 lg:grid-cols-[0.95fr_1.05fr] lg:items-center">
+              <div className="max-w-5xl">
+                <Link
+                  href="/case-studies"
+                  className="inline-flex items-center gap-2 text-sm font-bold uppercase tracking-[0.16em] text-slate-300 transition hover:text-cyan-300"
+                >
+                  <ArrowLeft size={16} />
+                  Back to Case Studies
+                </Link>
 
-        <div className="absolute inset-0 -z-10 bg-[linear-gradient(to_right,rgba(255,255,255,0.045)_1px,transparent_1px),linear-gradient(to_bottom,rgba(255,255,255,0.045)_1px,transparent_1px)] bg-[size:40px_40px] opacity-20" />
+                <p className="mt-8 text-xs font-bold uppercase tracking-[0.35em] text-cyan-200">
+                  AI Outcome Brief
+                </p>
 
-        <Reveal>
-          <div className="max-w-6xl">
-            <Link
-              href="/case-studies"
-              className="inline-flex items-center gap-2 text-sm font-bold uppercase tracking-[0.16em] text-slate-300 transition hover:text-cyan-300"
-            >
-              <ArrowLeft size={16} />
-              Back to Case Studies
-            </Link>
+                <h1 className="mt-5 max-w-6xl text-5xl font-black uppercase leading-[0.92] text-white sm:text-6xl lg:text-[4.9rem]">
+                  {study.title}
+                </h1>
 
-            <p className="mt-8 text-xs font-bold uppercase tracking-[0.36em] text-cyan-300">
-              AI Outcome Brief
-            </p>
+                <p className="mt-8 max-w-3xl text-lg leading-8 text-slate-200 sm:text-xl">
+                  {study.summary}
+                </p>
 
-            <h1 className="mt-5 max-w-6xl text-5xl font-black uppercase leading-[0.92] text-white sm:text-7xl lg:text-8xl">
-              {study.title}
-            </h1>
+                <div className="mt-10 flex flex-wrap gap-4">
+                  <Link
+                    href="/contact"
+                    className="premium-button rounded-full bg-white px-8 py-4 text-sm font-black uppercase tracking-[0.18em] text-slate-950 transition hover:bg-cyan-200"
+                  >
+                    Discuss Similar Work
+                  </Link>
 
-            <p className="mt-8 max-w-4xl text-lg leading-8 text-slate-200 sm:text-xl">
-              {study.summary}
-            </p>
+                  <Link
+                    href="/services"
+                    className="premium-button rounded-full border border-white/35 bg-white/5 px-8 py-4 text-sm font-black uppercase tracking-[0.18em] text-white backdrop-blur transition hover:border-cyan-200 hover:text-cyan-100"
+                  >
+                    Explore Services
+                  </Link>
+                </div>
+              </div>
 
-            <div className="mt-10 flex flex-wrap gap-4">
-              <Link
-                href="/contact"
-                className="premium-button rounded-full bg-white px-8 py-4 text-sm font-black uppercase tracking-[0.18em] text-slate-950 transition hover:bg-cyan-200"
-              >
-                Discuss Similar Work
-              </Link>
+              <div className="about-hero-profile relative hidden min-h-[34rem] overflow-hidden lg:block">
+                <div
+                  className="absolute inset-0 bg-cover bg-center opacity-62"
+                  style={{ backgroundImage: `url(${heroImageUrl})` }}
+                />
+                <div className="absolute inset-0 bg-[linear-gradient(135deg,rgba(2,6,23,0.2),rgba(2,6,23,0.92)_64%,rgba(8,47,73,0.86))]" />
+                <div className="absolute inset-8 border border-cyan-200/15 bg-[linear-gradient(to_right,rgba(34,211,238,0.11)_1px,transparent_1px),linear-gradient(to_bottom,rgba(34,211,238,0.08)_1px,transparent_1px)] bg-[length:4.5rem_4.5rem]" />
 
-              <Link
-                href="/services"
-                className="premium-button rounded-full border border-white/35 bg-white/5 px-8 py-4 text-sm font-black uppercase tracking-[0.18em] text-white backdrop-blur transition hover:border-cyan-200 hover:text-cyan-100"
-              >
-                Explore Services
-              </Link>
+                <div className="absolute left-8 top-8 max-w-[18rem] border border-white/15 bg-black/50 p-5 backdrop-blur">
+                  <p className="text-xs font-black uppercase tracking-[0.2em] text-cyan-200">
+                    Outcome Brief
+                  </p>
+                  <p className="mt-3 text-2xl font-black uppercase leading-tight text-white">
+                    Challenge, response, and measurable value.
+                  </p>
+                </div>
+              </div>
             </div>
-          </div>
-        </Reveal>
-      </Section>
+          </Reveal>
+        </Section>
+      </section>
 
       {/* SNAPSHOT */}
-      <Section className="py-20 lg:py-28">
+      <Section className="about-command-section relative overflow-visible py-20 lg:py-28">
+        <div aria-hidden className="about-angle-field">
+          <div className="about-angle-plane about-angle-plane-a" />
+          <div className="about-angle-plane about-angle-plane-b" />
+          <div className="about-angle-plane about-angle-plane-c" />
+        </div>
+
         <Reveal>
           <div className="grid gap-5 lg:grid-cols-3">
-            <article className="rounded-[2rem] border border-white/10 bg-white/[0.035] p-7">
+            <article className="about-system-card min-h-[19rem] p-7">
               <Target className="text-cyan-200" size={26} />
 
               <p className="mt-8 text-xs uppercase tracking-[0.24em] text-cyan-300">
@@ -120,7 +149,7 @@ export default async function CaseStudyDetailPage({
               </p>
             </article>
 
-            <article className="rounded-[2rem] border border-white/10 bg-white/[0.035] p-7">
+            <article className="about-system-card min-h-[19rem] p-7">
               <Lightbulb className="text-cyan-200" size={26} />
 
               <p className="mt-8 text-xs uppercase tracking-[0.24em] text-cyan-300">
@@ -136,7 +165,7 @@ export default async function CaseStudyDetailPage({
               </p>
             </article>
 
-            <article className="rounded-[2rem] border border-cyan-200/20 bg-[radial-gradient(circle_at_20%_10%,rgba(34,211,238,0.16),transparent_30%),linear-gradient(145deg,rgba(15,23,42,0.92),rgba(2,6,23,0.88))] p-7">
+            <article className="about-system-card min-h-[19rem] p-7">
               <BarChart3 className="text-cyan-200" size={26} />
 
               <p className="mt-8 text-xs uppercase tracking-[0.24em] text-cyan-300">
@@ -159,7 +188,7 @@ export default async function CaseStudyDetailPage({
       <Section className="py-20 lg:py-28">
         <div className="grid gap-5 lg:grid-cols-2">
           <Reveal>
-            <article className="min-h-[420px] rounded-[2.5rem] border border-white/10 bg-[linear-gradient(145deg,rgba(255,255,255,0.08),rgba(255,255,255,0.025))] p-8 sm:p-10">
+            <article className="about-lead-panel min-h-[420px] p-8 sm:p-10">
               <div className="flex items-center gap-3">
                 <Workflow className="text-cyan-200" size={26} />
 
@@ -194,7 +223,7 @@ export default async function CaseStudyDetailPage({
           </Reveal>
 
           <Reveal delay={0.05}>
-            <article className="min-h-[420px] rounded-[2.5rem] border border-cyan-200/15 bg-[radial-gradient(circle_at_18%_20%,rgba(34,211,238,0.14),transparent_30%),linear-gradient(135deg,rgba(15,23,42,0.76),rgba(2,6,23,0.9))] p-8 sm:p-10">
+            <article className="about-lead-panel min-h-[420px] p-8 sm:p-10">
               <div className="flex items-center gap-3">
                 <BarChart3 className="text-cyan-200" size={26} />
 
@@ -237,7 +266,7 @@ export default async function CaseStudyDetailPage({
       {/* APPROACH */}
       <Section className="py-20 lg:py-28">
         <Reveal>
-          <div className="rounded-[2.5rem] border border-white/10 bg-white/[0.035] p-8 sm:p-12 lg:p-16">
+          <div className="about-lead-panel p-8 sm:p-12 lg:p-16">
             <div className="grid gap-10 lg:grid-cols-[0.75fr_1.25fr] lg:items-center">
               <div>
                 <ShieldCheck className="text-cyan-200" size={30} />
@@ -283,7 +312,7 @@ export default async function CaseStudyDetailPage({
                 ].map(({ title, body, icon: Icon }) => (
                   <article
                     key={title}
-                    className="rounded-2xl border border-white/10 bg-black/25 p-5"
+                    className="about-lead-card p-5"
                   >
                     <Icon className="text-cyan-200" size={22} />
 
@@ -302,6 +331,6 @@ export default async function CaseStudyDetailPage({
         </Reveal>
       </Section>
 
-    </main>
+    </HomepageCinematicScene>
   );
 }

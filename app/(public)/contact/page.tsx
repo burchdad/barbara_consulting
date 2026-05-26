@@ -1,5 +1,4 @@
 import {
-  Building2,
   Clock3,
   Mail,
   MapPin,
@@ -8,6 +7,7 @@ import {
   ShieldCheck,
 } from "lucide-react";
 
+import { HomepageCinematicScene } from "@/components/public/homepage-cinematic-scene";
 import { Section } from "@/components/ui/section";
 import { ContactForm } from "@/components/public/contact-form";
 import { Reveal } from "@/components/public/reveal";
@@ -47,44 +47,90 @@ export default async function ContactPage() {
   const address = settings?.address || siteConfig.contact.address;
 
   return (
-    <main className="overflow-hidden">
+    <HomepageCinematicScene
+      sceneSettings={{
+        type: "mesh",
+        glow: "blue",
+        particles: true,
+        parallax: true,
+      }}
+    >
       {/* HERO */}
-      <Section className="relative isolate overflow-hidden py-24 lg:py-32">
-        <div
-          className="absolute inset-0 -z-20 bg-cover bg-center opacity-40"
-          style={{
-            backgroundImage: `linear-gradient(to bottom, rgba(2, 6, 23, 0.18), rgba(2, 6, 23, 0.94)), url(${heroImageUrl})`,
-          }}
-        />
+      <section className="about-hero relative isolate overflow-hidden">
+        <div className="absolute inset-0 bg-[linear-gradient(120deg,rgba(2,6,23,0.98)_0%,rgba(2,6,23,0.9)_50%,rgba(8,47,73,0.62)_100%)]" />
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_72%_28%,rgba(34,211,238,0.18),transparent_30%),linear-gradient(to_right,rgba(255,255,255,0.035)_1px,transparent_1px),linear-gradient(to_bottom,rgba(255,255,255,0.026)_1px,transparent_1px)] bg-[length:100%_100%,64px_64px,64px_64px]" />
+        <div className="about-hero-dissolve absolute inset-x-0 bottom-0" />
 
-        <div className="absolute inset-0 -z-10 bg-[radial-gradient(circle_at_78%_22%,rgba(34,211,238,0.24),transparent_32%),radial-gradient(circle_at_18%_75%,rgba(168,85,247,0.13),transparent_30%),linear-gradient(135deg,rgba(2,6,23,0.96),rgba(2,6,23,0.76))]" />
+        <Section className="relative z-10 flex min-h-[82vh] items-center pb-24 pt-36 lg:pb-28">
+          <Reveal variant="angleLeft">
+            <div className="grid w-full gap-12 lg:grid-cols-[0.95fr_1.05fr] lg:items-center">
+              <div className="max-w-5xl">
+                <p className="mb-5 text-xs font-bold uppercase tracking-[0.35em] text-cyan-200">
+                  Contact the AI Delivery Team
+                </p>
 
-        <div className="absolute inset-0 -z-10 bg-[linear-gradient(to_right,rgba(255,255,255,0.045)_1px,transparent_1px),linear-gradient(to_bottom,rgba(255,255,255,0.045)_1px,transparent_1px)] bg-[size:40px_40px] opacity-20" />
+                <h1 className="max-w-6xl text-5xl font-black uppercase leading-[0.92] text-white sm:text-6xl lg:text-[4.9rem]">
+                  Let&apos;s build a practical path forward.
+                </h1>
 
-        <Reveal>
-          <div className="max-w-6xl">
-            <p className="text-xs font-bold uppercase tracking-[0.36em] text-cyan-300">
-              Contact the AI Delivery Team
-            </p>
+                <p className="mt-8 max-w-3xl text-lg leading-8 text-slate-200 sm:text-xl">
+                  Share the mission outcome, modernization goal, operational
+                  challenge, or AI opportunity you want to move forward. The
+                  team will review your request and respond with a practical
+                  next step.
+                </p>
+              </div>
 
-            <h1 className="mt-5 max-w-6xl text-5xl font-black uppercase leading-[0.92] text-white sm:text-7xl lg:text-8xl">
-              Let’s build a practical path forward.
-            </h1>
+              <div className="about-hero-profile relative hidden min-h-[34rem] overflow-hidden lg:block">
+                <div
+                  className="absolute inset-0 bg-cover bg-center opacity-58"
+                  style={{ backgroundImage: `url(${heroImageUrl})` }}
+                />
+                <div className="absolute inset-0 bg-[linear-gradient(135deg,rgba(2,6,23,0.2),rgba(2,6,23,0.92)_64%,rgba(8,47,73,0.86))]" />
+                <div className="absolute inset-8 border border-cyan-200/15 bg-[linear-gradient(to_right,rgba(34,211,238,0.11)_1px,transparent_1px),linear-gradient(to_bottom,rgba(34,211,238,0.08)_1px,transparent_1px)] bg-[length:4.5rem_4.5rem]" />
 
-            <p className="mt-8 max-w-4xl text-lg leading-8 text-slate-200 sm:text-xl">
-              Share the mission outcome, modernization goal, operational
-              challenge, or AI opportunity you want to move forward. The team
-              will review your request and respond with a practical next step.
-            </p>
-          </div>
-        </Reveal>
-      </Section>
+                <div className="absolute left-8 top-8 max-w-[18rem] border border-white/15 bg-black/50 p-5 backdrop-blur">
+                  <p className="text-xs font-black uppercase tracking-[0.2em] text-cyan-200">
+                    Project Intake
+                  </p>
+                  <p className="mt-3 text-2xl font-black uppercase leading-tight text-white">
+                    Mission context into a clear next step.
+                  </p>
+                </div>
+
+                <div className="absolute bottom-8 right-8 grid w-[21rem] gap-3">
+                  {["Need", "Fit", "Path"].map((item, index) => (
+                    <div
+                      key={item}
+                      className="flex items-center justify-between border border-cyan-200/18 bg-black/48 px-4 py-3 backdrop-blur"
+                    >
+                      <span className="text-xs font-black uppercase tracking-[0.18em] text-slate-300">
+                        0{index + 1}
+                      </span>
+                      <span className="text-sm font-black uppercase tracking-[0.14em] text-white">
+                        {item}
+                      </span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+          </Reveal>
+        </Section>
+      </section>
 
       {/* CONTACT FORM + INFO */}
-      <Section className="py-20 lg:py-28">
-        <div className="grid gap-10 lg:grid-cols-[0.85fr_1.15fr] lg:items-start">
-          <Reveal>
+      <Section className="about-command-section relative overflow-visible py-20 lg:py-28">
+        <div aria-hidden className="about-angle-field">
+          <div className="about-angle-plane about-angle-plane-a" />
+          <div className="about-angle-plane about-angle-plane-b" />
+          <div className="about-angle-plane about-angle-plane-c" />
+        </div>
+
+        <div className="relative z-10 grid gap-10 lg:grid-cols-[0.85fr_1.15fr] lg:items-start">
+          <Reveal variant="angleLeft">
             <div className="sticky top-28">
+              <div aria-hidden className="about-title-rail" />
               <p className="text-xs uppercase tracking-[0.3em] text-cyan-300">
                 Start the Conversation
               </p>
@@ -103,7 +149,7 @@ export default async function ContactPage() {
                 {contactReasons.map((reason) => (
                   <div
                     key={reason}
-                    className="flex items-center gap-3 rounded-2xl border border-white/10 bg-white/[0.035] p-4"
+                    className="about-value-chip flex min-h-[4.5rem] items-center gap-3 p-4"
                   >
                     <ShieldCheck className="shrink-0 text-cyan-300" size={18} />
 
@@ -116,7 +162,7 @@ export default async function ContactPage() {
 
               <div className="mt-8 grid gap-3 text-sm text-slate-300">
                 {email && (
-                  <div className="rounded-2xl border border-white/10 bg-black/25 p-5">
+                  <div className="border border-white/10 bg-black/25 p-5">
                     <div className="flex items-center gap-3">
                       <Mail className="text-cyan-300" size={18} />
                       <span className="text-xs uppercase tracking-[0.2em] text-slate-500">
@@ -131,7 +177,7 @@ export default async function ContactPage() {
                 )}
 
                 {phone && (
-                  <div className="rounded-2xl border border-white/10 bg-black/25 p-5">
+                  <div className="border border-white/10 bg-black/25 p-5">
                     <div className="flex items-center gap-3">
                       <Phone className="text-cyan-300" size={18} />
                       <span className="text-xs uppercase tracking-[0.2em] text-slate-500">
@@ -144,7 +190,7 @@ export default async function ContactPage() {
                 )}
 
                 {address && (
-                  <div className="rounded-2xl border border-white/10 bg-black/25 p-5">
+                  <div className="border border-white/10 bg-black/25 p-5">
                     <div className="flex items-center gap-3">
                       <MapPin className="text-cyan-300" size={18} />
                       <span className="text-xs uppercase tracking-[0.2em] text-slate-500">
@@ -159,9 +205,9 @@ export default async function ContactPage() {
             </div>
           </Reveal>
 
-          <Reveal delay={0.05}>
-            <div className="rounded-[2.5rem] border border-white/10 bg-[radial-gradient(circle_at_20%_0%,rgba(34,211,238,0.12),transparent_28%),linear-gradient(145deg,rgba(255,255,255,0.08),rgba(255,255,255,0.025))] p-5 shadow-[0_0_80px_rgba(34,211,238,0.08)] sm:p-8">
-              <div className="mb-8 rounded-[2rem] border border-white/10 bg-black/25 p-6">
+          <Reveal delay={0.05} variant="tiltRight">
+            <div className="about-lead-panel p-5 sm:p-8">
+              <div className="mb-8 border border-white/10 bg-black/25 p-6">
                 <div className="flex items-center gap-3">
                   <MessageSquareText className="text-cyan-300" size={24} />
 
@@ -171,7 +217,7 @@ export default async function ContactPage() {
                 </div>
 
                 <h3 className="mt-5 text-3xl font-black uppercase leading-tight text-white">
-                  Send the request. We’ll help define the next move.
+                  Send the request. We&apos;ll help define the next move.
                 </h3>
 
                 <p className="mt-4 text-sm leading-6 text-slate-300">
@@ -196,7 +242,7 @@ export default async function ContactPage() {
                 What Happens Next
               </p>
 
-              <h2 className="mt-3 text-5xl font-black uppercase text-white sm:text-7xl">
+              <h2 className="mt-3 text-5xl font-black uppercase leading-[0.95] text-white sm:text-6xl">
                 A clear path from message to momentum.
               </h2>
             </div>
@@ -211,10 +257,12 @@ export default async function ContactPage() {
         <div className="grid gap-5 lg:grid-cols-3">
           {responseSteps.map((step, index) => (
             <Reveal key={step.title} delay={0.04 + index * 0.04}>
-              <article className="rounded-[2rem] border border-white/10 bg-white/[0.035] p-7 transition hover:-translate-y-2 hover:border-cyan-200/40">
-                <p className="text-5xl font-black text-cyan-300/30">
+              <article className={`about-path-node about-path-node-${index + 1}`}>
+                <span className="about-path-node-index">
                   {String(index + 1).padStart(2, "0")}
-                </p>
+                </span>
+
+                <Clock3 className="text-cyan-200" size={22} />
 
                 <h3 className="mt-6 text-2xl font-black uppercase text-white">
                   {step.title}
@@ -229,6 +277,6 @@ export default async function ContactPage() {
         </div>
       </Section>
 
-    </main>
+    </HomepageCinematicScene>
   );
 }

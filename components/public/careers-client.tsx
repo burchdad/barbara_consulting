@@ -35,9 +35,9 @@ export function CareersClient({ jobs }: CareersClientProps) {
 
   return (
     <div className="space-y-8">
-      <div className="grid gap-3 rounded-xl border border-white/10 bg-white/[0.02] p-4 sm:grid-cols-3">
+      <div className="about-lead-panel grid gap-3 p-4 sm:grid-cols-3">
         <select
-          className="rounded-md border border-white/15 bg-black px-3 py-2 text-sm"
+          className="border border-white/15 bg-black/70 px-4 py-3 text-sm text-white outline-none transition focus:border-cyan-200/60"
           value={jobType}
           onChange={(e) => setJobType(e.target.value)}
         >
@@ -49,7 +49,7 @@ export function CareersClient({ jobs }: CareersClientProps) {
           ))}
         </select>
         <select
-          className="rounded-md border border-white/15 bg-black px-3 py-2 text-sm"
+          className="border border-white/15 bg-black/70 px-4 py-3 text-sm text-white outline-none transition focus:border-cyan-200/60"
           value={location}
           onChange={(e) => setLocation(e.target.value)}
         >
@@ -61,7 +61,7 @@ export function CareersClient({ jobs }: CareersClientProps) {
           ))}
         </select>
         <input
-          className="rounded-md border border-white/15 bg-black px-3 py-2 text-sm"
+          className="border border-white/15 bg-black/70 px-4 py-3 text-sm text-white outline-none transition placeholder:text-slate-500 focus:border-cyan-200/60"
           placeholder="Search roles"
           value={search}
           onChange={(e) => setSearch(e.target.value)}
@@ -69,21 +69,30 @@ export function CareersClient({ jobs }: CareersClientProps) {
       </div>
 
       {filteredJobs.length === 0 ? (
-        <p className="rounded-xl border border-white/10 bg-white/[0.02] p-8 text-center text-zinc-400">
+        <p className="about-leader-card p-8 text-center text-zinc-400">
           No jobs match your filters right now.
         </p>
       ) : (
         <div className="grid gap-4 md:grid-cols-2">
           {filteredJobs.map((job) => (
-            <article key={job.id} className="rounded-xl border border-white/10 bg-white/[0.02] p-5">
-              <h3 className="text-xl font-bold text-white">{job.title}</h3>
-              <p className="mt-2 text-sm text-zinc-400">{job.location} • {job.employmentType} • {job.jobType}</p>
-              <p className="mt-3 text-sm text-zinc-300">{job.description}</p>
+            <article key={job.id} className="about-leader-card p-6">
+              <p className="text-xs font-bold uppercase tracking-[0.22em] text-cyan-300">
+                Open Role
+              </p>
+              <h3 className="mt-3 text-2xl font-black uppercase leading-tight text-white">
+                {job.title}
+              </h3>
+              <p className="mt-3 text-sm uppercase tracking-[0.14em] text-zinc-400">
+                {job.location} / {job.employmentType} / {job.jobType}
+              </p>
+              <p className="mt-5 text-sm leading-6 text-zinc-300">
+                {job.description}
+              </p>
               <a
                 href={job.applyUrl || "#"}
                 target="_blank"
                 rel="noreferrer"
-                className="mt-4 inline-flex rounded-md border border-red-500/50 px-4 py-2 text-sm font-semibold text-red-300 transition hover:bg-red-500/15"
+                className="premium-button mt-6 inline-flex bg-white px-5 py-3 text-xs font-black uppercase tracking-[0.16em] text-slate-950 transition hover:bg-cyan-200"
               >
                 Apply Now
               </a>

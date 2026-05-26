@@ -9,6 +9,7 @@ import {
   UserCheck,
 } from "lucide-react";
 
+import { HomepageCinematicScene } from "@/components/public/homepage-cinematic-scene";
 import { Section } from "@/components/ui/section";
 import { Reveal } from "@/components/public/reveal";
 import { getGlobalSettings } from "@/lib/site-data";
@@ -101,51 +102,80 @@ export default async function PrivacyPage() {
   const email = settings?.email;
 
   return (
-    <main className="overflow-hidden">
+    <HomepageCinematicScene
+      sceneSettings={{
+        type: "mesh",
+        glow: "blue",
+        particles: true,
+        parallax: true,
+      }}
+    >
       {/* HERO */}
-      <Section className="relative isolate overflow-hidden py-24 lg:py-32">
-        <div
-          className="absolute inset-0 -z-20 bg-cover bg-center opacity-35"
-          style={{
-            backgroundImage: `linear-gradient(to bottom, rgba(2, 6, 23, 0.18), rgba(2, 6, 23, 0.94)), url(${heroImageUrl})`,
-          }}
-        />
+      <section className="about-hero relative isolate overflow-hidden">
+        <div className="absolute inset-0 bg-[linear-gradient(120deg,rgba(2,6,23,0.98)_0%,rgba(2,6,23,0.9)_50%,rgba(8,47,73,0.62)_100%)]" />
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_72%_28%,rgba(34,211,238,0.18),transparent_30%),linear-gradient(to_right,rgba(255,255,255,0.035)_1px,transparent_1px),linear-gradient(to_bottom,rgba(255,255,255,0.026)_1px,transparent_1px)] bg-[length:100%_100%,64px_64px,64px_64px]" />
+        <div className="about-hero-dissolve absolute inset-x-0 bottom-0" />
 
-        <div className="absolute inset-0 -z-10 bg-[radial-gradient(circle_at_18%_22%,rgba(34,211,238,0.24),transparent_32%),radial-gradient(circle_at_82%_72%,rgba(168,85,247,0.12),transparent_30%),linear-gradient(135deg,rgba(2,6,23,0.96),rgba(2,6,23,0.78))]" />
+        <Section className="relative z-10 flex min-h-[82vh] items-center pb-24 pt-36 lg:pb-28">
+          <Reveal variant="angleLeft">
+            <div className="grid w-full gap-12 lg:grid-cols-[0.95fr_1.05fr] lg:items-center">
+              <div className="max-w-5xl">
+                <p className="mb-5 text-xs font-bold uppercase tracking-[0.35em] text-cyan-200">
+                  Privacy Policy
+                </p>
 
-        <div className="absolute inset-0 -z-10 bg-[linear-gradient(to_right,rgba(255,255,255,0.045)_1px,transparent_1px),linear-gradient(to_bottom,rgba(255,255,255,0.045)_1px,transparent_1px)] bg-[size:40px_40px] opacity-20" />
+                <h1 className="max-w-6xl text-5xl font-black uppercase leading-[0.92] text-white sm:text-6xl lg:text-[4.9rem]">
+                  Data handling built around trust, clarity, and responsible
+                  use.
+                </h1>
 
-        <Reveal>
-          <div className="max-w-6xl">
-            <p className="text-xs font-bold uppercase tracking-[0.36em] text-cyan-300">
-              Privacy Policy
-            </p>
+                <p className="mt-8 max-w-3xl text-lg leading-8 text-slate-200 sm:text-xl">
+                  This Privacy Policy explains how {companyName} collects,
+                  uses, protects, and manages information submitted through
+                  website forms, communications, AI-enabled delivery workflows,
+                  and operational platforms.
+                </p>
 
-            <h1 className="mt-5 max-w-6xl text-5xl font-black uppercase leading-[0.92] text-white sm:text-7xl lg:text-8xl">
-              Data handling built around trust, clarity, and responsible use.
-            </h1>
+                <p className="mt-6 max-w-3xl text-sm leading-6 text-slate-400">
+                  Last updated: Replace with approved effective date before
+                  final production launch.
+                </p>
+              </div>
 
-            <p className="mt-8 max-w-4xl text-lg leading-8 text-slate-200 sm:text-xl">
-              This Privacy Policy explains how {companyName} collects, uses,
-              protects, and manages information submitted through website
-              forms, communications, AI-enabled delivery workflows, and
-              operational platforms.
-            </p>
+              <div className="about-hero-profile relative hidden min-h-[34rem] overflow-hidden lg:block">
+                <div
+                  className="absolute inset-0 bg-cover bg-center opacity-55"
+                  style={{ backgroundImage: `url(${heroImageUrl})` }}
+                />
+                <div className="absolute inset-0 bg-[linear-gradient(135deg,rgba(2,6,23,0.22),rgba(2,6,23,0.94)_64%,rgba(8,47,73,0.86))]" />
+                <div className="absolute inset-8 border border-cyan-200/15 bg-[linear-gradient(to_right,rgba(34,211,238,0.11)_1px,transparent_1px),linear-gradient(to_bottom,rgba(34,211,238,0.08)_1px,transparent_1px)] bg-[length:4.5rem_4.5rem]" />
 
-            <p className="mt-6 max-w-3xl text-sm leading-6 text-slate-400">
-              Last updated: Replace with approved effective date before final
-              production launch.
-            </p>
-          </div>
-        </Reveal>
-      </Section>
+                <div className="absolute left-8 top-8 max-w-[18rem] border border-white/15 bg-black/50 p-5 backdrop-blur">
+                  <p className="text-xs font-black uppercase tracking-[0.2em] text-cyan-200">
+                    Trust Layer
+                  </p>
+                  <p className="mt-3 text-2xl font-black uppercase leading-tight text-white">
+                    Clear rules for responsible information handling.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </Reveal>
+        </Section>
+      </section>
 
       {/* PRIVACY HIGHLIGHTS */}
-      <Section className="py-20 lg:py-28">
+      <Section className="about-command-section relative overflow-visible py-20 lg:py-28">
+        <div aria-hidden className="about-angle-field">
+          <div className="about-angle-plane about-angle-plane-a" />
+          <div className="about-angle-plane about-angle-plane-b" />
+          <div className="about-angle-plane about-angle-plane-c" />
+        </div>
+
         <div className="grid gap-5 lg:grid-cols-3">
           {privacyHighlights.map(({ title, body, icon: Icon }, index) => (
-            <Reveal key={title} delay={0.04 + index * 0.04}>
-              <article className="group min-h-[300px] rounded-[2rem] border border-white/10 bg-[linear-gradient(145deg,rgba(255,255,255,0.08),rgba(255,255,255,0.025))] p-8 transition hover:-translate-y-2 hover:border-cyan-200/40">
+            <Reveal key={title} delay={0.04 + index * 0.04} variant="tiltLeft">
+              <article className="about-system-card min-h-[19rem] p-8">
                 <Icon className="text-cyan-200" size={28} />
 
                 <h2 className="mt-10 text-3xl font-black uppercase leading-tight text-white">
@@ -166,6 +196,7 @@ export default async function PrivacyPage() {
         <div className="grid gap-12 lg:grid-cols-[0.7fr_1.3fr] lg:items-start">
           <Reveal>
             <div className="sticky top-28">
+              <div aria-hidden className="about-title-rail" />
               <p className="text-xs uppercase tracking-[0.3em] text-cyan-300">
                 Policy Overview
               </p>
@@ -180,7 +211,7 @@ export default async function PrivacyPage() {
                 partners.
               </p>
 
-              <div className="mt-8 rounded-[2rem] border border-cyan-200/15 bg-cyan-200/[0.03] p-6">
+              <div className="mt-8 border border-cyan-200/15 bg-cyan-200/[0.03] p-6">
                 <div className="flex items-center gap-3">
                   <FileText className="text-cyan-300" size={22} />
                   <p className="text-xs font-bold uppercase tracking-[0.2em] text-cyan-300">
@@ -201,7 +232,7 @@ export default async function PrivacyPage() {
               {policySections.map((section, index) => (
                 <article
                   key={section.title}
-                  className="rounded-[2rem] border border-white/10 bg-white/[0.035] p-7 transition hover:border-cyan-200/30"
+                  className="about-lead-card p-7"
                 >
                   <div className="flex items-start gap-4">
                     <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-cyan-200/30 bg-cyan-200/[0.06] text-sm font-black text-cyan-200">
@@ -230,7 +261,7 @@ export default async function PrivacyPage() {
       {/* CONTACT / RIGHTS */}
       <Section className="py-20 lg:py-28">
         <Reveal>
-          <div className="rounded-[2.5rem] border border-white/10 bg-[radial-gradient(circle_at_18%_20%,rgba(34,211,238,0.14),transparent_30%),linear-gradient(135deg,rgba(15,23,42,0.76),rgba(2,6,23,0.9))] p-8 sm:p-12 lg:p-16">
+          <div className="about-lead-panel p-8 sm:p-12 lg:p-16">
             <div className="grid gap-10 lg:grid-cols-[0.75fr_1.25fr] lg:items-center">
               <div>
                 <Database className="text-cyan-200" size={30} />
@@ -250,7 +281,7 @@ export default async function PrivacyPage() {
                 </p>
               </div>
 
-              <div className="rounded-[2rem] border border-white/10 bg-black/25 p-7">
+              <div className="border border-white/10 bg-black/25 p-7">
                 <div className="flex items-center gap-3">
                   <Mail className="text-cyan-300" size={22} />
 
@@ -276,6 +307,6 @@ export default async function PrivacyPage() {
         </Reveal>
       </Section>
 
-    </main>
+    </HomepageCinematicScene>
   );
 }

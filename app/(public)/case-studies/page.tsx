@@ -9,6 +9,7 @@ import {
   Target,
 } from "lucide-react";
 
+import { HomepageCinematicScene } from "@/components/public/homepage-cinematic-scene";
 import { Section } from "@/components/ui/section";
 import { Reveal } from "@/components/public/reveal";
 import { siteConfig } from "@/lib/config/site";
@@ -49,61 +50,107 @@ export default async function CaseStudiesPage() {
     siteConfig.media.caseStudiesHeroImageUrl;
 
   return (
-    <main className="overflow-hidden">
+    <HomepageCinematicScene
+      sceneSettings={{
+        type: "mesh",
+        glow: "blue",
+        particles: true,
+        parallax: true,
+      }}
+    >
       {/* HERO */}
-      <Section className="relative isolate overflow-hidden py-24 lg:py-32">
-        <div
-          className="absolute inset-0 -z-20 bg-cover bg-center opacity-40"
-          style={{
-            backgroundImage: `linear-gradient(to bottom, rgba(2, 6, 23, 0.18), rgba(2, 6, 23, 0.94)), url(${heroImageUrl})`,
-          }}
-        />
+      <section className="about-hero relative isolate overflow-hidden">
+        <div className="absolute inset-0 bg-[linear-gradient(120deg,rgba(2,6,23,0.98)_0%,rgba(2,6,23,0.9)_50%,rgba(8,47,73,0.62)_100%)]" />
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_72%_28%,rgba(34,211,238,0.18),transparent_30%),linear-gradient(to_right,rgba(255,255,255,0.035)_1px,transparent_1px),linear-gradient(to_bottom,rgba(255,255,255,0.026)_1px,transparent_1px)] bg-[length:100%_100%,64px_64px,64px_64px]" />
+        <div className="about-hero-dissolve absolute inset-x-0 bottom-0" />
 
-        <div className="absolute inset-0 -z-10 bg-[radial-gradient(circle_at_82%_28%,rgba(34,211,238,0.24),transparent_32%),radial-gradient(circle_at_18%_70%,rgba(168,85,247,0.13),transparent_30%),linear-gradient(135deg,rgba(2,6,23,0.96),rgba(2,6,23,0.76))]" />
+        <Section className="relative z-10 flex min-h-[82vh] items-center pb-24 pt-36 lg:pb-28">
+          <Reveal variant="angleLeft">
+            <div className="grid w-full gap-12 lg:grid-cols-[0.95fr_1.05fr] lg:items-center">
+              <div className="max-w-5xl">
+                <p className="mb-5 text-xs font-bold uppercase tracking-[0.35em] text-cyan-200">
+                  Case Studies
+                </p>
 
-        <div className="absolute inset-0 -z-10 bg-[linear-gradient(to_right,rgba(255,255,255,0.045)_1px,transparent_1px),linear-gradient(to_bottom,rgba(255,255,255,0.045)_1px,transparent_1px)] bg-[size:40px_40px] opacity-20" />
+                <h1 className="max-w-6xl text-5xl font-black uppercase leading-[0.92] text-white sm:text-6xl lg:text-[4.9rem]">
+                  Evidence-backed impact across AI, mission technology, and
+                  modernization.
+                </h1>
 
-        <Reveal>
-          <div className="max-w-6xl">
-            <p className="text-xs font-bold uppercase tracking-[0.36em] text-cyan-300">
-              Case Studies
-            </p>
+                <p className="mt-8 max-w-3xl text-lg leading-8 text-slate-200 sm:text-xl">
+                  Explore examples of how intelligent systems, secure
+                  workflows, and practical technology strategy can help
+                  organizations improve clarity, execution, resilience, and
+                  operational performance.
+                </p>
 
-            <h1 className="mt-5 max-w-6xl text-5xl font-black uppercase leading-[0.92] text-white sm:text-7xl lg:text-8xl">
-              Evidence-backed impact across AI, mission technology, and
-              modernization.
-            </h1>
+                <div className="mt-10 flex flex-wrap gap-4">
+                  <Link
+                    href="/contact"
+                    className="premium-button rounded-full bg-white px-8 py-4 text-sm font-black uppercase tracking-[0.18em] text-slate-950 transition hover:bg-cyan-200"
+                  >
+                    Discuss a Project
+                  </Link>
 
-            <p className="mt-8 max-w-4xl text-lg leading-8 text-slate-200 sm:text-xl">
-              Explore examples of how intelligent systems, secure workflows,
-              and practical technology strategy can help organizations improve
-              clarity, execution, resilience, and operational performance.
-            </p>
+                  <Link
+                    href="/services"
+                    className="premium-button rounded-full border border-white/35 bg-white/5 px-8 py-4 text-sm font-black uppercase tracking-[0.18em] text-white backdrop-blur transition hover:border-cyan-200 hover:text-cyan-100"
+                  >
+                    Explore Services
+                  </Link>
+                </div>
+              </div>
 
-            <div className="mt-10 flex flex-wrap gap-4">
-              <Link
-                href="/contact"
-                className="premium-button rounded-full bg-white px-8 py-4 text-sm font-black uppercase tracking-[0.18em] text-slate-950 transition hover:bg-cyan-200"
-              >
-                Discuss a Project
-              </Link>
+              <div className="about-hero-profile relative hidden min-h-[34rem] overflow-hidden lg:block">
+                <div
+                  className="absolute inset-0 bg-cover bg-center opacity-65"
+                  style={{ backgroundImage: `url(${heroImageUrl})` }}
+                />
+                <div className="absolute inset-0 bg-[linear-gradient(135deg,rgba(2,6,23,0.22),rgba(2,6,23,0.92)_64%,rgba(8,47,73,0.86))]" />
+                <div className="absolute inset-8 border border-cyan-200/15 bg-[linear-gradient(to_right,rgba(34,211,238,0.11)_1px,transparent_1px),linear-gradient(to_bottom,rgba(34,211,238,0.08)_1px,transparent_1px)] bg-[length:4.5rem_4.5rem]" />
 
-              <Link
-                href="/services"
-                className="premium-button rounded-full border border-white/35 bg-white/5 px-8 py-4 text-sm font-black uppercase tracking-[0.18em] text-white backdrop-blur transition hover:border-cyan-200 hover:text-cyan-100"
-              >
-                Explore Services
-              </Link>
+                <div className="absolute left-8 top-8 max-w-[18rem] border border-white/15 bg-black/50 p-5 backdrop-blur">
+                  <p className="text-xs font-black uppercase tracking-[0.2em] text-cyan-200">
+                    Outcome Briefs
+                  </p>
+                  <p className="mt-3 text-2xl font-black uppercase leading-tight text-white">
+                    Mission results translated into practical proof.
+                  </p>
+                </div>
+
+                <div className="absolute bottom-8 right-8 grid w-[21rem] gap-3">
+                  {["Challenge", "Response", "Impact"].map((item, index) => (
+                    <div
+                      key={item}
+                      className="flex items-center justify-between border border-cyan-200/18 bg-black/48 px-4 py-3 backdrop-blur"
+                    >
+                      <span className="text-xs font-black uppercase tracking-[0.18em] text-slate-300">
+                        0{index + 1}
+                      </span>
+                      <span className="text-sm font-black uppercase tracking-[0.14em] text-white">
+                        {item}
+                      </span>
+                    </div>
+                  ))}
+                </div>
+              </div>
             </div>
-          </div>
-        </Reveal>
-      </Section>
+          </Reveal>
+        </Section>
+      </section>
 
       {/* PROOF INTRO */}
-      <Section className="py-20 lg:py-28">
+      <Section className="about-command-section relative overflow-visible py-20 lg:py-28">
+        <div aria-hidden className="about-angle-field">
+          <div className="about-angle-plane about-angle-plane-a" />
+          <div className="about-angle-plane about-angle-plane-b" />
+          <div className="about-angle-plane about-angle-plane-c" />
+        </div>
+
         <div className="grid gap-12 lg:grid-cols-[0.85fr_1.15fr] lg:items-center">
-          <Reveal>
-            <div>
+          <Reveal variant="angleLeft">
+            <div className="relative">
+              <div aria-hidden className="about-title-rail" />
               <p className="text-xs uppercase tracking-[0.3em] text-cyan-300">
                 Impact Framework
               </p>
@@ -114,8 +161,8 @@ export default async function CaseStudiesPage() {
             </div>
           </Reveal>
 
-          <Reveal delay={0.05}>
-            <div className="rounded-[2rem] border border-white/10 bg-white/[0.035] p-8 shadow-[0_0_80px_rgba(34,211,238,0.06)] sm:p-10">
+          <Reveal delay={0.05} variant="tiltRight">
+            <div className="about-overview-panel relative p-8 sm:p-10">
               <p className="text-lg leading-8 text-slate-300">
                 These case study highlights are structured to show more than
                 activity. They are designed to clarify the challenge, the
@@ -127,7 +174,7 @@ export default async function CaseStudiesPage() {
                 {caseStudySignals.map((signal) => (
                   <span
                     key={signal}
-                    className="rounded-full border border-cyan-200/20 bg-cyan-200/[0.03] px-4 py-3 text-center text-xs font-bold uppercase tracking-[0.16em] text-cyan-100"
+                    className="border border-cyan-200/20 bg-cyan-200/[0.03] px-4 py-3 text-center text-xs font-bold uppercase tracking-[0.16em] text-cyan-100"
                   >
                     {signal}
                   </span>
@@ -142,8 +189,8 @@ export default async function CaseStudiesPage() {
       <Section className="py-20 lg:py-28">
         <div className="grid gap-5 lg:grid-cols-3">
           {proofPoints.map(({ title, body, icon: Icon }, index) => (
-            <Reveal key={title} delay={0.04 + index * 0.04}>
-              <article className="group min-h-[300px] rounded-[2rem] border border-white/10 bg-[linear-gradient(145deg,rgba(255,255,255,0.08),rgba(255,255,255,0.025))] p-8 transition hover:-translate-y-2 hover:border-cyan-200/40">
+            <Reveal key={title} delay={0.04 + index * 0.04} variant="tiltLeft">
+              <article className="about-system-card min-h-[19rem] p-8">
                 <Icon className="text-cyan-200" size={28} />
 
                 <h3 className="mt-10 text-3xl font-black uppercase leading-tight text-white">
@@ -184,7 +231,7 @@ export default async function CaseStudiesPage() {
           <div className="grid gap-6 sm:grid-cols-2 xl:grid-cols-3">
             {studies.map((study, index) => (
               <Reveal key={study.id} delay={0.04 + index * 0.04}>
-                <article className="case-card group flex min-h-[520px] flex-col overflow-hidden rounded-[2rem] border border-white/10 bg-white/[0.035] transition hover:-translate-y-2 hover:border-cyan-200/40 hover:bg-white/[0.055]">
+                <article className="about-leader-card group flex min-h-[520px] flex-col overflow-hidden transition hover:border-cyan-200/40">
                   <div
                     className="relative h-56 bg-cover bg-center"
                     style={{
@@ -237,7 +284,7 @@ export default async function CaseStudiesPage() {
           </div>
         ) : (
           <Reveal>
-            <div className="rounded-[2rem] border border-white/10 bg-white/[0.035] p-10 text-center">
+            <div className="about-leader-card p-10 text-center">
               <FileSearch className="mx-auto text-cyan-300" size={32} />
 
               <h3 className="mt-5 text-3xl font-black uppercase text-white">
@@ -256,7 +303,7 @@ export default async function CaseStudiesPage() {
       {/* OUTCOME STRIP */}
       <Section className="py-20 lg:py-28">
         <Reveal>
-          <div className="rounded-[2.5rem] border border-cyan-200/15 bg-[radial-gradient(circle_at_18%_20%,rgba(34,211,238,0.14),transparent_30%),linear-gradient(135deg,rgba(15,23,42,0.76),rgba(2,6,23,0.9))] p-8 sm:p-12 lg:p-16">
+          <div className="about-lead-panel p-8 sm:p-12 lg:p-16">
             <div className="grid gap-10 lg:grid-cols-[0.7fr_1.3fr] lg:items-center">
               <div>
                 <BarChart3 className="text-cyan-200" size={30} />
@@ -281,7 +328,7 @@ export default async function CaseStudiesPage() {
                 ].map((item) => (
                   <div
                     key={item}
-                    className="flex items-center gap-4 rounded-2xl border border-white/10 bg-black/25 p-5"
+                    className="about-lead-card flex min-h-[6rem] items-center gap-4 p-5"
                   >
                     <CheckCircle2
                       className="shrink-0 text-cyan-200"
@@ -299,6 +346,6 @@ export default async function CaseStudiesPage() {
         </Reveal>
       </Section>
 
-    </main>
+    </HomepageCinematicScene>
   );
 }

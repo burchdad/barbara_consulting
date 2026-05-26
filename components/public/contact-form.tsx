@@ -12,22 +12,37 @@ export function ContactForm() {
   const [state, action, pending] = useActionState(createContactSubmissionAction, initialState);
 
   return (
-    <form action={action} className="space-y-4 rounded-xl border border-white/10 bg-white/[0.02] p-6">
+    <form action={action} className="space-y-4 border border-cyan-200/14 bg-black/25 p-6">
       <div className="grid gap-4 sm:grid-cols-2">
-        <input name="name" placeholder="Name" className="rounded-md border border-white/15 bg-black px-3 py-2 text-sm" required />
-        <input name="email" type="email" placeholder="Email" className="rounded-md border border-white/15 bg-black px-3 py-2 text-sm" required />
+        <input
+          name="name"
+          placeholder="Name"
+          className="border border-white/15 bg-black/70 px-4 py-3 text-sm text-white outline-none transition placeholder:text-slate-500 focus:border-cyan-200/60"
+          required
+        />
+        <input
+          name="email"
+          type="email"
+          placeholder="Email"
+          className="border border-white/15 bg-black/70 px-4 py-3 text-sm text-white outline-none transition placeholder:text-slate-500 focus:border-cyan-200/60"
+          required
+        />
       </div>
-      <input name="phone" placeholder="Phone" className="w-full rounded-md border border-white/15 bg-black px-3 py-2 text-sm" />
+      <input
+        name="phone"
+        placeholder="Phone"
+        className="w-full border border-white/15 bg-black/70 px-4 py-3 text-sm text-white outline-none transition placeholder:text-slate-500 focus:border-cyan-200/60"
+      />
       <textarea
         name="message"
         placeholder="How can we help?"
-        className="min-h-36 w-full rounded-md border border-white/15 bg-black px-3 py-2 text-sm"
+        className="min-h-40 w-full border border-white/15 bg-black/70 px-4 py-3 text-sm text-white outline-none transition placeholder:text-slate-500 focus:border-cyan-200/60"
         required
       />
       <button
         type="submit"
         disabled={pending}
-        className="rounded-md bg-red-600 px-5 py-2.5 text-sm font-semibold text-white transition hover:bg-red-500 disabled:opacity-70"
+        className="premium-button bg-white px-6 py-3 text-sm font-black uppercase tracking-[0.16em] text-slate-950 transition hover:bg-cyan-200 disabled:opacity-70"
       >
         {pending ? "Submitting..." : "Submit"}
       </button>
