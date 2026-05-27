@@ -1,26 +1,14 @@
 import {
   Clock3,
   Mail,
-  MapPin,
-  MessageSquareText,
   Phone,
-  ShieldCheck,
 } from "lucide-react";
 
 import { HomepageCinematicScene } from "@/components/public/homepage-cinematic-scene";
 import { Section } from "@/components/ui/section";
-import { ContactForm } from "@/components/public/contact-form";
 import { Reveal } from "@/components/public/reveal";
 import { getGlobalSettings } from "@/lib/site-data";
 import { siteConfig } from "@/lib/config/site";
-
-const contactReasons = [
-  "AI modernization strategy",
-  "Secure workflow automation",
-  "Public-sector delivery support",
-  "Cybersecurity and compliance readiness",
-  "Cloud, data, and systems integration",
-];
 
 type LeadershipContact = {
   name: string;
@@ -85,33 +73,11 @@ const responseSteps = [
   },
 ];
 
-const locations = [
-  {
-    label: "Corporate Headquarters",
-    lines: [
-      "10011 Nicol Court E",
-      "Bowie, MD 20721",
-      "301-966-7523 Corporate",
-      "240-206-8796 Fax",
-    ],
-  },
-  {
-    label: "Satellite Office",
-    lines: [
-      "9711 Washingtonian Blvd, Ste 550",
-      "Gaithersburg, MD 20878",
-    ],
-  },
-];
-
 export default async function ContactPage() {
   const settings = await getGlobalSettings();
 
   const heroImageUrl =
     settings?.contactHeroImageUrl || siteConfig.media.contactHeroImageUrl;
-
-  const email = siteConfig.contact.email;
-  const phone = siteConfig.contact.phone;
 
   return (
     <HomepageCinematicScene
@@ -250,127 +216,6 @@ export default async function ContactPage() {
                   </div>
                 </article>
               ))}
-            </div>
-          </Reveal>
-        </div>
-      </Section>
-
-      {/* CONTACT FORM + INFO */}
-      <Section className="about-command-section relative overflow-visible py-20 lg:py-28">
-        <div aria-hidden className="about-angle-field">
-          <div className="about-angle-plane about-angle-plane-a" />
-          <div className="about-angle-plane about-angle-plane-b" />
-          <div className="about-angle-plane about-angle-plane-c" />
-        </div>
-
-        <div className="relative z-10 grid gap-10 lg:grid-cols-[0.85fr_1.15fr] lg:items-start">
-          <Reveal variant="angleLeft">
-            <div className="sticky top-28">
-              <div aria-hidden className="about-title-rail" />
-              <p className="text-xs uppercase tracking-[0.3em] text-cyan-300">
-                Start the Conversation
-              </p>
-
-              <h2 className="mt-4 text-5xl font-black uppercase leading-none text-white sm:text-6xl">
-                Tell us what needs to improve.
-              </h2>
-
-              <p className="mt-5 max-w-xl text-lg leading-8 text-slate-300">
-                From AI modernization to federal IT operations, engagements are
-                designed around speed, security, mission alignment, acquisition
-                fit, and measurable impact.
-              </p>
-
-              <div className="mt-8 grid gap-3">
-                {contactReasons.map((reason) => (
-                  <div
-                    key={reason}
-                    className="about-value-chip flex min-h-[4.5rem] items-center gap-3 p-4"
-                  >
-                    <ShieldCheck className="shrink-0 text-cyan-300" size={18} />
-
-                    <p className="text-sm font-bold uppercase tracking-[0.12em] text-slate-200">
-                      {reason}
-                    </p>
-                  </div>
-                ))}
-              </div>
-
-              <div className="mt-8 grid gap-3 text-sm text-slate-300">
-                {email && (
-                  <div className="border border-white/10 bg-black/25 p-5">
-                    <div className="flex items-center gap-3">
-                      <Mail className="text-cyan-300" size={18} />
-                      <span className="text-xs uppercase tracking-[0.2em] text-slate-500">
-                        Email
-                      </span>
-                    </div>
-
-                    <p className="mt-3 break-words text-base text-white">
-                      {email}
-                    </p>
-                  </div>
-                )}
-
-                {phone && (
-                  <div className="border border-white/10 bg-black/25 p-5">
-                    <div className="flex items-center gap-3">
-                      <Phone className="text-cyan-300" size={18} />
-                      <span className="text-xs uppercase tracking-[0.2em] text-slate-500">
-                        Phone
-                      </span>
-                    </div>
-
-                    <p className="mt-3 text-base text-white">{phone}</p>
-                  </div>
-                )}
-
-                {locations.map((location) => (
-                  <div
-                    key={location.label}
-                    className="border border-white/10 bg-black/25 p-5"
-                  >
-                    <div className="flex items-center gap-3">
-                      <MapPin className="text-cyan-300" size={18} />
-                      <span className="text-xs uppercase tracking-[0.2em] text-slate-500">
-                        {location.label}
-                      </span>
-                    </div>
-
-                    <div className="mt-3 space-y-1 text-base text-white">
-                      {location.lines.map((line) => (
-                        <p key={line}>{line}</p>
-                      ))}
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </Reveal>
-
-          <Reveal delay={0.05} variant="tiltRight">
-            <div className="about-lead-panel p-5 sm:p-8">
-              <div className="mb-8 border border-white/10 bg-black/25 p-6">
-                <div className="flex items-center gap-3">
-                  <MessageSquareText className="text-cyan-300" size={24} />
-
-                  <p className="text-xs font-bold uppercase tracking-[0.24em] text-cyan-300">
-                    Project Intake
-                  </p>
-                </div>
-
-                <h3 className="mt-5 text-3xl font-black uppercase leading-tight text-white">
-                  Send the request. We&apos;ll help define the next move.
-                </h3>
-
-                <p className="mt-4 text-sm leading-6 text-slate-300">
-                  A strong message includes the organization type, the problem
-                  you want solved, the timeline, and the outcome you want to
-                  create.
-                </p>
-              </div>
-
-              <ContactForm />
             </div>
           </Reveal>
         </div>

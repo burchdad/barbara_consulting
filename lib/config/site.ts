@@ -37,7 +37,7 @@ export const siteConfig = {
   },
 
   contact: {
-    email: "info@graymatterstech.com",
+    email: "time@graymatterstech.com",
     phone: "301-966-7523",
     address:
       "Corporate Headquarters: 10011 Nicol Court E, Bowie, MD 20721 | Satellite Office: 9711 Washingtonian Blvd, Ste 550, Gaithersburg, MD 20878 | Fax: 240-206-8796",
