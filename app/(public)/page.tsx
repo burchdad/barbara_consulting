@@ -149,21 +149,23 @@ export default async function HomePage() {
                 mission execution.
               </p>
 
-              <div className="mt-10 flex flex-wrap gap-4">
+              <div className="relative z-30 mt-10 flex flex-wrap gap-4">
                 <Link
                   href="/contact"
-                  className="premium-button rounded-full bg-white px-8 py-4 text-sm font-black uppercase tracking-[0.18em] text-slate-950 transition hover:bg-cyan-200"
+                  className="premium-button pointer-events-auto rounded-full bg-white px-8 py-4 text-sm font-black uppercase tracking-[0.18em] text-slate-950 transition hover:bg-cyan-200"
                 >
                   Start a Strategic Conversation
                 </Link>
 
-                <Link
+                <a
                   href="/capabilities/joint-capability-statement.pdf"
                   download
-                  className="premium-button rounded-full border border-white/35 bg-white/5 px-8 py-4 text-sm font-black uppercase tracking-[0.18em] text-white backdrop-blur transition hover:border-cyan-200 hover:text-cyan-100"
+                  target="_blank"
+                  rel="noreferrer"
+                  className="premium-button pointer-events-auto rounded-full border border-white/35 bg-white/5 px-8 py-4 text-sm font-black uppercase tracking-[0.18em] text-white backdrop-blur transition hover:border-cyan-200 hover:text-cyan-100"
                 >
                   Capabilities Statement
-                </Link>
+                </a>
               </div>
             </div>
           </Reveal>
