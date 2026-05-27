@@ -129,7 +129,7 @@ export default async function HomePage() {
             <div className="max-w-6xl">
               <img
                 src="/greylogo.png"
-                alt="Gray Matters Technology - Sage Tech Solutions"
+                alt="Gray Matters Technology Services - Sage Tech Solutions"
                 className="mb-10 h-auto w-[220px] sm:w-[300px] lg:w-[420px]"
               />
 
@@ -142,7 +142,8 @@ export default async function HomePage() {
               </h1>
 
               <p className="mt-8 max-w-3xl text-lg leading-8 text-slate-200 sm:text-xl">
-                Gray Matters Technology- Sage Tech Solutions helps teams
+                Gray Matters Technology Services - Sage Tech Solutions helps
+                teams
                 identify practical AI opportunities, modernize applications,
                 strengthen secure systems, and move from ideas to measurable
                 mission execution.
@@ -157,10 +158,11 @@ export default async function HomePage() {
                 </Link>
 
                 <Link
-                  href="/services"
+                  href="/capabilities/joint-capability-statement.pdf"
+                  download
                   className="premium-button rounded-full border border-white/35 bg-white/5 px-8 py-4 text-sm font-black uppercase tracking-[0.18em] text-white backdrop-blur transition hover:border-cyan-200 hover:text-cyan-100"
                 >
-                  Explore Capabilities
+                  Capabilities Statement
                 </Link>
               </div>
             </div>
@@ -196,7 +198,7 @@ export default async function HomePage() {
 
               <div className="about-copy-float relative p-6 sm:p-8">
                 <p className="text-lg leading-8 text-slate-300">
-                  Gray Matters Technology- Sage Tech Solutions supports
+                  Gray Matters Technology Services - Sage Tech Solutions supports
                   organizations with AI readiness, responsible adoption,
                   workflow automation, application modernization, cloud, data,
                   cyber readiness, and secure federal IT delivery. The goal is

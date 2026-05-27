@@ -7,10 +7,14 @@ export const dynamic = "force-dynamic";
 
 export default async function PublicLayout({ children }: { children: React.ReactNode }) {
   const settings = await getGlobalSettings();
+  const brand = (settings?.companyName ?? siteConfig.companyName).replace(
+    "Gray Matters Technology-",
+    "Gray Matters Technology Services -",
+  );
 
   return (
     <div className="min-h-screen bg-[#050505] text-zinc-100">
-      <SiteNav brand={settings?.companyName ?? siteConfig.companyName} />
+      <SiteNav brand={brand} />
       {children}
       <SiteFooter />
     </div>

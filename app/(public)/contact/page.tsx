@@ -22,18 +22,51 @@ const contactReasons = [
   "Cloud, data, and systems integration",
 ];
 
-const leadershipContacts = [
+type LeadershipContact = {
+  name: string;
+  title: string;
+  email: string;
+  phone: string;
+  secondary?: string;
+};
+
+const leadershipContacts: LeadershipContact[] = [
   {
     name: "Danielle Carr",
-    title: "CEO / Chief Strategy Officer",
+    title: "CEO",
     email: "Dcarr@graymatterstech.com",
-    phone: "240-784-7418",
+    phone: "240-784-7418 Mobile",
+    secondary: "301-966-7523 Corporate",
   },
   {
     name: "Barbara A. Gray",
-    title: "President / Enterprise Solutions",
+    title: "President",
     email: "Bgray@graymatterstech.com",
-    phone: "202-420-1767",
+    phone: "301-966-7523 or 202-420-1767",
+  },
+  {
+    name: "Alexis Muse",
+    title: "Operations Coordinator / AR",
+    email: "Amuse@graymatterstech.com",
+    phone: "301-966-7523 Corporate; 202-375-1217",
+  },
+  {
+    name: "Joy Hodge",
+    title: "Admin Manager",
+    email: "Jhodge@graymatterstech.com",
+    phone: "301-966-7523 Corporate; 301-798-7091",
+  },
+  {
+    name: "Bookkeeping / Accounting Department / AP",
+    title: "Accounting",
+    email: "",
+    phone: "301-966-7523 Corporate",
+  },
+  {
+    name: "Philip C. Katner",
+    title: "Sr. Security Specialist / Assistant FSO",
+    email: "",
+    phone: "301-966-7523 or 301-717-3380 Mobile",
   },
 ];
 
@@ -52,15 +85,33 @@ const responseSteps = [
   },
 ];
 
+const locations = [
+  {
+    label: "Corporate Headquarters",
+    lines: [
+      "10011 Nicol Court E",
+      "Bowie, MD 20721",
+      "301-966-7523 Corporate",
+      "240-206-8796 Fax",
+    ],
+  },
+  {
+    label: "Satellite Office",
+    lines: [
+      "9711 Washingtonian Blvd, Ste 550",
+      "Gaithersburg, MD 20878",
+    ],
+  },
+];
+
 export default async function ContactPage() {
   const settings = await getGlobalSettings();
 
   const heroImageUrl =
     settings?.contactHeroImageUrl || siteConfig.media.contactHeroImageUrl;
 
-  const email = settings?.email || siteConfig.contact.email;
-  const phone = settings?.phone || siteConfig.contact.phone;
-  const address = settings?.address || siteConfig.contact.address;
+  const email = siteConfig.contact.email;
+  const phone = siteConfig.contact.phone;
 
   return (
     <HomepageCinematicScene
@@ -135,6 +186,75 @@ export default async function ContactPage() {
         </Section>
       </section>
 
+      {/* LEADERSHIP POINTS OF CONTACT */}
+      <Section className="about-command-section relative overflow-visible py-20 lg:py-24">
+        <div aria-hidden className="about-angle-field">
+          <div className="about-angle-plane about-angle-plane-a" />
+          <div className="about-angle-plane about-angle-plane-b" />
+          <div className="about-angle-plane about-angle-plane-c" />
+        </div>
+
+        <div className="relative z-10 grid gap-12 lg:grid-cols-[0.75fr_1.25fr] lg:items-start">
+          <Reveal variant="angleLeft">
+            <div className="relative">
+              <div aria-hidden className="about-title-rail" />
+              <p className="text-xs uppercase tracking-[0.3em] text-cyan-300">
+                Leadership Points of Contact
+              </p>
+
+              <h2 className="mt-4 text-5xl font-black uppercase leading-none text-white sm:text-6xl">
+                Contact Gray Matters Technology Services.
+              </h2>
+
+              <p className="mt-5 max-w-xl text-lg leading-8 text-slate-300">
+                Direct leadership, operations, security, and accounting contacts
+                for procurement, teaming, contract administration, and project
+                intake.
+              </p>
+            </div>
+          </Reveal>
+
+          <Reveal delay={0.05} variant="tiltRight">
+            <div className="about-lead-panel grid gap-4 p-6 sm:p-8 md:grid-cols-2">
+              {leadershipContacts.map((contact) => (
+                <article
+                  key={contact.name}
+                  className="border border-cyan-200/15 bg-black/25 p-5"
+                >
+                  <h3 className="text-2xl font-black uppercase leading-tight text-white">
+                    {contact.name}
+                  </h3>
+                  <p className="mt-2 text-xs font-bold uppercase tracking-[0.18em] text-cyan-200">
+                    {contact.title}
+                  </p>
+
+                  <div className="mt-5 grid gap-3 text-sm leading-6 text-slate-300">
+                    <p className="flex items-start gap-3">
+                      <Phone className="mt-1 shrink-0 text-cyan-300" size={16} />
+                      <span>
+                        {contact.phone}
+                        {contact.secondary ? (
+                          <>
+                            <br />
+                            {contact.secondary}
+                          </>
+                        ) : null}
+                      </span>
+                    </p>
+                    {contact.email ? (
+                      <p className="flex items-start gap-3 break-words">
+                        <Mail className="mt-1 shrink-0 text-cyan-300" size={16} />
+                        {contact.email}
+                      </p>
+                    ) : null}
+                  </div>
+                </article>
+              ))}
+            </div>
+          </Reveal>
+        </div>
+      </Section>
+
       {/* CONTACT FORM + INFO */}
       <Section className="about-command-section relative overflow-visible py-20 lg:py-28">
         <div aria-hidden className="about-angle-field">
@@ -176,38 +296,6 @@ export default async function ContactPage() {
                 ))}
               </div>
 
-              <div className="mt-8 border border-cyan-200/15 bg-cyan-200/[0.03] p-5">
-                <p className="text-xs font-bold uppercase tracking-[0.22em] text-cyan-300">
-                  Leadership Points of Contact
-                </p>
-
-                <div className="mt-5 grid gap-4">
-                  {leadershipContacts.map((contact) => (
-                    <div
-                      key={contact.email}
-                      className="border border-white/10 bg-black/25 p-4"
-                    >
-                      <p className="text-base font-black uppercase text-white">
-                        {contact.name}
-                      </p>
-                      <p className="mt-1 text-xs uppercase tracking-[0.16em] text-slate-400">
-                        {contact.title}
-                      </p>
-                      <div className="mt-4 grid gap-2 text-sm text-slate-300">
-                        <p className="flex items-center gap-3 break-words">
-                          <Mail className="shrink-0 text-cyan-300" size={15} />
-                          {contact.email}
-                        </p>
-                        <p className="flex items-center gap-3">
-                          <Phone className="shrink-0 text-cyan-300" size={15} />
-                          {contact.phone}
-                        </p>
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              </div>
-
               <div className="mt-8 grid gap-3 text-sm text-slate-300">
                 {email && (
                   <div className="border border-white/10 bg-black/25 p-5">
@@ -237,18 +325,25 @@ export default async function ContactPage() {
                   </div>
                 )}
 
-                {address && (
-                  <div className="border border-white/10 bg-black/25 p-5">
+                {locations.map((location) => (
+                  <div
+                    key={location.label}
+                    className="border border-white/10 bg-black/25 p-5"
+                  >
                     <div className="flex items-center gap-3">
                       <MapPin className="text-cyan-300" size={18} />
                       <span className="text-xs uppercase tracking-[0.2em] text-slate-500">
-                        Headquarters
+                        {location.label}
                       </span>
                     </div>
 
-                    <p className="mt-3 text-base text-white">{address}</p>
+                    <div className="mt-3 space-y-1 text-base text-white">
+                      {location.lines.map((line) => (
+                        <p key={line}>{line}</p>
+                      ))}
+                    </div>
                   </div>
-                )}
+                ))}
               </div>
             </div>
           </Reveal>

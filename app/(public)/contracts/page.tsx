@@ -55,6 +55,55 @@ const procurementSignals = [
   "NAICS 541190",
 ];
 
+const contractVehicles = [
+  "GSA OASIS Plus 8(a)",
+  "WOSB / EDWOSB",
+  "SDVOSB",
+  "8(a) STARS III - 47QTCB21D0291",
+  "GSA MAS - GS-35F-290CA",
+  "GSA MOBIS",
+  "FAA eFAST BPA - 693KA9-22-A-00152",
+  "MDA SHIELD MA-IDIQ",
+  "Navy SeaPort NxG",
+  "DHS EAGLE II",
+  "CATS",
+  "MBE Certified - State of Maryland",
+  "CMMI Development Level 3 Certified",
+  "CMMI Services Level 3 Certified",
+  "ISO 9001 Certified",
+];
+
+const vehicleDetails = [
+  {
+    label: "8(a) STARS III",
+    value: "Contract Number: 47QTCB21D0291",
+  },
+  {
+    label: "Expiration",
+    value: "7/1/2029",
+  },
+  {
+    label: "Program Manager",
+    value: "Barbara Gray | Bgray@graymatterstech.com",
+  },
+  {
+    label: "GSA Reference",
+    value: "www.gsa.gov/8astars3",
+  },
+  {
+    label: "GMTS UEI / CAGE",
+    value: "DRJDASA3SJJ3 / 4VUH8",
+  },
+  {
+    label: "GMTS DUNS",
+    value: "615433088",
+  },
+  {
+    label: "SageTech UEI / CAGE",
+    value: "XZPZCQAY8WD9 / 8HTM5",
+  },
+];
+
 const agencyExperience = [
   "Department of State",
   "HHS-ACF",
@@ -63,6 +112,29 @@ const agencyExperience = [
   "Department of Education",
   "Department of Labor",
   "DoD mission environments",
+];
+
+const keyPartnerships = [
+  "Elastic",
+  "SageTech Solutions",
+  "The Muse Group",
+  "ITG Solutions",
+  "Fellows Consortium",
+  "Mariji",
+  "Large business teaming partners",
+  "8(a) partner channels",
+];
+
+const pastClients = [
+  "Harvard Maintenance",
+  "CIO",
+  "Department of Education",
+  "Department of State",
+  "Family & Youth Services Bureau",
+  "USDA Farm Service Agency",
+  "Defense Intelligence Agency",
+  "IRS",
+  "Department of the Navy",
 ];
 
 const leadershipContacts = [
@@ -114,7 +186,7 @@ export default async function ContractsPage() {
                 </h1>
 
                 <p className="mt-8 max-w-3xl text-lg leading-8 text-slate-200 sm:text-xl">
-                  Review acquisition pathways, certification signals, and
+                  Review acquisition pathways, certification vehicles, and
                   engagement details for agencies and partners seeking trusted
                   support across AI modernization, secure systems, cloud, data,
                   and operational delivery.
@@ -202,6 +274,58 @@ export default async function ContractsPage() {
         </div>
       </Section>
 
+      {/* CONTRACT VEHICLE MATRIX */}
+      <Section className="py-20 lg:py-28">
+        <Reveal>
+          <div className="about-lead-panel overflow-hidden p-8 sm:p-12 lg:p-14">
+            <div className="grid gap-10 lg:grid-cols-[0.85fr_1.15fr] lg:items-start">
+              <div>
+                <p className="text-xs uppercase tracking-[0.3em] text-cyan-300">
+                  Contract Vehicles
+                </p>
+
+                <h2 className="mt-3 text-5xl font-black uppercase leading-[0.95] text-white sm:text-6xl">
+                  Acquisition paths built for federal speed.
+                </h2>
+
+                <p className="mt-5 text-lg leading-8 text-slate-300">
+                  Public-sector buyers and teaming partners can quickly assess
+                  small-business certifications, active vehicles, and corporate
+                  quality credentials in one focused view.
+                </p>
+              </div>
+
+              <div className="grid gap-3 sm:grid-cols-2">
+                {contractVehicles.map((vehicle) => (
+                  <div
+                    key={vehicle}
+                    className="border border-cyan-200/18 bg-cyan-200/[0.035] px-5 py-4 text-sm font-black uppercase tracking-[0.14em] text-cyan-100"
+                  >
+                    {vehicle}
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            <div className="mt-10 grid gap-4 md:grid-cols-2 xl:grid-cols-4">
+              {vehicleDetails.map((detail) => (
+                <article
+                  key={detail.label}
+                  className="border border-white/10 bg-black/25 p-5"
+                >
+                  <p className="text-xs font-bold uppercase tracking-[0.2em] text-slate-500">
+                    {detail.label}
+                  </p>
+                  <p className="mt-3 text-sm font-semibold leading-6 text-white">
+                    {detail.value}
+                  </p>
+                </article>
+              ))}
+            </div>
+          </div>
+        </Reveal>
+      </Section>
+
       {/* SUPPORT AREAS */}
       <Section className="py-20 lg:py-28">
         <div className="grid gap-12 lg:grid-cols-[0.85fr_1.15fr] lg:items-center">
@@ -242,7 +366,7 @@ export default async function ContractsPage() {
               <div className="mt-8 grid gap-6 lg:grid-cols-2">
                 <div>
                   <p className="text-xs font-bold uppercase tracking-[0.22em] text-cyan-300">
-                    Certification Signals
+                    Certification Vehicles
                   </p>
                   <div className="mt-4 grid gap-3">
                     {procurementSignals.map((signal) => (
@@ -271,6 +395,57 @@ export default async function ContractsPage() {
                     ))}
                   </div>
                 </div>
+              </div>
+            </div>
+          </Reveal>
+        </div>
+      </Section>
+
+      {/* PARTNERSHIPS / CLIENTS */}
+      <Section className="py-20 lg:py-28">
+        <div className="grid gap-12 lg:grid-cols-2 lg:items-start">
+          <Reveal variant="angleLeft">
+            <div className="about-overview-panel p-8 sm:p-10">
+              <p className="text-xs uppercase tracking-[0.3em] text-cyan-300">
+                Key Partnerships
+              </p>
+
+              <h2 className="mt-3 text-5xl font-black uppercase leading-[0.95] text-white sm:text-6xl">
+                Teaming channels for larger opportunities.
+              </h2>
+
+              <div className="mt-8 grid gap-3 sm:grid-cols-2">
+                {keyPartnerships.map((partner) => (
+                  <span
+                    key={partner}
+                    className="border border-cyan-200/20 bg-cyan-200/[0.03] px-4 py-3 text-xs font-bold uppercase tracking-[0.15em] text-cyan-100"
+                  >
+                    {partner}
+                  </span>
+                ))}
+              </div>
+            </div>
+          </Reveal>
+
+          <Reveal delay={0.05} variant="tiltRight">
+            <div className="about-overview-panel p-8 sm:p-10">
+              <p className="text-xs uppercase tracking-[0.3em] text-cyan-300">
+                Past Clients
+              </p>
+
+              <h2 className="mt-3 text-5xl font-black uppercase leading-[0.95] text-white sm:text-6xl">
+                Proven support across public and mission environments.
+              </h2>
+
+              <div className="mt-8 grid gap-3 sm:grid-cols-2">
+                {pastClients.map((client) => (
+                  <span
+                    key={client}
+                    className="border border-white/10 bg-black/25 px-4 py-3 text-xs font-bold uppercase tracking-[0.14em] text-slate-200"
+                  >
+                    {client}
+                  </span>
+                ))}
               </div>
             </div>
           </Reveal>

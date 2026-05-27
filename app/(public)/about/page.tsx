@@ -189,7 +189,10 @@ function AboutSignalGraph() {
 export default async function AboutPage() {
   const { settings, leadership } = await getPublishedData();
 
-  const companyName = settings?.companyName ?? siteConfig.companyName;
+  const companyName = (settings?.companyName ?? siteConfig.companyName).replace(
+    "Gray Matters Technology-",
+    "Gray Matters Technology Services -",
+  );
   const aboutHeroImageUrl =
     settings?.aboutHeroImageUrl || siteConfig.media.aboutHeroImageUrl;
   const leadersToRender =
@@ -224,7 +227,7 @@ export default async function AboutPage() {
             <div className="grid w-full gap-12 lg:grid-cols-[0.9fr_1.1fr] lg:items-center">
               <div className="max-w-4xl">
                 <p className="mb-5 text-xs font-bold uppercase tracking-[0.35em] text-cyan-200">
-                  About {companyName}
+                  About Us | {companyName}
                 </p>
 
                 <h1 className="max-w-5xl text-5xl font-black uppercase leading-[0.92] text-white sm:text-6xl lg:text-[4.9rem]">
@@ -233,10 +236,10 @@ export default async function AboutPage() {
                 </h1>
 
                 <p className="mt-8 max-w-3xl text-lg leading-8 text-slate-200 sm:text-xl">
-                  Gray Matters Technology- Sage Tech Solutions helps leaders
-                  turn emerging technology, secure systems, and federal delivery
-                  experience into responsible operating capability without
-                  losing sight of people, process, or risk.
+                  Gray Matters Technology Services - Sage Tech Solutions helps
+                  leaders turn emerging technology, secure systems, and federal
+                  delivery experience into responsible operating capability
+                  without losing sight of people, process, or risk.
                 </p>
 
                 <div className="mt-10 flex flex-wrap gap-4">
@@ -297,6 +300,85 @@ export default async function AboutPage() {
           </Reveal>
         </Section>
       </section>
+
+      {/* LEADERSHIP TEAM */}
+      <Section className="py-20 lg:py-24">
+        <Reveal>
+          <div className="mb-12 flex flex-col justify-between gap-5 lg:flex-row lg:items-end">
+            <div>
+              <p className="text-xs uppercase tracking-[0.3em] text-cyan-300">
+                Executive Leadership
+              </p>
+
+              <h2 className="mt-3 text-5xl font-black uppercase leading-[0.95] text-white sm:text-6xl">
+                Experienced guidance for complex environments.
+              </h2>
+            </div>
+
+            <p className="max-w-xl text-slate-300">
+              Leadership combines federal delivery experience, technology
+              strategy, cybersecurity, data, AI, contracts, and practical
+              operations support for complex modernization efforts.
+            </p>
+          </div>
+        </Reveal>
+
+        <div className="grid gap-6 lg:grid-cols-2">
+          {leadersToRender.map((leader, index) => (
+            <Reveal key={leader.id} delay={0.05 + index * 0.04}>
+              <article className="about-leader-card overflow-hidden p-7 sm:p-8">
+                <div className="flex flex-col gap-5 sm:flex-row sm:items-start sm:justify-between">
+                  <div>
+                    <p className="text-xs uppercase tracking-[0.24em] text-cyan-300">
+                      Executive Leadership
+                    </p>
+
+                    <h3 className="mt-3 text-4xl font-black uppercase leading-tight text-white">
+                      {leader.name}
+                    </h3>
+
+                    <p className="mt-2 text-sm font-semibold uppercase tracking-[0.18em] text-cyan-100/70">
+                      {leader.title}
+                    </p>
+                  </div>
+
+                  {leader.photoUrl ? (
+                    <div className="relative h-20 w-20 shrink-0 overflow-hidden rounded-full border border-cyan-200/30 bg-cyan-200/[0.06] shadow-[0_0_38px_rgba(34,211,238,0.16)]">
+                      <Image
+                        src={leader.photoUrl}
+                        alt={`${leader.name} headshot`}
+                        fill
+                        sizes="80px"
+                        className="object-cover"
+                      />
+                    </div>
+                  ) : (
+                    <div className="flex h-16 w-16 shrink-0 items-center justify-center rounded-full border border-cyan-200/25 bg-cyan-200/[0.06] text-xl font-black text-cyan-100">
+                      {leader.name
+                        .split(" ")
+                        .map((part) => part[0])
+                        .join("")
+                        .slice(0, 2)}
+                    </div>
+                  )}
+                </div>
+
+                <div className="mt-6 h-px bg-gradient-to-r from-cyan-300/35 to-transparent" />
+
+                <p className="mt-5 text-xs font-bold uppercase tracking-[0.18em] text-cyan-200/80">
+                  {leader.credential}
+                </p>
+
+                <div className="mt-5 space-y-4 text-sm leading-7 text-slate-300">
+                  {leader.bio.map((paragraph) => (
+                    <p key={paragraph}>{paragraph}</p>
+                  ))}
+                </div>
+              </article>
+            </Reveal>
+          ))}
+        </div>
+      </Section>
 
       {/* POSITIONING */}
       <Section
@@ -512,85 +594,6 @@ export default async function AboutPage() {
             </div>
           </div>
         </Reveal>
-      </Section>
-
-      {/* LEADERSHIP TEAM */}
-      <Section className="py-24 lg:py-32">
-        <Reveal>
-          <div className="mb-12 flex flex-col justify-between gap-5 lg:flex-row lg:items-end">
-            <div>
-              <p className="text-xs uppercase tracking-[0.3em] text-cyan-300">
-                Leadership Team
-              </p>
-
-              <h2 className="mt-3 text-5xl font-black uppercase leading-[0.95] text-white sm:text-6xl">
-                Experienced guidance for complex environments.
-              </h2>
-            </div>
-
-            <p className="max-w-xl text-slate-300">
-              Leadership combines federal delivery experience, technology
-              strategy, cybersecurity, data, AI, contracts, and practical
-              operations support for complex modernization efforts.
-            </p>
-          </div>
-        </Reveal>
-
-        <div className="grid gap-6 lg:grid-cols-2">
-            {leadersToRender.map((leader, index) => (
-              <Reveal key={leader.id} delay={0.05 + index * 0.04}>
-                <article className="about-leader-card overflow-hidden p-7 sm:p-8">
-                  <div className="flex flex-col gap-5 sm:flex-row sm:items-start sm:justify-between">
-                    <div>
-                      <p className="text-xs uppercase tracking-[0.24em] text-cyan-300">
-                        Executive Leadership
-                      </p>
-
-                      <h3 className="mt-3 text-4xl font-black uppercase leading-tight text-white">
-                        {leader.name}
-                      </h3>
-
-                      <p className="mt-2 text-sm font-semibold uppercase tracking-[0.18em] text-cyan-100/70">
-                        {leader.title}
-                      </p>
-                    </div>
-
-                    {leader.photoUrl ? (
-                      <div className="relative h-20 w-20 shrink-0 overflow-hidden rounded-full border border-cyan-200/30 bg-cyan-200/[0.06] shadow-[0_0_38px_rgba(34,211,238,0.16)]">
-                        <Image
-                          src={leader.photoUrl}
-                          alt={`${leader.name} headshot`}
-                          fill
-                          sizes="80px"
-                          className="object-cover"
-                        />
-                      </div>
-                    ) : (
-                      <div className="flex h-16 w-16 shrink-0 items-center justify-center rounded-full border border-cyan-200/25 bg-cyan-200/[0.06] text-xl font-black text-cyan-100">
-                        {leader.name
-                          .split(" ")
-                          .map((part) => part[0])
-                          .join("")
-                          .slice(0, 2)}
-                      </div>
-                    )}
-                  </div>
-
-                  <div className="mt-6 h-px bg-gradient-to-r from-cyan-300/35 to-transparent" />
-
-                  <p className="mt-5 text-xs font-bold uppercase tracking-[0.18em] text-cyan-200/80">
-                    {leader.credential}
-                  </p>
-
-                  <div className="mt-5 space-y-4 text-sm leading-7 text-slate-300">
-                    {leader.bio.map((paragraph) => (
-                      <p key={paragraph}>{paragraph}</p>
-                    ))}
-                  </div>
-                </article>
-              </Reveal>
-            ))}
-        </div>
       </Section>
 
     </HomepageCinematicScene>

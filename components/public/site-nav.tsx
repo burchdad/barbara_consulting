@@ -8,13 +8,13 @@ import { Logo } from "@/components/ui/Logo";
 
 const navItems = [
   { href: "/", label: "Home" },
-  { href: "/about", label: "About" },
+  { href: "/about", label: "About Us" },
   { href: "/services", label: "Services" },
-  { href: "/case-studies", label: "Case Studies" },
-  { href: "/contracts", label: "Contracts" },
+  { href: "/contracts", label: "Contract Vehicles" },
   { href: "/careers", label: "Careers" },
   { href: "/contact", label: "Contact" },
   { href: "/privacy", label: "Privacy Policy" },
+  { href: "/admin/login", label: "Login" },
 ];
 
 type SiteNavProps = {

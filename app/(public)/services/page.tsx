@@ -222,7 +222,7 @@ export default async function ServicesPage() {
                 </h1>
 
                 <p className="mt-8 max-w-3xl text-lg leading-8 text-slate-200 sm:text-xl">
-                  Gray Matters Technology- Sage Tech Solutions helps
+                  Gray Matters Technology Services - Sage Tech Solutions helps
                   organizations assess AI readiness, modernize applications,
                   automate workflows, strengthen cybersecurity and ATO
                   readiness, operate cloud-enabled systems, and improve mission

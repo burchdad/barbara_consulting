@@ -3,18 +3,18 @@
  */
 
 export const siteConfig = {
-  companyName: "Gray Matters Technology- Sage Tech Solutions",
+  companyName: "Gray Matters Technology Services - Sage Tech Solutions",
   tagline: "AI-Forward Federal Technology Delivery",
 
   hero: {
     eyebrow: "AI Strategy, Federal IT, and Secure Modernization",
     headline: "AI-forward technology delivery for complex mission teams.",
     subtext:
-      "Gray Matters Technology- Sage Tech Solutions helps agencies and partners modernize systems, automate workflows, strengthen cybersecurity readiness, and apply practical AI across mission operations with disciplined delivery.",
+      "Gray Matters Technology Services - Sage Tech Solutions helps agencies and partners modernize systems, automate workflows, strengthen cybersecurity readiness, and apply practical AI across mission operations with disciplined delivery.",
     trustBadge:
       "WOSB and SDVOSB delivery partner with more than two decades of federal performance",
     ctaPrimary: "Get in Touch",
-    ctaSecondary: "Explore Capabilities",
+    ctaSecondary: "Capabilities Statement",
   },
 
   about: {
@@ -30,17 +30,17 @@ export const siteConfig = {
       "Collaboration",
     ],
     paragraphs: [
-      "Gray Matters Technology- Sage Tech Solutions is an AI-forward federal technology partner helping agencies and mission organizations turn modernization priorities into practical operating capability.",
-      "The firm combines more than two decades of federal performance with expanded AI, data, cybersecurity, cloud, low-code, logistics, and enterprise systems expertise.",
-      "From AI readiness and agile software modernization to workflow automation, ServiceNow support, cloud services, ATO readiness, and team training, every engagement is grounded in usefulness, security, adoption, and measurable outcomes.",
-      "Gray Matters Technology- Sage Tech Solutions emphasizes responsible AI, human oversight, data awareness, and disciplined implementation so leaders can modernize with confidence.",
+      "Gray Matters Technology Services is a highly skilled, highly qualified, small business. Our philosophy is based on teamwork and integrity; our employees are the backbone of our company. GMTS has a vision: build quality products while delivering service innovation.",
+      "GMTS engineers operate using best practices and creative innovation; they understand how to minimize the expected learning curve associated with implementing new ideas and concepts. GMTS has strong financials and a solid business infrastructure that enables us to fully support our clients immediately after contract award.",
+      "We implement a top-down approach to assist management at all levels of project and program management. GMTS holds CMMI Level 3 and ISO 9001 certifications, and is well versed in implementing personnel security standards; 100% of our existing team members have over 20 years of federal experience.",
     ],
   },
 
   contact: {
-    email: "info@graymatterstechnology.com",
+    email: "info@graymatterstech.com",
     phone: "301-966-7523",
-    address: "9711 Washington Blvd, Gaithersburg, MD 20878",
+    address:
+      "Corporate Headquarters: 10011 Nicol Court E, Bowie, MD 20721 | Satellite Office: 9711 Washingtonian Blvd, Ste 550, Gaithersburg, MD 20878 | Fax: 240-206-8796",
   },
 
   media: {
@@ -68,14 +68,14 @@ export const siteConfig = {
     statement:
       "AI-forward federal technology delivery across modernization, automation, cybersecurity, cloud, data, and mission support.",
     ctaHeadline:
-      "Connect with Gray Matters Technology- Sage Tech Solutions to identify practical AI opportunities and build a clear modernization path.",
+      "Connect with Gray Matters Technology Services - Sage Tech Solutions to identify practical AI opportunities and build a clear modernization path.",
     ctaButtonLabel: "Schedule a Consultation",
   },
 
   globalImpact: {
     eyebrow: "AI Impact",
     headline: "Practical Intelligence for Everyday Operations",
-    body: "Gray Matters Technology- Sage Tech Solutions helps leaders move from AI curiosity to useful adoption through strategy, process clarity, automation planning, and team enablement.",
+    body: "Gray Matters Technology Services - Sage Tech Solutions helps leaders move from AI curiosity to useful adoption through strategy, process clarity, automation planning, and team enablement.",
     stats: [
       { label: "Core Service Areas", value: "6" },
       { label: "Advisory Focus", value: "AI" },
@@ -103,7 +103,7 @@ export const siteConfig = {
   },
 
   meta: {
-    title: "Gray Matters Technology- Sage Tech Solutions | AI Consulting",
+    title: "Gray Matters Technology Services - Sage Tech Solutions | AI Consulting",
     description:
       "AI consulting for strategy, workflow automation, team training, responsible adoption, and practical modernization.",
   },

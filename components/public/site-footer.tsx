@@ -6,11 +6,19 @@ import { siteConfig } from "@/lib/config/site";
 
 export async function SiteFooter() {
   const settings = await getGlobalSettings();
-  const companyName = settings?.companyName ?? siteConfig.companyName;
-  const footerStatement = settings?.footerStatement ?? siteConfig.footer.statement;
-  const email = settings?.email ?? siteConfig.contact.email;
-  const phone = settings?.phone ?? siteConfig.contact.phone;
-  const address = settings?.address ?? siteConfig.contact.address;
+  const companyName = (settings?.companyName ?? siteConfig.companyName).replace(
+    "Gray Matters Technology-",
+    "Gray Matters Technology Services -",
+  );
+  const footerStatement = (
+    settings?.footerStatement ?? siteConfig.footer.statement
+  ).replace(
+    "Gray Matters Technology-",
+    "Gray Matters Technology Services -",
+  );
+  const email = siteConfig.contact.email;
+  const phone = siteConfig.contact.phone;
+  const address = siteConfig.contact.address;
   const linkedInUrl = settings?.linkedInUrl || siteConfig.social.linkedin;
 
   return (
@@ -51,7 +59,7 @@ export async function SiteFooter() {
           <p className="text-xs uppercase tracking-[0.2em] text-slate-500">Company</p>
           <nav className="mt-4 grid gap-2 text-sm text-slate-300">
             <Link href="/" className="hover:text-cyan-200">Home</Link>
-            <Link href="/about" className="hover:text-cyan-200">About</Link>
+            <Link href="/about" className="hover:text-cyan-200">About Us</Link>
             <Link href="/careers" className="hover:text-cyan-200">Careers</Link>
             <Link href="/contact" className="hover:text-cyan-200">Contact</Link>
           </nav>
@@ -61,9 +69,10 @@ export async function SiteFooter() {
           <p className="text-xs uppercase tracking-[0.2em] text-slate-500">Capabilities</p>
           <nav className="mt-4 grid gap-2 text-sm text-slate-300">
             <Link href="/services" className="hover:text-cyan-200">Services</Link>
-            <Link href="/contracts" className="hover:text-cyan-200">Contracts</Link>
-            <Link href="/case-studies" className="hover:text-cyan-200">Case Studies</Link>
+            <Link href="/contracts" className="hover:text-cyan-200">Contract Vehicles</Link>
+            <Link href="/capabilities/joint-capability-statement.pdf" className="hover:text-cyan-200">Capabilities Statement</Link>
             <Link href="/privacy" className="hover:text-cyan-200">Privacy</Link>
+            <Link href="/admin/login" className="hover:text-cyan-200">Login</Link>
           </nav>
         </div>
 
