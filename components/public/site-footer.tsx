@@ -60,7 +60,7 @@ export async function SiteFooter() {
           <nav className="mt-4 grid gap-2 text-sm text-slate-300">
             <Link href="/" className="hover:text-cyan-200">Home</Link>
             <Link href="/about" className="hover:text-cyan-200">About Us</Link>
-            <Link href="/partnerships" className="hover:text-cyan-200">Partnerships</Link>
+            <Link href="/partnerships" className="hover:text-cyan-200">Key Partnerships / Eco-Systems</Link>
             <Link href="/podcasts-webinars" className="hover:text-cyan-200">Podcasts & Webinars</Link>
             <Link href="/careers" className="hover:text-cyan-200">Careers</Link>
             <Link href="/contact" className="hover:text-cyan-200">Contact</Link>
