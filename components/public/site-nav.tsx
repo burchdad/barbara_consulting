@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { Download, Menu, X } from "lucide-react";
+import { Menu, X } from "lucide-react";
 import { AnimatePresence, motion } from "framer-motion";
 import { useState } from "react";
 import { Logo } from "@/components/ui/Logo";
@@ -56,7 +56,6 @@ export function SiteNav({ brand }: SiteNavProps) {
             download
             className="inline-flex min-h-10 items-center gap-2 whitespace-nowrap rounded-full border border-cyan-200/50 bg-cyan-200/10 px-4 py-2 text-xs font-black uppercase tracking-[0.12em] text-cyan-100 shadow-[0_0_24px_rgba(34,211,238,0.12)] transition hover:border-cyan-200 hover:bg-cyan-200/20 hover:text-white sm:px-5"
           >
-            <Download size={15} />
             <span className="hidden sm:inline">Capabilities Statement</span>
             <span className="sm:hidden">PDF</span>
           </a>
