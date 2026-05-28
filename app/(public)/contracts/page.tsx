@@ -112,19 +112,7 @@ const agencyExperience = [
   "DoD mission environments",
 ];
 
-const keyPartnerships = [
-  "Elastic",
-  "SageTech Solutions",
-  "The Muse Group",
-  "ITG Solutions",
-  "Fellows Consortium",
-  "Mariji",
-  "Large business teaming partners",
-  "8(a) partner channels",
-];
-
 const pastClients = [
-  "Harvard Maintenance",
   "CIO",
   "Department of Education",
   "Department of State",
@@ -399,55 +387,38 @@ export default async function ContractsPage() {
         </div>
       </Section>
 
-      {/* PARTNERSHIPS / CLIENTS */}
+      {/* PAST CLIENTS */}
       <Section className="py-20 lg:py-28">
-        <div className="grid gap-12 lg:grid-cols-2 lg:items-start">
-          <Reveal variant="angleLeft">
-            <div className="about-overview-panel p-8 sm:p-10">
-              <p className="text-xs uppercase tracking-[0.3em] text-cyan-300">
-                Key Partnerships
-              </p>
+        <Reveal variant="tiltRight">
+          <div className="about-overview-panel p-8 sm:p-10">
+            <p className="text-xs uppercase tracking-[0.3em] text-cyan-300">
+              Past Clients
+            </p>
 
-              <h2 className="mt-3 text-5xl font-black uppercase leading-[0.95] text-white sm:text-6xl">
-                Teaming channels for larger opportunities.
-              </h2>
-
-              <div className="mt-8 grid gap-3 sm:grid-cols-2">
-                {keyPartnerships.map((partner) => (
-                  <span
-                    key={partner}
-                    className="border border-cyan-200/20 bg-cyan-200/[0.03] px-4 py-3 text-xs font-bold uppercase tracking-[0.15em] text-cyan-100"
-                  >
-                    {partner}
-                  </span>
-                ))}
-              </div>
-            </div>
-          </Reveal>
-
-          <Reveal delay={0.05} variant="tiltRight">
-            <div className="about-overview-panel p-8 sm:p-10">
-              <p className="text-xs uppercase tracking-[0.3em] text-cyan-300">
-                Past Clients
-              </p>
-
+            <div className="grid gap-8 lg:grid-cols-[0.95fr_1.05fr] lg:items-end">
               <h2 className="mt-3 text-5xl font-black uppercase leading-[0.95] text-white sm:text-6xl">
                 Proven support across public and mission environments.
               </h2>
 
-              <div className="mt-8 grid gap-3 sm:grid-cols-2">
-                {pastClients.map((client) => (
-                  <span
-                    key={client}
-                    className="border border-white/10 bg-black/25 px-4 py-3 text-xs font-bold uppercase tracking-[0.14em] text-slate-200"
-                  >
-                    {client}
-                  </span>
-                ))}
-              </div>
+              <p className="text-lg leading-8 text-slate-300">
+                Client experience reflects work across federal, public-sector,
+                intelligence, finance, education, agriculture, and Navy mission
+                environments.
+              </p>
             </div>
-          </Reveal>
-        </div>
+
+            <div className="mt-8 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+              {pastClients.map((client) => (
+                <span
+                  key={client}
+                  className="border border-white/10 bg-black/25 px-4 py-3 text-xs font-bold uppercase tracking-[0.14em] text-slate-200"
+                >
+                  {client}
+                </span>
+              ))}
+            </div>
+          </div>
+        </Reveal>
       </Section>
 
       {/* PROCUREMENT CONTACTS */}

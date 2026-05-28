@@ -11,6 +11,13 @@ const navItems = [
   { href: "/about", label: "About Us" },
   { href: "/services", label: "Services" },
   { href: "/contracts", label: "Contract Vehicles" },
+  { href: "/partnerships", label: "Partnerships" },
+  { href: "/podcasts-webinars", label: "Podcasts & Webinars" },
+  {
+    href: "/capabilities/joint-capability-statement.pdf",
+    label: "Capabilities PDF",
+    download: true,
+  },
   { href: "/careers", label: "Careers" },
   { href: "/contact", label: "Contact" },
   { href: "/privacy", label: "Privacy Policy" },
@@ -31,16 +38,27 @@ export function SiteNav({ brand }: SiteNavProps) {
         <Link href="/" className="font-black uppercase tracking-[0.12em] text-white">
           <Logo companyName={brand} />
         </Link>
-        <nav className="hidden items-center gap-6 text-sm text-zinc-300 lg:flex">
+        <nav className="hidden items-center gap-4 text-xs text-zinc-300 xl:flex">
           {navItems.map((item) => (
-            <Link key={item.href} href={item.href} className="nav-link-premium transition hover:text-red-400">
-              {item.label}
-            </Link>
+            item.download ? (
+              <a
+                key={item.href}
+                href={item.href}
+                download
+                className="nav-link-premium transition hover:text-red-400"
+              >
+                {item.label}
+              </a>
+            ) : (
+              <Link key={item.href} href={item.href} className="nav-link-premium transition hover:text-red-400">
+                {item.label}
+              </Link>
+            )
           ))}
         </nav>
         <button
           type="button"
-          className="rounded-md border border-white/20 p-2 text-white lg:hidden"
+          className="rounded-md border border-white/20 p-2 text-white xl:hidden"
           onClick={() => setOpen((v) => !v)}
           aria-label="Toggle mobile menu"
         >
@@ -53,18 +71,30 @@ export function SiteNav({ brand }: SiteNavProps) {
             initial={{ opacity: 0, y: -8 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -8 }}
-            className="border-t border-white/10 bg-[#080808] lg:hidden"
+            className="border-t border-white/10 bg-[#080808] xl:hidden"
           >
             <nav className="mx-auto grid w-full max-w-7xl gap-1 px-4 py-4 sm:px-6">
               {navItems.map((item) => (
-                <Link
-                  key={item.href}
-                  href={item.href}
-                  onClick={() => setOpen(false)}
-                  className="rounded-md px-3 py-2 text-lg font-semibold text-zinc-200 transition hover:bg-white/5 hover:text-red-400"
-                >
-                  {item.label}
-                </Link>
+                item.download ? (
+                  <a
+                    key={item.href}
+                    href={item.href}
+                    download
+                    onClick={() => setOpen(false)}
+                    className="rounded-md px-3 py-2 text-lg font-semibold text-zinc-200 transition hover:bg-white/5 hover:text-red-400"
+                  >
+                    {item.label}
+                  </a>
+                ) : (
+                  <Link
+                    key={item.href}
+                    href={item.href}
+                    onClick={() => setOpen(false)}
+                    className="rounded-md px-3 py-2 text-lg font-semibold text-zinc-200 transition hover:bg-white/5 hover:text-red-400"
+                  >
+                    {item.label}
+                  </Link>
+                )
               ))}
             </nav>
           </motion.div>
