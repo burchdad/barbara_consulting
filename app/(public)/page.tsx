@@ -127,11 +127,25 @@ export default async function HomePage() {
         <Section className="relative z-10 flex min-h-screen items-end pb-24 pt-36 lg:pb-32">
           <Reveal>
             <div className="max-w-6xl">
-              <img
-                src="/greylogo.png"
-                alt="Gray Matters Technology Services - Sage Tech Solutions"
-                className="mb-10 h-auto w-[220px] sm:w-[300px] lg:w-[420px]"
-              />
+              <div className="mb-10 inline-flex flex-col gap-3 border border-cyan-200/20 bg-black/35 p-3 shadow-[0_24px_80px_rgba(34,211,238,0.1)] backdrop-blur sm:flex-row sm:items-center sm:p-4">
+                <div className="flex h-28 w-28 items-center justify-center bg-white/88 p-2 sm:h-32 sm:w-32">
+                  <img
+                    src="/greylogo.png"
+                    alt="Gray Matters Technology Services"
+                    className="h-full w-full object-contain"
+                  />
+                </div>
+
+                <div className="hidden h-16 w-px bg-cyan-200/30 sm:block" />
+
+                <div className="flex h-28 w-28 items-center justify-center bg-white p-2 sm:h-32 sm:w-32">
+                  <img
+                    src="/sagetech-logo-tight.png"
+                    alt="SageTech Solutions"
+                    className="max-h-full max-w-full object-contain"
+                  />
+                </div>
+              </div>
 
               <p className="mb-5 text-xs font-bold uppercase tracking-[0.35em] text-cyan-200">
                 AI Strategy | Federal IT | Secure Systems
