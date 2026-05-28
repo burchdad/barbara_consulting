@@ -34,8 +34,8 @@ export function SiteNav({ brand }: SiteNavProps) {
     <header className="sticky top-0 z-50 border-b border-white/10 bg-black/70 backdrop-blur-xl">
       <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-red-400/60 to-transparent" />
       <div className="mx-auto flex w-full max-w-7xl items-center justify-between gap-4 px-4 py-4 sm:px-6 lg:px-8">
-        <Link href="/" className="font-black uppercase tracking-[0.12em] text-white">
-          <Logo companyName={brand} />
+        <Link href="/" className="min-w-0 font-black uppercase tracking-[0.12em] text-white">
+          <Logo companyName={brand} className="block max-w-[34rem] text-sm leading-tight sm:text-base lg:text-lg xl:truncate" />
         </Link>
 
         <div className="flex items-center gap-3">
@@ -44,7 +44,7 @@ export function SiteNav({ brand }: SiteNavProps) {
               <Link
                 key={item.href}
                 href={item.href}
-                className="nav-link-premium max-w-[11.5rem] text-center leading-tight transition hover:text-red-400"
+                className="nav-link-premium whitespace-nowrap transition hover:text-red-400"
               >
                 {item.label}
               </Link>
@@ -54,7 +54,7 @@ export function SiteNav({ brand }: SiteNavProps) {
           <a
             href={capabilitiesStatementHref}
             download
-            className="inline-flex min-h-10 items-center gap-2 rounded-full border border-cyan-200/50 bg-cyan-200/10 px-4 py-2 text-xs font-black uppercase tracking-[0.12em] text-cyan-100 shadow-[0_0_24px_rgba(34,211,238,0.12)] transition hover:border-cyan-200 hover:bg-cyan-200/20 hover:text-white sm:px-5"
+            className="inline-flex min-h-10 items-center gap-2 whitespace-nowrap rounded-full border border-cyan-200/50 bg-cyan-200/10 px-4 py-2 text-xs font-black uppercase tracking-[0.12em] text-cyan-100 shadow-[0_0_24px_rgba(34,211,238,0.12)] transition hover:border-cyan-200 hover:bg-cyan-200/20 hover:text-white sm:px-5"
           >
             <Download size={15} />
             <span className="hidden sm:inline">Capabilities Statement</span>
@@ -78,16 +78,16 @@ export function SiteNav({ brand }: SiteNavProps) {
             initial={{ opacity: 0, y: -8 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -8 }}
-            className="border-t border-white/10 bg-[#080808]"
+            className="absolute right-4 top-[calc(100%+0.75rem)] w-[min(calc(100vw-2rem),24rem)] overflow-hidden rounded-lg border border-cyan-200/18 bg-[#05080b]/95 shadow-[0_24px_80px_rgba(0,0,0,0.55)] backdrop-blur-xl sm:right-6 lg:right-8"
           >
-            <nav className="mx-auto grid w-full max-w-7xl gap-4 px-4 py-4 sm:px-6">
+            <nav className="grid gap-4 p-4 text-right">
               <div className="grid gap-1 xl:hidden">
                 {primaryNavItems.map((item) => (
                   <Link
                     key={item.href}
                     href={item.href}
                     onClick={() => setOpen(false)}
-                    className="rounded-md px-3 py-2 text-lg font-semibold text-zinc-200 transition hover:bg-white/5 hover:text-red-400"
+                    className="rounded-md px-3 py-2 text-base font-semibold text-zinc-200 transition hover:bg-white/5 hover:text-red-400"
                   >
                     {item.label}
                   </Link>
@@ -100,7 +100,7 @@ export function SiteNav({ brand }: SiteNavProps) {
                     key={item.href}
                     href={item.href}
                     onClick={() => setOpen(false)}
-                    className="rounded-md px-3 py-2 text-lg font-semibold text-zinc-200 transition hover:bg-white/5 hover:text-red-400"
+                    className="rounded-md px-3 py-2 text-base font-semibold text-zinc-200 transition hover:bg-white/5 hover:text-red-400"
                   >
                     {item.label}
                   </Link>
@@ -111,10 +111,10 @@ export function SiteNav({ brand }: SiteNavProps) {
                 <Link
                   href="/admin/login"
                   onClick={() => setOpen(false)}
-                  className="flex items-center justify-between rounded-md border border-cyan-200/20 bg-black/35 px-4 py-3 text-lg font-black uppercase tracking-[0.14em] text-cyan-100 transition hover:border-cyan-200/50 hover:bg-cyan-200/10 hover:text-white"
+                  className="flex items-center justify-between gap-4 rounded-md border border-cyan-200/20 bg-black/35 px-4 py-3 text-base font-black uppercase tracking-[0.14em] text-cyan-100 transition hover:border-cyan-200/50 hover:bg-cyan-200/10 hover:text-white"
                 >
-                  Login
                   <span className="text-xs text-cyan-300">Admin</span>
+                  Login
                 </Link>
               </div>
             </nav>
