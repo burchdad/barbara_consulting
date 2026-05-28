@@ -36,8 +36,8 @@ export function SiteNav({ brand }: SiteNavProps) {
   return (
     <header className="sticky top-0 z-50 border-b border-white/10 bg-black/70 backdrop-blur-xl">
       <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-red-400/60 to-transparent" />
-      <div className="mx-auto flex w-full max-w-7xl items-center justify-between gap-4 px-4 py-4 sm:px-6 lg:px-8">
-        <Link href="/" className="min-w-0 font-black uppercase tracking-[0.12em] text-white">
+      <div className="flex w-full items-center justify-between gap-6 px-4 py-4 sm:px-6 lg:px-10 xl:px-16 2xl:px-24">
+        <Link href="/" className="ml-[clamp(0rem,8vw,14rem)] shrink-0 font-black uppercase tracking-[0.12em] text-white">
           <Logo
             companyName={brandLines.join(" / ")}
             className="sr-only"
@@ -49,14 +49,13 @@ export function SiteNav({ brand }: SiteNavProps) {
             {brandLines.map((line, index) => (
               <span key={line} className="block whitespace-nowrap">
                 {line}
-                {index === 0 ? " /" : ""}
               </span>
             ))}
           </span>
         </Link>
 
-        <div className="flex items-center gap-3">
-          <nav className="hidden items-center gap-5 text-sm text-zinc-300 xl:flex">
+        <div className="ml-auto flex shrink-0 items-center gap-3">
+          <nav className="hidden items-center gap-5 text-sm text-zinc-300 2xl:flex">
             {primaryNavItems.map((item) => (
               <Link
                 key={item.href}
