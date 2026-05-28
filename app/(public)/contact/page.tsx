@@ -1,11 +1,13 @@
 import {
   Clock3,
   Mail,
+  MessageSquareText,
   Phone,
 } from "lucide-react";
 
 import { HomepageCinematicScene } from "@/components/public/homepage-cinematic-scene";
 import { Section } from "@/components/ui/section";
+import { ContactForm } from "@/components/public/contact-form";
 import { Reveal } from "@/components/public/reveal";
 import { getGlobalSettings } from "@/lib/site-data";
 import { siteConfig } from "@/lib/config/site";
@@ -219,6 +221,40 @@ export default async function ContactPage() {
             </div>
           </Reveal>
         </div>
+      </Section>
+
+      {/* CONTACT FORM */}
+      <Section className="about-command-section relative overflow-visible py-16 lg:py-20">
+        <div aria-hidden className="about-angle-field">
+          <div className="about-angle-plane about-angle-plane-a" />
+          <div className="about-angle-plane about-angle-plane-b" />
+          <div className="about-angle-plane about-angle-plane-c" />
+        </div>
+
+        <Reveal variant="tiltRight">
+          <div className="about-lead-panel relative z-10 mx-auto max-w-5xl p-5 sm:p-8">
+            <div className="mb-8 border border-white/10 bg-black/25 p-6">
+              <div className="flex items-center gap-3">
+                <MessageSquareText className="text-cyan-300" size={24} />
+
+                <p className="text-xs font-bold uppercase tracking-[0.24em] text-cyan-300">
+                  Project Intake
+                </p>
+              </div>
+
+              <h2 className="mt-5 text-3xl font-black uppercase leading-tight text-white sm:text-4xl">
+                Send the request. We&apos;ll help define the next move.
+              </h2>
+
+              <p className="mt-4 max-w-3xl text-sm leading-6 text-slate-300">
+                A strong message includes the organization type, the problem you
+                want solved, the timeline, and the outcome you want to create.
+              </p>
+            </div>
+
+            <ContactForm />
+          </div>
+        </Reveal>
       </Section>
 
       {/* RESPONSE PROCESS */}
