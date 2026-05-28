@@ -29,13 +29,30 @@ type SiteNavProps = {
 
 export function SiteNav({ brand }: SiteNavProps) {
   const [open, setOpen] = useState(false);
+  const brandLines = brand
+    .replace(" - Sage Tech Solutions", " / SageTech Solutions")
+    .split(" / ");
 
   return (
     <header className="sticky top-0 z-50 border-b border-white/10 bg-black/70 backdrop-blur-xl">
       <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-red-400/60 to-transparent" />
       <div className="mx-auto flex w-full max-w-7xl items-center justify-between gap-4 px-4 py-4 sm:px-6 lg:px-8">
         <Link href="/" className="min-w-0 font-black uppercase tracking-[0.12em] text-white">
-          <Logo companyName={brand} className="block max-w-[34rem] text-sm leading-tight sm:text-base lg:text-lg xl:truncate" />
+          <Logo
+            companyName={brandLines.join(" / ")}
+            className="sr-only"
+          />
+          <span
+            aria-hidden="true"
+            className="block text-sm font-black uppercase leading-tight tracking-[0.12em] text-white sm:text-base lg:text-lg"
+          >
+            {brandLines.map((line, index) => (
+              <span key={line} className="block whitespace-nowrap">
+                {line}
+                {index === 0 ? " /" : ""}
+              </span>
+            ))}
+          </span>
         </Link>
 
         <div className="flex items-center gap-3">
