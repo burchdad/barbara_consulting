@@ -1,10 +1,9 @@
 import Link from "next/link";
 import {
   ArrowRight,
-  Blocks,
   BrainCircuit,
-  DatabaseZap,
   Handshake,
+  Landmark,
   Network,
   ShieldCheck,
 } from "lucide-react";
@@ -13,93 +12,52 @@ import { HomepageCinematicScene } from "@/components/public/homepage-cinematic-s
 import { Reveal } from "@/components/public/reveal";
 import { Section } from "@/components/ui/section";
 
-const partnershipCards = [
+const keyAdvisors = [
+  "Keith Wilson - USDA",
+  "Schuyler Eldridge - former ASPR HCA",
+  "Diane Frasier - former NIH HCA",
+  "Torreon Creekmore - NGA, IARPA, ODNI",
+  "Calvin Mitchell - former Dept. of Education HCA",
+  "Lonnie Chin - FAA",
+  "Guy Torres - former IRS CPO",
+  "Karlos Morgan - DHS",
+];
+
+const keyTechnologists = [
+  "Torreon Creekmore - C-more Consulting",
+  "Bill Pratt - Gov-IT Works, former CTO DHS",
+  "Royce Allen - former CIO, Dept. of Commerce",
+  "Darryl Peek - Elastic, former Sr. Program Director DHS",
+  "Avery Muse - The Muse Group, former Deputy CIO, HHS OIT",
+  "Jose Arrieta - Navy Board of Advisors",
+  "Jamie Gracia - Wolverine Group, former Dept. of State Industry Liaison",
+];
+
+const ecosystemChannels = [
   {
-    name: "SageTech Solutions",
-    type: "Strategic Partner",
+    title: "Advisory Access",
+    body: "Senior acquisition, HCA, CPO, and federal mission advisors help shape practical routes into agency requirements, bid positioning, and procurement readiness.",
+    icon: Landmark,
+  },
+  {
+    title: "Technology Bench",
+    body: "Experienced CIO, CTO, cybersecurity, data, search, and systems leaders strengthen the technical perspective behind modernization opportunities.",
     icon: BrainCircuit,
-    summary:
-      "Supports Gray Matters Technology Services across cloud services, AI strategy, workforce AI-agile software development, logistics, performance management, medical accuracy reviews, VISN transaction processing, system integration, and cloud solutions.",
-    signals: [
-      "AWS and Google cloud",
-      "HL7 and Maximo",
-      "Help desk Tier 2 and 3",
-      "Apian and MetaPlan",
-      "Authority to Operate support",
-    ],
   },
   {
-    name: "The Muse Group",
-    type: "Business Partner",
-    icon: Handshake,
-    summary:
-      "Planning, IT operations, cybersecurity, and IT service management partner for strategy and delivery support.",
-    signals: [
-      "Strategic planning",
-      "IT operations",
-      "Cybersecurity",
-      "IT service management",
-    ],
-  },
-  {
-    name: "ITG Solutions",
-    type: "Subcontractor to GMTS - 10 Years",
+    title: "Teaming Ecosystem",
+    body: "Partner and advisory relationships help GMTS align the right delivery capacity, past-performance context, and technical credibility for larger opportunities.",
     icon: Network,
-    summary:
-      "Longstanding delivery partner for web development, content, system integration, Apian, low-code, and no-code implementation support.",
-    signals: [
-      "Web development",
-      "Content support",
-      "System integration",
-      "Low-code and no-code",
-    ],
-  },
-  {
-    name: "Elastic",
-    type: "Large Business",
-    icon: DatabaseZap,
-    summary:
-      "Large-business ecosystem partner providing small business licensing, AI analytics, datastore, and search-engine capabilities.",
-    signals: [
-      "AI analytics",
-      "Datastore",
-      "Search engine",
-      "Small business licensing",
-    ],
-  },
-  {
-    name: "Fellows Consortium",
-    type: "Strategic Partner",
-    icon: Blocks,
-    summary:
-      "New strategic partner supporting extended teaming capacity and opportunity alignment.",
-    signals: [
-      "Strategic teaming",
-      "Partner expansion",
-      "Opportunity alignment",
-    ],
-  },
-  {
-    name: "Mariji",
-    type: "Joint Venture Channel",
-    icon: ShieldCheck,
-    summary:
-      "8(a) joint venture channel with a one-year current pathway and five-year partner runway.",
-    signals: [
-      "8(a) channel",
-      "Joint venture",
-      "Partner runway",
-    ],
   },
 ];
 
-const ecosystemAreas = [
-  "AI strategy and responsible adoption",
-  "Cybersecurity, compliance, and ATO readiness",
-  "Cloud services and system integration",
-  "Workforce enablement and AI-agile delivery",
-  "Service management and mission operations",
-  "Low-code, no-code, and automation delivery",
+const positioningSignals = [
+  "Federal acquisition perspective",
+  "Former HCA and CPO insight",
+  "CIO and CTO modernization guidance",
+  "DHS, USDA, FAA, IRS, Navy, and State experience",
+  "Search, data, cybersecurity, and systems leadership",
+  "Bid readiness and partner alignment",
 ];
 
 export default function PartnershipsPage() {
@@ -121,18 +79,19 @@ export default function PartnershipsPage() {
           <Reveal variant="angleLeft">
             <div className="max-w-6xl">
               <p className="mb-5 text-xs font-bold uppercase tracking-[0.35em] text-cyan-200">
-                Key Partnerships & Ecosystems
+                Key Partnerships / Eco-Systems
               </p>
 
               <h1 className="text-5xl font-black uppercase leading-[0.92] text-white sm:text-6xl lg:text-[5.2rem]">
-                Strategic teaming channels for mission-scale delivery.
+                Advisory and technology channels for mission-scale delivery.
               </h1>
 
               <p className="mt-8 max-w-4xl text-lg leading-8 text-slate-200 sm:text-xl">
-                Gray Matters Technology Services - Sage Tech Solutions brings a
-                focused ecosystem of strategic partners, subcontractors, large
-                business channels, and joint venture pathways to support federal
-                modernization, AI, cloud, cybersecurity, and mission operations.
+                Gray Matters Technology Services - Sage Tech Solutions is
+                supported by a focused network of senior advisors,
+                technologists, and teaming channels with direct federal
+                acquisition, modernization, cybersecurity, and mission delivery
+                experience.
               </p>
 
               <div className="mt-10 flex flex-wrap gap-4">
@@ -167,55 +126,78 @@ export default function PartnershipsPage() {
           <div className="mb-12 grid gap-6 lg:grid-cols-[0.85fr_1.15fr] lg:items-end">
             <div>
               <p className="text-xs uppercase tracking-[0.3em] text-cyan-300">
-                Trusted Partnerships
+                Key Partnerships
               </p>
               <h2 className="mt-3 text-5xl font-black uppercase leading-[0.95] text-white sm:text-6xl">
-                Existing partner ecosystem.
+                Advisors and technologists connected to the work.
               </h2>
             </div>
             <p className="text-lg leading-8 text-slate-300">
-              These relationships expand delivery reach while keeping the
-              engagement centered on practical execution, secure implementation,
-              and measurable mission outcomes.
+              These relationships strengthen strategic positioning, technical
+              credibility, and partner readiness for agencies and primes
+              evaluating AI-forward modernization opportunities.
             </p>
           </div>
         </Reveal>
 
-        <div className="grid gap-5 lg:grid-cols-2">
-          {partnershipCards.map(({ name, type, summary, signals, icon: Icon }, index) => (
-            <Reveal key={name} delay={0.04 + index * 0.03} variant="tiltLeft">
-              <article className="about-system-card min-h-[24rem] p-7">
-                <div className="flex items-start justify-between gap-4">
-                  <div>
-                    <p className="text-xs font-bold uppercase tracking-[0.2em] text-cyan-300">
-                      {type}
-                    </p>
-                    <h3 className="mt-3 text-3xl font-black uppercase leading-tight text-white">
-                      {name}
-                    </h3>
-                  </div>
-                  <div className="inline-flex h-12 w-12 shrink-0 items-center justify-center border border-cyan-200/25 bg-cyan-200/5 text-cyan-200">
-                    <Icon size={24} />
-                  </div>
+        <div className="grid gap-5 lg:grid-cols-[0.9fr_1.1fr]">
+          <Reveal variant="tiltLeft">
+            <article className="about-system-card min-h-[34rem] p-8">
+              <div className="flex items-start justify-between gap-4">
+                <div>
+                  <p className="text-xs font-bold uppercase tracking-[0.2em] text-cyan-300">
+                    Key Advisors
+                  </p>
+                  <h3 className="mt-3 text-4xl font-black uppercase leading-tight text-white">
+                    Acquisition and mission guidance.
+                  </h3>
                 </div>
-
-                <p className="mt-6 text-base leading-7 text-slate-300">
-                  {summary}
-                </p>
-
-                <div className="mt-7 grid gap-3 sm:grid-cols-2">
-                  {signals.map((signal) => (
-                    <span
-                      key={signal}
-                      className="border border-cyan-200/15 bg-black/25 px-4 py-3 text-xs font-bold uppercase tracking-[0.14em] text-cyan-100"
-                    >
-                      {signal}
-                    </span>
-                  ))}
+                <div className="inline-flex h-12 w-12 shrink-0 items-center justify-center border border-cyan-200/25 bg-cyan-200/5 text-cyan-200">
+                  <Handshake size={24} />
                 </div>
-              </article>
-            </Reveal>
-          ))}
+              </div>
+
+              <div className="mt-8 grid gap-3">
+                {keyAdvisors.map((advisor) => (
+                  <p
+                    key={advisor}
+                    className="border border-cyan-200/15 bg-black/25 px-4 py-3 text-sm font-bold uppercase tracking-[0.08em] text-slate-100"
+                  >
+                    {advisor}
+                  </p>
+                ))}
+              </div>
+            </article>
+          </Reveal>
+
+          <Reveal delay={0.05} variant="tiltRight">
+            <article className="about-system-card min-h-[34rem] p-8">
+              <div className="flex items-start justify-between gap-4">
+                <div>
+                  <p className="text-xs font-bold uppercase tracking-[0.2em] text-cyan-300">
+                    Key Technologists
+                  </p>
+                  <h3 className="mt-3 text-4xl font-black uppercase leading-tight text-white">
+                    Technical leaders and modernization operators.
+                  </h3>
+                </div>
+                <div className="inline-flex h-12 w-12 shrink-0 items-center justify-center border border-cyan-200/25 bg-cyan-200/5 text-cyan-200">
+                  <BrainCircuit size={24} />
+                </div>
+              </div>
+
+              <div className="mt-8 grid gap-3">
+                {keyTechnologists.map((technologist) => (
+                  <p
+                    key={technologist}
+                    className="border border-white/10 bg-black/25 px-4 py-3 text-sm font-bold uppercase tracking-[0.08em] text-slate-200"
+                  >
+                    {technologist}
+                  </p>
+                ))}
+              </div>
+            </article>
+          </Reveal>
         </div>
       </Section>
 
@@ -225,37 +207,54 @@ export default function PartnershipsPage() {
             <div className="grid gap-10 lg:grid-cols-[0.85fr_1.15fr] lg:items-start">
               <div>
                 <p className="text-xs uppercase tracking-[0.3em] text-cyan-300">
-                  Ecosystem Depth
+                  Eco-System Depth
                 </p>
                 <h2 className="mt-3 text-5xl font-black uppercase leading-[0.95] text-white sm:text-6xl">
-                  Designed to strengthen bid readiness and delivery capacity.
+                  Built to strengthen bid readiness and technical confidence.
                 </h2>
               </div>
 
               <div>
                 <p className="text-lg leading-8 text-slate-300">
-                  The partner ecosystem gives GMTS a broader bench for
-                  modernization opportunities while preserving a clear lead
-                  point of accountability for agencies, primes, and teaming
-                  partners.
+                  The updated eco-system gives GMTS a deeper advisory
+                  and technical bench for upcoming opportunities while
+                  preserving a clear lead point of accountability for agencies,
+                  primes, and teaming partners.
                 </p>
 
+                <div className="mt-8 grid gap-4 lg:grid-cols-3">
+                  {ecosystemChannels.map(({ title, body, icon: Icon }) => (
+                    <article
+                      key={title}
+                      className="border border-cyan-200/15 bg-black/25 p-5"
+                    >
+                      <Icon className="text-cyan-200" size={24} />
+                      <h3 className="mt-5 text-xl font-black uppercase leading-tight text-white">
+                        {title}
+                      </h3>
+                      <p className="mt-4 text-sm leading-6 text-slate-300">
+                        {body}
+                      </p>
+                    </article>
+                  ))}
+                </div>
+
                 <div className="mt-8 grid gap-3 sm:grid-cols-2">
-                  {ecosystemAreas.map((area) => (
+                  {positioningSignals.map((signal) => (
                     <span
-                      key={area}
+                      key={signal}
                       className="border border-white/10 bg-black/25 px-4 py-3 text-xs font-bold uppercase tracking-[0.14em] text-slate-200"
                     >
-                      {area}
+                      {signal}
                     </span>
                   ))}
                 </div>
 
                 <Link
-                  href="/contracts"
+                  href="/contact"
                   className="mt-8 inline-flex items-center gap-2 text-sm font-black uppercase tracking-[0.18em] text-cyan-200 transition hover:text-white"
                 >
-                  Review Contract Vehicles <ArrowRight size={16} />
+                  Discuss the Eco-System <ArrowRight size={16} />
                 </Link>
               </div>
             </div>
