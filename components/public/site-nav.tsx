@@ -22,6 +22,7 @@ const menuItems = [
 ];
 
 const capabilitiesStatementHref = "/capabilities/joint-capability-statement.pdf";
+const employeeTimesheetHref = "https://graymatterstechnology.tsheets.com";
 
 type SiteNavProps = {
   brand: string;
@@ -120,6 +121,19 @@ export function SiteNav({ brand }: SiteNavProps) {
                     {item.label}
                   </Link>
                 ))}
+              </div>
+
+              <div className="mt-2 border-t border-white/10 pt-3">
+                <a
+                  href={employeeTimesheetHref}
+                  target="_blank"
+                  rel="noreferrer"
+                  onClick={() => setOpen(false)}
+                  className="flex items-center justify-between gap-4 rounded-md border border-emerald-300/25 bg-emerald-300/[0.08] px-4 py-3 text-base font-black uppercase tracking-[0.14em] text-emerald-100 transition hover:border-emerald-200/60 hover:bg-emerald-300/[0.14] hover:text-white"
+                >
+                  <span className="text-xs text-emerald-300">Employee</span>
+                  Timesheet
+                </a>
               </div>
 
               <div className="mt-2 border-t border-cyan-200/15 bg-cyan-200/[0.045] p-3">
