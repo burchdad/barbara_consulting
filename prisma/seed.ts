@@ -47,6 +47,7 @@ async function main() {
       contactHeroImageUrl: siteConfig.media.contactHeroImageUrl,
       contractsHeroImageUrl: siteConfig.media.contractsHeroImageUrl,
       privacyHeroImageUrl: siteConfig.media.privacyHeroImageUrl,
+      capabilityStatementUrl: siteConfig.media.capabilityStatementUrl,
       homepageSceneType: backgroundConfig.type,
       homepageSceneGlow: backgroundConfig.glow,
       homepageSceneParticles: backgroundConfig.particles,

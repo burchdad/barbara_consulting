@@ -361,6 +361,7 @@ export async function updateGlobalSettingsAction(formData: FormData) {
     contactHeroImageUrl: String(formData.get("contactHeroImageUrl") || ""),
     contractsHeroImageUrl: String(formData.get("contractsHeroImageUrl") || ""),
     privacyHeroImageUrl: String(formData.get("privacyHeroImageUrl") || ""),
+    capabilityStatementUrl: String(formData.get("capabilityStatementUrl") || ""),
     homepageSceneType: String(formData.get("homepageSceneType") || "grid"),
     homepageSceneGlow: String(formData.get("homepageSceneGlow") || "blue"),
     homepageSceneParticles: toBool(formData.get("homepageSceneParticles")),
@@ -385,5 +386,6 @@ export async function updateGlobalSettingsAction(formData: FormData) {
   revalidatePath("/case-studies");
   revalidatePath("/careers");
   revalidatePath("/contact");
+  revalidatePath("/contracts");
   revalidatePath("/admin/settings");
 }

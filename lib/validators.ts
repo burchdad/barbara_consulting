@@ -1,5 +1,10 @@
 import { z } from "zod";
 
+const publicAssetUrlSchema = z.string().refine(
+  (value) => value.startsWith("/") || /^https?:\/\//i.test(value),
+  "Use an internal path or an http(s) URL.",
+);
+
 export const loginSchema = z.object({
   email: z.string().email(),
   password: z.string().min(8),
@@ -122,6 +127,7 @@ export const globalSettingSchema = z.object({
   contactHeroImageUrl: z.string().url().optional().or(z.literal("")),
   contractsHeroImageUrl: z.string().url().optional().or(z.literal("")),
   privacyHeroImageUrl: z.string().url().optional().or(z.literal("")),
+  capabilityStatementUrl: publicAssetUrlSchema,
   homepageSceneType: z.enum(["earth", "grid", "cityscape", "mesh"]).default("grid"),
   homepageSceneGlow: z.enum(["red", "blue", "green", "gold"]).default("blue"),
   homepageSceneParticles: z.boolean().default(true),

@@ -16,10 +16,12 @@ export async function SiteFooter() {
     "Gray Matters Technology-",
     "Gray Matters Technology Services -",
   );
-  const email = siteConfig.contact.email;
-  const phone = siteConfig.contact.phone;
-  const address = siteConfig.contact.address;
+  const email = settings?.email || siteConfig.contact.email;
+  const phone = settings?.phone || siteConfig.contact.phone;
+  const address = settings?.address || siteConfig.contact.address;
   const linkedInUrl = settings?.linkedInUrl || siteConfig.social.linkedin;
+  const capabilityStatementHref =
+    settings?.capabilityStatementUrl || siteConfig.media.capabilityStatementUrl;
 
   return (
     <footer className="relative border-t border-cyan-200/20 bg-[#020617]">
@@ -72,7 +74,7 @@ export async function SiteFooter() {
           <nav className="mt-4 grid gap-2 text-sm text-slate-300">
             <Link href="/services" className="hover:text-cyan-200">Services</Link>
             <Link href="/contracts" className="hover:text-cyan-200">Contract Vehicles</Link>
-            <a href="/capabilities/joint-capability-statement.pdf" download className="hover:text-cyan-200">Capabilities Statement</a>
+            <a href={capabilityStatementHref} download className="hover:text-cyan-200">Capabilities Statement</a>
             <Link href="/privacy" className="hover:text-cyan-200">Privacy</Link>
             <Link href="/admin/login" className="hover:text-cyan-200">Login</Link>
           </nav>

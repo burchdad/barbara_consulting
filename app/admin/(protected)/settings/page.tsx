@@ -30,6 +30,7 @@ export default async function AdminSettingsPage() {
           <div className="md:col-span-2"><AdminField label="Contact Hero Image URL" name="contactHeroImageUrl" defaultValue={settings?.contactHeroImageUrl ?? siteConfig.media.contactHeroImageUrl} type="url" /></div>
           <div className="md:col-span-2"><AdminField label="Contracts Hero Image URL" name="contractsHeroImageUrl" defaultValue={settings?.contractsHeroImageUrl ?? siteConfig.media.contractsHeroImageUrl} type="url" /></div>
           <div className="md:col-span-2"><AdminField label="Privacy Hero Image URL" name="privacyHeroImageUrl" defaultValue={settings?.privacyHeroImageUrl ?? siteConfig.media.privacyHeroImageUrl} type="url" /></div>
+          <div className="md:col-span-2"><AdminField label="Capabilities Statement URL or Path" name="capabilityStatementUrl" defaultValue={settings?.capabilityStatementUrl ?? siteConfig.media.capabilityStatementUrl} required /></div>
           <label className="grid gap-2 text-sm text-zinc-300">
             <span>Homepage Scene Type</span>
             <select

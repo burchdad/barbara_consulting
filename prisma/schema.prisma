@@ -170,6 +170,7 @@ model GlobalSetting {
   contactHeroImageUrl String?
   contractsHeroImageUrl String?
   privacyHeroImageUrl String?
+  capabilityStatementUrl String @default("/capabilities/joint-capability-statement.pdf")
   homepageSceneType SceneType @default(grid)
   homepageSceneGlow SceneGlow @default(blue)
   homepageSceneParticles Boolean @default(true)

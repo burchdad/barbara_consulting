@@ -44,6 +44,7 @@ export const siteConfig = {
   },
 
   media: {
+    capabilityStatementUrl: "/capabilities/joint-capability-statement.pdf",
     aboutHeroImageUrl:
       "https://images.unsplash.com/photo-1677442136019-21780ecad995?auto=format&fit=crop&w=2200&q=85",
     caseStudiesHeroImageUrl:

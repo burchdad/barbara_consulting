@@ -21,14 +21,14 @@ const menuItems = [
   { href: "/privacy", label: "Privacy Policy" },
 ];
 
-const capabilitiesStatementHref = "/capabilities/joint-capability-statement.pdf";
 const employeeTimesheetHref = "https://graymatterstechnology.tsheets.com";
 
 type SiteNavProps = {
   brand: string;
+  capabilityStatementHref: string;
 };
 
-export function SiteNav({ brand }: SiteNavProps) {
+export function SiteNav({ brand, capabilityStatementHref }: SiteNavProps) {
   const [open, setOpen] = useState(false);
   const brandLines = brand
     .replace(" - Sage Tech Solutions", " / SageTech Solutions")
@@ -69,7 +69,7 @@ export function SiteNav({ brand }: SiteNavProps) {
           </nav>
 
           <a
-            href={capabilitiesStatementHref}
+            href={capabilityStatementHref}
             download
             className="inline-flex min-h-10 items-center gap-2 whitespace-nowrap rounded-full border border-cyan-200/50 bg-cyan-200/10 px-4 py-2 text-xs font-black uppercase tracking-[0.12em] text-cyan-100 shadow-[0_0_24px_rgba(34,211,238,0.12)] transition hover:border-cyan-200 hover:bg-cyan-200/20 hover:text-white sm:px-5"
           >
