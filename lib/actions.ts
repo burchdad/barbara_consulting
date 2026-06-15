@@ -375,11 +375,16 @@ export async function updateGlobalSettingsAction(formData: FormData) {
     phone: parsed.data.phone ?? "",
   };
 
-  const existing = await prisma.globalSetting.findFirst();
-  if (existing) {
-    await prisma.globalSetting.update({ where: { id: existing.id }, data });
-  } else {
-    await prisma.globalSetting.create({ data });
+  try {
+    const existing = await prisma.globalSetting.findFirst();
+    if (existing) {
+      await prisma.globalSetting.update({ where: { id: existing.id }, data });
+    } else {
+      await prisma.globalSetting.create({ data });
+    }
+  } catch (error) {
+    console.error("[admin/settings] Unable to save global settings.", error);
+    return;
   }
 
   revalidatePath("/");
