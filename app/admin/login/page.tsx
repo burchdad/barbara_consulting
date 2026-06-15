@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { useActionState } from "react";
 import { loginAction } from "@/lib/actions";
 
@@ -18,6 +19,12 @@ export default function AdminLoginPage() {
         <button type="submit" disabled={pending} className="w-full rounded-md bg-red-600 px-4 py-2 text-sm font-semibold text-white hover:bg-red-500 disabled:opacity-70">
           {pending ? "Signing in..." : "Sign In"}
         </button>
+        <Link
+          href="/admin/settings"
+          className="block w-full rounded-md border border-cyan-200/35 px-4 py-2 text-center text-xs font-semibold uppercase tracking-[0.12em] text-cyan-100 transition hover:border-cyan-200 hover:bg-cyan-200/10 hover:text-white"
+        >
+          Website Update Dashboard
+        </Link>
         {state.message ? <p className="text-sm text-red-400">{state.message}</p> : null}
       </form>
     </main>
