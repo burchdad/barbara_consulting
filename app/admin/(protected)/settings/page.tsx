@@ -5,7 +5,10 @@ import { siteConfig } from "@/lib/config/site";
 import { prisma } from "@/lib/prisma";
 
 export default async function AdminSettingsPage() {
-  const settings = await prisma.globalSetting.findFirst();
+  const settings = await prisma.globalSetting.findFirst().catch((error) => {
+    console.error("[admin/settings] Unable to load global settings.", error);
+    return null;
+  });
 
   return (
     <div className="space-y-6">

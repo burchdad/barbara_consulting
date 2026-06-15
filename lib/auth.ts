@@ -10,6 +10,9 @@ const SESSION_MAX_AGE = 60 * 60 * 24 * 7;
 function getSecret() {
   const secret = process.env.ADMIN_SESSION_SECRET || process.env.NEXTAUTH_SECRET || "dev-secret-change-me";
   if (process.env.NODE_ENV === "production" && secret === "dev-secret-change-me") {
+    if (process.env.VERCEL_ENV === "preview") {
+      return "preview-only-admin-session-secret";
+    }
     throw new Error("Missing ADMIN_SESSION_SECRET (or NEXTAUTH_SECRET fallback) in production.");
   }
   return secret;
