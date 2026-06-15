@@ -28,6 +28,7 @@ export type ContactFormState = {
 };
 
 export async function loginAction(_: unknown, formData: FormData) {
+  const redirectTo = String(formData.get("redirectTo") || "/admin");
   const parsed = loginSchema.safeParse({
     email: formData.get("email"),
     password: formData.get("password"),
@@ -42,7 +43,7 @@ export async function loginAction(_: unknown, formData: FormData) {
     return { success: false, message: "Invalid credentials." };
   }
 
-  redirect("/admin");
+  redirect(redirectTo.startsWith("/") ? redirectTo : "/admin");
 }
 
 export async function logoutAction() {
