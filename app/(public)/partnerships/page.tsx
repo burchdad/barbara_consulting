@@ -13,14 +13,14 @@ import { Reveal } from "@/components/public/reveal";
 import { Section } from "@/components/ui/section";
 import {
   ecosystemChannels,
-  keyAdvisors,
-  keyTechnologists,
   positioningSignals,
 } from "@/lib/data/partnership-ecosystem";
-import { getPublishedData } from "@/lib/site-data";
+import { getPublicPartnershipsPageData } from "@/lib/site-data";
 
 export default async function PartnershipsPage() {
-  const { partners } = await getPublishedData();
+  const { partners, contacts } = await getPublicPartnershipsPageData();
+  const keyAdvisors = contacts.filter((contact) => contact.category === "advisor");
+  const keyTechnologists = contacts.filter((contact) => contact.category === "technologist");
 
   return (
     <HomepageCinematicScene
@@ -119,14 +119,16 @@ export default async function PartnershipsPage() {
               </div>
 
               <div className="mt-8 grid gap-3">
-                {keyAdvisors.map((advisor) => (
+                {keyAdvisors.length ? keyAdvisors.map((advisor) => (
                   <p
                     key={`${advisor.name}-${advisor.organization}`}
                     className="border border-cyan-200/15 bg-black/25 px-4 py-3 text-sm font-bold uppercase tracking-[0.08em] text-slate-100"
                   >
                     {advisor.name} - {advisor.organization}
                   </p>
-                ))}
+                )) : (
+                  <p className="text-sm leading-6 text-slate-300">No advisors are published yet.</p>
+                )}
               </div>
             </article>
           </Reveal>
@@ -148,14 +150,16 @@ export default async function PartnershipsPage() {
               </div>
 
               <div className="mt-8 grid gap-3">
-                {keyTechnologists.map((technologist) => (
+                {keyTechnologists.length ? keyTechnologists.map((technologist) => (
                   <p
                     key={`${technologist.name}-${technologist.organization}`}
                     className="border border-white/10 bg-black/25 px-4 py-3 text-sm font-bold uppercase tracking-[0.08em] text-slate-200"
                   >
                     {technologist.name} - {technologist.organization}
                   </p>
-                ))}
+                )) : (
+                  <p className="text-sm leading-6 text-slate-300">No technologists are published yet.</p>
+                )}
               </div>
             </article>
           </Reveal>

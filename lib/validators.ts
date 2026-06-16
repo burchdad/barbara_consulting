@@ -108,6 +108,15 @@ export const missionPartnerSchema = z.object({
   isPublished: z.boolean().default(false),
 });
 
+export const partnershipContactSchema = z.object({
+  id: z.string().optional(),
+  name: z.string().min(2),
+  organization: z.string().min(2),
+  category: z.enum(["advisor", "technologist"]),
+  displayOrder: z.number().int().default(0),
+  isPublished: z.boolean().default(false),
+});
+
 export const globalSettingSchema = z.object({
   companyName: z.string().min(2),
   tagline: z.string().min(2),

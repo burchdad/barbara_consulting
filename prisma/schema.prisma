@@ -140,6 +140,17 @@ model MissionPartner {
   updatedAt   DateTime @updatedAt
 }
 
+model PartnershipContact {
+  id           String   @id @default(cuid())
+  name         String
+  organization String
+  category     String
+  displayOrder Int      @default(0)
+  isPublished  Boolean  @default(true)
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+}
+
 model ContactSubmission {
   id        String           @id @default(cuid())
   name      String

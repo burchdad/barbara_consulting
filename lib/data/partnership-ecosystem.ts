@@ -47,3 +47,18 @@ export const positioningSignals = [
   "Search, data, cybersecurity, and systems leadership",
   "Bid readiness and partner alignment",
 ];
+
+export const partnershipContactSeed = [
+  ...keyAdvisors.map((contact, index) => ({
+    ...contact,
+    category: "advisor",
+    displayOrder: index,
+    isPublished: true,
+  })),
+  ...keyTechnologists.map((contact, index) => ({
+    ...contact,
+    category: "technologist",
+    displayOrder: index,
+    isPublished: true,
+  })),
+];

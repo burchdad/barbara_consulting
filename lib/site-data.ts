@@ -1,5 +1,6 @@
 import { prisma } from "@/lib/prisma";
 import { ensureContentBaseline } from "@/lib/content-baseline";
+import { ensurePartnershipContactCompatibility } from "@/lib/partnership-contact-compatibility";
 
 let hasWarnedPublicDataFallback = false;
 
@@ -137,5 +138,22 @@ export async function getPublicContractsPageData() {
       return { contracts, settings };
     },
     { contracts: [], settings: null },
+  );
+}
+
+export async function getPublicPartnershipsPageData() {
+  return withPublicDataFallback(
+    async () => {
+      await ensureContentBaseline();
+      await ensurePartnershipContactCompatibility();
+
+      const [partners, contacts] = await Promise.all([
+        prisma.missionPartner.findMany({ where: { isPublished: true }, orderBy: { displayOrder: "asc" } }),
+        prisma.partnershipContact.findMany({ where: { isPublished: true }, orderBy: [{ category: "asc" }, { displayOrder: "asc" }] }),
+      ]);
+
+      return { partners, contacts };
+    },
+    { partners: [], contacts: [] },
   );
 }

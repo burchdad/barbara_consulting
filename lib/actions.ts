@@ -4,6 +4,7 @@ import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 import { SubmissionStatus } from "@prisma/client";
 import { ensureGlobalSettingCompatibility } from "@/lib/admin-settings";
+import { ensurePartnershipContactCompatibility } from "@/lib/partnership-contact-compatibility";
 import { prisma } from "@/lib/prisma";
 import { clearAdminSession, loginAdmin, requireAdmin } from "@/lib/auth";
 import {
@@ -15,6 +16,7 @@ import {
   leadershipSchema,
   loginSchema,
   missionPartnerSchema,
+  partnershipContactSchema,
   serviceItemSchema,
   testimonialSchema,
   toBool,
@@ -435,6 +437,49 @@ export async function upsertPartnerAction(formData: FormData) {
     return;
   }
   revalidatePath("/");
+  revalidatePath("/partnerships");
+  revalidatePath("/admin/partners");
+}
+
+export async function upsertPartnershipContactAction(formData: FormData) {
+  await requireAdmin();
+  await ensurePartnershipContactCompatibility();
+  const parsed = partnershipContactSchema.safeParse({
+    id: String(formData.get("id") || "") || undefined,
+    name: formData.get("name"),
+    organization: formData.get("organization"),
+    category: formData.get("category"),
+    displayOrder: toInt(formData.get("displayOrder")),
+    isPublished: toBool(formData.get("isPublished")),
+  });
+  if (!parsed.success) return;
+
+  const { id, ...data } = parsed.data;
+  try {
+    if (id) {
+      await prisma.partnershipContact.update({ where: { id }, data });
+    } else {
+      await prisma.partnershipContact.create({ data });
+    }
+  } catch (error) {
+    console.error("[admin/partners] Unable to save partnership contact.", error);
+    return;
+  }
+  revalidatePath("/partnerships");
+  revalidatePath("/admin/partners");
+}
+
+export async function deletePartnershipContactAction(formData: FormData) {
+  await requireAdmin();
+  await ensurePartnershipContactCompatibility();
+  const id = String(formData.get("id") || "");
+  if (!id) return;
+  try {
+    await prisma.partnershipContact.delete({ where: { id } });
+  } catch (error) {
+    console.error("[admin/partners] Unable to delete partnership contact.", error);
+    return;
+  }
   revalidatePath("/partnerships");
   revalidatePath("/admin/partners");
 }

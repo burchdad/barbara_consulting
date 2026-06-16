@@ -8,6 +8,7 @@ import { contractsSeed } from "../lib/data/contracts";
 import { testimonialsSeed } from "../lib/data/testimonials";
 import { servicesSeed } from "../lib/data/servicesSeed";
 import { partnersSeed } from "../lib/data/partnersSeed";
+import { partnershipContactSeed } from "../lib/data/partnership-ecosystem";
 import { jobsSeed } from "../lib/data/jobsSeed";
 
 const prisma = new PrismaClient();
@@ -76,6 +77,9 @@ async function main() {
 
   await prisma.missionPartner.deleteMany();
   await prisma.missionPartner.createMany({ data: partnersSeed });
+
+  await prisma.partnershipContact.deleteMany();
+  await prisma.partnershipContact.createMany({ data: partnershipContactSeed });
 }
 
 main()

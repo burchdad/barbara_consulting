@@ -6,8 +6,10 @@ import { contractsSeed } from "@/lib/data/contracts";
 import { jobsSeed } from "@/lib/data/jobsSeed";
 import { leadershipSeed } from "@/lib/data/leadership";
 import { partnersSeed } from "@/lib/data/partnersSeed";
+import { partnershipContactSeed } from "@/lib/data/partnership-ecosystem";
 import { servicesSeed } from "@/lib/data/servicesSeed";
 import { testimonialsSeed } from "@/lib/data/testimonials";
+import { ensurePartnershipContactCompatibility } from "@/lib/partnership-contact-compatibility";
 
 let baselinePromise: Promise<void> | null = null;
 
@@ -19,6 +21,8 @@ export async function ensureContentBaseline() {
 
   baselinePromise = (async () => {
     try {
+      await ensurePartnershipContactCompatibility();
+
       const [
         settingsCount,
         jobsCount,
@@ -28,6 +32,7 @@ export async function ensureContentBaseline() {
         testimonialsCount,
         servicesCount,
         partnersCount,
+        partnershipContactsCount,
       ] = await Promise.all([
         prisma.globalSetting.count(),
         prisma.job.count(),
@@ -37,6 +42,7 @@ export async function ensureContentBaseline() {
         prisma.testimonial.count(),
         prisma.serviceItem.count(),
         prisma.missionPartner.count(),
+        prisma.partnershipContact.count(),
       ]);
 
       const totalContentCount =
@@ -46,7 +52,8 @@ export async function ensureContentBaseline() {
         leadershipCount +
         testimonialsCount +
         servicesCount +
-        partnersCount;
+        partnersCount +
+        partnershipContactsCount;
 
       if (totalContentCount > 0) {
         return;
@@ -90,6 +97,7 @@ export async function ensureContentBaseline() {
         testimonialsSeed.length ? prisma.testimonial.createMany({ data: testimonialsSeed, skipDuplicates: true }) : Promise.resolve(),
         servicesSeed.length ? prisma.serviceItem.createMany({ data: servicesSeed, skipDuplicates: true }) : Promise.resolve(),
         partnersSeed.length ? prisma.missionPartner.createMany({ data: partnersSeed, skipDuplicates: true }) : Promise.resolve(),
+        partnershipContactSeed.length ? prisma.partnershipContact.createMany({ data: partnershipContactSeed, skipDuplicates: true }) : Promise.resolve(),
       ]);
     } catch (error) {
       console.error("[content-baseline] Unable to initialize site content.", error);
