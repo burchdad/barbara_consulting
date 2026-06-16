@@ -1,7 +1,7 @@
 import { cn } from "@/components/ui/cn";
 
 export function AdminCard({ className, children }: { className?: string; children: React.ReactNode }) {
-  return <section className={cn("rounded-xl border border-white/10 bg-black/40 p-5", className)}>{children}</section>;
+  return <section className={cn("rounded-lg border border-white/10 bg-black/45 p-5 shadow-[0_18px_60px_rgba(0,0,0,0.22)] xl:p-6", className)}>{children}</section>;
 }
 
 export function AdminField({ label, name, defaultValue, required = false, type = "text" }: { label: string; name: string; defaultValue?: string | number | null; required?: boolean; type?: string }) {
@@ -13,7 +13,7 @@ export function AdminField({ label, name, defaultValue, required = false, type =
         name={name}
         defaultValue={defaultValue ?? ""}
         required={required}
-        className="rounded-md border border-white/15 bg-black px-3 py-2 text-sm text-zinc-100"
+        className="min-w-0 rounded-md border border-white/15 bg-black px-3 py-2 text-sm text-zinc-100"
       />
     </label>
   );
@@ -28,7 +28,7 @@ export function AdminTextArea({ label, name, defaultValue, required = false, row
         defaultValue={defaultValue ?? ""}
         required={required}
         rows={rows}
-        className="rounded-md border border-white/15 bg-black px-3 py-2 text-sm text-zinc-100"
+        className="min-w-0 rounded-md border border-white/15 bg-black px-3 py-2 text-sm text-zinc-100"
       />
     </label>
   );

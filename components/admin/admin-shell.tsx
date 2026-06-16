@@ -17,8 +17,8 @@ const links = [
 export function AdminShell({ children }: { children: React.ReactNode }) {
   return (
     <div className="min-h-screen bg-[#0a0a0a] text-zinc-100">
-      <div className="mx-auto grid w-full max-w-7xl gap-6 px-4 py-6 lg:grid-cols-[260px_1fr] lg:px-8">
-        <aside className="rounded-xl border border-white/10 bg-black/40 p-4">
+      <div className="grid w-full gap-6 px-4 py-5 sm:px-6 lg:grid-cols-[280px_minmax(0,1fr)] lg:px-8 xl:px-10 2xl:px-12">
+        <aside className="rounded-lg border border-white/10 bg-black/50 p-4 lg:sticky lg:top-5 lg:h-[calc(100vh-2.5rem)] lg:overflow-y-auto">
           <p className="text-sm font-bold uppercase tracking-[0.2em] text-red-400">Admin</p>
           <nav className="mt-4 grid gap-1 text-sm">
             {links.map((link) => (
@@ -33,7 +33,7 @@ export function AdminShell({ children }: { children: React.ReactNode }) {
             </button>
           </form>
         </aside>
-        <main className="space-y-6">{children}</main>
+        <main className="min-w-0 space-y-6">{children}</main>
       </div>
     </div>
   );
