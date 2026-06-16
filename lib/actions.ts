@@ -45,6 +45,7 @@ const ghostMissionControlWebhookUrl =
   "https://ghostmissioncontrol-production.up.railway.app/mission/web-helper-requests";
 
 const ghostMissionControlWebhookSecret =
+  process.env.GHOST_WEB_HELPER_WEBHOOK_SECRET ||
   process.env.GHOST_WEBHOOK_SECRET ||
   process.env.GHOST_MISSION_CONTROL_WEBHOOK_SECRET ||
   process.env.WEB_HELPER_AGENT_WEBHOOK_SECRET;
