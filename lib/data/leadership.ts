@@ -4,6 +4,7 @@
 
 export const leadershipSeed = [
   {
+    id: "seed-danielle-carr",
     name: "Danielle Carr",
     title: "CEO / Chief Strategy Officer",
     photoUrl: "/leadership/danielle-carr.webp",
@@ -16,6 +17,7 @@ export const leadershipSeed = [
     isPublished: true,
   },
   {
+    id: "seed-barbara-gray",
     name: "Barbara A. Gray",
     title: "President of Operations",
     photoUrl: "/leadership/barbara-gray.webp",
@@ -28,6 +30,7 @@ export const leadershipSeed = [
     isPublished: true,
   },
   {
+    id: "seed-bill-pratt",
     name: "Bill Pratt",
     title: "Chief Technology Officer",
     photoUrl: "/leadership/bill-pratt.webp",
@@ -40,6 +43,7 @@ export const leadershipSeed = [
     isPublished: true,
   },
   {
+    id: "seed-torreon-creekmore",
     name: "Torreon Creekmore",
     title: "Chief Data Officer",
     photoUrl: "/leadership/torreon-creekmore.webp",
@@ -52,6 +56,7 @@ export const leadershipSeed = [
     isPublished: true,
   },
   {
+    id: "seed-tushar-rathod",
     name: "Tushar Rathod",
     title: "Chief AI Officer",
     photoUrl: "/leadership/tushar-rathod.webp",
@@ -64,6 +69,7 @@ export const leadershipSeed = [
     isPublished: true,
   },
   {
+    id: "seed-alexis-muse",
     name: "Alexis Muse",
     title: "Director of Contracts",
     photoUrl: "/leadership/alexis-muse.webp",

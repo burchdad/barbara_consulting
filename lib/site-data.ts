@@ -1,5 +1,10 @@
 import { prisma } from "@/lib/prisma";
+import { caseStudiesSeed } from "@/lib/data/caseStudies";
+import { contractsSeed } from "@/lib/data/contracts";
 import { jobsSeed } from "@/lib/data/jobsSeed";
+import { leadershipSeed } from "@/lib/data/leadership";
+import { servicesSeed } from "@/lib/data/servicesSeed";
+import { testimonialsSeed } from "@/lib/data/testimonials";
 
 let hasWarnedPublicDataFallback = false;
 
@@ -37,17 +42,26 @@ export async function getPublishedData() {
         prisma.job.findMany({ where: { isPublished: true }, orderBy: { createdAt: "desc" } }),
       ]);
 
-      return { settings, services, partners, contracts, cases, leadership, testimonials, jobs };
+      return {
+        settings,
+        services: services.length ? services : servicesSeed,
+        partners,
+        contracts: contracts.length ? contracts : contractsSeed,
+        cases: cases.length ? cases : caseStudiesSeed,
+        leadership: leadership.length ? leadership : leadershipSeed,
+        testimonials: testimonials.length ? testimonials : testimonialsSeed,
+        jobs: jobs.length ? jobs : jobsSeed,
+      };
     },
     {
       settings: null,
-      services: [],
+      services: servicesSeed,
       partners: [],
-      contracts: [],
-      cases: [],
-      leadership: [],
-      testimonials: [],
-      jobs: [],
+      contracts: contractsSeed,
+      cases: caseStudiesSeed,
+      leadership: leadershipSeed,
+      testimonials: testimonialsSeed,
+      jobs: jobsSeed,
     },
   );
 }
@@ -89,9 +103,9 @@ export async function getPublicCaseStudiesPageData() {
         prisma.globalSetting.findFirst(),
       ]);
 
-      return { studies, settings };
+      return { studies: studies.length ? studies : caseStudiesSeed, settings };
     },
-    { studies: [], settings: null },
+    { studies: caseStudiesSeed, settings: null },
   );
 }
 
@@ -103,9 +117,9 @@ export async function getPublicCaseStudyDetailData(slug: string) {
         prisma.globalSetting.findFirst(),
       ]);
 
-      return { study, settings };
+      return { study: study ?? caseStudiesSeed.find((item) => item.slug === slug) ?? null, settings };
     },
-    { study: null, settings: null },
+    { study: caseStudiesSeed.find((item) => item.slug === slug) ?? null, settings: null },
   );
 }
 
@@ -117,8 +131,8 @@ export async function getPublicContractsPageData() {
         prisma.globalSetting.findFirst(),
       ]);
 
-      return { contracts, settings };
+      return { contracts: contracts.length ? contracts : contractsSeed, settings };
     },
-    { contracts: [], settings: null },
+    { contracts: contractsSeed, settings: null },
   );
 }

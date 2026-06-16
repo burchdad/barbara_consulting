@@ -149,10 +149,15 @@ export async function upsertCaseStudyAction(formData: FormData) {
   if (!parsed.success) return;
 
   const { id, ...data } = parsed.data;
-  if (id) {
-    await prisma.caseStudy.update({ where: { id }, data });
-  } else {
-    await prisma.caseStudy.create({ data });
+  try {
+    if (id) {
+      await prisma.caseStudy.update({ where: { id }, data });
+    } else {
+      await prisma.caseStudy.create({ data });
+    }
+  } catch (error) {
+    console.error("[admin/case-studies] Unable to save case study.", error);
+    return;
   }
   revalidatePath("/case-studies");
   revalidatePath("/admin/case-studies");
@@ -162,7 +167,12 @@ export async function deleteCaseStudyAction(formData: FormData) {
   await requireAdmin();
   const id = String(formData.get("id") || "");
   if (!id) return;
-  await prisma.caseStudy.delete({ where: { id } });
+  try {
+    await prisma.caseStudy.delete({ where: { id } });
+  } catch (error) {
+    console.error("[admin/case-studies] Unable to delete case study.", error);
+    return;
+  }
   revalidatePath("/case-studies");
   revalidatePath("/admin/case-studies");
 }
@@ -188,10 +198,15 @@ export async function upsertContractAction(formData: FormData) {
   if (!parsed.success) return;
 
   const { id, ...data } = parsed.data;
-  if (id) {
-    await prisma.contract.update({ where: { id }, data });
-  } else {
-    await prisma.contract.create({ data });
+  try {
+    if (id) {
+      await prisma.contract.update({ where: { id }, data });
+    } else {
+      await prisma.contract.create({ data });
+    }
+  } catch (error) {
+    console.error("[admin/contracts] Unable to save contract.", error);
+    return;
   }
   revalidatePath("/contracts");
   revalidatePath("/admin/contracts");
@@ -201,7 +216,12 @@ export async function deleteContractAction(formData: FormData) {
   await requireAdmin();
   const id = String(formData.get("id") || "");
   if (!id) return;
-  await prisma.contract.delete({ where: { id } });
+  try {
+    await prisma.contract.delete({ where: { id } });
+  } catch (error) {
+    console.error("[admin/contracts] Unable to delete contract.", error);
+    return;
+  }
   revalidatePath("/contracts");
   revalidatePath("/admin/contracts");
 }
@@ -222,10 +242,15 @@ export async function upsertLeadershipAction(formData: FormData) {
   if (!parsed.success) return;
 
   const { id, ...data } = parsed.data;
-  if (id) {
-    await prisma.leadershipMember.update({ where: { id }, data });
-  } else {
-    await prisma.leadershipMember.create({ data });
+  try {
+    if (id) {
+      await prisma.leadershipMember.update({ where: { id }, data });
+    } else {
+      await prisma.leadershipMember.create({ data });
+    }
+  } catch (error) {
+    console.error("[admin/leadership] Unable to save leader.", error);
+    return;
   }
   revalidatePath("/about");
   revalidatePath("/admin/leadership");
@@ -235,7 +260,12 @@ export async function deleteLeadershipAction(formData: FormData) {
   await requireAdmin();
   const id = String(formData.get("id") || "");
   if (!id) return;
-  await prisma.leadershipMember.delete({ where: { id } });
+  try {
+    await prisma.leadershipMember.delete({ where: { id } });
+  } catch (error) {
+    console.error("[admin/leadership] Unable to delete leader.", error);
+    return;
+  }
   revalidatePath("/about");
   revalidatePath("/admin/leadership");
 }
@@ -254,10 +284,15 @@ export async function upsertTestimonialAction(formData: FormData) {
   if (!parsed.success) return;
 
   const { id, ...data } = parsed.data;
-  if (id) {
-    await prisma.testimonial.update({ where: { id }, data });
-  } else {
-    await prisma.testimonial.create({ data });
+  try {
+    if (id) {
+      await prisma.testimonial.update({ where: { id }, data });
+    } else {
+      await prisma.testimonial.create({ data });
+    }
+  } catch (error) {
+    console.error("[admin/testimonials] Unable to save testimonial.", error);
+    return;
   }
   revalidatePath("/");
   revalidatePath("/admin/testimonials");
@@ -267,7 +302,12 @@ export async function deleteTestimonialAction(formData: FormData) {
   await requireAdmin();
   const id = String(formData.get("id") || "");
   if (!id) return;
-  await prisma.testimonial.delete({ where: { id } });
+  try {
+    await prisma.testimonial.delete({ where: { id } });
+  } catch (error) {
+    console.error("[admin/testimonials] Unable to delete testimonial.", error);
+    return;
+  }
   revalidatePath("/");
   revalidatePath("/admin/testimonials");
 }
@@ -286,10 +326,15 @@ export async function upsertServiceAction(formData: FormData) {
   if (!parsed.success) return;
 
   const { id, ...data } = parsed.data;
-  if (id) {
-    await prisma.serviceItem.update({ where: { id }, data });
-  } else {
-    await prisma.serviceItem.create({ data });
+  try {
+    if (id) {
+      await prisma.serviceItem.update({ where: { id }, data });
+    } else {
+      await prisma.serviceItem.create({ data });
+    }
+  } catch (error) {
+    console.error("[admin/services] Unable to save service.", error);
+    return;
   }
   revalidatePath("/");
   revalidatePath("/admin/services");
@@ -299,7 +344,12 @@ export async function deleteServiceAction(formData: FormData) {
   await requireAdmin();
   const id = String(formData.get("id") || "");
   if (!id) return;
-  await prisma.serviceItem.delete({ where: { id } });
+  try {
+    await prisma.serviceItem.delete({ where: { id } });
+  } catch (error) {
+    console.error("[admin/services] Unable to delete service.", error);
+    return;
+  }
   revalidatePath("/");
   revalidatePath("/admin/services");
 }
