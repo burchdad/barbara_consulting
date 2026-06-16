@@ -50,6 +50,85 @@ const ghostMissionControlWebhookSecret =
   process.env.GHOST_MISSION_CONTROL_WEBHOOK_SECRET ||
   process.env.WEB_HELPER_AGENT_WEBHOOK_SECRET;
 
+function buildSupportTicketPayload(ticket: {
+  id: string;
+  clientName: string;
+  requesterName: string;
+  requesterEmail: string;
+  pageUrl: string;
+  requestType: string;
+  priority: string;
+  summary: string;
+  details: string;
+  attachments: unknown;
+}) {
+  return {
+    client: ticket.clientName,
+    site: "www.graymatterstech.com",
+    repo: "burchdad/barbara_consulting",
+    source: "client_admin_dashboard",
+    request_type: ticket.requestType,
+    priority: ticket.priority,
+    page_url: ticket.pageUrl,
+    summary: ticket.summary,
+    details: ticket.details,
+    requester: {
+      name: ticket.requesterName,
+      email: ticket.requesterEmail,
+    },
+    attachments: Array.isArray(ticket.attachments) ? ticket.attachments : [],
+    branch_policy: "testing_branch_only",
+    approval_required: true,
+    ticket_id: ticket.id,
+  };
+}
+
+async function forwardSupportTicket(ticket: Parameters<typeof buildSupportTicketPayload>[0]) {
+  if (!ghostMissionControlWebhookSecret) {
+    return {
+      status: "needs_webhook_secret",
+      message: "Support request saved, but the Ghost Mission Control webhook secret is not configured.",
+    };
+  }
+
+  try {
+    const response = await fetch(ghostMissionControlWebhookUrl, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "X-Ghost-Webhook-Secret": ghostMissionControlWebhookSecret,
+      },
+      body: JSON.stringify(buildSupportTicketPayload(ticket)),
+    });
+
+    if (response.ok) {
+      return {
+        status: "sent",
+        message: "Support request sent to Ghost Mission Control.",
+      };
+    }
+
+    const responseBody = await response.text().catch(() => "");
+    console.error("[admin/support] Ghost Mission Control rejected ticket.", {
+      status: response.status,
+      responseBody,
+    });
+    return {
+      status: "webhook_failed",
+      message:
+        response.status === 401
+          ? "Support request saved, but Mission Control rejected the webhook secret. Confirm the Vercel and Railway secrets match, then retry."
+          : "Support request saved, but Mission Control did not accept the handoff. Check Mission Control logs, then retry.",
+    };
+  } catch (error) {
+    console.error("[admin/support] Unable to send ticket to Ghost Mission Control.", error);
+    return {
+      status: "webhook_failed",
+      message: "Support request saved, but Mission Control could not be reached. Check the webhook URL, then retry.",
+    };
+  }
+}
+
 export async function loginAction(_: unknown, formData: FormData) {
   const redirectTo = String(formData.get("redirectTo") || "/admin");
   const parsed = loginSchema.safeParse({
@@ -592,25 +671,6 @@ export async function createSupportTicketAction(
     };
   }
 
-  const payload = {
-    client: parsed.data.clientName,
-    site: "www.graymatterstech.com",
-    repo: "burchdad/barbara_consulting",
-    source: "client_admin_dashboard",
-    request_type: parsed.data.requestType,
-    priority: parsed.data.priority,
-    page_url: parsed.data.pageUrl,
-    summary: parsed.data.summary,
-    details: parsed.data.details,
-    requester: {
-      name: parsed.data.requesterName,
-      email: parsed.data.requesterEmail,
-    },
-    attachments,
-    branch_policy: "testing_branch_only",
-    approval_required: true,
-  };
-
   let status = ghostMissionControlWebhookSecret ? "pending" : "needs_webhook_secret";
 
   const ticket = await prisma.supportTicket.create({
@@ -621,35 +681,34 @@ export async function createSupportTicketAction(
     },
   });
 
-  if (ghostMissionControlWebhookSecret) {
-    try {
-      const response = await fetch(ghostMissionControlWebhookUrl, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          "X-Ghost-Webhook-Secret": ghostMissionControlWebhookSecret,
-        },
-        body: JSON.stringify({ ...payload, ticket_id: ticket.id }),
-      });
-      status = response.ok ? "sent" : "webhook_failed";
-    } catch (error) {
-      console.error("[admin/support] Unable to send ticket to Ghost Mission Control.", error);
-      status = "webhook_failed";
-    }
-
-    await prisma.supportTicket.update({ where: { id: ticket.id }, data: { status } });
-  }
+  const handoff = await forwardSupportTicket(ticket);
+  status = handoff.status;
+  await prisma.supportTicket.update({ where: { id: ticket.id }, data: { status } });
 
   revalidatePath("/admin/support");
 
   return {
-    success: status === "sent" || status === "needs_webhook_secret",
+    success: status === "sent",
     ticketId: ticket.id,
-    message:
-      status === "sent"
-        ? "Support request sent to Ghost Mission Control."
-        : "Support request saved. Add the Ghost webhook secret env var to forward future tickets automatically.",
+    message: handoff.message,
   };
+}
+
+export async function retrySupportTicketHandoffAction(formData: FormData) {
+  await requireAdmin();
+  await ensurePartnershipContactCompatibility();
+
+  const id = String(formData.get("id") || "");
+  if (!id) return;
+
+  const ticket = await prisma.supportTicket.findUnique({ where: { id } });
+  if (!ticket || ticket.status === "sent") return;
+
+  await prisma.supportTicket.update({ where: { id }, data: { status: "pending" } });
+  const handoff = await forwardSupportTicket(ticket);
+  await prisma.supportTicket.update({ where: { id }, data: { status: handoff.status } });
+
+  revalidatePath("/admin/support");
 }
 
 export async function updateGlobalSettingsAction(formData: FormData) {
