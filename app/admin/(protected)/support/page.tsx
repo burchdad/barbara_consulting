@@ -25,9 +25,9 @@ export default async function AdminSupportPage() {
   const sentCount = tickets.filter((ticket) => ticket.status === "sent").length;
   const openCount = tickets.filter((ticket) => ticket.status !== "sent").length;
   const webhookConfigured = Boolean(
+    process.env.GHOST_MISSION_CONTROL_WEBHOOK_SECRET ||
     process.env.GHOST_WEB_HELPER_WEBHOOK_SECRET ||
     process.env.GHOST_WEBHOOK_SECRET ||
-    process.env.GHOST_MISSION_CONTROL_WEBHOOK_SECRET ||
     process.env.WEB_HELPER_AGENT_WEBHOOK_SECRET,
   );
 
