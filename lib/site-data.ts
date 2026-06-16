@@ -1,10 +1,5 @@
 import { prisma } from "@/lib/prisma";
-import { caseStudiesSeed } from "@/lib/data/caseStudies";
-import { contractsSeed } from "@/lib/data/contracts";
-import { jobsSeed } from "@/lib/data/jobsSeed";
-import { leadershipSeed } from "@/lib/data/leadership";
-import { servicesSeed } from "@/lib/data/servicesSeed";
-import { testimonialsSeed } from "@/lib/data/testimonials";
+import { ensureContentBaseline } from "@/lib/content-baseline";
 
 let hasWarnedPublicDataFallback = false;
 
@@ -25,12 +20,16 @@ async function withPublicDataFallback<T>(query: () => Promise<T>, fallback: T): 
 }
 
 export async function getGlobalSettings() {
-  return withPublicDataFallback(() => prisma.globalSetting.findFirst(), null);
+  return withPublicDataFallback(async () => {
+    await ensureContentBaseline();
+    return prisma.globalSetting.findFirst();
+  }, null);
 }
 
 export async function getPublishedData() {
   return withPublicDataFallback(
     async () => {
+      await ensureContentBaseline();
       const [settings, services, partners, contracts, cases, leadership, testimonials, jobs] = await Promise.all([
         prisma.globalSetting.findFirst(),
         prisma.serviceItem.findMany({ where: { isPublished: true }, orderBy: { displayOrder: "asc" } }),
@@ -44,24 +43,24 @@ export async function getPublishedData() {
 
       return {
         settings,
-        services: services.length ? services : servicesSeed,
+        services,
         partners,
-        contracts: contracts.length ? contracts : contractsSeed,
-        cases: cases.length ? cases : caseStudiesSeed,
-        leadership: leadership.length ? leadership : leadershipSeed,
-        testimonials: testimonials.length ? testimonials : testimonialsSeed,
-        jobs: jobs.length ? jobs : jobsSeed,
+        contracts,
+        cases,
+        leadership,
+        testimonials,
+        jobs,
       };
     },
     {
       settings: null,
-      services: servicesSeed,
+      services: [],
       partners: [],
-      contracts: contractsSeed,
-      cases: caseStudiesSeed,
-      leadership: leadershipSeed,
-      testimonials: testimonialsSeed,
-      jobs: jobsSeed,
+      contracts: [],
+      cases: [],
+      leadership: [],
+      testimonials: [],
+      jobs: [],
     },
   );
 }
@@ -69,6 +68,7 @@ export async function getPublishedData() {
 export async function getPublicCareersPageData() {
   return withPublicDataFallback(
     async () => {
+      await ensureContentBaseline();
       const [jobs, settings] = await Promise.all([
         prisma.job.findMany({
           where: { isPublished: true },
@@ -86,15 +86,16 @@ export async function getPublicCareersPageData() {
         prisma.globalSetting.findFirst(),
       ]);
 
-      return { jobs: jobs.length ? jobs : jobsSeed, settings };
+      return { jobs, settings };
     },
-    { jobs: jobsSeed, settings: null },
+    { jobs: [], settings: null },
   );
 }
 
 export async function getPublicCaseStudiesPageData() {
   return withPublicDataFallback(
     async () => {
+      await ensureContentBaseline();
       const [studies, settings] = await Promise.all([
         prisma.caseStudy.findMany({
           where: { isPublished: true },
@@ -103,36 +104,38 @@ export async function getPublicCaseStudiesPageData() {
         prisma.globalSetting.findFirst(),
       ]);
 
-      return { studies: studies.length ? studies : caseStudiesSeed, settings };
+      return { studies, settings };
     },
-    { studies: caseStudiesSeed, settings: null },
+    { studies: [], settings: null },
   );
 }
 
 export async function getPublicCaseStudyDetailData(slug: string) {
   return withPublicDataFallback(
     async () => {
+      await ensureContentBaseline();
       const [study, settings] = await Promise.all([
         prisma.caseStudy.findUnique({ where: { slug } }),
         prisma.globalSetting.findFirst(),
       ]);
 
-      return { study: study ?? caseStudiesSeed.find((item) => item.slug === slug) ?? null, settings };
+      return { study, settings };
     },
-    { study: caseStudiesSeed.find((item) => item.slug === slug) ?? null, settings: null },
+    { study: null, settings: null },
   );
 }
 
 export async function getPublicContractsPageData() {
   return withPublicDataFallback(
     async () => {
+      await ensureContentBaseline();
       const [contracts, settings] = await Promise.all([
         prisma.contract.findMany({ where: { isPublished: true }, orderBy: { displayOrder: "asc" } }),
         prisma.globalSetting.findFirst(),
       ]);
 
-      return { contracts: contracts.length ? contracts : contractsSeed, settings };
+      return { contracts, settings };
     },
-    { contracts: contractsSeed, settings: null },
+    { contracts: [], settings: null },
   );
 }

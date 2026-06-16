@@ -1,16 +1,12 @@
 import { AdminCard, AdminField, AdminTextArea } from "@/components/admin/admin-form";
 import { ModuleHeader } from "@/components/admin/module-header";
 import { deleteContractAction, upsertContractAction } from "@/lib/actions";
-import { contractsSeed } from "@/lib/data/contracts";
+import { ensureContentBaseline } from "@/lib/content-baseline";
 import { prisma } from "@/lib/prisma";
 
 export default async function AdminContractsPage() {
-  const savedContracts = await prisma.contract.findMany({ orderBy: { displayOrder: "asc" } }).catch((error) => {
-    console.error("[admin/contracts] Unable to load contracts.", error);
-    return [];
-  });
-  const contracts = savedContracts.length ? savedContracts : contractsSeed;
-  const isShowingFallback = savedContracts.length === 0;
+  await ensureContentBaseline();
+  const contracts = await prisma.contract.findMany({ orderBy: { displayOrder: "asc" } });
   const publishedCount = contracts.filter((contract) => contract.isPublished).length;
 
   return (
@@ -19,13 +15,8 @@ export default async function AdminContractsPage() {
       <div className="grid gap-4 md:grid-cols-3">
         <AdminCard><p className="text-sm text-zinc-400">Displayed Contracts</p><p className="mt-2 text-4xl font-black">{contracts.length}</p></AdminCard>
         <AdminCard><p className="text-sm text-zinc-400">Published</p><p className="mt-2 text-4xl font-black">{publishedCount}</p></AdminCard>
-        <AdminCard><p className="text-sm text-zinc-400">Status</p><p className="mt-2 text-lg font-black uppercase text-cyan-100">{isShowingFallback ? "Default content active" : "Procurement content live"}</p></AdminCard>
+        <AdminCard><p className="text-sm text-zinc-400">Status</p><p className="mt-2 text-lg font-black uppercase text-cyan-100">{contracts.length ? "Procurement content live" : "Ready for first contract"}</p></AdminCard>
       </div>
-      {isShowingFallback ? (
-        <AdminCard className="border-cyan-200/25 bg-cyan-200/[0.04]">
-          <p className="text-sm font-semibold text-cyan-100">Displaying default contract vehicle content for this environment. When saved contract records exist, this tab automatically uses the live database content.</p>
-        </AdminCard>
-      ) : null}
       <AdminCard>
         <h2 className="text-xl font-black uppercase">Create Contract</h2>
         <form action={upsertContractAction} className="mt-4 grid gap-3 md:grid-cols-2">
@@ -47,40 +38,29 @@ export default async function AdminContractsPage() {
       </AdminCard>
 
       {contracts.map((contract) => (
-        <AdminCard key={isShowingFallback ? contract.contractNumber : contract.id}>
-          {isShowingFallback ? (
-            <article className="space-y-3">
-              <p className="text-xs font-bold uppercase tracking-[0.18em] text-cyan-300">Displayed Content</p>
-              <h2 className="text-2xl font-black uppercase text-white">{contract.name}</h2>
-              <p className="text-sm uppercase tracking-[0.12em] text-zinc-400">{contract.agency} / {contract.contractNumber} / {contract.contractType}</p>
-              <p className="text-sm leading-6 text-zinc-300">{contract.summary}</p>
-            </article>
-          ) : (
-            <>
-              <form action={upsertContractAction} className="grid gap-3 md:grid-cols-2">
-                <input type="hidden" name="id" value={contract.id} />
-                <div className="md:col-span-2 flex flex-wrap items-center justify-between gap-3">
-                  <h2 className="text-xl font-black uppercase">{contract.name}</h2>
-                  <span className={contract.isPublished ? "text-xs font-bold uppercase text-cyan-300" : "text-xs font-bold uppercase text-zinc-500"}>{contract.isPublished ? "Published" : "Draft"}</span>
-                </div>
-                <AdminField label="Contract Name" name="name" defaultValue={contract.name} required />
-                <AdminField label="Contract Number" name="contractNumber" defaultValue={contract.contractNumber} required />
-                <AdminField label="Agency" name="agency" defaultValue={contract.agency} required />
-                <AdminField label="Period" name="period" defaultValue={contract.period} required />
-                <AdminField label="Contract Type" name="contractType" defaultValue={contract.contractType} required />
-                <AdminField label="Availability" name="availability" defaultValue={contract.availability} required />
-                <AdminField label="Program Manager" name="programManager" defaultValue={contract.programManager} required />
-                <AdminField label="Email" name="email" type="email" defaultValue={contract.email} required />
-                <AdminField label="Phone" name="phone" defaultValue={contract.phone} required />
-                <AdminField label="Display Order" name="displayOrder" type="number" defaultValue={contract.displayOrder} />
-                <label className="flex items-center gap-2 text-sm text-zinc-300"><input type="checkbox" name="isPublished" defaultChecked={contract.isPublished} /> Published</label>
-                <div className="md:col-span-2"><AdminTextArea label="Summary" name="summary" defaultValue={contract.summary} required /></div>
-                <div className="md:col-span-2"><AdminTextArea label="Scope" name="scope" defaultValue={contract.scope} required /></div>
-                <button className="rounded-md bg-red-600 px-4 py-2 text-sm font-semibold text-white md:col-span-2" type="submit">Update Contract</button>
-              </form>
-              <form action={deleteContractAction} className="mt-2"><input type="hidden" name="id" value={contract.id} /><button type="submit" className="rounded-md border border-white/20 px-3 py-1.5 text-xs">Delete</button></form>
-            </>
-          )}
+        <AdminCard key={contract.id}>
+          <form action={upsertContractAction} className="grid gap-3 md:grid-cols-2">
+            <input type="hidden" name="id" value={contract.id} />
+            <div className="md:col-span-2 flex flex-wrap items-center justify-between gap-3">
+              <h2 className="text-xl font-black uppercase">{contract.name}</h2>
+              <span className={contract.isPublished ? "text-xs font-bold uppercase text-cyan-300" : "text-xs font-bold uppercase text-zinc-500"}>{contract.isPublished ? "Published" : "Draft"}</span>
+            </div>
+            <AdminField label="Contract Name" name="name" defaultValue={contract.name} required />
+            <AdminField label="Contract Number" name="contractNumber" defaultValue={contract.contractNumber} required />
+            <AdminField label="Agency" name="agency" defaultValue={contract.agency} required />
+            <AdminField label="Period" name="period" defaultValue={contract.period} required />
+            <AdminField label="Contract Type" name="contractType" defaultValue={contract.contractType} required />
+            <AdminField label="Availability" name="availability" defaultValue={contract.availability} required />
+            <AdminField label="Program Manager" name="programManager" defaultValue={contract.programManager} required />
+            <AdminField label="Email" name="email" type="email" defaultValue={contract.email} required />
+            <AdminField label="Phone" name="phone" defaultValue={contract.phone} required />
+            <AdminField label="Display Order" name="displayOrder" type="number" defaultValue={contract.displayOrder} />
+            <label className="flex items-center gap-2 text-sm text-zinc-300"><input type="checkbox" name="isPublished" defaultChecked={contract.isPublished} /> Published</label>
+            <div className="md:col-span-2"><AdminTextArea label="Summary" name="summary" defaultValue={contract.summary} required /></div>
+            <div className="md:col-span-2"><AdminTextArea label="Scope" name="scope" defaultValue={contract.scope} required /></div>
+            <button className="rounded-md bg-red-600 px-4 py-2 text-sm font-semibold text-white md:col-span-2" type="submit">Update Contract</button>
+          </form>
+          <form action={deleteContractAction} className="mt-2"><input type="hidden" name="id" value={contract.id} /><button type="submit" className="rounded-md border border-white/20 px-3 py-1.5 text-xs">Delete</button></form>
         </AdminCard>
       ))}
     </div>

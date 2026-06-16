@@ -354,6 +354,63 @@ export async function deleteServiceAction(formData: FormData) {
   revalidatePath("/admin/services");
 }
 
+export async function updateDashboardOverviewAction(formData: FormData) {
+  await requireAdmin();
+  await ensureGlobalSettingCompatibility();
+
+  const existing = await prisma.globalSetting.findFirst();
+  if (!existing) return;
+
+  const parsed = globalSettingSchema.safeParse({
+    companyName: String(formData.get("companyName") || existing.companyName),
+    tagline: String(formData.get("tagline") || existing.tagline),
+    email: existing.email,
+    phone: existing.phone,
+    address: existing.address,
+    linkedInUrl: existing.linkedInUrl ?? "",
+    footerStatement: String(formData.get("footerStatement") || existing.footerStatement),
+    heroEyebrow: String(formData.get("heroEyebrow") || existing.heroEyebrow),
+    heroHeadline: String(formData.get("heroHeadline") || existing.heroHeadline),
+    heroTrustBadge: existing.heroTrustBadge,
+    heroSubheadline: String(formData.get("heroSubheadline") || existing.heroSubheadline),
+    aboutHeroImageUrl: existing.aboutHeroImageUrl ?? "",
+    caseStudiesHeroImageUrl: existing.caseStudiesHeroImageUrl ?? "",
+    caseStudyDetailFallbackImageUrl: existing.caseStudyDetailFallbackImageUrl ?? "",
+    careersHeroImageUrl: existing.careersHeroImageUrl ?? "",
+    contactHeroImageUrl: existing.contactHeroImageUrl ?? "",
+    contractsHeroImageUrl: existing.contractsHeroImageUrl ?? "",
+    privacyHeroImageUrl: existing.privacyHeroImageUrl ?? "",
+    capabilityStatementUrl: String(formData.get("capabilityStatementUrl") || existing.capabilityStatementUrl),
+    homepageSceneType: existing.homepageSceneType,
+    homepageSceneGlow: existing.homepageSceneGlow,
+    homepageSceneParticles: existing.homepageSceneParticles,
+    homepageSceneParallax: existing.homepageSceneParallax,
+  });
+  if (!parsed.success) return;
+
+  try {
+    await prisma.globalSetting.update({
+      where: { id: existing.id },
+      data: {
+        companyName: parsed.data.companyName,
+        tagline: parsed.data.tagline,
+        heroEyebrow: parsed.data.heroEyebrow,
+        heroHeadline: parsed.data.heroHeadline,
+        heroSubheadline: parsed.data.heroSubheadline,
+        footerStatement: parsed.data.footerStatement,
+        capabilityStatementUrl: parsed.data.capabilityStatementUrl,
+      },
+    });
+  } catch (error) {
+    console.error("[admin/dashboard] Unable to save dashboard overview content.", error);
+    return;
+  }
+
+  revalidatePath("/");
+  revalidatePath("/admin");
+  revalidatePath("/admin/settings");
+}
+
 export async function upsertPartnerAction(formData: FormData) {
   await requireAdmin();
   const parsed = missionPartnerSchema.safeParse({
@@ -367,12 +424,18 @@ export async function upsertPartnerAction(formData: FormData) {
   if (!parsed.success) return;
 
   const { id, ...data } = parsed.data;
-  if (id) {
-    await prisma.missionPartner.update({ where: { id }, data });
-  } else {
-    await prisma.missionPartner.create({ data });
+  try {
+    if (id) {
+      await prisma.missionPartner.update({ where: { id }, data });
+    } else {
+      await prisma.missionPartner.create({ data });
+    }
+  } catch (error) {
+    console.error("[admin/partners] Unable to save mission partner.", error);
+    return;
   }
   revalidatePath("/");
+  revalidatePath("/partnerships");
   revalidatePath("/admin/partners");
 }
 
@@ -380,8 +443,14 @@ export async function deletePartnerAction(formData: FormData) {
   await requireAdmin();
   const id = String(formData.get("id") || "");
   if (!id) return;
-  await prisma.missionPartner.delete({ where: { id } });
+  try {
+    await prisma.missionPartner.delete({ where: { id } });
+  } catch (error) {
+    console.error("[admin/partners] Unable to delete mission partner.", error);
+    return;
+  }
   revalidatePath("/");
+  revalidatePath("/partnerships");
   revalidatePath("/admin/partners");
 }
 
@@ -390,7 +459,12 @@ export async function setSubmissionStatusAction(formData: FormData) {
   const id = String(formData.get("id") || "");
   const status = String(formData.get("status") || "unread") as SubmissionStatus;
   if (!id) return;
-  await prisma.contactSubmission.update({ where: { id }, data: { status } });
+  try {
+    await prisma.contactSubmission.update({ where: { id }, data: { status } });
+  } catch (error) {
+    console.error("[admin/submissions] Unable to update submission status.", error);
+    return;
+  }
   revalidatePath("/admin/submissions");
 }
 
@@ -398,7 +472,12 @@ export async function deleteSubmissionAction(formData: FormData) {
   await requireAdmin();
   const id = String(formData.get("id") || "");
   if (!id) return;
-  await prisma.contactSubmission.delete({ where: { id } });
+  try {
+    await prisma.contactSubmission.delete({ where: { id } });
+  } catch (error) {
+    console.error("[admin/submissions] Unable to delete submission.", error);
+    return;
+  }
   revalidatePath("/admin/submissions");
 }
 

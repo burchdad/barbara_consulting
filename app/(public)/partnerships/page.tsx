@@ -11,6 +11,7 @@ import {
 import { HomepageCinematicScene } from "@/components/public/homepage-cinematic-scene";
 import { Reveal } from "@/components/public/reveal";
 import { Section } from "@/components/ui/section";
+import { getPublishedData } from "@/lib/site-data";
 
 const keyAdvisors = [
   "Keith Wilson - USDA",
@@ -60,7 +61,9 @@ const positioningSignals = [
   "Bid readiness and partner alignment",
 ];
 
-export default function PartnershipsPage() {
+export default async function PartnershipsPage() {
+  const { partners } = await getPublishedData();
+
   return (
     <HomepageCinematicScene
       sceneSettings={{
@@ -199,6 +202,52 @@ export default function PartnershipsPage() {
             </article>
           </Reveal>
         </div>
+      </Section>
+
+      <Section className="py-20 lg:py-28">
+        <Reveal>
+          <div className="about-overview-panel p-8 sm:p-10">
+            <p className="text-xs uppercase tracking-[0.3em] text-cyan-300">
+              Mission Partners
+            </p>
+
+            <div className="grid gap-8 lg:grid-cols-[0.8fr_1.2fr] lg:items-end">
+              <h2 className="mt-3 text-5xl font-black uppercase leading-[0.95] text-white sm:text-6xl">
+                Published partner relationships from the admin dashboard.
+              </h2>
+
+              <p className="text-lg leading-8 text-slate-300">
+                This section is fully database-driven. Add, edit, publish, or remove mission partner records in admin and the frontend updates here.
+              </p>
+            </div>
+
+            {partners.length ? (
+              <div className="mt-10 grid gap-5 md:grid-cols-2 xl:grid-cols-3">
+                {partners.map((partner) => (
+                  <article key={partner.id} className="border border-cyan-200/15 bg-black/25 p-6">
+                    {partner.logoUrl ? (
+                      // eslint-disable-next-line @next/next/no-img-element
+                      <img src={partner.logoUrl} alt={partner.name} className="mb-5 h-14 w-auto object-contain" />
+                    ) : null}
+                    <h3 className="text-2xl font-black uppercase leading-tight text-white">{partner.name}</h3>
+                    <p className="mt-3 text-xs font-bold uppercase tracking-[0.16em] text-cyan-200">
+                      Mission Partner
+                    </p>
+                    {partner.websiteUrl ? (
+                      <a href={partner.websiteUrl} target="_blank" rel="noreferrer" className="mt-5 inline-flex items-center gap-2 text-sm font-black uppercase tracking-[0.16em] text-cyan-200 transition hover:text-white">
+                        Visit Partner <ArrowRight size={16} />
+                      </a>
+                    ) : null}
+                  </article>
+                ))}
+              </div>
+            ) : (
+              <p className="mt-8 text-base leading-7 text-slate-300">
+                No mission partners are published yet. As records are saved and published in the admin dashboard, they will appear here automatically.
+              </p>
+            )}
+          </div>
+        </Reveal>
       </Section>
 
       <Section className="py-20 lg:py-28">

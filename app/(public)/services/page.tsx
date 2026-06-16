@@ -17,7 +17,6 @@ import { HomepageCinematicScene } from "@/components/public/homepage-cinematic-s
 import { Section } from "@/components/ui/section";
 import { Reveal } from "@/components/public/reveal";
 import { getPublishedData } from "@/lib/site-data";
-import { fallbackServices } from "@/lib/data/services";
 
 const audienceSegments = [
   {
@@ -191,8 +190,6 @@ function ServicesCommandMap() {
 
 export default async function ServicesPage() {
   const { services } = await getPublishedData();
-
-  const servicesToRender = services.length ? services : fallbackServices;
 
   return (
     <HomepageCinematicScene
@@ -471,38 +468,46 @@ export default async function ServicesPage() {
           </div>
         </Reveal>
 
-        <div className="grid gap-5 md:grid-cols-2 xl:grid-cols-4">
-          {servicesToRender.map((service, index) => (
-            <Reveal key={service.id} delay={0.04 + index * 0.035} variant="tiltLeft">
-              <article className="about-lead-card relative flex min-h-[22rem] flex-col p-7">
-                <span className="absolute right-5 top-5 text-xs font-black uppercase tracking-[0.22em] text-cyan-200/45">
-                  {String(index + 1).padStart(2, "0")}
-                </span>
+        {services.length ? (
+          <div className="grid gap-5 md:grid-cols-2 xl:grid-cols-4">
+            {services.map((service, index) => (
+              <Reveal key={service.id} delay={0.04 + index * 0.035} variant="tiltLeft">
+                <article className="about-lead-card relative flex min-h-[22rem] flex-col p-7">
+                  <span className="absolute right-5 top-5 text-xs font-black uppercase tracking-[0.22em] text-cyan-200/45">
+                    {String(index + 1).padStart(2, "0")}
+                  </span>
 
-                <div className="inline-flex w-fit items-center gap-2 border border-cyan-200/20 bg-cyan-200/[0.04] px-3 py-1 text-xs text-cyan-100">
-                  {categoryIcon(service.category)}
-                  {service.category}
-                </div>
+                  <div className="inline-flex w-fit items-center gap-2 border border-cyan-200/20 bg-cyan-200/[0.04] px-3 py-1 text-xs text-cyan-100">
+                    {categoryIcon(service.category)}
+                    {service.category}
+                  </div>
 
-                <h3 className="mt-8 text-3xl font-black uppercase leading-tight text-white">
-                  {service.title}
-                </h3>
+                  <h3 className="mt-8 text-3xl font-black uppercase leading-tight text-white">
+                    {service.title}
+                  </h3>
 
-                <p className="mt-4 text-sm leading-6 text-slate-300">
-                  {service.description}
-                </p>
-
-                <div className="mt-auto pt-8">
-                  <div className="h-px bg-gradient-to-r from-cyan-300/40 to-transparent" />
-
-                  <p className="mt-4 text-xs uppercase tracking-[0.18em] text-cyan-200">
-                    Strategic capability {String(index + 1).padStart(2, "0")}
+                  <p className="mt-4 text-sm leading-6 text-slate-300">
+                    {service.description}
                   </p>
-                </div>
-              </article>
-            </Reveal>
-          ))}
-        </div>
+
+                  <div className="mt-auto pt-8">
+                    <div className="h-px bg-gradient-to-r from-cyan-300/40 to-transparent" />
+
+                    <p className="mt-4 text-xs uppercase tracking-[0.18em] text-cyan-200">
+                      Strategic capability {String(index + 1).padStart(2, "0")}
+                    </p>
+                  </div>
+                </article>
+              </Reveal>
+            ))}
+          </div>
+        ) : (
+          <Reveal>
+            <article className="about-overview-panel p-8 text-slate-300">
+              Service items will appear here after they are published from the admin dashboard.
+            </article>
+          </Reveal>
+        )}
       </Section>
 
       {/* PROCESS */}
