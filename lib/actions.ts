@@ -114,16 +114,16 @@ async function forwardSupportTicket(ticket: Parameters<typeof buildSupportTicket
     }
 
     const responseBody = await response.text().catch(() => "");
-    console.error("[admin/support] Ghost Mission Control rejected ticket.", {
-      status: response.status,
-      responseBody,
-    });
+    const responseDetail = responseBody ? ` Response: ${responseBody.slice(0, 500)}` : "";
+    console.error(
+      `[admin/support] Ghost Mission Control rejected ticket. Status: ${response.status}.${responseDetail}`,
+    );
     return {
       status: "webhook_failed",
       message:
         response.status === 401
           ? "Support request saved, but Mission Control rejected the webhook secret. Confirm the Vercel and Railway secrets match, then retry."
-          : "Support request saved, but Mission Control did not accept the handoff. Check Mission Control logs, then retry.",
+          : `Support request saved, but Mission Control returned ${response.status}.${responseBody ? ` ${responseBody.slice(0, 180)}` : " Check Mission Control logs, then retry."}`,
     };
   } catch (error) {
     console.error("[admin/support] Unable to send ticket to Ghost Mission Control.", error);
