@@ -171,6 +171,24 @@ const contentSchemaStatements = [
     )
   `,
   `
+    CREATE TABLE IF NOT EXISTS "SupportTicket" (
+      "id" TEXT NOT NULL,
+      "clientName" TEXT NOT NULL,
+      "requesterName" TEXT NOT NULL,
+      "requesterEmail" TEXT NOT NULL,
+      "pageUrl" TEXT NOT NULL,
+      "requestType" TEXT NOT NULL,
+      "priority" TEXT NOT NULL,
+      "summary" TEXT NOT NULL,
+      "details" TEXT NOT NULL,
+      "attachments" JSONB NOT NULL,
+      "status" TEXT NOT NULL DEFAULT 'pending',
+      "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+      "updatedAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+      CONSTRAINT "SupportTicket_pkey" PRIMARY KEY ("id")
+    )
+  `,
+  `
     CREATE TABLE IF NOT EXISTS "GlobalSetting" (
       "id" TEXT NOT NULL,
       "companyName" TEXT NOT NULL,

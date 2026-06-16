@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { BarChart3, BriefcaseBusiness, Building2, FileText, Handshake, Home, Mail, MessageSquareQuote, Settings, ShieldCheck, Users } from "lucide-react";
+import { BarChart3, BotMessageSquare, BriefcaseBusiness, Building2, FileText, Handshake, Home, Mail, MessageSquareQuote, Settings, ShieldCheck, Users } from "lucide-react";
 import { logoutAction } from "@/lib/actions";
 
 const links = [
@@ -12,6 +12,7 @@ const links = [
   { href: "/admin/services", label: "Services", icon: ShieldCheck },
   { href: "/admin/partners", label: "Mission Partners", icon: Handshake },
   { href: "/admin/submissions", label: "Contact Submissions", icon: Mail },
+  { href: "/admin/support", label: "Website Support", icon: BotMessageSquare },
   { href: "/admin/settings", label: "Global Settings", icon: Settings },
 ];
 

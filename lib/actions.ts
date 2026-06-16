@@ -7,7 +7,7 @@ import { ensureGlobalSettingCompatibility } from "@/lib/admin-settings";
 import { ensurePartnershipContactCompatibility } from "@/lib/partnership-contact-compatibility";
 import { prisma } from "@/lib/prisma";
 import { clearAdminSession, loginAdmin, requireAdmin } from "@/lib/auth";
-import { uploadAdminFile } from "@/lib/blob-uploads";
+import { uploadAdminFile, uploadAdminFiles } from "@/lib/blob-uploads";
 import {
   caseStudySchema,
   contactSchema,
@@ -19,6 +19,7 @@ import {
   missionPartnerSchema,
   partnershipContactSchema,
   serviceItemSchema,
+  supportTicketSchema,
   testimonialSchema,
   toBool,
   toInt,
@@ -28,6 +29,13 @@ import {
 export type ContactFormState = {
   success: boolean;
   message: string;
+  errors?: Record<string, string[]>;
+};
+
+export type SupportTicketFormState = {
+  success: boolean;
+  message: string;
+  ticketId?: string;
   errors?: Record<string, string[]>;
 };
 
@@ -534,6 +542,101 @@ export async function deleteSubmissionAction(formData: FormData) {
     return;
   }
   revalidatePath("/admin/submissions");
+}
+
+export async function createSupportTicketAction(
+  _: SupportTicketFormState,
+  formData: FormData,
+): Promise<SupportTicketFormState> {
+  await requireAdmin();
+  await ensurePartnershipContactCompatibility();
+
+  const parsed = supportTicketSchema.safeParse({
+    clientName: formData.get("clientName"),
+    requesterName: formData.get("requesterName"),
+    requesterEmail: formData.get("requesterEmail"),
+    pageUrl: formData.get("pageUrl"),
+    requestType: formData.get("requestType"),
+    priority: formData.get("priority"),
+    summary: formData.get("summary"),
+    details: formData.get("details"),
+  });
+
+  if (!parsed.success) {
+    return {
+      success: false,
+      message: "Please complete the required ticket details.",
+      errors: parsed.error.flatten().fieldErrors,
+    };
+  }
+
+  let attachments: Awaited<ReturnType<typeof uploadAdminFiles>> = [];
+  try {
+    attachments = await uploadAdminFiles(formData, "attachments", "admin/support-tickets", "support");
+  } catch (error) {
+    console.error("[admin/support] Unable to upload support attachments.", error);
+    return {
+      success: false,
+      message: "One of the attachments could not be uploaded. Please try again with images or PDFs under 15MB.",
+    };
+  }
+
+  const payload = {
+    client: parsed.data.clientName,
+    site: "www.graymatterstech.com",
+    repo: "burchdad/barbara_consulting",
+    source: "client_admin_dashboard",
+    requestType: parsed.data.requestType,
+    priority: parsed.data.priority,
+    pageUrl: parsed.data.pageUrl,
+    summary: parsed.data.summary,
+    details: parsed.data.details,
+    requester: {
+      name: parsed.data.requesterName,
+      email: parsed.data.requesterEmail,
+    },
+    attachments,
+    branchPolicy: "testing_branch_only",
+    approvalRequired: true,
+  };
+
+  const webhookUrl = process.env.GHOST_MISSION_CONTROL_WEBHOOK_URL || process.env.WEB_HELPER_AGENT_WEBHOOK_URL;
+  let status = webhookUrl ? "pending" : "needs_webhook";
+
+  const ticket = await prisma.supportTicket.create({
+    data: {
+      ...parsed.data,
+      attachments,
+      status,
+    },
+  });
+
+  if (webhookUrl) {
+    try {
+      const response = await fetch(webhookUrl, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ ...payload, ticketId: ticket.id }),
+      });
+      status = response.ok ? "sent" : "webhook_failed";
+    } catch (error) {
+      console.error("[admin/support] Unable to send ticket to Ghost Mission Control.", error);
+      status = "webhook_failed";
+    }
+
+    await prisma.supportTicket.update({ where: { id: ticket.id }, data: { status } });
+  }
+
+  revalidatePath("/admin/support");
+
+  return {
+    success: status === "sent" || status === "needs_webhook",
+    ticketId: ticket.id,
+    message:
+      status === "sent"
+        ? "Support request sent to Ghost Mission Control."
+        : "Support request saved. Add the Ghost Mission Control webhook env var to forward future tickets automatically.",
+  };
 }
 
 export async function updateGlobalSettingsAction(formData: FormData) {

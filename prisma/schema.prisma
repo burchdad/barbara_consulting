@@ -161,6 +161,22 @@ model ContactSubmission {
   createdAt DateTime         @default(now())
 }
 
+model SupportTicket {
+  id            String   @id @default(cuid())
+  clientName    String
+  requesterName String
+  requesterEmail String
+  pageUrl       String
+  requestType   String
+  priority      String
+  summary       String
+  details       String
+  attachments   Json
+  status        String   @default("pending")
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+}
+
 model GlobalSetting {
   id             String   @id @default(cuid())
   companyName    String

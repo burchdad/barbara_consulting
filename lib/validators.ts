@@ -117,6 +117,17 @@ export const partnershipContactSchema = z.object({
   isPublished: z.boolean().default(false),
 });
 
+export const supportTicketSchema = z.object({
+  clientName: z.string().min(2).max(160),
+  requesterName: z.string().min(2).max(120),
+  requesterEmail: z.string().email(),
+  pageUrl: z.string().min(1).max(500),
+  requestType: z.enum(["text_update", "image_or_file", "layout_change", "bug", "new_content", "other"]),
+  priority: z.enum(["normal", "high", "urgent"]).default("normal"),
+  summary: z.string().min(5).max(180),
+  details: z.string().min(20).max(5000),
+});
+
 export const globalSettingSchema = z.object({
   companyName: z.string().min(2),
   tagline: z.string().min(2),

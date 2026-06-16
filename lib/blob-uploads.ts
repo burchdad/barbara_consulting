@@ -1,7 +1,7 @@
 import { put } from "@vercel/blob";
 import { randomUUID } from "crypto";
 
-type UploadKind = "image" | "pdf";
+type UploadKind = "image" | "pdf" | "support";
 
 const uploadRules: Record<UploadKind, { maxSize: number; contentTypes: string[] }> = {
   image: {
@@ -11,6 +11,10 @@ const uploadRules: Record<UploadKind, { maxSize: number; contentTypes: string[] 
   pdf: {
     maxSize: 15 * 1024 * 1024,
     contentTypes: ["application/pdf"],
+  },
+  support: {
+    maxSize: 15 * 1024 * 1024,
+    contentTypes: ["image/jpeg", "image/png", "image/webp", "image/gif", "application/pdf"],
   },
 };
 
@@ -53,4 +57,25 @@ export async function uploadAdminFile(formData: FormData, fieldName: string, fol
   });
 
   return blob.url;
+}
+
+export async function uploadAdminFiles(formData: FormData, fieldName: string, folder: string, kind: UploadKind) {
+  const files = formData.getAll(fieldName).filter((file): file is File => file instanceof File && file.size > 0);
+  const uploaded = [];
+
+  for (const file of files) {
+    const singleFileFormData = new FormData();
+    singleFileFormData.set(fieldName, file);
+    const url = await uploadAdminFile(singleFileFormData, fieldName, folder, kind);
+    if (url) {
+      uploaded.push({
+        name: file.name,
+        type: file.type,
+        size: file.size,
+        url,
+      });
+    }
+  }
+
+  return uploaded;
 }
