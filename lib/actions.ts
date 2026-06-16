@@ -7,6 +7,7 @@ import { ensureGlobalSettingCompatibility } from "@/lib/admin-settings";
 import { ensurePartnershipContactCompatibility } from "@/lib/partnership-contact-compatibility";
 import { prisma } from "@/lib/prisma";
 import { clearAdminSession, loginAdmin, requireAdmin } from "@/lib/auth";
+import { uploadAdminFile } from "@/lib/blob-uploads";
 import {
   caseStudySchema,
   contactSchema,
@@ -230,11 +231,16 @@ export async function deleteContractAction(formData: FormData) {
 
 export async function upsertLeadershipAction(formData: FormData) {
   await requireAdmin();
+  const uploadedPhotoUrl = await uploadAdminFile(formData, "photoFile", "admin/leadership", "image").catch((error) => {
+    console.error("[admin/leadership] Unable to upload leader photo.", error);
+    return null;
+  });
+
   const parsed = leadershipSchema.safeParse({
     id: String(formData.get("id") || "") || undefined,
     name: formData.get("name"),
     title: formData.get("title"),
-    photoUrl: String(formData.get("photoUrl") || ""),
+    photoUrl: uploadedPhotoUrl || String(formData.get("photoUrl") || ""),
     shortBio: formData.get("shortBio"),
     fullBio: formData.get("fullBio"),
     linkedInUrl: String(formData.get("linkedInUrl") || ""),
@@ -362,6 +368,10 @@ export async function updateDashboardOverviewAction(formData: FormData) {
 
   const existing = await prisma.globalSetting.findFirst();
   if (!existing) return;
+  const uploadedCapabilityUrl = await uploadAdminFile(formData, "capabilityStatementFile", "admin/capabilities", "pdf").catch((error) => {
+    console.error("[admin/dashboard] Unable to upload capabilities statement.", error);
+    return null;
+  });
 
   const parsed = globalSettingSchema.safeParse({
     companyName: String(formData.get("companyName") || existing.companyName),
@@ -382,7 +392,7 @@ export async function updateDashboardOverviewAction(formData: FormData) {
     contactHeroImageUrl: existing.contactHeroImageUrl ?? "",
     contractsHeroImageUrl: existing.contractsHeroImageUrl ?? "",
     privacyHeroImageUrl: existing.privacyHeroImageUrl ?? "",
-    capabilityStatementUrl: String(formData.get("capabilityStatementUrl") || existing.capabilityStatementUrl),
+    capabilityStatementUrl: uploadedCapabilityUrl || String(formData.get("capabilityStatementUrl") || existing.capabilityStatementUrl),
     homepageSceneType: existing.homepageSceneType,
     homepageSceneGlow: existing.homepageSceneGlow,
     homepageSceneParticles: existing.homepageSceneParticles,
@@ -528,6 +538,29 @@ export async function deleteSubmissionAction(formData: FormData) {
 
 export async function updateGlobalSettingsAction(formData: FormData) {
   await requireAdmin();
+  const [
+    aboutHeroImageUrl,
+    caseStudiesHeroImageUrl,
+    caseStudyDetailFallbackImageUrl,
+    careersHeroImageUrl,
+    contactHeroImageUrl,
+    contractsHeroImageUrl,
+    privacyHeroImageUrl,
+    capabilityStatementUrl,
+  ] = await Promise.all([
+    uploadAdminFile(formData, "aboutHeroImageFile", "admin/page-images", "image"),
+    uploadAdminFile(formData, "caseStudiesHeroImageFile", "admin/page-images", "image"),
+    uploadAdminFile(formData, "caseStudyDetailFallbackImageFile", "admin/page-images", "image"),
+    uploadAdminFile(formData, "careersHeroImageFile", "admin/page-images", "image"),
+    uploadAdminFile(formData, "contactHeroImageFile", "admin/page-images", "image"),
+    uploadAdminFile(formData, "contractsHeroImageFile", "admin/page-images", "image"),
+    uploadAdminFile(formData, "privacyHeroImageFile", "admin/page-images", "image"),
+    uploadAdminFile(formData, "capabilityStatementFile", "admin/capabilities", "pdf"),
+  ]).catch((error) => {
+    console.error("[admin/settings] Unable to upload one or more files.", error);
+    return [null, null, null, null, null, null, null, null];
+  });
+
   const parsed = globalSettingSchema.safeParse({
     companyName: formData.get("companyName"),
     tagline: formData.get("tagline"),
@@ -540,14 +573,14 @@ export async function updateGlobalSettingsAction(formData: FormData) {
     heroHeadline: formData.get("heroHeadline"),
     heroTrustBadge: formData.get("heroTrustBadge"),
     heroSubheadline: formData.get("heroSubheadline"),
-    aboutHeroImageUrl: String(formData.get("aboutHeroImageUrl") || ""),
-    caseStudiesHeroImageUrl: String(formData.get("caseStudiesHeroImageUrl") || ""),
-    caseStudyDetailFallbackImageUrl: String(formData.get("caseStudyDetailFallbackImageUrl") || ""),
-    careersHeroImageUrl: String(formData.get("careersHeroImageUrl") || ""),
-    contactHeroImageUrl: String(formData.get("contactHeroImageUrl") || ""),
-    contractsHeroImageUrl: String(formData.get("contractsHeroImageUrl") || ""),
-    privacyHeroImageUrl: String(formData.get("privacyHeroImageUrl") || ""),
-    capabilityStatementUrl: String(formData.get("capabilityStatementUrl") || ""),
+    aboutHeroImageUrl: aboutHeroImageUrl || String(formData.get("aboutHeroImageUrl") || ""),
+    caseStudiesHeroImageUrl: caseStudiesHeroImageUrl || String(formData.get("caseStudiesHeroImageUrl") || ""),
+    caseStudyDetailFallbackImageUrl: caseStudyDetailFallbackImageUrl || String(formData.get("caseStudyDetailFallbackImageUrl") || ""),
+    careersHeroImageUrl: careersHeroImageUrl || String(formData.get("careersHeroImageUrl") || ""),
+    contactHeroImageUrl: contactHeroImageUrl || String(formData.get("contactHeroImageUrl") || ""),
+    contractsHeroImageUrl: contractsHeroImageUrl || String(formData.get("contractsHeroImageUrl") || ""),
+    privacyHeroImageUrl: privacyHeroImageUrl || String(formData.get("privacyHeroImageUrl") || ""),
+    capabilityStatementUrl: capabilityStatementUrl || String(formData.get("capabilityStatementUrl") || ""),
     homepageSceneType: String(formData.get("homepageSceneType") || "grid"),
     homepageSceneGlow: String(formData.get("homepageSceneGlow") || "blue"),
     homepageSceneParticles: toBool(formData.get("homepageSceneParticles")),

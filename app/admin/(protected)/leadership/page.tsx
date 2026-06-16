@@ -4,6 +4,7 @@ import {
   AdminCheckbox,
   AdminDeleteButton,
   AdminEditCard,
+  AdminFileField,
   AdminField,
   AdminSectionHeader,
   AdminStatCard,
@@ -30,10 +31,11 @@ export default async function AdminLeadershipPage() {
       </div>
       <AdminCard>
         <AdminSectionHeader title="Create Leader" description="Add a public leadership profile with headshot and biography content." />
-        <form action={upsertLeadershipAction} className="mt-5 grid gap-4 md:grid-cols-2">
+        <form action={upsertLeadershipAction} encType="multipart/form-data" className="mt-5 grid gap-4 md:grid-cols-2">
           <AdminField label="Name" name="name" required />
           <AdminField label="Title" name="title" required />
           <AdminField label="Photo URL" name="photoUrl" />
+          <AdminFileField label="Upload Headshot" name="photoFile" accept="image/jpeg,image/png,image/webp,image/gif" note="Optional. Uploading a file stores it in Blob and replaces the photo URL." />
           <AdminField label="LinkedIn URL" name="linkedInUrl" />
           <AdminField label="Display Order" name="displayOrder" type="number" defaultValue={0} />
           <AdminCheckbox label="Published" name="isPublished" />
@@ -47,11 +49,12 @@ export default async function AdminLeadershipPage() {
       <AdminSectionHeader title="Manage Leadership" description="Open a profile to edit bios, links, headshots, and visibility." />
       {leaders.map((leader) => (
         <AdminEditCard key={leader.id} title={leader.name} meta={`${leader.title} / order ${leader.displayOrder}`} published={leader.isPublished}>
-          <form action={upsertLeadershipAction} className="grid gap-4 md:grid-cols-2">
+          <form action={upsertLeadershipAction} encType="multipart/form-data" className="grid gap-4 md:grid-cols-2">
             <input type="hidden" name="id" value={leader.id} />
             <AdminField label="Name" name="name" defaultValue={leader.name} required />
             <AdminField label="Title" name="title" defaultValue={leader.title} required />
             <AdminField label="Photo URL" name="photoUrl" defaultValue={leader.photoUrl} />
+            <AdminFileField label="Replace Headshot" name="photoFile" accept="image/jpeg,image/png,image/webp,image/gif" note="Optional. Leave blank to keep the current URL." />
             <AdminField label="LinkedIn URL" name="linkedInUrl" defaultValue={leader.linkedInUrl} />
             <AdminField label="Display Order" name="displayOrder" type="number" defaultValue={leader.displayOrder} />
             <AdminCheckbox label="Published" name="isPublished" defaultChecked={leader.isPublished} />

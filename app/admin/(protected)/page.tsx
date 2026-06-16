@@ -1,4 +1,4 @@
-import { AdminActionRow, AdminCard, AdminField, AdminSectionHeader, AdminStatCard, AdminSubmitButton, AdminStatusBadge, AdminTextArea } from "@/components/admin/admin-form";
+import { AdminActionRow, AdminCard, AdminFileField, AdminField, AdminSectionHeader, AdminStatCard, AdminSubmitButton, AdminStatusBadge, AdminTextArea } from "@/components/admin/admin-form";
 import { ModuleHeader } from "@/components/admin/module-header";
 import { updateDashboardOverviewAction } from "@/lib/actions";
 import { ensureContentBaseline } from "@/lib/content-baseline";
@@ -39,7 +39,7 @@ export default async function AdminDashboardPage() {
       <div className="grid gap-6 xl:grid-cols-[1.1fr_0.9fr]">
         <AdminCard>
           <AdminSectionHeader title="Homepage Quick Update" description="Fast edits for the content clients are most likely to request." />
-          <form action={updateDashboardOverviewAction} className="mt-5 grid gap-4 md:grid-cols-2">
+          <form action={updateDashboardOverviewAction} encType="multipart/form-data" className="mt-5 grid gap-4 md:grid-cols-2">
             <AdminField label="Company Name" name="companyName" defaultValue={settings?.companyName} required />
             <AdminField label="Tagline" name="tagline" defaultValue={settings?.tagline} required />
             <div className="md:col-span-2"><AdminField label="Hero Eyebrow" name="heroEyebrow" defaultValue={settings?.heroEyebrow} required /></div>
@@ -47,6 +47,9 @@ export default async function AdminDashboardPage() {
             <div className="md:col-span-2"><AdminTextArea label="Hero Subheadline" name="heroSubheadline" defaultValue={settings?.heroSubheadline} rows={3} required /></div>
             <div className="md:col-span-2"><AdminTextArea label="Footer Statement" name="footerStatement" defaultValue={settings?.footerStatement} rows={3} required /></div>
             <div className="md:col-span-2"><AdminField label="Capabilities Statement URL or Path" name="capabilityStatementUrl" defaultValue={settings?.capabilityStatementUrl} required /></div>
+            <div className="md:col-span-2">
+              <AdminFileField label="Upload Capabilities Statement PDF" name="capabilityStatementFile" accept="application/pdf" note="Optional. Uploading a PDF stores it in Blob and replaces the current capabilities statement URL." />
+            </div>
             <AdminActionRow className="md:col-span-2"><AdminSubmitButton>Save Overview</AdminSubmitButton></AdminActionRow>
           </form>
         </AdminCard>
