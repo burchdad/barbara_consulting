@@ -39,6 +39,16 @@ export type SupportTicketFormState = {
   errors?: Record<string, string[]>;
 };
 
+const ghostMissionControlWebhookUrl =
+  process.env.GHOST_MISSION_CONTROL_WEBHOOK_URL ||
+  process.env.WEB_HELPER_AGENT_WEBHOOK_URL ||
+  "https://ghostmissioncontrol-production.up.railway.app/mission/web-helper-requests";
+
+const ghostMissionControlWebhookSecret =
+  process.env.GHOST_WEBHOOK_SECRET ||
+  process.env.GHOST_MISSION_CONTROL_WEBHOOK_SECRET ||
+  process.env.WEB_HELPER_AGENT_WEBHOOK_SECRET;
+
 export async function loginAction(_: unknown, formData: FormData) {
   const redirectTo = String(formData.get("redirectTo") || "/admin");
   const parsed = loginSchema.safeParse({
@@ -586,9 +596,9 @@ export async function createSupportTicketAction(
     site: "www.graymatterstech.com",
     repo: "burchdad/barbara_consulting",
     source: "client_admin_dashboard",
-    requestType: parsed.data.requestType,
+    request_type: parsed.data.requestType,
     priority: parsed.data.priority,
-    pageUrl: parsed.data.pageUrl,
+    page_url: parsed.data.pageUrl,
     summary: parsed.data.summary,
     details: parsed.data.details,
     requester: {
@@ -596,12 +606,11 @@ export async function createSupportTicketAction(
       email: parsed.data.requesterEmail,
     },
     attachments,
-    branchPolicy: "testing_branch_only",
-    approvalRequired: true,
+    branch_policy: "testing_branch_only",
+    approval_required: true,
   };
 
-  const webhookUrl = process.env.GHOST_MISSION_CONTROL_WEBHOOK_URL || process.env.WEB_HELPER_AGENT_WEBHOOK_URL;
-  let status = webhookUrl ? "pending" : "needs_webhook";
+  let status = ghostMissionControlWebhookSecret ? "pending" : "needs_webhook_secret";
 
   const ticket = await prisma.supportTicket.create({
     data: {
@@ -611,12 +620,15 @@ export async function createSupportTicketAction(
     },
   });
 
-  if (webhookUrl) {
+  if (ghostMissionControlWebhookSecret) {
     try {
-      const response = await fetch(webhookUrl, {
+      const response = await fetch(ghostMissionControlWebhookUrl, {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ ...payload, ticketId: ticket.id }),
+        headers: {
+          "Content-Type": "application/json",
+          "X-Ghost-Webhook-Secret": ghostMissionControlWebhookSecret,
+        },
+        body: JSON.stringify({ ...payload, ticket_id: ticket.id }),
       });
       status = response.ok ? "sent" : "webhook_failed";
     } catch (error) {
@@ -630,12 +642,12 @@ export async function createSupportTicketAction(
   revalidatePath("/admin/support");
 
   return {
-    success: status === "sent" || status === "needs_webhook",
+    success: status === "sent" || status === "needs_webhook_secret",
     ticketId: ticket.id,
     message:
       status === "sent"
         ? "Support request sent to Ghost Mission Control."
-        : "Support request saved. Add the Ghost Mission Control webhook env var to forward future tickets automatically.",
+        : "Support request saved. Add the Ghost webhook secret env var to forward future tickets automatically.",
   };
 }
 

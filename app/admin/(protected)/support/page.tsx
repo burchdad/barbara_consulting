@@ -7,7 +7,7 @@ import { SupportTicketForm } from "@/app/admin/(protected)/support/support-ticke
 
 function statusLabel(status: string) {
   if (status === "sent") return "Sent";
-  if (status === "needs_webhook") return "Saved";
+  if (status === "needs_webhook" || status === "needs_webhook_secret") return "Saved";
   if (status === "webhook_failed") return "Retry Needed";
   return "Pending";
 }
@@ -22,7 +22,11 @@ export default async function AdminSupportPage() {
 
   const sentCount = tickets.filter((ticket) => ticket.status === "sent").length;
   const openCount = tickets.filter((ticket) => ticket.status !== "sent").length;
-  const webhookConfigured = Boolean(process.env.GHOST_MISSION_CONTROL_WEBHOOK_URL || process.env.WEB_HELPER_AGENT_WEBHOOK_URL);
+  const webhookConfigured = Boolean(
+    process.env.GHOST_WEBHOOK_SECRET ||
+    process.env.GHOST_MISSION_CONTROL_WEBHOOK_SECRET ||
+    process.env.WEB_HELPER_AGENT_WEBHOOK_SECRET,
+  );
 
   return (
     <div className="space-y-6">
