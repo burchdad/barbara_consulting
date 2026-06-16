@@ -1,4 +1,4 @@
-import { AdminActionRow, AdminCard, AdminFileField, AdminField, AdminSectionHeader, AdminStatCard, AdminSubmitButton, AdminStatusBadge, AdminTextArea } from "@/components/admin/admin-form";
+import { AdminActionRow, AdminAssetUploadField, AdminCard, AdminField, AdminSectionHeader, AdminStatCard, AdminSubmitButton, AdminStatusBadge, AdminTextArea } from "@/components/admin/admin-form";
 import { ModuleHeader } from "@/components/admin/module-header";
 import { updateDashboardOverviewAction } from "@/lib/actions";
 import { ensureContentBaseline } from "@/lib/content-baseline";
@@ -46,9 +46,15 @@ export default async function AdminDashboardPage() {
             <div className="md:col-span-2"><AdminTextArea label="Hero Headline" name="heroHeadline" defaultValue={settings?.heroHeadline} rows={2} required /></div>
             <div className="md:col-span-2"><AdminTextArea label="Hero Subheadline" name="heroSubheadline" defaultValue={settings?.heroSubheadline} rows={3} required /></div>
             <div className="md:col-span-2"><AdminTextArea label="Footer Statement" name="footerStatement" defaultValue={settings?.footerStatement} rows={3} required /></div>
-            <div className="md:col-span-2"><AdminField label="Capabilities Statement URL or Path" name="capabilityStatementUrl" defaultValue={settings?.capabilityStatementUrl} required /></div>
             <div className="md:col-span-2">
-              <AdminFileField label="Upload Capabilities Statement PDF" name="capabilityStatementFile" accept="application/pdf" note="Optional. Uploading a PDF stores it in Blob and replaces the current capabilities statement URL." />
+              <AdminAssetUploadField
+                label="Capabilities Statement PDF"
+                name="capabilityStatementFile"
+                currentValueName="capabilityStatementUrl"
+                currentValue={settings?.capabilityStatementUrl}
+                accept="application/pdf"
+                note="Upload a replacement PDF to store it in Blob and publish the new file."
+              />
             </div>
             <AdminActionRow className="md:col-span-2"><AdminSubmitButton>Save Overview</AdminSubmitButton></AdminActionRow>
           </form>

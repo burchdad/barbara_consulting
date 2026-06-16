@@ -43,6 +43,46 @@ export function AdminFileField({ label, name, accept, note }: { label: string; n
   );
 }
 
+export function AdminAssetUploadField({
+  label,
+  name,
+  currentValueName,
+  currentValue,
+  accept,
+  note,
+}: {
+  label: string;
+  name: string;
+  currentValueName: string;
+  currentValue?: string | null;
+  accept: string;
+  note?: string;
+}) {
+  return (
+    <div className="grid gap-3 rounded-lg border border-white/10 bg-white/[0.02] p-4">
+      <input type="hidden" name={currentValueName} value={currentValue ?? ""} />
+      <div className="flex flex-wrap items-center justify-between gap-3">
+        <div>
+          <p className="text-xs font-black uppercase tracking-[0.12em] text-zinc-400">{label}</p>
+          <p className="mt-1 text-sm text-zinc-500">Current file will stay active unless a replacement is uploaded.</p>
+        </div>
+        {currentValue ? (
+          <a href={currentValue} target="_blank" rel="noreferrer" className="rounded-md border border-white/15 px-3 py-2 text-xs font-bold uppercase tracking-[0.08em] text-zinc-200 transition hover:bg-white/5">
+            View Current
+          </a>
+        ) : null}
+      </div>
+      <input
+        type="file"
+        name={name}
+        accept={accept}
+        className="min-w-0 rounded-md border border-dashed border-white/20 bg-black/60 px-3 py-2.5 text-sm text-zinc-300 file:mr-3 file:rounded-md file:border-0 file:bg-white/10 file:px-3 file:py-1.5 file:text-xs file:font-bold file:uppercase file:tracking-[0.08em] file:text-white hover:border-red-400/50"
+      />
+      {note ? <p className="text-xs leading-5 text-zinc-500">{note}</p> : null}
+    </div>
+  );
+}
+
 export function AdminTextArea({ label, name, defaultValue, required = false, rows = 4 }: { label: string; name: string; defaultValue?: string; required?: boolean; rows?: number }) {
   return (
     <label className="grid gap-2 text-sm font-medium text-zinc-300">

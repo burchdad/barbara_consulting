@@ -1,5 +1,6 @@
 import {
   AdminActionRow,
+  AdminAssetUploadField,
   AdminCard,
   AdminCheckbox,
   AdminFileField,
@@ -62,8 +63,16 @@ export default async function AdminSettingsPage() {
           <AdminFileField label="Upload Contracts Hero Image" name="contractsHeroImageFile" accept="image/jpeg,image/png,image/webp,image/gif" />
           <div><AdminField label="Privacy Hero Image URL" name="privacyHeroImageUrl" defaultValue={settings?.privacyHeroImageUrl ?? siteConfig.media.privacyHeroImageUrl} type="url" /></div>
           <AdminFileField label="Upload Privacy Hero Image" name="privacyHeroImageFile" accept="image/jpeg,image/png,image/webp,image/gif" />
-          <div><AdminField label="Capabilities Statement URL or Path" name="capabilityStatementUrl" defaultValue={settings?.capabilityStatementUrl ?? siteConfig.media.capabilityStatementUrl} required /></div>
-          <AdminFileField label="Upload Capabilities Statement PDF" name="capabilityStatementFile" accept="application/pdf" note="Optional. Uploading a PDF stores it in Blob and replaces the URL/path." />
+          <div className="md:col-span-2">
+            <AdminAssetUploadField
+              label="Capabilities Statement PDF"
+              name="capabilityStatementFile"
+              currentValueName="capabilityStatementUrl"
+              currentValue={settings?.capabilityStatementUrl ?? siteConfig.media.capabilityStatementUrl}
+              accept="application/pdf"
+              note="Upload a replacement PDF to store it in Blob and publish the new file."
+            />
+          </div>
           <AdminSelect label="Homepage Scene Type" name="homepageSceneType" defaultValue={settings?.homepageSceneType ?? "grid"}>
             <option value="grid">AI Grid</option>
             <option value="mesh">Neural Mesh</option>
