@@ -39,6 +39,11 @@ export type SupportTicketFormState = {
   errors?: Record<string, string[]>;
 };
 
+export type RetrySupportTicketState = {
+  success: boolean;
+  message: string;
+};
+
 const ghostMissionControlWebhookUrl =
   process.env.GHOST_MISSION_CONTROL_WEBHOOK_URL ||
   process.env.WEB_HELPER_AGENT_WEBHOOK_URL ||
@@ -694,21 +699,46 @@ export async function createSupportTicketAction(
   };
 }
 
-export async function retrySupportTicketHandoffAction(formData: FormData) {
+export async function retrySupportTicketHandoffAction(
+  _: RetrySupportTicketState,
+  formData: FormData,
+): Promise<RetrySupportTicketState> {
   await requireAdmin();
   await ensurePartnershipContactCompatibility();
 
   const id = String(formData.get("id") || "");
-  if (!id) return;
+  if (!id) {
+    return {
+      success: false,
+      message: "Unable to retry this ticket because its ID is missing.",
+    };
+  }
 
   const ticket = await prisma.supportTicket.findUnique({ where: { id } });
-  if (!ticket || ticket.status === "sent") return;
+  if (!ticket) {
+    return {
+      success: false,
+      message: "Unable to retry this ticket because it was not found.",
+    };
+  }
+
+  if (ticket.status === "sent") {
+    return {
+      success: true,
+      message: "This ticket has already been sent to Mission Control.",
+    };
+  }
 
   await prisma.supportTicket.update({ where: { id }, data: { status: "pending" } });
   const handoff = await forwardSupportTicket(ticket);
   await prisma.supportTicket.update({ where: { id }, data: { status: handoff.status } });
 
   revalidatePath("/admin/support");
+
+  return {
+    success: handoff.status === "sent",
+    message: handoff.message,
+  };
 }
 
 export async function updateGlobalSettingsAction(formData: FormData) {
