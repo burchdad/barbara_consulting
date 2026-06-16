@@ -100,10 +100,15 @@ export async function upsertJobAction(formData: FormData) {
   if (!parsed.success) return;
 
   const { id, ...data } = parsed.data;
-  if (id) {
-    await prisma.job.update({ where: { id }, data });
-  } else {
-    await prisma.job.create({ data });
+  try {
+    if (id) {
+      await prisma.job.update({ where: { id }, data });
+    } else {
+      await prisma.job.create({ data });
+    }
+  } catch (error) {
+    console.error("[admin/jobs] Unable to save job.", error);
+    return;
   }
   revalidatePath("/careers");
   revalidatePath("/admin/jobs");
@@ -113,7 +118,12 @@ export async function deleteJobAction(formData: FormData) {
   await requireAdmin();
   const id = String(formData.get("id") || "");
   if (!id) return;
-  await prisma.job.delete({ where: { id } });
+  try {
+    await prisma.job.delete({ where: { id } });
+  } catch (error) {
+    console.error("[admin/jobs] Unable to delete job.", error);
+    return;
+  }
   revalidatePath("/careers");
   revalidatePath("/admin/jobs");
 }

@@ -1,4 +1,5 @@
 import { prisma } from "@/lib/prisma";
+import { jobsSeed } from "@/lib/data/jobsSeed";
 
 let hasWarnedPublicDataFallback = false;
 
@@ -71,9 +72,9 @@ export async function getPublicCareersPageData() {
         prisma.globalSetting.findFirst(),
       ]);
 
-      return { jobs, settings };
+      return { jobs: jobs.length ? jobs : jobsSeed, settings };
     },
-    { jobs: [], settings: null },
+    { jobs: jobsSeed, settings: null },
   );
 }
 
