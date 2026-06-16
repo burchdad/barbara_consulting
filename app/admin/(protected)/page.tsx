@@ -1,4 +1,4 @@
-import { AdminCard, AdminField, AdminTextArea } from "@/components/admin/admin-form";
+import { AdminActionRow, AdminCard, AdminField, AdminSectionHeader, AdminStatCard, AdminSubmitButton, AdminStatusBadge, AdminTextArea } from "@/components/admin/admin-form";
 import { ModuleHeader } from "@/components/admin/module-header";
 import { updateDashboardOverviewAction } from "@/lib/actions";
 import { ensureContentBaseline } from "@/lib/content-baseline";
@@ -24,22 +24,22 @@ export default async function AdminDashboardPage() {
       <ModuleHeader title="Dashboard Overview" subtitle="Operational snapshot and quick action context." />
 
       <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
-        <AdminCard><p className="text-sm text-zinc-400">Active Jobs</p><p className="mt-2 text-4xl font-black">{jobs}</p></AdminCard>
-        <AdminCard><p className="text-sm text-zinc-400">Published Case Studies</p><p className="mt-2 text-4xl font-black">{studies}</p></AdminCard>
-        <AdminCard><p className="text-sm text-zinc-400">Published Contracts</p><p className="mt-2 text-4xl font-black">{contracts}</p></AdminCard>
-        <AdminCard><p className="text-sm text-zinc-400">Contact Submissions</p><p className="mt-2 text-4xl font-black">{submissions}</p></AdminCard>
+        <AdminStatCard label="Active Jobs" value={jobs} />
+        <AdminStatCard label="Published Case Studies" value={studies} />
+        <AdminStatCard label="Published Contracts" value={contracts} />
+        <AdminStatCard label="Contact Submissions" value={submissions} />
       </div>
 
       <div className="grid gap-4 md:grid-cols-3">
-        <AdminCard><p className="text-sm text-zinc-400">Published Services</p><p className="mt-2 text-4xl font-black">{services}</p></AdminCard>
-        <AdminCard><p className="text-sm text-zinc-400">Published Testimonials</p><p className="mt-2 text-4xl font-black">{testimonials}</p></AdminCard>
-        <AdminCard><p className="text-sm text-zinc-400">Published Partners</p><p className="mt-2 text-4xl font-black">{partners}</p></AdminCard>
+        <AdminStatCard label="Published Services" value={services} />
+        <AdminStatCard label="Published Testimonials" value={testimonials} />
+        <AdminStatCard label="Published Partners" value={partners} />
       </div>
 
       <div className="grid gap-6 xl:grid-cols-[1.1fr_0.9fr]">
         <AdminCard>
-          <h2 className="text-2xl font-black uppercase">Homepage Quick Update</h2>
-          <form action={updateDashboardOverviewAction} className="mt-4 grid gap-3 md:grid-cols-2">
+          <AdminSectionHeader title="Homepage Quick Update" description="Fast edits for the content clients are most likely to request." />
+          <form action={updateDashboardOverviewAction} className="mt-5 grid gap-4 md:grid-cols-2">
             <AdminField label="Company Name" name="companyName" defaultValue={settings?.companyName} required />
             <AdminField label="Tagline" name="tagline" defaultValue={settings?.tagline} required />
             <div className="md:col-span-2"><AdminField label="Hero Eyebrow" name="heroEyebrow" defaultValue={settings?.heroEyebrow} required /></div>
@@ -47,22 +47,20 @@ export default async function AdminDashboardPage() {
             <div className="md:col-span-2"><AdminTextArea label="Hero Subheadline" name="heroSubheadline" defaultValue={settings?.heroSubheadline} rows={3} required /></div>
             <div className="md:col-span-2"><AdminTextArea label="Footer Statement" name="footerStatement" defaultValue={settings?.footerStatement} rows={3} required /></div>
             <div className="md:col-span-2"><AdminField label="Capabilities Statement URL or Path" name="capabilityStatementUrl" defaultValue={settings?.capabilityStatementUrl} required /></div>
-            <button className="rounded-md bg-red-600 px-4 py-2 text-sm font-semibold text-white md:col-span-2" type="submit">Save Overview</button>
+            <AdminActionRow className="md:col-span-2"><AdminSubmitButton>Save Overview</AdminSubmitButton></AdminActionRow>
           </form>
         </AdminCard>
 
         <AdminCard>
-          <h2 className="text-2xl font-black uppercase">Recent Submissions</h2>
+          <AdminSectionHeader title="Recent Submissions" description="Latest contact messages captured by the website." />
           <div className="mt-4 space-y-3">
             {recentSubmissions.length ? recentSubmissions.map((submission) => (
               <article key={submission.id} className="rounded-md border border-white/10 bg-white/[0.02] p-3 text-sm">
                 <div className="flex flex-wrap items-start justify-between gap-2">
-                  <p className="font-semibold text-white">{submission.name} • {submission.email}</p>
-                  <span className={submission.status === "read" ? "text-xs font-bold uppercase text-cyan-300" : "text-xs font-bold uppercase text-amber-300"}>
-                    {submission.status}
-                  </span>
+                  <p className="font-semibold text-white">{submission.name} / {submission.email}</p>
+                  <AdminStatusBadge active={submission.status === "read"} activeLabel="Read" inactiveLabel="Unread" />
                 </div>
-                <p className="mt-1 text-zinc-400">{submission.message}</p>
+                <p className="mt-2 line-clamp-4 text-zinc-400">{submission.message}</p>
               </article>
             )) : (
               <p className="text-sm text-zinc-400">No submissions have been captured yet.</p>

@@ -1,5 +1,5 @@
 import { format } from "date-fns";
-import { AdminCard } from "@/components/admin/admin-form";
+import { AdminActionRow, AdminCard, AdminDeleteButton, AdminSectionHeader, AdminSelect, AdminStatCard, AdminStatusBadge, AdminSubmitButton } from "@/components/admin/admin-form";
 import { ModuleHeader } from "@/components/admin/module-header";
 import { deleteSubmissionAction, setSubmissionStatusAction } from "@/lib/actions";
 import { ensureContentBaseline } from "@/lib/content-baseline";
@@ -16,45 +16,42 @@ export default async function AdminSubmissionsPage() {
       <ModuleHeader title="Contact Submissions" subtitle="Review, save status updates, and triage incoming requests." />
 
       <div className="grid gap-4 md:grid-cols-3">
-        <AdminCard><p className="text-sm text-zinc-400">Total Submissions</p><p className="mt-2 text-4xl font-black">{submissions.length}</p></AdminCard>
-        <AdminCard><p className="text-sm text-zinc-400">Unread</p><p className="mt-2 text-4xl font-black">{unreadCount}</p></AdminCard>
-        <AdminCard><p className="text-sm text-zinc-400">Reviewed</p><p className="mt-2 text-4xl font-black">{readCount}</p></AdminCard>
+        <AdminStatCard label="Total Submissions" value={submissions.length} />
+        <AdminStatCard label="Unread" value={unreadCount} />
+        <AdminStatCard label="Reviewed" value={readCount} />
       </div>
 
       <AdminCard>
-        <div className="space-y-4">
+        <AdminSectionHeader title="Submission Inbox" description="Update status as requests are reviewed, then delete records that no longer need to be retained." />
+        <div className="mt-5 space-y-4">
           {submissions.length ? submissions.map((submission) => (
             <article key={submission.id} className="rounded-lg border border-white/10 bg-white/[0.02] p-4">
               <div className="flex flex-wrap items-start justify-between gap-4">
                 <div>
-                  <p className="font-semibold text-white">{submission.name} • {submission.email}</p>
+                  <p className="font-semibold text-white">{submission.name} / {submission.email}</p>
                   <p className="mt-1 text-sm text-zinc-400">{submission.phone || "No phone provided"}</p>
                   <p className="text-xs text-zinc-500">{format(submission.createdAt, "PPpp")}</p>
                 </div>
-                <span className={`rounded-md px-3 py-1.5 text-xs font-bold uppercase ${submission.status === "read" ? "bg-emerald-500/20 text-emerald-300" : "bg-amber-500/20 text-amber-300"}`}>
-                  {submission.status}
-                </span>
+                <AdminStatusBadge active={submission.status === "read"} activeLabel="Read" inactiveLabel="Unread" />
               </div>
 
               <p className="mt-3 text-sm leading-6 text-zinc-300">{submission.message}</p>
 
-              <div className="mt-4 flex flex-wrap items-center gap-2">
-                <form action={setSubmissionStatusAction} className="flex flex-wrap items-center gap-2">
+              <AdminActionRow className="mt-4">
+                <form action={setSubmissionStatusAction} className="flex flex-wrap items-end gap-2">
                   <input type="hidden" name="id" value={submission.id} />
-                  <select name="status" defaultValue={submission.status} className="rounded-md border border-white/15 bg-black px-3 py-2 text-sm text-zinc-100">
+                  <AdminSelect label="Status" name="status" defaultValue={submission.status}>
                     <option value="unread">Unread</option>
                     <option value="read">Read</option>
-                  </select>
-                  <button className="rounded-md bg-red-600 px-3 py-2 text-xs font-semibold uppercase text-white" type="submit">
-                    Save Submission
-                  </button>
+                  </AdminSelect>
+                  <AdminSubmitButton>Save Submission</AdminSubmitButton>
                 </form>
 
                 <form action={deleteSubmissionAction}>
                   <input type="hidden" name="id" value={submission.id} />
-                  <button className="rounded-md border border-white/20 px-3 py-2 text-xs" type="submit">Delete</button>
+                  <AdminDeleteButton />
                 </form>
-              </div>
+              </AdminActionRow>
             </article>
           )) : (
             <p className="text-sm text-zinc-400">No contact submissions have been received yet.</p>
