@@ -11,19 +11,19 @@ export default async function AdminContractsPage() {
   });
   const contracts = savedContracts.length ? savedContracts : contractsSeed;
   const isShowingFallback = savedContracts.length === 0;
-  const publishedCount = savedContracts.filter((contract) => contract.isPublished).length;
+  const publishedCount = contracts.filter((contract) => contract.isPublished).length;
 
   return (
     <div className="space-y-6">
       <ModuleHeader title="Contracts" subtitle="Manage procurement-facing contract vehicle records." />
       <div className="grid gap-4 md:grid-cols-3">
-        <AdminCard><p className="text-sm text-zinc-400">Saved Contracts</p><p className="mt-2 text-4xl font-black">{savedContracts.length}</p></AdminCard>
+        <AdminCard><p className="text-sm text-zinc-400">Displayed Contracts</p><p className="mt-2 text-4xl font-black">{contracts.length}</p></AdminCard>
         <AdminCard><p className="text-sm text-zinc-400">Published</p><p className="mt-2 text-4xl font-black">{publishedCount}</p></AdminCard>
-        <AdminCard><p className="text-sm text-zinc-400">Status</p><p className="mt-2 text-lg font-black uppercase text-cyan-100">{publishedCount ? "Procurement content live" : "Using starter examples"}</p></AdminCard>
+        <AdminCard><p className="text-sm text-zinc-400">Status</p><p className="mt-2 text-lg font-black uppercase text-cyan-100">{isShowingFallback ? "Default content active" : "Procurement content live"}</p></AdminCard>
       </div>
       {isShowingFallback ? (
         <AdminCard className="border-cyan-200/25 bg-cyan-200/[0.04]">
-          <p className="text-sm font-semibold text-cyan-100">No saved contracts were found. Starter vehicle examples are shown below; create and publish a contract to replace them.</p>
+          <p className="text-sm font-semibold text-cyan-100">Displaying default contract vehicle content for this environment. When saved contract records exist, this tab automatically uses the live database content.</p>
         </AdminCard>
       ) : null}
       <AdminCard>
@@ -50,7 +50,7 @@ export default async function AdminContractsPage() {
         <AdminCard key={isShowingFallback ? contract.contractNumber : contract.id}>
           {isShowingFallback ? (
             <article className="space-y-3">
-              <p className="text-xs font-bold uppercase tracking-[0.18em] text-cyan-300">Starter Example</p>
+              <p className="text-xs font-bold uppercase tracking-[0.18em] text-cyan-300">Displayed Content</p>
               <h2 className="text-2xl font-black uppercase text-white">{contract.name}</h2>
               <p className="text-sm uppercase tracking-[0.12em] text-zinc-400">{contract.agency} / {contract.contractNumber} / {contract.contractType}</p>
               <p className="text-sm leading-6 text-zinc-300">{contract.summary}</p>

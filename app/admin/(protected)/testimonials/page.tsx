@@ -11,19 +11,19 @@ export default async function AdminTestimonialsPage() {
   });
   const testimonials = savedTestimonials.length ? savedTestimonials : testimonialsSeed;
   const isShowingFallback = savedTestimonials.length === 0;
-  const publishedCount = savedTestimonials.filter((item) => item.isPublished).length;
+  const publishedCount = testimonials.filter((item) => item.isPublished).length;
 
   return (
     <div className="space-y-6">
       <ModuleHeader title="Testimonials" subtitle="Manage social proof shown on public pages." />
       <div className="grid gap-4 md:grid-cols-3">
-        <AdminCard><p className="text-sm text-zinc-400">Saved Testimonials</p><p className="mt-2 text-4xl font-black">{savedTestimonials.length}</p></AdminCard>
+        <AdminCard><p className="text-sm text-zinc-400">Displayed Testimonials</p><p className="mt-2 text-4xl font-black">{testimonials.length}</p></AdminCard>
         <AdminCard><p className="text-sm text-zinc-400">Published</p><p className="mt-2 text-4xl font-black">{publishedCount}</p></AdminCard>
-        <AdminCard><p className="text-sm text-zinc-400">Status</p><p className="mt-2 text-lg font-black uppercase text-cyan-100">{publishedCount ? "Testimonials live" : "Using starter examples"}</p></AdminCard>
+        <AdminCard><p className="text-sm text-zinc-400">Status</p><p className="mt-2 text-lg font-black uppercase text-cyan-100">{isShowingFallback ? "Default content active" : "Testimonials live"}</p></AdminCard>
       </div>
       {isShowingFallback ? (
         <AdminCard className="border-cyan-200/25 bg-cyan-200/[0.04]">
-          <p className="text-sm font-semibold text-cyan-100">No saved testimonials were found. Starter examples are shown below; create and publish testimonials to replace them.</p>
+          <p className="text-sm font-semibold text-cyan-100">Displaying default testimonial content for this environment. When saved testimonial records exist, this tab automatically uses the live database content.</p>
         </AdminCard>
       ) : null}
       <AdminCard>
@@ -43,7 +43,7 @@ export default async function AdminTestimonialsPage() {
         <AdminCard key={isShowingFallback ? `${item.authorName}-${item.displayOrder}` : item.id}>
           {isShowingFallback ? (
             <article className="space-y-3">
-              <p className="text-xs font-bold uppercase tracking-[0.18em] text-cyan-300">Starter Example</p>
+              <p className="text-xs font-bold uppercase tracking-[0.18em] text-cyan-300">Displayed Content</p>
               <blockquote className="text-lg leading-7 text-zinc-100">{item.quote}</blockquote>
               <p className="text-sm uppercase tracking-[0.12em] text-zinc-400">{item.authorName} / {item.organization}</p>
             </article>

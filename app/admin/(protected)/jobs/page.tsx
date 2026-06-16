@@ -15,7 +15,7 @@ export default async function AdminJobsPage() {
   });
   const jobs = savedJobs.length ? savedJobs : jobsSeed;
   const isShowingFallback = savedJobs.length === 0;
-  const publishedCount = savedJobs.filter((job) => job.isPublished).length;
+  const publishedCount = jobs.filter((job) => job.isPublished).length;
 
   return (
     <div className="space-y-6">
@@ -23,8 +23,8 @@ export default async function AdminJobsPage() {
 
       <div className="grid gap-4 md:grid-cols-3">
         <AdminCard>
-          <p className="text-sm text-zinc-400">Saved Roles</p>
-          <p className="mt-2 text-4xl font-black">{savedJobs.length}</p>
+          <p className="text-sm text-zinc-400">Displayed Roles</p>
+          <p className="mt-2 text-4xl font-black">{jobs.length}</p>
         </AdminCard>
         <AdminCard>
           <p className="text-sm text-zinc-400">Published Roles</p>
@@ -33,7 +33,7 @@ export default async function AdminJobsPage() {
         <AdminCard>
           <p className="text-sm text-zinc-400">Career Page Status</p>
           <p className="mt-2 text-lg font-black uppercase text-cyan-100">
-            {publishedCount ? "Live roles active" : "Using starter examples"}
+            {isShowingFallback ? "Default content active" : "Live roles active"}
           </p>
         </AdminCard>
       </div>
@@ -41,7 +41,7 @@ export default async function AdminJobsPage() {
       {isShowingFallback ? (
         <AdminCard className="border-cyan-200/25 bg-cyan-200/[0.04]">
           <p className="text-sm font-semibold text-cyan-100">
-            No saved jobs were found in this environment. The roles below are starter examples; create and publish a role to make real career openings appear.
+            Displaying default career content for this environment. When saved job records exist, this tab automatically uses the live database content.
           </p>
         </AdminCard>
       ) : null}
@@ -72,7 +72,7 @@ export default async function AdminJobsPage() {
               <article className="space-y-3">
                 <div className="flex flex-wrap items-start justify-between gap-3">
                   <div>
-                    <p className="text-xs font-bold uppercase tracking-[0.18em] text-cyan-300">Starter Example</p>
+                    <p className="text-xs font-bold uppercase tracking-[0.18em] text-cyan-300">Displayed Content</p>
                     <h2 className="mt-2 text-2xl font-black uppercase text-white">{job.title}</h2>
                   </div>
                   <span className="rounded-md border border-white/15 px-3 py-1 text-xs uppercase text-zinc-300">

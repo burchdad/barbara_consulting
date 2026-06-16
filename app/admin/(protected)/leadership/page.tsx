@@ -11,19 +11,19 @@ export default async function AdminLeadershipPage() {
   });
   const leaders = savedLeaders.length ? savedLeaders : leadershipSeed;
   const isShowingFallback = savedLeaders.length === 0;
-  const publishedCount = savedLeaders.filter((leader) => leader.isPublished).length;
+  const publishedCount = leaders.filter((leader) => leader.isPublished).length;
 
   return (
     <div className="space-y-6">
       <ModuleHeader title="Leadership" subtitle="Maintain executive team bios and profile content." />
       <div className="grid gap-4 md:grid-cols-3">
-        <AdminCard><p className="text-sm text-zinc-400">Saved Leaders</p><p className="mt-2 text-4xl font-black">{savedLeaders.length}</p></AdminCard>
+        <AdminCard><p className="text-sm text-zinc-400">Displayed Leaders</p><p className="mt-2 text-4xl font-black">{leaders.length}</p></AdminCard>
         <AdminCard><p className="text-sm text-zinc-400">Published</p><p className="mt-2 text-4xl font-black">{publishedCount}</p></AdminCard>
-        <AdminCard><p className="text-sm text-zinc-400">Status</p><p className="mt-2 text-lg font-black uppercase text-cyan-100">{publishedCount ? "Leadership live" : "Using starter examples"}</p></AdminCard>
+        <AdminCard><p className="text-sm text-zinc-400">Status</p><p className="mt-2 text-lg font-black uppercase text-cyan-100">{isShowingFallback ? "Default content active" : "Leadership live"}</p></AdminCard>
       </div>
       {isShowingFallback ? (
         <AdminCard className="border-cyan-200/25 bg-cyan-200/[0.04]">
-          <p className="text-sm font-semibold text-cyan-100">No saved leadership profiles were found. Starter examples are shown below; create and publish profiles to replace them.</p>
+          <p className="text-sm font-semibold text-cyan-100">Displaying default leadership content for this environment. When saved leadership records exist, this tab automatically uses the live database content.</p>
         </AdminCard>
       ) : null}
       <AdminCard>
@@ -45,7 +45,7 @@ export default async function AdminLeadershipPage() {
         <AdminCard key={isShowingFallback ? leader.name : leader.id}>
           {isShowingFallback ? (
             <article className="space-y-3">
-              <p className="text-xs font-bold uppercase tracking-[0.18em] text-cyan-300">Starter Example</p>
+              <p className="text-xs font-bold uppercase tracking-[0.18em] text-cyan-300">Displayed Content</p>
               <h2 className="text-2xl font-black uppercase text-white">{leader.name}</h2>
               <p className="text-sm uppercase tracking-[0.12em] text-zinc-400">{leader.title}</p>
               <p className="text-sm leading-6 text-zinc-300">{leader.shortBio}</p>

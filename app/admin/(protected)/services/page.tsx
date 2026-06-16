@@ -15,19 +15,19 @@ export default async function AdminServicesPage() {
   });
   const services = savedServices.length ? savedServices : servicesSeed;
   const isShowingFallback = savedServices.length === 0;
-  const publishedCount = savedServices.filter((service) => service.isPublished).length;
+  const publishedCount = services.filter((service) => service.isPublished).length;
 
   return (
     <div className="space-y-6">
       <ModuleHeader title="Services" subtitle="Maintain capability categories and bullet content." />
       <div className="grid gap-4 md:grid-cols-3">
-        <AdminCard><p className="text-sm text-zinc-400">Saved Services</p><p className="mt-2 text-4xl font-black">{savedServices.length}</p></AdminCard>
+        <AdminCard><p className="text-sm text-zinc-400">Displayed Services</p><p className="mt-2 text-4xl font-black">{services.length}</p></AdminCard>
         <AdminCard><p className="text-sm text-zinc-400">Published</p><p className="mt-2 text-4xl font-black">{publishedCount}</p></AdminCard>
-        <AdminCard><p className="text-sm text-zinc-400">Status</p><p className="mt-2 text-lg font-black uppercase text-cyan-100">{publishedCount ? "Services live" : "Using starter examples"}</p></AdminCard>
+        <AdminCard><p className="text-sm text-zinc-400">Status</p><p className="mt-2 text-lg font-black uppercase text-cyan-100">{isShowingFallback ? "Default content active" : "Services live"}</p></AdminCard>
       </div>
       {isShowingFallback ? (
         <AdminCard className="border-cyan-200/25 bg-cyan-200/[0.04]">
-          <p className="text-sm font-semibold text-cyan-100">No saved services were found. Starter service examples are shown below; create and publish services to replace them.</p>
+          <p className="text-sm font-semibold text-cyan-100">Displaying default services content for this environment. When saved service records exist, this tab automatically uses the live database content.</p>
         </AdminCard>
       ) : null}
       <AdminCard>
@@ -47,7 +47,7 @@ export default async function AdminServicesPage() {
         <AdminCard key={isShowingFallback ? `${service.category}-${service.displayOrder}` : service.id}>
           {isShowingFallback ? (
             <article className="space-y-3">
-              <p className="text-xs font-bold uppercase tracking-[0.18em] text-cyan-300">Starter Example</p>
+              <p className="text-xs font-bold uppercase tracking-[0.18em] text-cyan-300">Displayed Content</p>
               <h2 className="text-2xl font-black uppercase text-white">{service.title}</h2>
               <p className="text-sm uppercase tracking-[0.12em] text-zinc-400">{service.category}</p>
               <p className="text-sm leading-6 text-zinc-300">{service.description}</p>

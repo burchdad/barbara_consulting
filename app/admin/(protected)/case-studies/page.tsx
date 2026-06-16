@@ -15,21 +15,21 @@ export default async function AdminCaseStudiesPage() {
   });
   const studies = savedStudies.length ? savedStudies : caseStudiesSeed;
   const isShowingFallback = savedStudies.length === 0;
-  const publishedCount = savedStudies.filter((study) => study.isPublished).length;
+  const publishedCount = studies.filter((study) => study.isPublished).length;
 
   return (
     <div className="space-y-6">
       <ModuleHeader title="Case Studies" subtitle="Manage featured proof points and detail pages." />
 
       <div className="grid gap-4 md:grid-cols-3">
-        <AdminCard><p className="text-sm text-zinc-400">Saved Studies</p><p className="mt-2 text-4xl font-black">{savedStudies.length}</p></AdminCard>
+        <AdminCard><p className="text-sm text-zinc-400">Displayed Studies</p><p className="mt-2 text-4xl font-black">{studies.length}</p></AdminCard>
         <AdminCard><p className="text-sm text-zinc-400">Published</p><p className="mt-2 text-4xl font-black">{publishedCount}</p></AdminCard>
-        <AdminCard><p className="text-sm text-zinc-400">Status</p><p className="mt-2 text-lg font-black uppercase text-cyan-100">{publishedCount ? "Live proof active" : "Using starter examples"}</p></AdminCard>
+        <AdminCard><p className="text-sm text-zinc-400">Status</p><p className="mt-2 text-lg font-black uppercase text-cyan-100">{isShowingFallback ? "Default content active" : "Live proof active"}</p></AdminCard>
       </div>
 
       {isShowingFallback ? (
         <AdminCard className="border-cyan-200/25 bg-cyan-200/[0.04]">
-          <p className="text-sm font-semibold text-cyan-100">No saved case studies were found. Starter examples are shown below; create and publish a case study to replace them.</p>
+          <p className="text-sm font-semibold text-cyan-100">Displaying default case study content for this environment. When saved case study records exist, this tab automatically uses the live database content.</p>
         </AdminCard>
       ) : null}
 
@@ -56,7 +56,7 @@ export default async function AdminCaseStudiesPage() {
         <AdminCard key={isShowingFallback ? study.slug : study.id}>
           {isShowingFallback ? (
             <article className="space-y-3">
-              <p className="text-xs font-bold uppercase tracking-[0.18em] text-cyan-300">Starter Example</p>
+              <p className="text-xs font-bold uppercase tracking-[0.18em] text-cyan-300">Displayed Content</p>
               <h2 className="text-2xl font-black uppercase text-white">{study.title}</h2>
               <p className="text-sm leading-6 text-zinc-300">{study.summary}</p>
               <p className="text-xs uppercase tracking-[0.12em] text-zinc-500">Slug: {study.slug}</p>
