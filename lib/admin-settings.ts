@@ -1,11 +1,8 @@
-import { prisma } from "@/lib/prisma";
+import { ensureContentSchemaCompatibility } from "@/lib/partnership-contact-compatibility";
 
 export async function ensureGlobalSettingCompatibility() {
   try {
-    await prisma.$executeRaw`
-      ALTER TABLE "GlobalSetting"
-      ADD COLUMN IF NOT EXISTS "capabilityStatementUrl" TEXT NOT NULL DEFAULT '/capabilities/joint-capability-statement.pdf'
-    `;
+    await ensureContentSchemaCompatibility();
   } catch (error) {
     console.error("[admin/settings] Unable to verify global settings schema.", error);
   }

@@ -2,9 +2,11 @@ import { format } from "date-fns";
 import { AdminCard } from "@/components/admin/admin-form";
 import { ModuleHeader } from "@/components/admin/module-header";
 import { deleteSubmissionAction, setSubmissionStatusAction } from "@/lib/actions";
+import { ensureContentBaseline } from "@/lib/content-baseline";
 import { prisma } from "@/lib/prisma";
 
 export default async function AdminSubmissionsPage() {
+  await ensureContentBaseline();
   const submissions = await prisma.contactSubmission.findMany({ orderBy: { createdAt: "desc" } });
   const unreadCount = submissions.filter((submission) => submission.status === "unread").length;
   const readCount = submissions.length - unreadCount;

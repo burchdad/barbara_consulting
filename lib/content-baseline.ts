@@ -9,7 +9,7 @@ import { partnersSeed } from "@/lib/data/partnersSeed";
 import { partnershipContactSeed } from "@/lib/data/partnership-ecosystem";
 import { servicesSeed } from "@/lib/data/servicesSeed";
 import { testimonialsSeed } from "@/lib/data/testimonials";
-import { ensurePartnershipContactCompatibility } from "@/lib/partnership-contact-compatibility";
+import { ensureContentSchemaCompatibility } from "@/lib/partnership-contact-compatibility";
 
 let baselinePromise: Promise<void> | null = null;
 
@@ -21,7 +21,7 @@ export async function ensureContentBaseline() {
 
   baselinePromise = (async () => {
     try {
-      await ensurePartnershipContactCompatibility();
+      await ensureContentSchemaCompatibility();
 
       const [
         settingsCount,
