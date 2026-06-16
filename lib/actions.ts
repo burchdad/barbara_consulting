@@ -3,6 +3,7 @@
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 import { SubmissionStatus } from "@prisma/client";
+import { ensureGlobalSettingCompatibility } from "@/lib/admin-settings";
 import { prisma } from "@/lib/prisma";
 import { clearAdminSession, loginAdmin, requireAdmin } from "@/lib/auth";
 import {
@@ -376,6 +377,7 @@ export async function updateGlobalSettingsAction(formData: FormData) {
   };
 
   try {
+    await ensureGlobalSettingCompatibility();
     const existing = await prisma.globalSetting.findFirst();
     if (existing) {
       await prisma.globalSetting.update({ where: { id: existing.id }, data });

@@ -1,31 +1,42 @@
 import { AdminCard, AdminField, AdminTextArea } from "@/components/admin/admin-form";
 import { ModuleHeader } from "@/components/admin/module-header";
+import { ensureGlobalSettingCompatibility } from "@/lib/admin-settings";
 import { updateGlobalSettingsAction } from "@/lib/actions";
 import { siteConfig } from "@/lib/config/site";
 import { prisma } from "@/lib/prisma";
 
 export default async function AdminSettingsPage() {
+  await ensureGlobalSettingCompatibility();
   const settings = await prisma.globalSetting.findFirst().catch((error) => {
     console.error("[admin/settings] Unable to load global settings.", error);
     return null;
   });
+  const companyName = settings?.companyName ?? siteConfig.companyName;
+  const tagline = settings?.tagline ?? siteConfig.tagline;
+  const email = settings?.email ?? siteConfig.contact.email;
+  const phone = settings?.phone ?? siteConfig.contact.phone;
+  const address = settings?.address ?? siteConfig.contact.address;
+  const linkedInUrl = settings?.linkedInUrl ?? siteConfig.social.linkedin;
+  const footerStatement = settings?.footerStatement ?? siteConfig.footer.statement;
+  const heroHeadline = settings?.heroHeadline ?? siteConfig.hero.headline;
+  const heroSubheadline = settings?.heroSubheadline ?? siteConfig.hero.subtext;
 
   return (
     <div className="space-y-6">
       <ModuleHeader title="Global Settings" subtitle="Manage company-level public content and contact data." />
       <AdminCard>
         <form action={updateGlobalSettingsAction} className="grid gap-3 md:grid-cols-2">
-          <AdminField label="Company Name" name="companyName" defaultValue={settings?.companyName} required />
-          <AdminField label="Tagline" name="tagline" defaultValue={settings?.tagline} required />
-          <AdminField label="Email" name="email" type="email" defaultValue={settings?.email} required />
-          <AdminField label="Phone" name="phone" defaultValue={settings?.phone} />
-          <div className="md:col-span-2"><AdminField label="Address" name="address" defaultValue={settings?.address} required /></div>
-          <AdminField label="LinkedIn URL" name="linkedInUrl" defaultValue={settings?.linkedInUrl} />
+          <AdminField label="Company Name" name="companyName" defaultValue={companyName} required />
+          <AdminField label="Tagline" name="tagline" defaultValue={tagline} required />
+          <AdminField label="Email" name="email" type="email" defaultValue={email} required />
+          <AdminField label="Phone" name="phone" defaultValue={phone} />
+          <div className="md:col-span-2"><AdminField label="Address" name="address" defaultValue={address} required /></div>
+          <AdminField label="LinkedIn URL" name="linkedInUrl" defaultValue={linkedInUrl} />
           <div className="md:col-span-2"><AdminTextArea label="Hero Eyebrow" name="heroEyebrow" defaultValue={settings?.heroEyebrow ?? siteConfig.hero.eyebrow} required rows={2} /></div>
-          <div className="md:col-span-2"><AdminTextArea label="Footer Statement" name="footerStatement" defaultValue={settings?.footerStatement} required /></div>
-          <div className="md:col-span-2"><AdminTextArea label="Hero Headline" name="heroHeadline" defaultValue={settings?.heroHeadline} required /></div>
+          <div className="md:col-span-2"><AdminTextArea label="Footer Statement" name="footerStatement" defaultValue={footerStatement} required /></div>
+          <div className="md:col-span-2"><AdminTextArea label="Hero Headline" name="heroHeadline" defaultValue={heroHeadline} required /></div>
           <div className="md:col-span-2"><AdminTextArea label="Hero Trust Badge" name="heroTrustBadge" defaultValue={settings?.heroTrustBadge ?? siteConfig.hero.trustBadge} required rows={2} /></div>
-          <div className="md:col-span-2"><AdminTextArea label="Hero Subheadline" name="heroSubheadline" defaultValue={settings?.heroSubheadline} required /></div>
+          <div className="md:col-span-2"><AdminTextArea label="Hero Subheadline" name="heroSubheadline" defaultValue={heroSubheadline} required /></div>
           <div className="md:col-span-2"><AdminField label="About Hero Image URL" name="aboutHeroImageUrl" defaultValue={settings?.aboutHeroImageUrl ?? siteConfig.media.aboutHeroImageUrl} type="url" /></div>
           <div className="md:col-span-2"><AdminField label="Case Studies Hero Image URL" name="caseStudiesHeroImageUrl" defaultValue={settings?.caseStudiesHeroImageUrl ?? siteConfig.media.caseStudiesHeroImageUrl} type="url" /></div>
           <div className="md:col-span-2"><AdminField label="Case Study Detail Fallback Image URL" name="caseStudyDetailFallbackImageUrl" defaultValue={settings?.caseStudyDetailFallbackImageUrl ?? siteConfig.media.caseStudyDetailFallbackImageUrl} type="url" /></div>
