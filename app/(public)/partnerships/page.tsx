@@ -11,55 +11,13 @@ import {
 import { HomepageCinematicScene } from "@/components/public/homepage-cinematic-scene";
 import { Reveal } from "@/components/public/reveal";
 import { Section } from "@/components/ui/section";
+import {
+  ecosystemChannels,
+  keyAdvisors,
+  keyTechnologists,
+  positioningSignals,
+} from "@/lib/data/partnership-ecosystem";
 import { getPublishedData } from "@/lib/site-data";
-
-const keyAdvisors = [
-  "Keith Wilson - USDA",
-  "Schuyler Eldridge - former ASPR HCA",
-  "Diane Frasier - former NIH HCA",
-  "Torreon Creekmore - NGA, IARPA, ODNI",
-  "Calvin Mitchell - former Dept. of Education HCA",
-  "Lonnie Chin - FAA",
-  "Guy Torres - former IRS CPO",
-  "Karlos Morgan - DHS",
-];
-
-const keyTechnologists = [
-  "Torreon Creekmore - C-more Consulting",
-  "Bill Pratt - Gov-IT Works, former CTO DHS",
-  "Royce Allen - former CIO, Dept. of Commerce",
-  "Darryl Peek - Elastic, former Sr. Program Director DHS",
-  "Avery Muse - The Muse Group, former Deputy CIO, HHS OIT",
-  "Jose Arrieta - Navy Board of Advisors",
-  "Jamie Gracia - Wolverine Group, former Dept. of State Industry Liaison",
-];
-
-const ecosystemChannels = [
-  {
-    title: "Advisory Access",
-    body: "Senior acquisition, HCA, CPO, and federal mission advisors help shape practical routes into agency requirements, bid positioning, and procurement readiness.",
-    icon: Landmark,
-  },
-  {
-    title: "Technology Bench",
-    body: "Experienced CIO, CTO, cybersecurity, data, search, and systems leaders strengthen the technical perspective behind modernization opportunities.",
-    icon: BrainCircuit,
-  },
-  {
-    title: "Teaming Ecosystem",
-    body: "Partner and advisory relationships help GMTS align the right delivery capacity, past-performance context, and technical credibility for larger opportunities.",
-    icon: Network,
-  },
-];
-
-const positioningSignals = [
-  "Federal acquisition perspective",
-  "Former HCA and CPO insight",
-  "CIO and CTO modernization guidance",
-  "DHS, USDA, FAA, IRS, Navy, and State experience",
-  "Search, data, cybersecurity, and systems leadership",
-  "Bid readiness and partner alignment",
-];
 
 export default async function PartnershipsPage() {
   const { partners } = await getPublishedData();
@@ -163,10 +121,10 @@ export default async function PartnershipsPage() {
               <div className="mt-8 grid gap-3">
                 {keyAdvisors.map((advisor) => (
                   <p
-                    key={advisor}
+                    key={`${advisor.name}-${advisor.organization}`}
                     className="border border-cyan-200/15 bg-black/25 px-4 py-3 text-sm font-bold uppercase tracking-[0.08em] text-slate-100"
                   >
-                    {advisor}
+                    {advisor.name} - {advisor.organization}
                   </p>
                 ))}
               </div>
@@ -192,10 +150,10 @@ export default async function PartnershipsPage() {
               <div className="mt-8 grid gap-3">
                 {keyTechnologists.map((technologist) => (
                   <p
-                    key={technologist}
+                    key={`${technologist.name}-${technologist.organization}`}
                     className="border border-white/10 bg-black/25 px-4 py-3 text-sm font-bold uppercase tracking-[0.08em] text-slate-200"
                   >
-                    {technologist}
+                    {technologist.name} - {technologist.organization}
                   </p>
                 ))}
               </div>
@@ -272,7 +230,9 @@ export default async function PartnershipsPage() {
                 </p>
 
                 <div className="mt-8 grid gap-4 lg:grid-cols-3">
-                  {ecosystemChannels.map(({ title, body, icon: Icon }) => (
+                  {ecosystemChannels.map(({ title, body }, index) => {
+                    const Icon = [Landmark, BrainCircuit, Network][index] ?? ShieldCheck;
+                    return (
                     <article
                       key={title}
                       className="border border-cyan-200/15 bg-black/25 p-5"
@@ -285,7 +245,8 @@ export default async function PartnershipsPage() {
                         {body}
                       </p>
                     </article>
-                  ))}
+                    );
+                  })}
                 </div>
 
                 <div className="mt-8 grid gap-3 sm:grid-cols-2">
