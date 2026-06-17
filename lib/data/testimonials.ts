@@ -6,6 +6,7 @@
 
 export const testimonialsSeed = [
   {
+    id: "seed-program-executive",
     quote:
       "The team improved delivery velocity while strengthening governance and transparency across our contracts.",
     authorName: "Program Executive",
@@ -15,6 +16,7 @@ export const testimonialsSeed = [
     displayOrder: 1,
   },
   {
+    id: "seed-acquisition-lead",
     quote:
       "Their engineering and operations team integrated quickly and performed under pressure from day one.",
     authorName: "Acquisition Lead",
@@ -24,6 +26,7 @@ export const testimonialsSeed = [
     displayOrder: 2,
   },
   {
+    id: "seed-division-director",
     quote:
       "A mission-first partner with exceptional accountability and communication discipline.",
     authorName: "Division Director",

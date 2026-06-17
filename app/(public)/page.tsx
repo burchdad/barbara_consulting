@@ -12,29 +12,12 @@ import { Section } from "@/components/ui/section";
 import { Reveal } from "@/components/public/reveal";
 import { HomepageCinematicScene } from "@/components/public/homepage-cinematic-scene";
 import { getPublishedData } from "@/lib/site-data";
+import { siteConfig } from "@/lib/config/site";
 
 const featuredAudience = [
   "AI readiness",
   "Federal IT modernization",
   "Secure modernization",
-];
-
-const procurementFallbackNodes = [
-  {
-    title: "Public-Sector Ready",
-    body: "Structured for government and enterprise review.",
-    Icon: ShieldCheck,
-  },
-  {
-    title: "Mission Aligned",
-    body: "Designed around operational goals and measurable value.",
-    Icon: Layers3,
-  },
-  {
-    title: "AI Forward",
-    body: "Practical modernization without unnecessary complexity.",
-    Icon: Sparkles,
-  },
 ];
 
 const procurementIcons = [ShieldCheck, Layers3, Sparkles];
@@ -85,18 +68,16 @@ function FloatingReadinessGraph() {
 }
 
 export default async function HomePage() {
-  const { contracts, testimonials } = await getPublishedData();
-  const procurementNodes =
-    contracts.length > 0
-      ? contracts.slice(0, 3).map((contract, index) => ({
-          title: contract.name,
-          body: contract.agency,
-          Icon: procurementIcons[index] ?? ShieldCheck,
-        }))
-      : procurementFallbackNodes;
-
-  const heroHeadline =
-    "AI-forward technology delivery for mission teams.";
+  const { settings, contracts, testimonials } = await getPublishedData();
+  const procurementNodes = contracts.slice(0, 3).map((contract, index) => ({
+    title: contract.name,
+    body: contract.agency,
+    Icon: procurementIcons[index] ?? ShieldCheck,
+  }));
+  const heroEyebrow = settings?.heroEyebrow || siteConfig.hero.eyebrow;
+  const heroHeadline = settings?.heroHeadline || siteConfig.hero.headline;
+  const heroSubheadline = settings?.heroSubheadline || siteConfig.hero.subtext;
+  const capabilityStatementUrl = settings?.capabilityStatementUrl || siteConfig.media.capabilityStatementUrl;
 
   return (
     <HomepageCinematicScene
@@ -147,21 +128,13 @@ export default async function HomePage() {
                 </div>
               </div>
 
-              <p className="mb-5 text-xs font-bold uppercase tracking-[0.35em] text-cyan-200">
-                AI Strategy | Federal IT | Secure Systems
-              </p>
+              <p className="mb-5 text-xs font-bold uppercase tracking-[0.35em] text-cyan-200">{heroEyebrow}</p>
 
               <h1 className="max-w-7xl text-5xl font-black uppercase leading-[0.92] text-white sm:text-7xl lg:text-8xl 2xl:text-[8.5rem]">
                 {heroHeadline}
               </h1>
 
-              <p className="mt-8 max-w-3xl text-lg leading-8 text-slate-200 sm:text-xl">
-                Gray Matters Technology Services - Sage Tech Solutions helps
-                teams
-                identify practical AI opportunities, modernize applications,
-                strengthen secure systems, and move from ideas to measurable
-                mission execution.
-              </p>
+              <p className="mt-8 max-w-3xl text-lg leading-8 text-slate-200 sm:text-xl">{heroSubheadline}</p>
 
               <div className="relative z-30 mt-10 flex flex-wrap gap-4">
                 <Link
@@ -172,7 +145,7 @@ export default async function HomePage() {
                 </Link>
 
                 <a
-                  href="/capabilities/joint-capability-statement.pdf"
+                  href={capabilityStatementUrl}
                   download
                   target="_blank"
                   rel="noreferrer"

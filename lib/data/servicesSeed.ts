@@ -5,6 +5,7 @@
 
 export const servicesSeed = [
   {
+    id: "seed-ai-readiness-governance-roadmaps",
     category: "AI Strategy",
     title: "AI Readiness, Governance, and Roadmaps",
     description:
@@ -19,6 +20,7 @@ export const servicesSeed = [
     isPublished: true,
   },
   {
+    id: "seed-application-modernization",
     category: "AI-Agile Software Development",
     title: "Application Modernization",
     description:
@@ -33,6 +35,7 @@ export const servicesSeed = [
     isPublished: true,
   },
   {
+    id: "seed-low-code-process-automation",
     category: "Workflow Automation",
     title: "Low-Code and Process Automation",
     description:
@@ -47,6 +50,7 @@ export const servicesSeed = [
     isPublished: true,
   },
   {
+    id: "seed-cloud-solutions-enterprise-support",
     category: "Cloud & Infrastructure",
     title: "Cloud Solutions and Enterprise Support",
     description:
@@ -61,6 +65,7 @@ export const servicesSeed = [
     isPublished: true,
   },
   {
+    id: "seed-cyber-readiness-ato-support",
     category: "Cybersecurity & Compliance",
     title: "Cyber Readiness and ATO Support",
     description:
@@ -75,6 +80,7 @@ export const servicesSeed = [
     isPublished: true,
   },
   {
+    id: "seed-reporting-analytics-data-operations",
     category: "Data Intelligence",
     title: "Reporting, Analytics, and Data Operations",
     description:
@@ -89,6 +95,7 @@ export const servicesSeed = [
     isPublished: true,
   },
   {
+    id: "seed-logistics-program-operations",
     category: "Mission Support",
     title: "Logistics and Program Operations",
     description:
@@ -103,6 +110,7 @@ export const servicesSeed = [
     isPublished: true,
   },
   {
+    id: "seed-ai-training-for-teams",
     category: "Training & Enablement",
     title: "AI Training for Teams",
     description:

@@ -8,6 +8,8 @@ import { contractsSeed } from "../lib/data/contracts";
 import { testimonialsSeed } from "../lib/data/testimonials";
 import { servicesSeed } from "../lib/data/servicesSeed";
 import { partnersSeed } from "../lib/data/partnersSeed";
+import { partnershipContactSeed } from "../lib/data/partnership-ecosystem";
+import { jobsSeed } from "../lib/data/jobsSeed";
 
 const prisma = new PrismaClient();
 
@@ -47,6 +49,7 @@ async function main() {
       contactHeroImageUrl: siteConfig.media.contactHeroImageUrl,
       contractsHeroImageUrl: siteConfig.media.contractsHeroImageUrl,
       privacyHeroImageUrl: siteConfig.media.privacyHeroImageUrl,
+      capabilityStatementUrl: siteConfig.media.capabilityStatementUrl,
       homepageSceneType: backgroundConfig.type,
       homepageSceneGlow: backgroundConfig.glow,
       homepageSceneParticles: backgroundConfig.particles,
@@ -55,52 +58,7 @@ async function main() {
   });
 
   await prisma.job.deleteMany();
-  await prisma.job.createMany({
-    data: [
-      {
-        title: "Senior Program Manager",
-        slug: "senior-program-manager",
-        department: "Program Delivery",
-        location: "Washington, DC",
-        jobType: "Hybrid",
-        employmentType: "Full-Time",
-        description: "Lead multi-site programs and oversee delivery execution across stakeholders.",
-        responsibilities: ["Manage program roadmaps", "Coordinate subcontractors", "Drive executive reporting"],
-        requirements: ["8+ years PM experience", "PMP preferred", "Clearance eligible"],
-        benefits: ["401(k) matching", "Medical/Dental/Vision", "Annual training stipend"],
-        applyUrl: "https://example.com/jobs/senior-program-manager",
-        isPublished: true,
-      },
-      {
-        title: "Cloud Security Engineer",
-        slug: "cloud-security-engineer",
-        department: "Engineering",
-        location: "Remote - US",
-        jobType: "Remote",
-        employmentType: "Full-Time",
-        description: "Build zero-trust cloud systems and support accreditation pathways for secure workloads.",
-        responsibilities: ["Design secure architectures", "Implement IaC controls", "Support risk management frameworks"],
-        requirements: ["5+ years cloud security", "AWS/Azure certifications", "Public trust eligible"],
-        benefits: ["Flexible work model", "Certification reimbursement", "Performance bonuses"],
-        applyUrl: "https://example.com/jobs/cloud-security-engineer",
-        isPublished: true,
-      },
-      {
-        title: "Logistics Analyst",
-        slug: "logistics-analyst",
-        department: "Mission Support",
-        location: "San Diego, CA",
-        jobType: "On-Site",
-        employmentType: "Full-Time",
-        description: "Support readiness metrics and supply operations for mission-critical deployment cycles.",
-        responsibilities: ["Track inventory KPIs", "Coordinate vendors", "Document sustainment plans"],
-        requirements: ["3+ years logistics analysis", "Operations environment familiarity", "Strong Excel and SQL"],
-        benefits: ["Paid parental leave", "Medical coverage", "Professional development"],
-        applyUrl: "https://example.com/jobs/logistics-analyst",
-        isPublished: true,
-      },
-    ],
-  });
+  await prisma.job.createMany({ data: jobsSeed.map(({ id, ...job }) => job) });
 
   await prisma.caseStudy.deleteMany();
   await prisma.caseStudy.createMany({ data: caseStudiesSeed });
@@ -119,6 +77,9 @@ async function main() {
 
   await prisma.missionPartner.deleteMany();
   await prisma.missionPartner.createMany({ data: partnersSeed });
+
+  await prisma.partnershipContact.deleteMany();
+  await prisma.partnershipContact.createMany({ data: partnershipContactSeed });
 }
 
 main()

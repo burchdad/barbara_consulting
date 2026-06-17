@@ -11,10 +11,12 @@ export default async function PublicLayout({ children }: { children: React.React
     "Gray Matters Technology-",
     "Gray Matters Technology Services -",
   );
+  const capabilityStatementHref =
+    settings?.capabilityStatementUrl || siteConfig.media.capabilityStatementUrl;
 
   return (
     <div className="min-h-screen bg-[#050505] text-zinc-100">
-      <SiteNav brand={brand} />
+      <SiteNav brand={brand} capabilityStatementHref={capabilityStatementHref} />
       {children}
       <SiteFooter />
     </div>

@@ -11,56 +11,17 @@ import {
 import { HomepageCinematicScene } from "@/components/public/homepage-cinematic-scene";
 import { Reveal } from "@/components/public/reveal";
 import { Section } from "@/components/ui/section";
+import {
+  ecosystemChannels,
+  positioningSignals,
+} from "@/lib/data/partnership-ecosystem";
+import { getPublicPartnershipsPageData } from "@/lib/site-data";
 
-const keyAdvisors = [
-  "Keith Wilson - USDA",
-  "Schuyler Eldridge - former ASPR HCA",
-  "Diane Frasier - former NIH HCA",
-  "Torreon Creekmore - NGA, IARPA, ODNI",
-  "Calvin Mitchell - former Dept. of Education HCA",
-  "Lonnie Chin - FAA",
-  "Guy Torres - former IRS CPO",
-  "Karlos Morgan - DHS",
-];
+export default async function PartnershipsPage() {
+  const { partners, contacts } = await getPublicPartnershipsPageData();
+  const keyAdvisors = contacts.filter((contact) => contact.category === "advisor");
+  const keyTechnologists = contacts.filter((contact) => contact.category === "technologist");
 
-const keyTechnologists = [
-  "Torreon Creekmore - C-more Consulting",
-  "Bill Pratt - Gov-IT Works, former CTO DHS",
-  "Royce Allen - former CIO, Dept. of Commerce",
-  "Darryl Peek - Elastic, former Sr. Program Director DHS",
-  "Avery Muse - The Muse Group, former Deputy CIO, HHS OIT",
-  "Jose Arrieta - Navy Board of Advisors",
-  "Jamie Gracia - Wolverine Group, former Dept. of State Industry Liaison",
-];
-
-const ecosystemChannels = [
-  {
-    title: "Advisory Access",
-    body: "Senior acquisition, HCA, CPO, and federal mission advisors help shape practical routes into agency requirements, bid positioning, and procurement readiness.",
-    icon: Landmark,
-  },
-  {
-    title: "Technology Bench",
-    body: "Experienced CIO, CTO, cybersecurity, data, search, and systems leaders strengthen the technical perspective behind modernization opportunities.",
-    icon: BrainCircuit,
-  },
-  {
-    title: "Teaming Ecosystem",
-    body: "Partner and advisory relationships help GMTS align the right delivery capacity, past-performance context, and technical credibility for larger opportunities.",
-    icon: Network,
-  },
-];
-
-const positioningSignals = [
-  "Federal acquisition perspective",
-  "Former HCA and CPO insight",
-  "CIO and CTO modernization guidance",
-  "DHS, USDA, FAA, IRS, Navy, and State experience",
-  "Search, data, cybersecurity, and systems leadership",
-  "Bid readiness and partner alignment",
-];
-
-export default function PartnershipsPage() {
   return (
     <HomepageCinematicScene
       sceneSettings={{
@@ -158,14 +119,16 @@ export default function PartnershipsPage() {
               </div>
 
               <div className="mt-8 grid gap-3">
-                {keyAdvisors.map((advisor) => (
+                {keyAdvisors.length ? keyAdvisors.map((advisor) => (
                   <p
-                    key={advisor}
+                    key={`${advisor.name}-${advisor.organization}`}
                     className="border border-cyan-200/15 bg-black/25 px-4 py-3 text-sm font-bold uppercase tracking-[0.08em] text-slate-100"
                   >
-                    {advisor}
+                    {advisor.name} - {advisor.organization}
                   </p>
-                ))}
+                )) : (
+                  <p className="text-sm leading-6 text-slate-300">No advisors are published yet.</p>
+                )}
               </div>
             </article>
           </Reveal>
@@ -187,18 +150,66 @@ export default function PartnershipsPage() {
               </div>
 
               <div className="mt-8 grid gap-3">
-                {keyTechnologists.map((technologist) => (
+                {keyTechnologists.length ? keyTechnologists.map((technologist) => (
                   <p
-                    key={technologist}
+                    key={`${technologist.name}-${technologist.organization}`}
                     className="border border-white/10 bg-black/25 px-4 py-3 text-sm font-bold uppercase tracking-[0.08em] text-slate-200"
                   >
-                    {technologist}
+                    {technologist.name} - {technologist.organization}
                   </p>
-                ))}
+                )) : (
+                  <p className="text-sm leading-6 text-slate-300">No technologists are published yet.</p>
+                )}
               </div>
             </article>
           </Reveal>
         </div>
+      </Section>
+
+      <Section className="py-20 lg:py-28">
+        <Reveal>
+          <div className="about-overview-panel p-8 sm:p-10">
+            <p className="text-xs uppercase tracking-[0.3em] text-cyan-300">
+              Mission Partners
+            </p>
+
+            <div className="grid gap-8 lg:grid-cols-[0.8fr_1.2fr] lg:items-end">
+              <h2 className="mt-3 text-5xl font-black uppercase leading-[0.95] text-white sm:text-6xl">
+                Published partner relationships from the admin dashboard.
+              </h2>
+
+              <p className="text-lg leading-8 text-slate-300">
+                This section is fully database-driven. Add, edit, publish, or remove mission partner records in admin and the frontend updates here.
+              </p>
+            </div>
+
+            {partners.length ? (
+              <div className="mt-10 grid gap-5 md:grid-cols-2 xl:grid-cols-3">
+                {partners.map((partner) => (
+                  <article key={partner.id} className="border border-cyan-200/15 bg-black/25 p-6">
+                    {partner.logoUrl ? (
+                      // eslint-disable-next-line @next/next/no-img-element
+                      <img src={partner.logoUrl} alt={partner.name} className="mb-5 h-14 w-auto object-contain" />
+                    ) : null}
+                    <h3 className="text-2xl font-black uppercase leading-tight text-white">{partner.name}</h3>
+                    <p className="mt-3 text-xs font-bold uppercase tracking-[0.16em] text-cyan-200">
+                      Mission Partner
+                    </p>
+                    {partner.websiteUrl ? (
+                      <a href={partner.websiteUrl} target="_blank" rel="noreferrer" className="mt-5 inline-flex items-center gap-2 text-sm font-black uppercase tracking-[0.16em] text-cyan-200 transition hover:text-white">
+                        Visit Partner <ArrowRight size={16} />
+                      </a>
+                    ) : null}
+                  </article>
+                ))}
+              </div>
+            ) : (
+              <p className="mt-8 text-base leading-7 text-slate-300">
+                No mission partners are published yet. As records are saved and published in the admin dashboard, they will appear here automatically.
+              </p>
+            )}
+          </div>
+        </Reveal>
       </Section>
 
       <Section className="py-20 lg:py-28">
@@ -223,7 +234,9 @@ export default function PartnershipsPage() {
                 </p>
 
                 <div className="mt-8 grid gap-4 lg:grid-cols-3">
-                  {ecosystemChannels.map(({ title, body, icon: Icon }) => (
+                  {ecosystemChannels.map(({ title, body }, index) => {
+                    const Icon = [Landmark, BrainCircuit, Network][index] ?? ShieldCheck;
+                    return (
                     <article
                       key={title}
                       className="border border-cyan-200/15 bg-black/25 p-5"
@@ -236,7 +249,8 @@ export default function PartnershipsPage() {
                         {body}
                       </p>
                     </article>
-                  ))}
+                    );
+                  })}
                 </div>
 
                 <div className="mt-8 grid gap-3 sm:grid-cols-2">

@@ -6,6 +6,7 @@
 
 export const contractsSeed = [
   {
+    id: "seed-8a-stars-iii",
     name: "8(a) STARS III",
     contractNumber: "47QTCB21D0291",
     agency: "GSA",
@@ -23,6 +24,7 @@ export const contractsSeed = [
     displayOrder: 1,
   },
   {
+    id: "seed-gsa-mas-schedule",
     name: "GSA MAS Schedule",
     contractNumber: "GS-35F-290CA",
     agency: "GSA",
@@ -40,6 +42,7 @@ export const contractsSeed = [
     displayOrder: 2,
   },
   {
+    id: "seed-faa-efast-bpa",
     name: "FAA eFAST BPA",
     contractNumber: "693KA9-22-A-00152",
     agency: "Federal Aviation Administration",

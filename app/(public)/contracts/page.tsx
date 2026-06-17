@@ -53,65 +53,6 @@ const procurementSignals = [
   "NAICS 541190",
 ];
 
-const contractVehicles = [
-  "GSA OASIS Plus 8(a)",
-  "WOSB / EDWOSB",
-  "SDVOSB",
-  "8(a) STARS III - 47QTCB21D0291",
-  "GSA MAS - GS-35F-290CA",
-  "GSA MOBIS",
-  "FAA eFAST BPA - 693KA9-22-A-00152",
-  "MDA SHIELD MA-IDIQ",
-  "Navy SeaPort NxG",
-  "DHS EAGLE II",
-  "CATS",
-  "MBE Certified - State of Maryland",
-  "CMMI Development Level 3 Certified",
-  "CMMI Services Level 3 Certified",
-  "ISO 9001 Certified",
-];
-
-const vehicleDetails = [
-  {
-    label: "8(a) STARS III",
-    value: "Contract Number: 47QTCB21D0291",
-  },
-  {
-    label: "Expiration",
-    value: "7/1/2029",
-  },
-  {
-    label: "Program Manager",
-    value: "Barbara Gray | Bgray@graymatterstech.com",
-  },
-  {
-    label: "GSA Reference",
-    value: "www.gsa.gov/8astars3",
-  },
-  {
-    label: "GMTS UEI / CAGE",
-    value: "DRJDASA3SJJ3 / 4VUH8",
-  },
-  {
-    label: "GMTS DUNS",
-    value: "615433088",
-  },
-  {
-    label: "SageTech UEI / CAGE",
-    value: "XZPZCQAY8WD9 / 8HTM5",
-  },
-];
-
-const agencyExperience = [
-  "Department of State",
-  "HHS-ACF",
-  "USDA",
-  "SSA",
-  "Department of Education",
-  "Department of Labor",
-  "DoD mission environments",
-];
-
 const pastClients = [
   "CIO",
   "Department of Education",
@@ -123,26 +64,21 @@ const pastClients = [
   "Department of the Navy",
 ];
 
-const leadershipContacts = [
-  {
-    name: "Danielle Carr",
-    title: "CEO / Chief Strategy Officer",
-    email: "Dcarr@graymatterstech.com",
-    phone: "240-784-7418",
-  },
-  {
-    name: "Barbara A. Gray",
-    title: "President / Enterprise Solutions",
-    email: "Bgray@graymatterstech.com",
-    phone: "202-420-1767",
-  },
-];
-
 export default async function ContractsPage() {
-  const { settings } = await getPublicContractsPageData();
+  const { contracts, settings } = await getPublicContractsPageData();
 
   const heroImageUrl =
     settings?.contractsHeroImageUrl || siteConfig.media.contractsHeroImageUrl;
+  const publishedContracts = contracts;
+  const agencyExperience = [...new Set(publishedContracts.map((contract) => contract.agency))].slice(0, 7);
+  const procurementContacts = publishedContracts
+    .map((contract) => ({
+      name: contract.programManager,
+      title: contract.name,
+      email: contract.email,
+      phone: contract.phone,
+    }))
+    .filter((contact, index, list) => list.findIndex((item) => item.email === contact.email && item.phone === contact.phone) === index);
 
   return (
     <HomepageCinematicScene
@@ -281,33 +217,49 @@ export default async function ContractsPage() {
                 </p>
               </div>
 
-              <div className="grid gap-3 sm:grid-cols-2">
-                {contractVehicles.map((vehicle) => (
-                  <div
-                    key={vehicle}
-                    className="border border-cyan-200/18 bg-cyan-200/[0.035] px-5 py-4 text-sm font-black uppercase tracking-[0.14em] text-cyan-100"
-                  >
-                    {vehicle}
-                  </div>
-                ))}
-              </div>
+              {publishedContracts.length ? (
+                <div className="grid gap-3 sm:grid-cols-2">
+                  {publishedContracts.map((contract) => (
+                    <div
+                      key={contract.id}
+                      className="border border-cyan-200/18 bg-cyan-200/[0.035] px-5 py-4"
+                    >
+                      <p className="text-sm font-black uppercase tracking-[0.14em] text-cyan-100">
+                        {contract.name}
+                      </p>
+                      <p className="mt-2 text-xs uppercase tracking-[0.14em] text-slate-300">
+                        {contract.agency} • {contract.contractType}
+                      </p>
+                    </div>
+                  ))}
+                </div>
+              ) : (
+                <p className="text-base leading-7 text-slate-300">
+                  Contract vehicles will appear here after they are published from the admin dashboard.
+                </p>
+              )}
             </div>
 
-            <div className="mt-10 grid gap-4 md:grid-cols-2 xl:grid-cols-4">
-              {vehicleDetails.map((detail) => (
-                <article
-                  key={detail.label}
-                  className="border border-white/10 bg-black/25 p-5"
-                >
-                  <p className="text-xs font-bold uppercase tracking-[0.2em] text-slate-500">
-                    {detail.label}
-                  </p>
-                  <p className="mt-3 text-sm font-semibold leading-6 text-white">
-                    {detail.value}
-                  </p>
-                </article>
-              ))}
-            </div>
+            {publishedContracts.length ? (
+              <div className="mt-10 grid gap-4 md:grid-cols-2">
+                {publishedContracts.map((contract) => (
+                  <article key={`${contract.id}-detail`} className="border border-white/10 bg-black/25 p-5">
+                    <p className="text-xs font-bold uppercase tracking-[0.2em] text-slate-500">
+                      {contract.contractNumber}
+                    </p>
+                    <p className="mt-3 text-lg font-semibold leading-6 text-white">
+                      {contract.period}
+                    </p>
+                    <p className="mt-2 text-sm leading-6 text-slate-300">
+                      {contract.summary}
+                    </p>
+                    <p className="mt-4 text-xs font-bold uppercase tracking-[0.16em] text-cyan-200">
+                      {contract.availability}
+                    </p>
+                  </article>
+                ))}
+              </div>
+            ) : null}
           </div>
         </Reveal>
       </Section>
@@ -434,7 +386,7 @@ export default async function ContractsPage() {
             </h2>
 
             <div className="mt-10 grid gap-5 lg:grid-cols-2">
-              {leadershipContacts.map((contact) => (
+              {procurementContacts.map((contact) => (
                 <article
                   key={contact.email}
                   className="border border-cyan-200/15 bg-black/25 p-6"

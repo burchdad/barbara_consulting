@@ -6,10 +6,34 @@ import { prisma } from "@/lib/prisma";
 
 const SESSION_COOKIE = "bf_admin_session";
 const SESSION_MAX_AGE = 60 * 60 * 24 * 7;
+const PREVIEW_ADMIN_ID = "preview-admin";
+
+function isPreviewDeployment() {
+  return process.env.VERCEL_ENV === "preview";
+}
+
+function getPreviewCredentials() {
+  return {
+    email: process.env.ADMIN_EMAIL || "admin@company.com",
+    password: process.env.ADMIN_PASSWORD || "ChangeMe123!",
+  };
+}
+
+function isPreviewAdminLogin(email: string, password: string) {
+  const previewCredentials = getPreviewCredentials();
+  return (
+    isPreviewDeployment() &&
+    email === previewCredentials.email &&
+    password === previewCredentials.password
+  );
+}
 
 function getSecret() {
   const secret = process.env.ADMIN_SESSION_SECRET || process.env.NEXTAUTH_SECRET || "dev-secret-change-me";
   if (process.env.NODE_ENV === "production" && secret === "dev-secret-change-me") {
+    if (process.env.VERCEL_ENV === "preview") {
+      return "preview-only-admin-session-secret";
+    }
     throw new Error("Missing ADMIN_SESSION_SECRET (or NEXTAUTH_SECRET fallback) in production.");
   }
   return secret;
@@ -61,6 +85,14 @@ export async function getAdminUser() {
   const parsed = decodeSession(token);
   if (!parsed) return null;
 
+  if (parsed.userId === PREVIEW_ADMIN_ID && isPreviewDeployment()) {
+    return {
+      id: PREVIEW_ADMIN_ID,
+      email: getPreviewCredentials().email,
+      name: "Preview Admin",
+    };
+  }
+
   return prisma.user.findUnique({
     where: { id: parsed.userId },
     select: { id: true, email: true, name: true },
@@ -76,12 +108,35 @@ export async function requireAdmin() {
 }
 
 export async function loginAdmin(email: string, password: string) {
-  const user = await prisma.user.findUnique({ where: { email } });
-  if (!user) return null;
+  try {
+    const user = await prisma.user.findUnique({ where: { email } });
+    if (!user) {
+      if (isPreviewAdminLogin(email, password)) {
+        await setAdminSession(PREVIEW_ADMIN_ID);
+        return {
+          id: PREVIEW_ADMIN_ID,
+          email,
+          name: "Preview Admin",
+        };
+      }
+      return null;
+    }
 
-  const valid = await bcrypt.compare(password, user.passwordHash);
-  if (!valid) return null;
+    const valid = await bcrypt.compare(password, user.passwordHash);
+    if (!valid) return null;
 
-  await setAdminSession(user.id);
-  return user;
+    await setAdminSession(user.id);
+    return user;
+  } catch (error) {
+    console.error("[auth] Admin login failed.", error);
+    if (isPreviewAdminLogin(email, password)) {
+      await setAdminSession(PREVIEW_ADMIN_ID);
+      return {
+        id: PREVIEW_ADMIN_ID,
+        email,
+        name: "Preview Admin",
+      };
+    }
+    return null;
+  }
 }

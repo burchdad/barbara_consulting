@@ -6,6 +6,7 @@
 
 export const caseStudiesSeed = [
   {
+    id: "seed-federal-application-modernization",
     title: "Federal Application Modernization",
     slug: "federal-application-modernization",
     summary:
@@ -34,6 +35,7 @@ export const caseStudiesSeed = [
     displayOrder: 1,
   },
   {
+    id: "seed-enterprise-support-service-operations",
     title: "Enterprise Support and Service Operations",
     slug: "enterprise-support-service-operations",
     summary:
@@ -57,6 +59,7 @@ export const caseStudiesSeed = [
     displayOrder: 2,
   },
   {
+    id: "seed-low-code-automation-cost-reduction",
     title: "Low-Code Automation and Cost Reduction",
     slug: "low-code-automation-cost-reduction",
     summary:

@@ -140,6 +140,17 @@ model MissionPartner {
   updatedAt   DateTime @updatedAt
 }
 
+model PartnershipContact {
+  id           String   @id @default(cuid())
+  name         String
+  organization String
+  category     String
+  displayOrder Int      @default(0)
+  isPublished  Boolean  @default(true)
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+}
+
 model ContactSubmission {
   id        String           @id @default(cuid())
   name      String
@@ -148,6 +159,22 @@ model ContactSubmission {
   message   String
   status    SubmissionStatus @default(unread)
   createdAt DateTime         @default(now())
+}
+
+model SupportTicket {
+  id            String   @id @default(cuid())
+  clientName    String
+  requesterName String
+  requesterEmail String
+  pageUrl       String
+  requestType   String
+  priority      String
+  summary       String
+  details       String
+  attachments   Json
+  status        String   @default("pending")
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
 }
 
 model GlobalSetting {
@@ -170,6 +197,7 @@ model GlobalSetting {
   contactHeroImageUrl String?
   contractsHeroImageUrl String?
   privacyHeroImageUrl String?
+  capabilityStatementUrl String @default("/capabilities/joint-capability-statement.pdf")
   homepageSceneType SceneType @default(grid)
   homepageSceneGlow SceneGlow @default(blue)
   homepageSceneParticles Boolean @default(true)

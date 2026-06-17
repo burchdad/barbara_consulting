@@ -1,5 +1,10 @@
 import { z } from "zod";
 
+const publicAssetUrlSchema = z.string().refine(
+  (value) => value.startsWith("/") || /^https?:\/\//i.test(value),
+  "Use an internal path or an http(s) URL.",
+);
+
 export const loginSchema = z.object({
   email: z.string().email(),
   password: z.string().min(8),
@@ -103,6 +108,26 @@ export const missionPartnerSchema = z.object({
   isPublished: z.boolean().default(false),
 });
 
+export const partnershipContactSchema = z.object({
+  id: z.string().optional(),
+  name: z.string().min(2),
+  organization: z.string().min(2),
+  category: z.enum(["advisor", "technologist"]),
+  displayOrder: z.number().int().default(0),
+  isPublished: z.boolean().default(false),
+});
+
+export const supportTicketSchema = z.object({
+  clientName: z.string().min(2).max(160),
+  requesterName: z.string().min(2).max(120),
+  requesterEmail: z.string().email(),
+  pageUrl: z.string().min(1).max(500),
+  requestType: z.enum(["text_update", "image_or_file", "layout_change", "bug", "new_content", "other"]),
+  priority: z.enum(["normal", "high", "urgent"]).default("normal"),
+  summary: z.string().min(5).max(180),
+  details: z.string().min(20).max(5000),
+});
+
 export const globalSettingSchema = z.object({
   companyName: z.string().min(2),
   tagline: z.string().min(2),
@@ -122,6 +147,7 @@ export const globalSettingSchema = z.object({
   contactHeroImageUrl: z.string().url().optional().or(z.literal("")),
   contractsHeroImageUrl: z.string().url().optional().or(z.literal("")),
   privacyHeroImageUrl: z.string().url().optional().or(z.literal("")),
+  capabilityStatementUrl: publicAssetUrlSchema,
   homepageSceneType: z.enum(["earth", "grid", "cityscape", "mesh"]).default("grid"),
   homepageSceneGlow: z.enum(["red", "blue", "green", "gold"]).default("blue"),
   homepageSceneParticles: z.boolean().default(true),

@@ -56,94 +56,6 @@ const clarityPath = [
   "Move from plan to execution",
 ];
 
-const fallbackLeadership = [
-  {
-    id: "danielle-carr",
-    name: "Danielle Carr",
-    title: "Chief Executive Officer / Chief Strategy Officer",
-    credential: "MBA; M.S., Acquisition and Supply Chain Management",
-    photoUrl: "/leadership/danielle-carr.webp",
-    bio: [
-      "Danielle Carr was named CEO of Gray Matters Technology Services in January 2025 after serving as CEO of Sage Tech Solutions for the past five years. The merged capabilities of the two companies bring AI strategy, cost-saving innovation, and public-sector delivery experience to federal and state government clients through a Service-Disabled Veteran-Owned Small Business and Woman-Owned Small Business platform.",
-      "Her career spans work with NASA, the Department of Defense, HHS, international agencies, and other mission-focused organizations. Recognition for her leadership with the National Contract Management Association underscores her commitment to developing the next generation of procurement professionals and building strong relationships that support organizational growth.",
-      "Ms. Carr holds an MBA and a Master of Science in Acquisition and Supply Chain Management from the University of Maryland, College Park. She also holds multiple professional certifications and has served as Education Chair and Past President of the NCMA Bethesda Chapter.",
-    ],
-  },
-  {
-    id: "barbara-gray",
-    name: "Barbara A. Gray",
-    title: "President of Operations",
-    credential: "M.S., Information Technology; AI Strategy, PMP, ITIL, CISSP, SQL, and Oracle certifications",
-    photoUrl: "/leadership/barbara-gray.webp",
-    bio: [
-      "Barbara A. Gray, former CEO of Gray Matters Technology Services, managed and operated GMTS for more than 23 years as CEO and technology thought leader. She currently serves as President of Integrated Solutions.",
-      "Earlier in her career, Ms. Gray served in roles of increasing responsibility while supporting SAIC, Raytheon, Booz Allen, and Houston Associates across 20 collective years of technology and mission support experience.",
-      "Ms. Gray holds a Master of Information Technology from Williamsburg University and maintains certifications spanning AI strategy, project management, IT service management, cybersecurity, SQL, and Oracle administration.",
-    ],
-  },
-  {
-    id: "alexis-muse",
-    name: "Alexis Muse",
-    title: "Director of Contracts",
-    credential: "B.S., Finance, University of Maryland",
-    photoUrl: "/leadership/alexis-muse.webp",
-    bio: [
-      "Alexis Muse serves as Senior Contracts Manager, supporting federal contract operations across GMTS and Sage Tech Solutions.",
-      "She holds a bachelor's degree in finance from the University of Maryland and brings more than 15 years of experience supporting federal government contracts.",
-    ],
-  },
-  {
-    id: "bill-pratt",
-    name: "Bill Pratt",
-    title: "Chief Technology Officer",
-    credential: "Former CTO, Department of Homeland Security",
-    photoUrl: "/leadership/bill-pratt.webp",
-    bio: [
-      "Bill Pratt supports the firm as Chief Technology Officer, bringing senior federal technology leadership experience to modernization, architecture, and secure delivery efforts.",
-    ],
-  },
-  {
-    id: "royce-allen",
-    name: "Royce Allen",
-    title: "Cybersecurity Executive",
-    credential: "Former cybersecurity executive",
-    photoUrl: "/leadership/royce-allen.webp",
-    bio: [
-      "Royce Allen strengthens the firm's cybersecurity bench for programs that require risk awareness, compliance readiness, and disciplined protection of mission systems.",
-    ],
-  },
-  {
-    id: "torreon-creekmore",
-    name: "Torreon Creekmore",
-    title: "Chief Data Officer",
-    credential: "Data strategy and analytics leadership",
-    photoUrl: "/leadership/torreon-creekmore.webp",
-    bio: [
-      "Torreon Creekmore leads data capability alignment across reporting, analytics, performance management, and decision support initiatives.",
-    ],
-  },
-  {
-    id: "tushar-rathod",
-    name: "Tushar Rathod",
-    title: "Chief AI Officer",
-    credential: "University of Maryland AI Lab",
-    photoUrl: "/leadership/tushar-rathod.webp",
-    bio: [
-      "Tushar Rathod supports the firm's AI capability with applied expertise in intelligent systems, AI-enabled delivery, and responsible adoption pathways.",
-    ],
-  },
-  {
-    id: "phillip-katner",
-    name: "Phillip C. Katner",
-    title: "Director of Compliance & Security",
-    credential: "Compliance and security leadership",
-    photoUrl: "/leadership/phillip-katner.webp",
-    bio: [
-      "Phillip C. Katner supports compliance and security planning for regulated technology programs and mission environments.",
-    ],
-  },
-];
-
 function AboutSignalGraph() {
   const nodes = [
     "left-[11%] top-[34%]",
@@ -195,17 +107,14 @@ export default async function AboutPage() {
   );
   const aboutHeroImageUrl =
     settings?.aboutHeroImageUrl || siteConfig.media.aboutHeroImageUrl;
-  const leadersToRender =
-    leadership.length > 0
-      ? leadership.map((leader) => ({
-          id: leader.id,
-          name: leader.name,
-          title: leader.title,
-          credential: "Executive Leadership",
-          photoUrl: leader.photoUrl,
-          bio: [leader.fullBio || leader.shortBio].filter(Boolean),
-        }))
-      : fallbackLeadership;
+  const leadersToRender = leadership.map((leader) => ({
+    id: leader.id,
+    name: leader.name,
+    title: leader.title,
+    credential: "Executive Leadership",
+    photoUrl: leader.photoUrl,
+    bio: [leader.fullBio || leader.shortBio].filter(Boolean),
+  }));
 
   return (
     <HomepageCinematicScene
