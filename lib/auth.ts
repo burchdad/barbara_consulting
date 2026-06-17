@@ -6,25 +6,37 @@ import { prisma } from "@/lib/prisma";
 
 const SESSION_COOKIE = "bf_admin_session";
 const SESSION_MAX_AGE = 60 * 60 * 24 * 7;
-const PREVIEW_ADMIN_ID = "preview-admin";
+const ENV_ADMIN_ID = "env-admin";
 
 function isPreviewDeployment() {
   return process.env.VERCEL_ENV === "preview";
 }
 
-function getPreviewCredentials() {
-  return {
-    email: process.env.ADMIN_EMAIL || "admin@company.com",
-    password: process.env.ADMIN_PASSWORD || "ChangeMe123!",
-  };
+function getEnvAdminCredentials() {
+  const email = process.env.ADMIN_EMAIL;
+  const password = process.env.ADMIN_PASSWORD;
+
+  if (email && password) {
+    return { email, password };
+  }
+
+  if (isPreviewDeployment()) {
+    return {
+      email: email || "admin@company.com",
+      password: password || "ChangeMe123!",
+    };
+  }
+
+  return null;
 }
 
-function isPreviewAdminLogin(email: string, password: string) {
-  const previewCredentials = getPreviewCredentials();
+function isEnvAdminLogin(email: string, password: string) {
+  const envCredentials = getEnvAdminCredentials();
+  if (!envCredentials) return false;
+
   return (
-    isPreviewDeployment() &&
-    email === previewCredentials.email &&
-    password === previewCredentials.password
+    email === envCredentials.email &&
+    password === envCredentials.password
   );
 }
 
@@ -85,11 +97,14 @@ export async function getAdminUser() {
   const parsed = decodeSession(token);
   if (!parsed) return null;
 
-  if (parsed.userId === PREVIEW_ADMIN_ID && isPreviewDeployment()) {
+  if (parsed.userId === ENV_ADMIN_ID) {
+    const envCredentials = getEnvAdminCredentials();
+    if (!envCredentials) return null;
+
     return {
-      id: PREVIEW_ADMIN_ID,
-      email: getPreviewCredentials().email,
-      name: "Preview Admin",
+      id: ENV_ADMIN_ID,
+      email: envCredentials.email,
+      name: "Website Updates Admin",
     };
   }
 
@@ -108,19 +123,18 @@ export async function requireAdmin() {
 }
 
 export async function loginAdmin(email: string, password: string) {
+  if (isEnvAdminLogin(email, password)) {
+    await setAdminSession(ENV_ADMIN_ID);
+    return {
+      id: ENV_ADMIN_ID,
+      email,
+      name: "Website Updates Admin",
+    };
+  }
+
   try {
     const user = await prisma.user.findUnique({ where: { email } });
-    if (!user) {
-      if (isPreviewAdminLogin(email, password)) {
-        await setAdminSession(PREVIEW_ADMIN_ID);
-        return {
-          id: PREVIEW_ADMIN_ID,
-          email,
-          name: "Preview Admin",
-        };
-      }
-      return null;
-    }
+    if (!user) return null;
 
     const valid = await bcrypt.compare(password, user.passwordHash);
     if (!valid) return null;
@@ -129,14 +143,6 @@ export async function loginAdmin(email: string, password: string) {
     return user;
   } catch (error) {
     console.error("[auth] Admin login failed.", error);
-    if (isPreviewAdminLogin(email, password)) {
-      await setAdminSession(PREVIEW_ADMIN_ID);
-      return {
-        id: PREVIEW_ADMIN_ID,
-        email,
-        name: "Preview Admin",
-      };
-    }
     return null;
   }
 }
