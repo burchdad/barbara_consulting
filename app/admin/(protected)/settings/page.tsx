@@ -2,11 +2,8 @@ import {
   AdminActionRow,
   AdminAssetUploadField,
   AdminCard,
-  AdminCheckbox,
-  AdminFileField,
   AdminField,
   AdminSectionHeader,
-  AdminSelect,
   AdminSubmitButton,
   AdminTextArea,
 } from "@/components/admin/admin-form";
@@ -18,7 +15,7 @@ import { prisma } from "@/lib/prisma";
 
 export default async function AdminSettingsPage() {
   await ensureGlobalSettingCompatibility();
-  const settings = await prisma.globalSetting.findFirst().catch((error) => {
+  const settings = await prisma.globalSetting.findFirst().catch((error: unknown) => {
     console.error("[admin/settings] Unable to load global settings.", error);
     return null;
   });
@@ -49,20 +46,6 @@ export default async function AdminSettingsPage() {
           <div className="md:col-span-2"><AdminTextArea label="Hero Headline" name="heroHeadline" defaultValue={heroHeadline} required /></div>
           <div className="md:col-span-2"><AdminTextArea label="Hero Trust Badge" name="heroTrustBadge" defaultValue={settings?.heroTrustBadge ?? siteConfig.hero.trustBadge} required rows={2} /></div>
           <div className="md:col-span-2"><AdminTextArea label="Hero Subheadline" name="heroSubheadline" defaultValue={heroSubheadline} required /></div>
-          <div><AdminField label="About Hero Image URL" name="aboutHeroImageUrl" defaultValue={settings?.aboutHeroImageUrl ?? siteConfig.media.aboutHeroImageUrl} type="url" /></div>
-          <AdminFileField label="Upload About Hero Image" name="aboutHeroImageFile" accept="image/jpeg,image/png,image/webp,image/gif" note="Optional. Leave blank to keep the URL." />
-          <div><AdminField label="Case Studies Hero Image URL" name="caseStudiesHeroImageUrl" defaultValue={settings?.caseStudiesHeroImageUrl ?? siteConfig.media.caseStudiesHeroImageUrl} type="url" /></div>
-          <AdminFileField label="Upload Case Studies Hero Image" name="caseStudiesHeroImageFile" accept="image/jpeg,image/png,image/webp,image/gif" />
-          <div><AdminField label="Case Study Detail Fallback Image URL" name="caseStudyDetailFallbackImageUrl" defaultValue={settings?.caseStudyDetailFallbackImageUrl ?? siteConfig.media.caseStudyDetailFallbackImageUrl} type="url" /></div>
-          <AdminFileField label="Upload Case Study Fallback Image" name="caseStudyDetailFallbackImageFile" accept="image/jpeg,image/png,image/webp,image/gif" />
-          <div><AdminField label="Careers Hero Image URL" name="careersHeroImageUrl" defaultValue={settings?.careersHeroImageUrl ?? siteConfig.media.careersHeroImageUrl} type="url" /></div>
-          <AdminFileField label="Upload Careers Hero Image" name="careersHeroImageFile" accept="image/jpeg,image/png,image/webp,image/gif" />
-          <div><AdminField label="Contact Hero Image URL" name="contactHeroImageUrl" defaultValue={settings?.contactHeroImageUrl ?? siteConfig.media.contactHeroImageUrl} type="url" /></div>
-          <AdminFileField label="Upload Contact Hero Image" name="contactHeroImageFile" accept="image/jpeg,image/png,image/webp,image/gif" />
-          <div><AdminField label="Contracts Hero Image URL" name="contractsHeroImageUrl" defaultValue={settings?.contractsHeroImageUrl ?? siteConfig.media.contractsHeroImageUrl} type="url" /></div>
-          <AdminFileField label="Upload Contracts Hero Image" name="contractsHeroImageFile" accept="image/jpeg,image/png,image/webp,image/gif" />
-          <div><AdminField label="Privacy Hero Image URL" name="privacyHeroImageUrl" defaultValue={settings?.privacyHeroImageUrl ?? siteConfig.media.privacyHeroImageUrl} type="url" /></div>
-          <AdminFileField label="Upload Privacy Hero Image" name="privacyHeroImageFile" accept="image/jpeg,image/png,image/webp,image/gif" />
           <div className="md:col-span-2">
             <AdminAssetUploadField
               label="Capabilities Statement PDF"
@@ -73,20 +56,6 @@ export default async function AdminSettingsPage() {
               note="Upload a replacement PDF to store it in Blob and publish the new file."
             />
           </div>
-          <AdminSelect label="Homepage Scene Type" name="homepageSceneType" defaultValue={settings?.homepageSceneType ?? "grid"}>
-            <option value="grid">AI Grid</option>
-            <option value="mesh">Neural Mesh</option>
-            <option value="cityscape">Cityscape</option>
-            <option value="earth">Earth</option>
-          </AdminSelect>
-          <AdminSelect label="Homepage Scene Glow" name="homepageSceneGlow" defaultValue={settings?.homepageSceneGlow ?? "blue"}>
-            <option value="blue">Blue</option>
-            <option value="red">Red</option>
-            <option value="green">Green</option>
-            <option value="gold">Gold</option>
-          </AdminSelect>
-          <AdminCheckbox label="Enable scene particles" name="homepageSceneParticles" defaultChecked={settings?.homepageSceneParticles ?? true} />
-          <AdminCheckbox label="Enable scene parallax" name="homepageSceneParallax" defaultChecked={settings?.homepageSceneParallax ?? true} />
           <AdminActionRow className="md:col-span-2"><AdminSubmitButton>Save Settings</AdminSubmitButton></AdminActionRow>
         </form>
       </AdminCard>

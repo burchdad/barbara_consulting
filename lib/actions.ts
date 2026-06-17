@@ -8,6 +8,7 @@ import { ensurePartnershipContactCompatibility } from "@/lib/partnership-contact
 import { prisma } from "@/lib/prisma";
 import { clearAdminSession, loginAdmin, requireAdmin } from "@/lib/auth";
 import { uploadAdminFile, uploadAdminFiles } from "@/lib/blob-uploads";
+import { siteConfig } from "@/lib/config/site";
 import {
   caseStudySchema,
   contactSchema,
@@ -743,27 +744,18 @@ export async function retrySupportTicketHandoffAction(
 
 export async function updateGlobalSettingsAction(formData: FormData) {
   await requireAdmin();
-  const [
-    aboutHeroImageUrl,
-    caseStudiesHeroImageUrl,
-    caseStudyDetailFallbackImageUrl,
-    careersHeroImageUrl,
-    contactHeroImageUrl,
-    contractsHeroImageUrl,
-    privacyHeroImageUrl,
-    capabilityStatementUrl,
-  ] = await Promise.all([
-    uploadAdminFile(formData, "aboutHeroImageFile", "admin/page-images", "image"),
-    uploadAdminFile(formData, "caseStudiesHeroImageFile", "admin/page-images", "image"),
-    uploadAdminFile(formData, "caseStudyDetailFallbackImageFile", "admin/page-images", "image"),
-    uploadAdminFile(formData, "careersHeroImageFile", "admin/page-images", "image"),
-    uploadAdminFile(formData, "contactHeroImageFile", "admin/page-images", "image"),
-    uploadAdminFile(formData, "contractsHeroImageFile", "admin/page-images", "image"),
-    uploadAdminFile(formData, "privacyHeroImageFile", "admin/page-images", "image"),
-    uploadAdminFile(formData, "capabilityStatementFile", "admin/capabilities", "pdf"),
-  ]).catch((error) => {
-    console.error("[admin/settings] Unable to upload one or more files.", error);
-    return [null, null, null, null, null, null, null, null];
+  let existing: Awaited<ReturnType<typeof prisma.globalSetting.findFirst>> = null;
+  try {
+    await ensureGlobalSettingCompatibility();
+    existing = await prisma.globalSetting.findFirst();
+  } catch (error) {
+    console.error("[admin/settings] Unable to prepare global settings.", error);
+    return;
+  }
+
+  const capabilityStatementUrl = await uploadAdminFile(formData, "capabilityStatementFile", "admin/capabilities", "pdf").catch((error) => {
+    console.error("[admin/settings] Unable to upload capabilities statement.", error);
+    return null;
   });
 
   const parsed = globalSettingSchema.safeParse({
@@ -778,18 +770,18 @@ export async function updateGlobalSettingsAction(formData: FormData) {
     heroHeadline: formData.get("heroHeadline"),
     heroTrustBadge: formData.get("heroTrustBadge"),
     heroSubheadline: formData.get("heroSubheadline"),
-    aboutHeroImageUrl: aboutHeroImageUrl || String(formData.get("aboutHeroImageUrl") || ""),
-    caseStudiesHeroImageUrl: caseStudiesHeroImageUrl || String(formData.get("caseStudiesHeroImageUrl") || ""),
-    caseStudyDetailFallbackImageUrl: caseStudyDetailFallbackImageUrl || String(formData.get("caseStudyDetailFallbackImageUrl") || ""),
-    careersHeroImageUrl: careersHeroImageUrl || String(formData.get("careersHeroImageUrl") || ""),
-    contactHeroImageUrl: contactHeroImageUrl || String(formData.get("contactHeroImageUrl") || ""),
-    contractsHeroImageUrl: contractsHeroImageUrl || String(formData.get("contractsHeroImageUrl") || ""),
-    privacyHeroImageUrl: privacyHeroImageUrl || String(formData.get("privacyHeroImageUrl") || ""),
-    capabilityStatementUrl: capabilityStatementUrl || String(formData.get("capabilityStatementUrl") || ""),
-    homepageSceneType: String(formData.get("homepageSceneType") || "grid"),
-    homepageSceneGlow: String(formData.get("homepageSceneGlow") || "blue"),
-    homepageSceneParticles: toBool(formData.get("homepageSceneParticles")),
-    homepageSceneParallax: toBool(formData.get("homepageSceneParallax")),
+    aboutHeroImageUrl: existing?.aboutHeroImageUrl ?? siteConfig.media.aboutHeroImageUrl,
+    caseStudiesHeroImageUrl: existing?.caseStudiesHeroImageUrl ?? siteConfig.media.caseStudiesHeroImageUrl,
+    caseStudyDetailFallbackImageUrl: existing?.caseStudyDetailFallbackImageUrl ?? siteConfig.media.caseStudyDetailFallbackImageUrl,
+    careersHeroImageUrl: existing?.careersHeroImageUrl ?? siteConfig.media.careersHeroImageUrl,
+    contactHeroImageUrl: existing?.contactHeroImageUrl ?? siteConfig.media.contactHeroImageUrl,
+    contractsHeroImageUrl: existing?.contractsHeroImageUrl ?? siteConfig.media.contractsHeroImageUrl,
+    privacyHeroImageUrl: existing?.privacyHeroImageUrl ?? siteConfig.media.privacyHeroImageUrl,
+    capabilityStatementUrl: capabilityStatementUrl || String(formData.get("capabilityStatementUrl") || existing?.capabilityStatementUrl || siteConfig.media.capabilityStatementUrl),
+    homepageSceneType: existing?.homepageSceneType ?? "grid",
+    homepageSceneGlow: existing?.homepageSceneGlow ?? "blue",
+    homepageSceneParticles: existing?.homepageSceneParticles ?? true,
+    homepageSceneParallax: existing?.homepageSceneParallax ?? true,
   });
   if (!parsed.success) return;
 
@@ -799,8 +791,6 @@ export async function updateGlobalSettingsAction(formData: FormData) {
   };
 
   try {
-    await ensureGlobalSettingCompatibility();
-    const existing = await prisma.globalSetting.findFirst();
     if (existing) {
       await prisma.globalSetting.update({ where: { id: existing.id }, data });
     } else {
