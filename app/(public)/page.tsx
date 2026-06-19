@@ -88,6 +88,8 @@ export default async function HomePage() {
         parallax: true,
       }}
     >
+      <span hidden data-mission-control-ticket="whr_test_1781903792556_f0075a63" />
+
       {/* HERO */}
       <section className="home-hero relative isolate min-h-screen overflow-hidden">
         <video
