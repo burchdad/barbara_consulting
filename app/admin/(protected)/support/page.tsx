@@ -10,7 +10,7 @@ function statusLabel(status: string) {
   if (status === "sent") return "Sent";
   if (status === "needs_webhook" || status === "needs_webhook_secret") return "Saved";
   if (status === "webhook_failed") return "Retry Needed";
-  if (status === "pending") return "Sending";
+  if (status === "pending") return "Queued";
   return "Pending";
 }
 
