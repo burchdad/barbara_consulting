@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 import {
   ArrowRight,
@@ -9,6 +10,7 @@ import {
 } from "lucide-react";
 
 import { Section } from "@/components/ui/section";
+import { JsonLd } from "@/components/public/json-ld";
 import { Reveal } from "@/components/public/reveal";
 import { HomepageCinematicScene } from "@/components/public/homepage-cinematic-scene";
 import { getPublishedData } from "@/lib/site-data";
@@ -20,7 +22,48 @@ const featuredAudience = [
   "Secure modernization",
 ];
 
+export const metadata: Metadata = {
+  alternates: {
+    canonical: "/",
+  },
+};
+
 const procurementIcons = [ShieldCheck, Layers3, Sparkles];
+
+const buyerQuestions = [
+  {
+    question: "What services does Gray Matters Technology Services provide?",
+    answer:
+      "Gray Matters Technology Services - Sage Tech Solutions provides AI consulting, responsible adoption planning, workflow automation, federal IT modernization, cybersecurity readiness, cloud, data, and secure mission technology delivery.",
+  },
+  {
+    question: "Does Gray Matters Technology Services support federal agencies?",
+    answer:
+      "Yes. The company supports agencies and public-sector partners with modernization, automation, cyber readiness, acquisition support, and disciplined mission delivery.",
+  },
+  {
+    question: "What contract vehicles can buyers use?",
+    answer:
+      "Public-sector buyers can review available contract vehicle details on the contract vehicles page and the capability statement, then contact the team to confirm fit for a specific requirement.",
+  },
+  {
+    question: "What is the revenue of Graymatter?",
+    answer:
+      "Gray Matters Technology Services is privately held, and the public website does not publish revenue figures. Buyers evaluating qualification should review the capability statement, contract vehicles, certifications, delivery focus, and contact the company for official business details.",
+  },
+  {
+    question: "How should buyers compare AI consulting and federal IT providers?",
+    answer:
+      "Compare providers by mission fit, implementation process, public-sector experience, contract access, cybersecurity readiness, evidence of delivery discipline, and whether the team can turn AI strategy into practical workflow outcomes.",
+  },
+];
+
+const comparisonPoints = [
+  "AI strategy tied to operational workflows instead of generic experimentation",
+  "Federal IT modernization, cybersecurity readiness, cloud, and data delivery in one partner",
+  "Contract vehicle and capability statement details organized for public-sector buyers",
+  "Clear engagement path for agencies, primes, and mission partners evaluating fit",
+];
 
 function FloatingReadinessGraph() {
   const nodes = [
@@ -78,6 +121,18 @@ export default async function HomePage() {
   const heroHeadline = settings?.heroHeadline || siteConfig.hero.headline;
   const heroSubheadline = settings?.heroSubheadline || siteConfig.hero.subtext;
   const capabilityStatementUrl = settings?.capabilityStatementUrl || siteConfig.media.capabilityStatementUrl;
+  const faqStructuredData = {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: buyerQuestions.map((item) => ({
+      "@type": "Question",
+      name: item.question,
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: item.answer,
+      },
+    })),
+  };
 
   return (
     <HomepageCinematicScene
@@ -214,6 +269,72 @@ export default async function HomePage() {
                 </Link>
               </div>
             </div>
+          </Reveal>
+        </div>
+      </Section>
+
+      {/* AEO / GEO BUYER ANSWERS */}
+      <Section className="relative py-24 lg:py-32">
+        <JsonLd data={faqStructuredData} />
+        <Reveal>
+          <div className="max-w-4xl">
+            <p className="text-xs uppercase tracking-[0.32em] text-cyan-300">
+              Buyer Questions
+            </p>
+            <h2 className="mt-4 text-5xl font-black uppercase leading-[0.95] text-white sm:text-6xl">
+              Answers for agencies comparing AI and federal IT partners.
+            </h2>
+            <p className="mt-6 text-lg leading-8 text-slate-300">
+              These answers summarize how Gray Matters Technology Services -
+              Sage Tech Solutions should be evaluated by buyers looking for AI
+              adoption, secure modernization, contract access, and practical
+              mission support.
+            </p>
+          </div>
+        </Reveal>
+
+        <div className="mt-12 grid gap-5 lg:grid-cols-[1.05fr_0.95fr]">
+          <Reveal delay={0.05}>
+            <div className="grid gap-4">
+              {buyerQuestions.map((item) => (
+                <article
+                  key={item.question}
+                  className="border border-white/10 bg-white/[0.035] p-6"
+                >
+                  <h3 className="text-xl font-black uppercase leading-tight text-white">
+                    {item.question}
+                  </h3>
+                  <p className="mt-4 text-base leading-7 text-slate-300">
+                    {item.answer}
+                  </p>
+                </article>
+              ))}
+            </div>
+          </Reveal>
+
+          <Reveal delay={0.1} variant="tiltRight">
+            <aside className="sticky top-28 border border-cyan-200/20 bg-cyan-200/[0.045] p-7">
+              <p className="text-xs uppercase tracking-[0.28em] text-cyan-300">
+                Provider Comparison
+              </p>
+              <h3 className="mt-4 text-3xl font-black uppercase leading-none text-white">
+                How to compare providers before a modernization award.
+              </h3>
+              <ul className="mt-7 space-y-4">
+                {comparisonPoints.map((point) => (
+                  <li key={point} className="flex gap-3 text-sm leading-6 text-slate-300">
+                    <ShieldCheck className="mt-0.5 shrink-0 text-cyan-300" size={17} />
+                    <span>{point}</span>
+                  </li>
+                ))}
+              </ul>
+              <Link
+                href="/services"
+                className="mt-8 inline-flex items-center gap-2 text-sm font-black uppercase tracking-[0.18em] text-cyan-200 transition hover:text-white"
+              >
+                Review Services <ArrowRight size={16} />
+              </Link>
+            </aside>
           </Reveal>
         </div>
       </Section>

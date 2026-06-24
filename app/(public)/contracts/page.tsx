@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 import {
   ClipboardCheck,
@@ -12,6 +13,15 @@ import { Section } from "@/components/ui/section";
 import { Reveal } from "@/components/public/reveal";
 import { siteConfig } from "@/lib/config/site";
 import { getPublicContractsPageData } from "@/lib/site-data";
+
+export const metadata: Metadata = {
+  title: "Contract Vehicles",
+  description:
+    "Review contract vehicles, procurement pathways, capability statement access, and public-sector acquisition details for Gray Matters Technology Services.",
+  alternates: {
+    canonical: "/contracts",
+  },
+};
 
 const procurementPoints = [
   {

@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import {
   BrainCircuit,
   GraduationCap,
@@ -11,6 +12,15 @@ import { CareersClient } from "@/components/public/careers-client";
 import { Reveal } from "@/components/public/reveal";
 import { siteConfig } from "@/lib/config/site";
 import { getPublicCareersPageData } from "@/lib/site-data";
+
+export const metadata: Metadata = {
+  title: "Careers",
+  description:
+    "Explore careers with Gray Matters Technology Services - Sage Tech Solutions supporting responsible AI, secure systems, and federal mission technology delivery.",
+  alternates: {
+    canonical: "/careers",
+  },
+};
 
 const careerPrinciples = [
   {

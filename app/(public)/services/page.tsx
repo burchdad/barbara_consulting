@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 import {
   BriefcaseBusiness,
@@ -17,6 +18,15 @@ import { HomepageCinematicScene } from "@/components/public/homepage-cinematic-s
 import { Section } from "@/components/ui/section";
 import { Reveal } from "@/components/public/reveal";
 import { getPublishedData } from "@/lib/site-data";
+
+export const metadata: Metadata = {
+  title: "Services",
+  description:
+    "Explore AI consulting, workflow automation, federal IT modernization, cybersecurity readiness, cloud, data, and mission technology services.",
+  alternates: {
+    canonical: "/services",
+  },
+};
 
 const audienceSegments = [
   {

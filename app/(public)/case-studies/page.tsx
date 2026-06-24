@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 import {
   ArrowRight,
@@ -14,6 +15,15 @@ import { Section } from "@/components/ui/section";
 import { Reveal } from "@/components/public/reveal";
 import { siteConfig } from "@/lib/config/site";
 import { getPublicCaseStudiesPageData } from "@/lib/site-data";
+
+export const metadata: Metadata = {
+  title: "Case Studies",
+  description:
+    "Read Gray Matters Technology Services case studies focused on AI modernization, workflow intelligence, cyber readiness, and mission technology outcomes.",
+  alternates: {
+    canonical: "/case-studies",
+  },
+};
 
 const proofPoints = [
   {

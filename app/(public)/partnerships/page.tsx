@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 import {
   ArrowRight,
@@ -16,6 +17,15 @@ import {
   positioningSignals,
 } from "@/lib/data/partnership-ecosystem";
 import { getPublicPartnershipsPageData } from "@/lib/site-data";
+
+export const metadata: Metadata = {
+  title: "Partnerships",
+  description:
+    "Explore Gray Matters Technology Services partner ecosystem, advisor relationships, technology channels, and teaming support for public-sector modernization.",
+  alternates: {
+    canonical: "/partnerships",
+  },
+};
 
 export default async function PartnershipsPage() {
   const { partners, contacts } = await getPublicPartnershipsPageData();

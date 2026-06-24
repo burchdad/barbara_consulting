@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 import Image from "next/image";
 import {
@@ -16,6 +17,15 @@ import { HomepageCinematicScene } from "@/components/public/homepage-cinematic-s
 import { Section } from "@/components/ui/section";
 import { siteConfig } from "@/lib/config/site";
 import { getPublishedData } from "@/lib/site-data";
+
+export const metadata: Metadata = {
+  title: "About",
+  description:
+    "Learn about Gray Matters Technology Services - Sage Tech Solutions, an AI-forward federal technology partner focused on responsible adoption, secure modernization, and mission delivery.",
+  alternates: {
+    canonical: "/about",
+  },
+};
 
 const leadershipPrinciples = [
   {

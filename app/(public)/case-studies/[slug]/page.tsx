@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import {
@@ -17,6 +18,10 @@ import { Reveal } from "@/components/public/reveal";
 import { siteConfig } from "@/lib/config/site";
 import { getPublicCaseStudyDetailData } from "@/lib/site-data";
 
+type CaseStudyDetailParams = {
+  params: Promise<{ slug: string }>;
+};
+
 function normalizeList(value: unknown): string[] {
   if (Array.isArray(value)) {
     return value.filter((item): item is string => typeof item === "string" && item.trim().length > 0);
@@ -25,11 +30,29 @@ function normalizeList(value: unknown): string[] {
   return [];
 }
 
-export default async function CaseStudyDetailPage({
-  params,
-}: {
-  params: Promise<{ slug: string }>;
-}) {
+export async function generateMetadata({ params }: CaseStudyDetailParams): Promise<Metadata> {
+  const { slug } = await params;
+  const { study } = await getPublicCaseStudyDetailData(slug);
+
+  if (!study || !study.isPublished) {
+    return {
+      title: "Case Study",
+      alternates: {
+        canonical: `/case-studies/${slug}`,
+      },
+    };
+  }
+
+  return {
+    title: study.title,
+    description: study.summary,
+    alternates: {
+      canonical: `/case-studies/${study.slug}`,
+    },
+  };
+}
+
+export default async function CaseStudyDetailPage({ params }: CaseStudyDetailParams) {
   const { slug } = await params;
   const { study, settings } = await getPublicCaseStudyDetailData(slug);
 

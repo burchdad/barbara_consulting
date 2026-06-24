@@ -1,9 +1,19 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 import { CalendarClock, Headphones, Radio, Video } from "lucide-react";
 
 import { HomepageCinematicScene } from "@/components/public/homepage-cinematic-scene";
 import { Reveal } from "@/components/public/reveal";
 import { Section } from "@/components/ui/section";
+
+export const metadata: Metadata = {
+  title: "Podcasts & Webinars",
+  description:
+    "Find AI readiness conversations, federal modernization webinars, procurement briefs, and practical public-sector technology resources.",
+  alternates: {
+    canonical: "/podcasts-webinars",
+  },
+};
 
 const resourceTracks = [
   {

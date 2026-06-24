@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 import {
   ArrowRight,
@@ -14,6 +15,15 @@ import { Section } from "@/components/ui/section";
 import { Reveal } from "@/components/public/reveal";
 import { getGlobalSettings } from "@/lib/site-data";
 import { siteConfig } from "@/lib/config/site";
+
+export const metadata: Metadata = {
+  title: "Privacy",
+  description:
+    "Review how Gray Matters Technology Services handles website inquiries, contact information, data usage, and responsible privacy practices.",
+  alternates: {
+    canonical: "/privacy",
+  },
+};
 
 const privacyHighlights = [
   {

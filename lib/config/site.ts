@@ -3,7 +3,9 @@
  */
 
 export const siteConfig = {
+  url: "https://www.graymatterstech.com",
   companyName: "Gray Matters Technology Services - Sage Tech Solutions",
+  shortName: "Gray Matters Technology Services",
   tagline: "AI-Forward Federal Technology Delivery",
 
   hero: {
@@ -62,7 +64,7 @@ export const siteConfig = {
   },
 
   social: {
-    linkedin: "https://www.linkedin.com",
+    linkedin: "https://www.linkedin.com/company/gray-matters-technology-services",
   },
 
   footer: {
@@ -106,6 +108,6 @@ export const siteConfig = {
   meta: {
     title: "Gray Matters Technology Services - Sage Tech Solutions | AI Consulting",
     description:
-      "AI consulting for strategy, workflow automation, team training, responsible adoption, and practical modernization.",
+      "AI consulting, federal IT modernization, cybersecurity readiness, workflow automation, and secure mission technology delivery for agencies and public-sector partners.",
   },
 };

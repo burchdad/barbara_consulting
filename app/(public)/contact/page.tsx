@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import {
   Clock3,
   Mail,
@@ -11,6 +12,15 @@ import { ContactForm } from "@/components/public/contact-form";
 import { Reveal } from "@/components/public/reveal";
 import { getGlobalSettings } from "@/lib/site-data";
 import { siteConfig } from "@/lib/config/site";
+
+export const metadata: Metadata = {
+  title: "Contact",
+  description:
+    "Contact Gray Matters Technology Services - Sage Tech Solutions for AI consulting, federal IT modernization, contract vehicle questions, and mission technology support.",
+  alternates: {
+    canonical: "/contact",
+  },
+};
 
 type LeadershipContact = {
   name: string;
