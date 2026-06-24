@@ -15,8 +15,10 @@ import {
 } from "lucide-react";
 
 import { HomepageCinematicScene } from "@/components/public/homepage-cinematic-scene";
+import { JsonLd } from "@/components/public/json-ld";
 import { Section } from "@/components/ui/section";
 import { Reveal } from "@/components/public/reveal";
+import { siteConfig } from "@/lib/config/site";
 import { getPublishedData } from "@/lib/site-data";
 
 export const metadata: Metadata = {
@@ -200,6 +202,55 @@ function ServicesCommandMap() {
 
 export default async function ServicesPage() {
   const { services } = await getPublishedData();
+  const servicesStructuredData = [
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      itemListElement: [
+        {
+          "@type": "ListItem",
+          position: 1,
+          name: "Home",
+          item: siteConfig.url,
+        },
+        {
+          "@type": "ListItem",
+          position: 2,
+          name: "Services",
+          item: `${siteConfig.url}/services`,
+        },
+      ],
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Service",
+      "@id": `${siteConfig.url}/services#service`,
+      name: "AI consulting and federal IT modernization services",
+      serviceType: [
+        "AI strategy and governance",
+        "Workflow automation",
+        "Federal IT modernization",
+        "Cybersecurity and ATO readiness",
+        "Cloud and data modernization",
+        "Program and acquisition support",
+      ],
+      provider: {
+        "@type": "Organization",
+        name: siteConfig.companyName,
+        url: siteConfig.url,
+      },
+      areaServed: {
+        "@type": "Country",
+        name: "United States",
+      },
+      audience: {
+        "@type": "Audience",
+        audienceType: "Federal agencies, public-sector partners, and mission technology teams",
+      },
+      description:
+        "Gray Matters Technology Services - Sage Tech Solutions helps agencies and partners assess AI readiness, modernize applications, automate workflows, strengthen cybersecurity readiness, and improve mission technology operations.",
+    },
+  ];
 
   return (
     <HomepageCinematicScene
@@ -210,6 +261,7 @@ export default async function ServicesPage() {
         parallax: true,
       }}
     >
+      <JsonLd data={servicesStructuredData} />
       {/* HERO */}
       <section className="about-hero relative isolate overflow-hidden">
         <div className="absolute inset-0 bg-[linear-gradient(120deg,rgba(2,6,23,0.98)_0%,rgba(2,6,23,0.9)_50%,rgba(8,47,73,0.62)_100%)]" />

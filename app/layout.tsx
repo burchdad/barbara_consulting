@@ -79,6 +79,7 @@ export default function RootLayout({
   const organizationId = `${siteConfig.url}/#organization`;
   const websiteId = `${siteConfig.url}/#website`;
   const serviceId = `${siteConfig.url}/#professional-service`;
+  const aiServiceId = `${siteConfig.url}/#ai-modernization-service`;
 
   const structuredData = {
     "@context": "https://schema.org",
@@ -139,6 +140,49 @@ export default function RootLayout({
           "Cloud and data modernization",
           "Mission technology delivery",
         ],
+      },
+      {
+        "@type": "Service",
+        "@id": aiServiceId,
+        name: "AI consulting and federal IT modernization services",
+        serviceType: "AI consulting, workflow automation, cybersecurity readiness, and federal IT modernization",
+        provider: { "@id": organizationId },
+        areaServed: {
+          "@type": "Country",
+          name: "United States",
+        },
+        audience: [
+          {
+            "@type": "Audience",
+            audienceType: "Federal agencies",
+          },
+          {
+            "@type": "Audience",
+            audienceType: "Public-sector partners",
+          },
+          {
+            "@type": "Audience",
+            audienceType: "Mission technology teams",
+          },
+        ],
+        hasOfferCatalog: {
+          "@type": "OfferCatalog",
+          name: "Core modernization capabilities",
+          itemListElement: [
+            "AI readiness and responsible adoption",
+            "Workflow automation",
+            "Application modernization",
+            "Cybersecurity and ATO readiness",
+            "Cloud and data modernization",
+            "Program and acquisition support",
+          ].map((name) => ({
+            "@type": "Offer",
+            itemOffered: {
+              "@type": "Service",
+              name,
+            },
+          })),
+        },
       },
     ],
   };
