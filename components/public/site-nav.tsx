@@ -45,7 +45,7 @@ export function SiteNav({ brand, capabilityStatementHref }: SiteNavProps) {
           />
           <span
             aria-hidden="true"
-            className="block text-sm font-black uppercase leading-tight tracking-[0.12em] text-white sm:text-base lg:text-lg"
+            className="block text-base font-black uppercase leading-tight tracking-[0.12em] text-white sm:text-lg lg:text-xl 2xl:text-2xl"
           >
             {brandLines.map((line, index) => (
               <span key={line} className="block whitespace-nowrap">
@@ -56,7 +56,7 @@ export function SiteNav({ brand, capabilityStatementHref }: SiteNavProps) {
         </Link>
 
         <div className="ml-auto flex shrink-0 items-center gap-3">
-          <nav className="hidden items-center gap-5 text-sm text-zinc-300 2xl:flex">
+          <nav className="hidden items-center gap-6 text-base font-semibold text-zinc-300 2xl:flex">
             {primaryNavItems.map((item) => (
               <Link
                 key={item.href}
@@ -71,7 +71,7 @@ export function SiteNav({ brand, capabilityStatementHref }: SiteNavProps) {
           <a
             href={capabilityStatementHref}
             download
-            className="inline-flex min-h-10 items-center gap-2 whitespace-nowrap rounded-full border border-cyan-200/50 bg-cyan-200/10 px-4 py-2 text-xs font-black uppercase tracking-[0.12em] text-cyan-100 shadow-[0_0_24px_rgba(34,211,238,0.12)] transition hover:border-cyan-200 hover:bg-cyan-200/20 hover:text-white sm:px-5"
+            className="inline-flex min-h-10 items-center gap-2 whitespace-nowrap rounded-full border border-cyan-200/50 bg-cyan-200/10 px-4 py-2 text-sm font-black uppercase tracking-[0.12em] text-cyan-100 shadow-[0_0_24px_rgba(34,211,238,0.12)] transition hover:border-cyan-200 hover:bg-cyan-200/20 hover:text-white sm:px-5"
           >
             <span className="hidden sm:inline">Capabilities Statement</span>
             <span className="sm:hidden">PDF</span>
