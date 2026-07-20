@@ -194,9 +194,9 @@ export default async function HomePage() {
         <div className="hero-section-dissolve absolute inset-x-0 bottom-0" />
 
         <Section className="relative z-10 flex min-h-screen items-end pb-24 pt-36 lg:pb-32">
-          <Reveal>
-            <div className="max-w-6xl">
-              <div className="mb-10 inline-flex flex-col gap-3 border border-cyan-200/20 bg-black/35 p-3 shadow-[0_24px_80px_rgba(34,211,238,0.1)] backdrop-blur sm:flex-row sm:items-center sm:p-4">
+          <Reveal className="w-full">
+            <div className="mx-auto w-full max-w-[92rem] text-center">
+              <div className="mx-auto mb-10 inline-flex flex-col gap-3 border border-cyan-200/20 bg-black/35 p-3 shadow-[0_24px_80px_rgba(34,211,238,0.1)] backdrop-blur sm:flex-row sm:items-center sm:p-4">
                 <div className="flex h-28 w-28 items-center justify-center bg-white/88 p-2 sm:h-32 sm:w-32">
                   <img
                     src="/greylogo.png"
@@ -218,13 +218,13 @@ export default async function HomePage() {
 
               <p className="mb-5 text-xs font-bold uppercase tracking-[0.35em] text-cyan-200">{heroEyebrow}</p>
 
-              <h1 className="max-w-7xl text-5xl font-black uppercase leading-[0.92] text-white sm:text-7xl lg:text-8xl 2xl:text-[8.5rem]">
+              <h1 className="mx-auto max-w-[90rem] text-5xl font-black uppercase leading-[0.92] text-white sm:text-7xl lg:text-8xl 2xl:text-[8.5rem]">
                 {heroHeadline}
               </h1>
 
-              <p className="mt-8 max-w-3xl text-lg leading-8 text-slate-200 sm:text-xl">{heroSubheadline}</p>
+              <p className="mx-auto mt-8 max-w-5xl text-lg leading-8 text-slate-200 sm:text-xl">{heroSubheadline}</p>
 
-              <div className="relative z-30 mt-10 flex flex-wrap gap-4">
+              <div className="relative z-30 mt-10 flex flex-wrap justify-center gap-4">
                 <Link
                   href="/contact"
                   className="premium-button pointer-events-auto rounded-full bg-white px-8 py-4 text-sm font-black uppercase tracking-[0.18em] text-slate-950 transition hover:bg-cyan-200"
