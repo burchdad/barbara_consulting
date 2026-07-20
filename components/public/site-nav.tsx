@@ -37,8 +37,8 @@ export function SiteNav({ brand, capabilityStatementHref }: SiteNavProps) {
   return (
     <header className="sticky top-0 z-50 border-b border-white/10 bg-black/70 backdrop-blur-xl">
       <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-red-400/60 to-transparent" />
-      <div className="flex w-full items-center justify-between gap-6 px-4 py-4 sm:px-6 lg:px-10 xl:px-16 2xl:px-24">
-        <Link href="/" className="ml-[clamp(0rem,8vw,14rem)] shrink-0 font-black uppercase tracking-[0.12em] text-white">
+      <div className="flex w-full items-center justify-between gap-6 px-4 py-4 sm:px-6 lg:px-10 xl:px-12 2xl:px-12">
+        <Link href="/" className="shrink-0 font-black uppercase tracking-[0.12em] text-white">
           <Logo
             companyName={brandLines.join(" / ")}
             className="sr-only"
