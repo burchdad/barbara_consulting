@@ -45,7 +45,7 @@ export function SiteNav({ brand, capabilityStatementHref }: SiteNavProps) {
           />
           <span
             aria-hidden="true"
-            className="block text-base font-black uppercase leading-tight tracking-[0.12em] text-white sm:text-lg lg:text-xl 2xl:text-2xl"
+            className="inline-block text-center text-base font-black uppercase leading-tight tracking-[0.12em] text-white sm:text-lg lg:text-xl 2xl:text-2xl"
           >
             {brandLines.map((line, index) => (
               <span key={line} className="block whitespace-nowrap">
