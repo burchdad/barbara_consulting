@@ -21,6 +21,7 @@ const menuItems = [
   { href: "/privacy", label: "Privacy Policy" },
 ];
 
+const sewpViHref = "/capabilities/sewp-vi.pdf";
 const employeeTimesheetHref = "https://graymatterstechnology.tsheets.com";
 
 type SiteNavProps = {
@@ -67,6 +68,14 @@ export function SiteNav({ brand, capabilityStatementHref }: SiteNavProps) {
               </Link>
             ))}
           </nav>
+
+          <a
+            href={sewpViHref}
+            download
+            className="inline-flex min-h-10 items-center whitespace-nowrap rounded-full border border-white/25 bg-white/[0.04] px-4 py-2 text-xs font-black uppercase tracking-[0.12em] text-white transition hover:border-cyan-200/50 hover:bg-cyan-200/10 hover:text-cyan-100 sm:px-5"
+          >
+            SEWP VI
+          </a>
 
           <a
             href={capabilityStatementHref}
