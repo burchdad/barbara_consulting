@@ -78,6 +78,8 @@ model Contract {
   contractNumber String
   agency         String
   period         String
+  beginDate      DateTime? @db.Date
+  expirationDate DateTime? @db.Date
   contractType   String
   availability   String
   programManager String
