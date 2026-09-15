@@ -4,7 +4,7 @@ import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 import { SubmissionStatus } from "@prisma/client";
 import { ensureGlobalSettingCompatibility } from "@/lib/admin-settings";
-import { ensurePartnershipContactCompatibility } from "@/lib/partnership-contact-compatibility";
+import { ensureContentSchemaCompatibility, ensurePartnershipContactCompatibility } from "@/lib/partnership-contact-compatibility";
 import { prisma } from "@/lib/prisma";
 import { clearAdminSession, loginAdmin, requireAdmin } from "@/lib/auth";
 import { uploadAdminFile, uploadAdminFiles } from "@/lib/blob-uploads";
@@ -291,7 +291,8 @@ export async function upsertContractAction(formData: FormData) {
     name: formData.get("name"),
     contractNumber: formData.get("contractNumber"),
     agency: formData.get("agency"),
-    period: formData.get("period"),
+    beginDate: String(formData.get("beginDate") || ""),
+    expirationDate: formData.get("expirationDate"),
     contractType: formData.get("contractType"),
     availability: formData.get("availability"),
     programManager: formData.get("programManager"),
@@ -302,10 +303,18 @@ export async function upsertContractAction(formData: FormData) {
     isPublished: toBool(formData.get("isPublished")),
     displayOrder: toInt(formData.get("displayOrder")),
   });
-  if (!parsed.success) return;
+  if (!parsed.success) redirect("/admin/contracts?error=period");
 
-  const { id, ...data } = parsed.data;
+  const { id, beginDate, expirationDate, ...fields } = parsed.data;
+  if (beginDate && beginDate > expirationDate) redirect("/admin/contracts?error=period");
+  const data = {
+    ...fields,
+    beginDate: beginDate ? new Date(`${beginDate}T00:00:00Z`) : null,
+    expirationDate: new Date(`${expirationDate}T00:00:00Z`),
+    period: beginDate ? `${beginDate} / ${expirationDate}` : expirationDate,
+  };
   try {
+    await ensureContentSchemaCompatibility();
     if (id) {
       await prisma.contract.update({ where: { id }, data });
     } else {

@@ -89,6 +89,10 @@ const contentSchemaStatements = [
     )
   `,
   `
+    ALTER TABLE "Contract" ADD COLUMN IF NOT EXISTS "beginDate" DATE,
+      ADD COLUMN IF NOT EXISTS "expirationDate" DATE
+  `,
+  `
     CREATE TABLE IF NOT EXISTS "LeadershipMember" (
       "id" TEXT NOT NULL,
       "name" TEXT NOT NULL,

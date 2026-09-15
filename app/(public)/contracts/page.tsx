@@ -13,6 +13,7 @@ import { Section } from "@/components/ui/section";
 import { Reveal } from "@/components/public/reveal";
 import { siteConfig } from "@/lib/config/site";
 import { getPublicContractsPageData } from "@/lib/site-data";
+import { getContractStatus } from "@/lib/contract-period";
 
 export const metadata: Metadata = {
   title: "Contract Vehicles",
@@ -210,66 +211,52 @@ export default async function ContractsPage() {
       <Section className="py-20 lg:py-28">
         <Reveal>
           <div className="about-lead-panel overflow-hidden p-8 sm:p-12 lg:p-14">
-            <div className="grid gap-10 lg:grid-cols-[0.85fr_1.15fr] lg:items-start">
-              <div>
-                <p className="text-xs uppercase tracking-[0.3em] text-cyan-300">
-                  Contract Vehicles
-                </p>
-
-                <h2 className="mt-3 text-5xl font-black uppercase leading-[0.95] text-white sm:text-6xl">
-                  Acquisition paths built for federal speed.
-                </h2>
-
-                <p className="mt-5 text-lg leading-8 text-slate-300">
-                  Public-sector buyers and teaming partners can quickly assess
-                  small-business certifications, active vehicles, and corporate
-                  quality credentials in one focused view.
-                </p>
-              </div>
-
-              {publishedContracts.length ? (
-                <div className="grid gap-3 sm:grid-cols-2">
-                  {publishedContracts.map((contract) => (
-                    <div
-                      key={contract.id}
-                      className="border border-cyan-200/18 bg-cyan-200/[0.035] px-5 py-4"
-                    >
-                      <p className="text-sm font-black uppercase tracking-[0.14em] text-cyan-100">
-                        {contract.name}
-                      </p>
-                      <p className="mt-2 text-xs uppercase tracking-[0.14em] text-slate-300">
-                        {contract.agency} • {contract.contractType}
-                      </p>
-                    </div>
-                  ))}
-                </div>
-              ) : (
-                <p className="text-base leading-7 text-slate-300">
-                  Contract vehicles will appear here after they are published from the admin dashboard.
-                </p>
-              )}
+            <div className="max-w-4xl">
+              <p className="text-xs uppercase tracking-[0.3em] text-cyan-300">
+                Contract Vehicles
+              </p>
+              <h2 className="mt-3 text-5xl font-black uppercase leading-[0.95] text-white sm:text-6xl">
+                Acquisition paths built for federal speed.
+              </h2>
+              <p className="mt-5 text-lg leading-8 text-slate-300">
+                Review contract vehicles, agency details, and current contract status.
+              </p>
             </div>
 
             {publishedContracts.length ? (
               <div className="mt-10 grid gap-4 md:grid-cols-2">
                 {publishedContracts.map((contract) => (
-                  <article key={`${contract.id}-detail`} className="border border-white/10 bg-black/25 p-5">
-                    <p className="text-xs font-bold uppercase tracking-[0.2em] text-slate-500">
-                      {contract.contractNumber}
-                    </p>
-                    <p className="mt-3 text-lg font-semibold leading-6 text-white">
-                      {contract.period}
-                    </p>
-                    <p className="mt-2 text-sm leading-6 text-slate-300">
-                      {contract.summary}
-                    </p>
-                    <p className="mt-4 text-xs font-bold uppercase tracking-[0.16em] text-cyan-200">
-                      {contract.availability}
-                    </p>
+                  <article key={contract.id} className="min-w-0 border border-white/10 bg-black/25 p-5 sm:p-6">
+                    <dl className="space-y-5 break-words">
+                      <div>
+                        <dt className="text-xs font-bold uppercase tracking-[0.16em] text-slate-400">Contract Name</dt>
+                        <dd className="mt-2"><h3 className="text-xl font-bold leading-7 text-cyan-100">{contract.name}</h3></dd>
+                      </div>
+                      <div>
+                        <dt className="text-xs font-bold uppercase tracking-[0.16em] text-slate-400">Contract Number</dt>
+                        <dd className="mt-2 text-sm leading-6 text-slate-200">{contract.contractNumber}</dd>
+                      </div>
+                      <div>
+                        <dt className="text-xs font-bold uppercase tracking-[0.16em] text-slate-400">Agency</dt>
+                        <dd className="mt-2 text-sm leading-6 text-slate-200">{contract.agency}</dd>
+                      </div>
+                      <div>
+                        <dt className="text-xs font-bold uppercase tracking-[0.16em] text-slate-400">Period</dt>
+                        <dd className="mt-2 text-sm font-semibold leading-6 text-white">{getContractStatus(contract)}</dd>
+                      </div>
+                      <div>
+                        <dt className="text-xs font-bold uppercase tracking-[0.16em] text-slate-400">Summary</dt>
+                        <dd className="mt-2 whitespace-pre-line text-sm leading-6 text-slate-300">{contract.summary}</dd>
+                      </div>
+                    </dl>
                   </article>
                 ))}
               </div>
-            ) : null}
+            ) : (
+              <p className="mt-10 text-base leading-7 text-slate-300">
+                Contract vehicles will appear here after they are published from the admin dashboard.
+              </p>
+            )}
           </div>
         </Reveal>
       </Section>

@@ -14,8 +14,10 @@ import { ModuleHeader } from "@/components/admin/module-header";
 import { deleteContractAction, upsertContractAction } from "@/lib/actions";
 import { ensureContentBaseline } from "@/lib/content-baseline";
 import { prisma } from "@/lib/prisma";
+import { getContractDates } from "@/lib/contract-period";
 
-export default async function AdminContractsPage() {
+export default async function AdminContractsPage({ searchParams }: { searchParams: Promise<{ error?: string }> }) {
+  const { error } = await searchParams;
   await ensureContentBaseline();
   const contracts = await prisma.contract.findMany({ orderBy: { displayOrder: "asc" } });
   const publishedCount = contracts.filter((contract) => contract.isPublished).length;
@@ -23,6 +25,7 @@ export default async function AdminContractsPage() {
   return (
     <div className="space-y-6">
       <ModuleHeader title="Contracts" subtitle="Manage procurement-facing contract vehicle records." />
+      {error === "period" && <p role="alert" className="text-red-300">Enter valid contract dates. The expiration date must be on or after the begin date.</p>}
       <div className="grid gap-4 md:grid-cols-3">
         <AdminStatCard label="Displayed Contracts" value={contracts.length} />
         <AdminStatCard label="Published" value={publishedCount} />
@@ -34,7 +37,9 @@ export default async function AdminContractsPage() {
           <AdminField label="Contract Name" name="name" required />
           <AdminField label="Contract Number" name="contractNumber" required />
           <AdminField label="Agency" name="agency" required />
-          <AdminField label="Period" name="period" required />
+          <AdminField label="Begin Date (optional)" name="beginDate" type="date" />
+          <AdminField label="End / Expiration Date" name="expirationDate" type="date" required />
+          <p className="text-xs text-zinc-400 md:col-span-2">Dates stay in the admin. The public page shows Active through the expiration day (Eastern time), Upcoming before the begin date, and Expired afterward.</p>
           <AdminField label="Contract Type" name="contractType" required />
           <AdminField label="Availability" name="availability" required />
           <AdminField label="Program Manager" name="programManager" required />
@@ -57,7 +62,9 @@ export default async function AdminContractsPage() {
             <AdminField label="Contract Name" name="name" defaultValue={contract.name} required />
             <AdminField label="Contract Number" name="contractNumber" defaultValue={contract.contractNumber} required />
             <AdminField label="Agency" name="agency" defaultValue={contract.agency} required />
-            <AdminField label="Period" name="period" defaultValue={contract.period} required />
+            <AdminField label="Begin Date (optional)" name="beginDate" type="date" defaultValue={getContractDates(contract).beginDate} />
+            <AdminField label="End / Expiration Date" name="expirationDate" type="date" defaultValue={getContractDates(contract).expirationDate} required />
+            <p className="text-xs text-zinc-400 md:col-span-2">Dates stay in the admin. Active includes the expiration day (Eastern time). Legacy period: {contract.period}. Year-only expirations use December 31; confirm the exact date when known.</p>
             <AdminField label="Contract Type" name="contractType" defaultValue={contract.contractType} required />
             <AdminField label="Availability" name="availability" defaultValue={contract.availability} required />
             <AdminField label="Program Manager" name="programManager" defaultValue={contract.programManager} required />
