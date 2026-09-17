@@ -31,33 +31,17 @@ type SiteNavProps = {
 
 export function SiteNav({ brand, capabilityStatementHref }: SiteNavProps) {
   const [open, setOpen] = useState(false);
-  const brandLines = brand
-    .replace(" - Sage Tech Solutions", " / SageTech Solutions")
-    .split(" / ");
 
   return (
     <header className="sticky top-0 z-50 border-b border-white/10 bg-black/70 backdrop-blur-xl">
       <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-red-400/60 to-transparent" />
-      <div className="flex w-full items-center justify-between gap-6 px-4 py-4 sm:px-6 lg:px-10 xl:px-12 2xl:px-12">
-        <Link href="/" className="shrink-0 font-black uppercase tracking-[0.12em] text-white">
-          <Logo
-            companyName={brandLines.join(" / ")}
-            className="sr-only"
-          />
-          <span
-            aria-hidden="true"
-            className="inline-block text-center text-base font-black uppercase leading-tight tracking-[0.12em] text-white sm:text-lg lg:text-xl 2xl:text-2xl"
-          >
-            {brandLines.map((line, index) => (
-              <span key={line} className="block whitespace-nowrap">
-                {line}
-              </span>
-            ))}
-          </span>
+      <div className="flex w-full items-center justify-between gap-4 max-md:flex-wrap px-4 py-4 sm:px-6 lg:px-10 xl:px-12 2xl:px-12">
+        <Link href="/" aria-label={`${brand} home`} className="shrink-0">
+          <Logo companyName="Gray Matters Technology Services" className="w-60 sm:w-56 xl:w-72" />
         </Link>
 
-        <div className="ml-auto flex shrink-0 items-center gap-3">
-          <nav className="hidden items-center gap-6 text-base font-semibold text-zinc-300 2xl:flex">
+        <div className="ml-auto flex shrink-0 items-center gap-3 max-md:w-full max-md:justify-end">
+          <nav className="hidden items-center gap-4 text-sm font-semibold text-zinc-300 2xl:flex">
             {primaryNavItems.map((item) => (
               <Link
                 key={item.href}

@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { Logo } from "@/components/ui/Logo";
 import {
   ArrowRight,
   Landmark,
@@ -197,13 +198,7 @@ export default async function HomePage() {
           <Reveal className="w-full">
             <div className="mx-auto w-full max-w-[92rem] text-center">
               <div className="mx-auto mb-10 inline-flex flex-col gap-3 border border-cyan-200/20 bg-black/35 p-3 shadow-[0_24px_80px_rgba(34,211,238,0.1)] backdrop-blur sm:flex-row sm:items-center sm:p-4">
-                <div className="flex h-28 w-28 items-center justify-center bg-white/88 p-2 sm:h-32 sm:w-32">
-                  <img
-                    src="/greylogo.png"
-                    alt="Gray Matters Technology Services"
-                    className="h-full w-full object-contain"
-                  />
-                </div>
+                <Logo companyName="Gray Matters Technology Services" className="w-60 sm:w-80" />
 
                 <div className="hidden h-16 w-px bg-cyan-200/30 sm:block" />
 

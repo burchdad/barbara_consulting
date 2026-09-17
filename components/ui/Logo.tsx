@@ -1,12 +1,5 @@
-/**
- * Logo component — swap this for a new client by:
- *   1. Replacing the <span> text with an <Image> tag pointing to /public/images/logo.svg
- *   2. Adjusting width/height as needed
- *
- * Example with image:
- *   import Image from "next/image";
- *   <Image src="/images/logo.svg" alt={companyName} width={160} height={32} />
- */
+import Image from "next/image";
+import { cn } from "@/components/ui/cn";
 
 type LogoProps = {
   companyName: string;
@@ -15,8 +8,14 @@ type LogoProps = {
 
 export function Logo({ companyName, className }: LogoProps) {
   return (
-    <span className={`font-black uppercase tracking-[0.12em] text-white ${className ?? ""}`}>
-      {companyName}
+    <span className={cn("relative block aspect-[4/1] overflow-hidden rounded-sm bg-white", className)}>
+      <Image
+        src="/gray-matters-logo.png"
+        alt={companyName}
+        fill
+        sizes="(max-width: 639px) 240px, 320px"
+        className="object-cover object-center"
+      />
     </span>
   );
 }

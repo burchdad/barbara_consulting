@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { Logo } from "@/components/ui/Logo";
 import { Globe, Mail, MapPin, Phone } from "lucide-react";
 import { Reveal } from "@/components/public/reveal";
 import { getGlobalSettings } from "@/lib/site-data";
@@ -48,6 +49,9 @@ export async function SiteFooter() {
       </div>
       <div className="relative mx-auto grid w-full max-w-7xl gap-10 px-4 py-14 sm:px-6 lg:grid-cols-[1.2fr_1fr_1fr_1fr] lg:px-8">
         <div className="space-y-4">
+          <Link href="/" aria-label="Gray Matters Technology Services home" className="inline-block max-w-full">
+            <Logo companyName="Gray Matters Technology Services" className="w-72 max-w-full" />
+          </Link>
           <p className="text-xs uppercase tracking-[0.35em] text-cyan-300">{companyName}</p>
           <p className="max-w-md text-sm text-slate-300">{footerStatement}</p>
           <div className="space-y-2 text-sm text-slate-400">
