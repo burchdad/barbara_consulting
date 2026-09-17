@@ -45,9 +45,9 @@ export const metadata: Metadata = {
     description: siteConfig.meta.description,
     images: [
       {
-        url: "/greylogo.png",
-        width: 1200,
-        height: 630,
+        url: "/gray-matters-logo.png",
+        width: 1774,
+        height: 887,
         alt: siteConfig.shortName,
       },
     ],
@@ -56,7 +56,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: siteConfig.meta.title,
     description: siteConfig.meta.description,
-    images: ["/greylogo.png"],
+    images: ["/gray-matters-logo.png"],
   },
   robots: {
     index: true,
@@ -94,7 +94,7 @@ export default function RootLayout({
           "Graymatterstech",
         ],
         url: siteConfig.url,
-        logo: `${siteConfig.url}/greylogo.png`,
+        logo: `${siteConfig.url}/gray-matters-logo.png`,
         email: siteConfig.contact.email,
         telephone: siteConfig.contact.phone,
         address: {

@@ -4,7 +4,6 @@ import Link from "next/link";
 import { Menu, X } from "lucide-react";
 import { AnimatePresence, motion } from "framer-motion";
 import { useState } from "react";
-import { Logo } from "@/components/ui/Logo";
 
 const primaryNavItems = [
   { href: "/", label: "Home" },
@@ -40,10 +39,7 @@ export function SiteNav({ brand, capabilityStatementHref }: SiteNavProps) {
       <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-red-400/60 to-transparent" />
       <div className="flex w-full items-center justify-between gap-6 px-4 py-4 sm:px-6 lg:px-10 xl:px-12 2xl:px-12">
         <Link href="/" className="shrink-0 font-black uppercase tracking-[0.12em] text-white">
-          <Logo
-            companyName={brandLines.join(" / ")}
-            className="sr-only"
-          />
+          <span className="sr-only">{brandLines.join(" / ")}</span>
           <span
             aria-hidden="true"
             className="inline-block text-center text-base font-black uppercase leading-tight tracking-[0.12em] text-white sm:text-lg lg:text-xl 2xl:text-2xl"
