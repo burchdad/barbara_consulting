@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import sewp from "@/lib/content/sewp.json";
 import styles from "./ordering-guide.module.css";
 import { PrintGuide } from "./print-guide";
 
@@ -10,7 +11,7 @@ export const metadata: Metadata = {
 
 export default function OrderingGuidePage() {
   return (
-    <main className={styles.page}>
+    <main id="sewp-main" tabIndex={-1} className={styles.page}>
       <div className={styles.toolbar}><span>Gray Matters Technology Services</span><PrintGuide /></div>
       <article className={styles.guide}>
         <h1 className={styles.title}>SEWP VI Ordering Guide</h1>
@@ -20,12 +21,9 @@ export default function OrderingGuidePage() {
             <img className={styles.logo} src="/capabilities/sewp-vi-contract-holder.jpg" width="865" height="384" alt="NASA SEWP VI Contract Holder" />
             <section>
               <h2>SEWP Overview</h2>
-              <p>NASA SEWP VI - The NASA SEWP (Solutions for Enterprise-Wide Procurement), pronounced &quot;soup&quot;, provides the latest Information Technology, Communication, and Audio-Visual (ITC/AV) solutions and services for all Federal Agencies and their approved contractors. Created in 1993, SEWP I was the first Government-Wide Acquisition Contract (GWAC) in the federal acquisition space. Originally, the contract vehicle provided only technology products for NASA and all other agencies. SEWP has continually evolved over the past 30 years, expanding its scope to meet the requests of its customers. The SEWP vehicle represents acquisition innovation within the Federal Government. The program is self-funded through usage fees (0.34%) and provides all Federal agencies with acquisition support - more than 50,000 orders a year.</p>
+              {sewp.overview.map((paragraph) => <p key={paragraph}>{paragraph}</p>)}
             </section>
-            <section>
-              <h2>Fair Opportunity</h2>
-              <p>FAR 16.505(b)(1) provides that each contractor shall be given fair opportunity to be considered for each order exceeding $10,000 and issued under multiple award contracts. The FAR states that the method to obtain fair opportunity is at the discretion of the Contracting Officer (CO) and that the CO must document the rationale for placement and price of each order. Using the SEWP online Quote Request Tool is the recommended method to assist in this activity and to augment the required decision documentation. The SEWP Quote Request Tool (QRT) will automatically include the Contract Holders within a selected Group or based on a suggested source.</p>
-            </section>
+
             <section>
               <h2>About Gray Matters Technology Services</h2>
               <p>Gray Matters Technology Services supports federal agencies and partners with IT modernization, cybersecurity, cloud, data, workflow automation, and mission technology delivery.</p>
@@ -36,18 +34,14 @@ export default function OrderingGuidePage() {
             <div className={styles.contract}>
               <h2>Gray Matters<br />Technology Services</h2>
               <p className={styles.contractHeading}>Category C Contract</p>
-              <p className={styles.contractHeading}>80TECH26DXXXX</p>
+              <p className={styles.contractHeading}>{sewp.contractNumber}</p>
               <p>PoP: November 2026 - October 2036</p>
+              <p>{sewp.multiAward}</p>
               <section>
                 <h3>Main Office Address:</h3>
                 <p>Gray Matters Technology Services<br />10011 Nicol Court E<br />Bowie, MD 20721<br />Phone: <a href="tel:+13019667523">301-966-7523</a><br />Fax: 240-206-8796</p>
               </section>
-              <section>
-                <h3>SEWP VI Program Support</h3>
-                <h4>Order Issues and Post-Delivery Contacts</h4>
-                <p>Christa Moyer<br />SEWP VI Program Manager<br /><a href="mailto:Cmoyer@graymatterstech.com">Cmoyer@graymatterstech.com</a><br /><a href="tel:+14107251155">410-725-1155</a></p>
-                <p>Barbara A. Gray<br />SEWP Deputy Program Manager<br /><a href="mailto:Bgray@graymatterstech.com">Bgray@graymatterstech.com</a><br /><a href="tel:+12024201767">202-420-1767</a></p>
-              </section>
+
             </div>
             <section className={styles.helpline}>
               <h3>SEWP Helpline</h3>
@@ -56,6 +50,17 @@ export default function OrderingGuidePage() {
           </aside>
         </div>
         <div className={styles.secondPage}>
+            <section>
+              <h2>Fair Opportunity</h2>
+              <p>FAR 16.505(b)(1) requires a fair opportunity for each awardee to be considered for orders exceeding the applicable micro-purchase threshold under multiple-award contracts, subject to the exceptions specified in that provision. The FAR states that the method to obtain fair opportunity is at the discretion of the Contracting Officer (CO) and that the CO must document the rationale for placement and price of each order. Using the SEWP online Quote Request Tool is the recommended method to assist in this activity and to augment the required decision documentation. The SEWP Quote Request Tool (QRT) will automatically include the Contract Holders within a selected Group or based on a suggested source.</p>
+            </section>
+          <section aria-labelledby="quotes-support">
+            <h2 id="quotes-support">Quotes, Support, and Order Issues</h2>
+            {sewp.support.map((item) => <div key={item.title}><h3>{item.title}</h3><p>{item.text}</p></div>)}
+            <h3>SEWP VI Sales and Support Contacts</h3>
+            {sewp.contacts.map((contact) => <p key={contact.email}><strong>{contact.name}</strong><br />{contact.role}<br /><a href={`mailto:${contact.email}`}>{contact.email}</a><br /><a href={`tel:${contact.tel}`}>{contact.phone}</a></p>)}
+          </section>
+
           <section>
             <h2>What&apos;s in scope for SEWP VI?</h2>
             <p>SEWP is designed to provide a broad suite of Information Technology, Communication and Audio Visual (ITC/AV) solutions and services. Technology is ever-evolving and for that reason SEWP&apos;s processes enable our Contract Holders to add new commercial technology and IT services to their contract daily, as requested by our customers. The focus of SEWP is on the full suite of technology offerings that simplify Governmental access and Industry offerings across the entire ITC/AV solutions and services landscape. SEWP is composed of three (3) scope categories detailed below. If you would like SEWP to determine if your requirement is within scope of the SEWP VI contract, please send an overview and/or bill of materials (BOM) to <a href="mailto:help@sewp.nasa.gov">help@sewp.nasa.gov</a> for review and feedback.</p>
@@ -75,6 +80,7 @@ export default function OrderingGuidePage() {
             <p>If modifications are made to any order, these modifications must also route through the SEWP Program Management Office (PMO).</p>
           </section>
         </div>
+        <div className={styles.download}><a href="/capabilities/sewp-vi.pdf" download>Download SEWP VI contract information (PDF)</a></div>
       </article>
     </main>
   );

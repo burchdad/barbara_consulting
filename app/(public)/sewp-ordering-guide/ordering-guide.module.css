@@ -1,4 +1,5 @@
-.page { background: #fff; color: #272727; font-family: Arial, Helvetica, sans-serif; }
+.page { background: #fff; color: #272727; font-family: Arial, Helvetica, sans-serif; scroll-margin-top: 9rem; }
+.guide [id] { scroll-margin-top: 9rem; }
 .toolbar { display: flex; justify-content: space-between; align-items: center; gap: 16px; flex-wrap: wrap; max-width: 1150px; margin: auto; padding: 20px 28px; font-size: 14px; }
 .toolbar button { cursor: pointer; border: 1px solid #19194e; padding: 10px 16px; border-radius: 4px; color: #19194e; font-weight: bold; }
 .toolbar button:hover { background: #f2f2fa; }
@@ -9,7 +10,7 @@
 .guide h2 { color: #19194e; font-size: 16px; margin: 0 0 24px; }
 .overview h2, .secondPage h2 { text-transform: uppercase; }
 .guide p { margin: 0 0 22px; }
-.guide a { color: #287d91; text-decoration: underline; overflow-wrap: anywhere; }
+.guide a { color: #16566a; text-decoration: underline; overflow-wrap: anywhere; }
 .guide section { margin-bottom: 28px; }
 .firstPage { display: grid; grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr); gap: 34px; padding: 0 28px 24px; background: linear-gradient(#ffdf00 0 35px, #fff 35px); }
 .logo { width: 65%; max-width: 340px; height: auto; margin: 0 auto 12px; display: block; }
@@ -53,4 +54,15 @@
   .contract section { margin-top: 20px; }
   .secondPage { break-before: page; border-top: 0; padding: 15px 10px; }
   .categories { grid-template-columns: repeat(3,1fr); margin: 40px auto; }
+}
+
+.download { padding: 20px 28px; }
+.secondPage h3 { margin: 18px 0 8px; }
+@media print {
+  .firstPage { display: block; }
+  .sidebar { text-align: left; }
+  .logo { width: 180px; margin-left: 0; }
+  .guide h2, .guide h3, .guide h4 { break-after: avoid; }
+  .guide p { orphans: 3; widows: 3; }
+  .download { display: none; }
 }
