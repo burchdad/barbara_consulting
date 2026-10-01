@@ -16,7 +16,7 @@ from reportlab.pdfbase import pdfmetrics
 from reportlab.pdfbase.ttfonts import TTFont
 from reportlab.lib.styles import ParagraphStyle
 from reportlab.lib.colors import HexColor
-from reportlab.platypus import SimpleDocTemplate, Paragraph, Spacer, PageBreak
+from reportlab.platypus import SimpleDocTemplate, Paragraph, Flowable, PageBreak
 from pypdf import PdfReader, PdfWriter
 from pypdf.generic import DictionaryObject as D, ArrayObject as A, NameObject as N, NumberObject as I, TextStringObject as T, BooleanObject as B
 
@@ -41,24 +41,45 @@ records = []
 page_ids = defaultdict(int)
 
 class TaggedParagraph(Paragraph):
-    def __init__(self, text, style, role='P', **kwargs):
+    def __init__(self, text, style, role='P', list_item=None, **kwargs):
         super().__init__(text, style, **kwargs)
         self.role = role
+        self.list_item = list_item
 
     def split(self, availWidth, availHeight):
         parts = super().split(availWidth, availHeight)
         for part in parts:
             part.role = self.role
+            part.list_item = self.list_item
         return parts
 
     def draw(self):
         page = self.canv.getPageNumber() - 1
         mcid = page_ids[page]
         page_ids[page] += 1
-        records.append((page, mcid, self.role))
+        records.append((page, mcid, self.role, self.list_item))
         self.canv.addLiteral(f'/{self.role} <</MCID {mcid}>> BDC')
         super().draw()
         self.canv.addLiteral('EMC')
+
+class TaggedListItem(Flowable):
+    """Keep a numbered label and body together, each with its own marked content."""
+    def __init__(self, number, text, list_id):
+        super().__init__()
+        key = (list_id, number)
+        self.label = TaggedParagraph(f'{number}.', styles['P'], 'Lbl', key)
+        self.body = TaggedParagraph(escape(text), styles['P'], 'LBody', key)
+        self.spaceAfter = 8
+
+    def wrap(self, availWidth, availHeight):
+        self.label_height = self.label.wrap(18, availHeight)[1]
+        self.body_height = self.body.wrap(availWidth - 18, availHeight)[1]
+        self.width, self.height = availWidth, max(self.label_height, self.body_height)
+        return self.width, self.height
+
+    def draw(self):
+        self.label.drawOn(self.canv, 0, self.height - self.label_height)
+        self.body.drawOn(self.canv, 18, self.height - self.body_height)
 
 story = []
 def para(text, role='P', markup=False):
@@ -126,10 +147,10 @@ link('NASA SEWP home page', 'https://www.sewp.nasa.gov/')
 
 story.append(PageBreak())
 para('A.1.13 Fair opportunity and requests for quotes', 'H2')
-for item in DATA['fairOpportunity']:
+for item_index, item in enumerate(DATA['fairOpportunity']):
     if isinstance(item['text'], list):
         for index, text in enumerate(item['text'], 1):
-            para(f'{index}. {text}')
+            story.append(TaggedListItem(index, text, item_index))
     else:
         para(item['text'])
 
@@ -144,12 +165,27 @@ document_ref = writer._add_object(document)
 tree[N('/K')] = document_ref
 parents = defaultdict(list)
 link_elements = defaultdict(list)
-for page_index, mcid, role in records:
+lists = {}
+list_items = {}
+for page_index, mcid, role, list_item in records:
     page = writer.pages[page_index]
-    element = D({N('/Type'): N('/StructElem'), N('/S'): N('/'+role), N('/P'): document_ref,
+    parent_ref = document_ref
+    if list_item is not None:
+        list_id, number = list_item
+        if list_id not in lists:
+            group = D({N('/Type'): N('/StructElem'), N('/S'): N('/L'), N('/P'): document_ref,
+                       N('/K'): A(), N('/A'): D({N('/O'): N('/List'), N('/ListNumbering'): N('/Decimal')})})
+            lists[list_id] = writer._add_object(group)
+            document[N('/K')].append(lists[list_id])
+        if list_item not in list_items:
+            entry = D({N('/Type'): N('/StructElem'), N('/S'): N('/LI'), N('/P'): lists[list_id], N('/K'): A()})
+            list_items[list_item] = writer._add_object(entry)
+            lists[list_id].get_object()[N('/K')].append(list_items[list_item])
+        parent_ref = list_items[list_item]
+    element = D({N('/Type'): N('/StructElem'), N('/S'): N('/'+role), N('/P'): parent_ref,
                  N('/Pg'): page.indirect_reference, N('/K'): I(mcid)})
     ref = writer._add_object(element)
-    document[N('/K')].append(ref)
+    parent_ref.get_object()[N('/K')].append(ref)
     parents[page_index].append(ref)
     if role == 'Link':
         link_elements[page_index].append(ref)
@@ -190,7 +226,25 @@ for stale in ['80TECH26DXXXX', 'TBD', 'acqu325isition', 'Digal', 'Audio-Visual(I
     assert stale not in text, stale
 assert reader.trailer['/Root']['/Lang'] == 'en-US'
 assert reader.metadata.title
-assert len(reader.trailer['/Root']['/StructTreeRoot']['/K']['/K']) == len(records)
+root_children = reader.trailer['/Root']['/StructTreeRoot']['/K']['/K']
+tagged_lists = [child.get_object() for child in root_children if child.get_object()['/S'] == '/L']
+expected_lists = [item['text'] for item in DATA['fairOpportunity'] if isinstance(item['text'], list)]
+assert len(tagged_lists) == len(expected_lists)
+for group, expected in zip(tagged_lists, expected_lists):
+    assert group['/A']['/ListNumbering'] == '/Decimal'
+    assert len(group['/K']) == len(expected)
+    for entry in group['/K']:
+        assert entry.get_object()['/S'] == '/LI'
+        assert [child.get_object()['/S'] for child in entry.get_object()['/K']] == ['/Lbl', '/LBody']
+# Each marked content ID must map to the exact leaf structure element on its page.
+parent_nums = reader.trailer['/Root']['/StructTreeRoot']['/ParentTree']['/Nums']
+parent_map = dict(zip(parent_nums[::2], parent_nums[1::2]))
+for page_index, mcid, role, _ in records:
+    element = parent_map[page_index][mcid].get_object()
+    assert element['/S'] == '/' + role
+    assert element['/Pg'].indirect_reference == reader.pages[page_index].indirect_reference
+    kids = element['/K']
+    assert (kids[0] if isinstance(kids, list) else kids) == mcid
 uris = [a.get_object()['/A']['/URI'] for page in reader.pages for a in page.get('/Annots', [])]
 assert 'https://www.graymatterstech.com/sewp-ordering-guide' in uris
 assert not any('contractholders' in u for u in uris)

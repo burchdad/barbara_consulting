@@ -4,7 +4,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Menu, X } from "lucide-react";
 import { AnimatePresence, motion } from "framer-motion";
-import { useState } from "react";
+import { useRef, useState } from "react";
 
 const primaryNavItems = [
   { href: "/", label: "Home" },
@@ -32,12 +32,19 @@ type SiteNavProps = {
 export function SiteNav({ brand, capabilityStatementHref }: SiteNavProps) {
   const pathname = usePathname();
   const [open, setOpen] = useState(false);
+  const menuButtonRef = useRef<HTMLButtonElement>(null);
   const brandLines = brand
     .replace(" - Sage Tech Solutions", " / SageTech Solutions")
     .split(" / ");
 
   return (
-    <header className="sticky top-0 z-50 border-b border-white/10 bg-black/70 backdrop-blur-xl">
+    <header className="sticky top-0 z-50 border-b border-white/10 bg-black/70 backdrop-blur-xl" onKeyDown={(event) => {
+      if (event.key === "Escape" && open) {
+        event.preventDefault();
+        setOpen(false);
+        menuButtonRef.current?.focus();
+      }
+    }}>
       {(pathname === "/sewp-vi" || pathname === "/sewp-ordering-guide") && <a href="#sewp-main" className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-[60] focus:rounded focus:bg-white focus:px-4 focus:py-3 focus:text-black focus:outline-2 focus:outline-cyan-700">Skip to main content</a>}
       <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-red-400/60 to-transparent" />
       <div className="flex w-full flex-wrap items-center justify-between gap-3 px-4 py-4 lg:flex-nowrap sm:gap-6 sm:px-6 lg:px-10 xl:px-12 2xl:px-12">
@@ -56,7 +63,7 @@ export function SiteNav({ brand, capabilityStatementHref }: SiteNavProps) {
         </Link>
 
         <div className="ml-auto flex shrink-0 items-center gap-3">
-          <nav className="hidden items-center gap-6 text-base font-semibold text-zinc-300 2xl:flex">
+          <nav aria-label="Primary" className="hidden items-center gap-6 text-base font-semibold text-zinc-300 2xl:flex">
             {primaryNavItems.map((item) => (
               <Link
                 key={item.href}
@@ -85,11 +92,13 @@ export function SiteNav({ brand, capabilityStatementHref }: SiteNavProps) {
           </a>
 
           <button
+            ref={menuButtonRef}
             type="button"
             className="rounded-md border border-white/20 p-2 text-white transition hover:border-cyan-200/50 hover:text-cyan-100"
             onClick={() => setOpen((v) => !v)}
             aria-label="Toggle navigation menu"
             aria-expanded={open}
+            aria-controls={open ? "site-navigation-menu" : undefined}
           >
             {open ? <X size={20} /> : <Menu size={20} />}
           </button>
@@ -98,13 +107,14 @@ export function SiteNav({ brand, capabilityStatementHref }: SiteNavProps) {
       <AnimatePresence>
         {open ? (
           <motion.div
+            id="site-navigation-menu"
             initial={{ opacity: 0, y: -8 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -8 }}
             className="absolute right-4 top-[calc(100%+0.75rem)] w-[min(calc(100vw-2rem),24rem)] overflow-hidden rounded-lg border border-cyan-200/18 bg-[#05080b]/95 shadow-[0_24px_80px_rgba(0,0,0,0.55)] backdrop-blur-xl sm:right-6 lg:right-8"
           >
-            <nav className="grid gap-4 p-4 text-right">
-              <div className="grid gap-1 xl:hidden">
+            <nav aria-label="Additional" className="grid gap-4 p-4 text-right">
+              <div className="grid gap-1 2xl:hidden">
                 {primaryNavItems.map((item) => (
                   <Link
                     key={item.href}

@@ -806,7 +806,6 @@ footer::before {
 
 footer .relative.overflow-hidden {
   mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.6) 0%, rgba(0, 0, 0, 0.85) 50%, rgba(0, 0, 0, 1) 100%);
-  animation: footer-wordmark-drift 26s ease-in-out infinite;
 }
 
 .home-hero {

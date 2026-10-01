@@ -62,8 +62,8 @@ export async function SiteFooter() {
         </div>
 
         <div>
-          <p className="text-xs uppercase tracking-[0.2em] text-slate-500">Company</p>
-          <nav className="mt-4 grid gap-2 text-sm text-slate-300">
+          <p className="text-xs uppercase tracking-[0.2em] text-slate-300">Company</p>
+          <nav aria-label="Company" className="mt-4 grid gap-2 text-sm text-slate-300">
             <Link href="/" className="hover:text-cyan-200">Home</Link>
             <Link href="/about" className="hover:text-cyan-200">About Us</Link>
             <Link href="/partnerships" className="hover:text-cyan-200">Key Partnerships / Eco-Systems</Link>
@@ -74,8 +74,8 @@ export async function SiteFooter() {
         </div>
 
         <div>
-          <p className="text-xs uppercase tracking-[0.2em] text-slate-500">Capabilities</p>
-          <nav className="mt-4 grid gap-2 text-sm text-slate-300">
+          <p className="text-xs uppercase tracking-[0.2em] text-slate-300">Capabilities</p>
+          <nav aria-label="Capabilities" className="mt-4 grid gap-2 text-sm text-slate-300">
             <Link href="/services" className="hover:text-cyan-200">Services</Link>
             <Link href="/contracts" className="hover:text-cyan-200">Contract Vehicles</Link>
             <a href={capabilityStatementHref} download className="hover:text-cyan-200">Capabilities Statement</a>
@@ -85,7 +85,7 @@ export async function SiteFooter() {
         </div>
 
         <div>
-          <p className="text-xs uppercase tracking-[0.2em] text-slate-500">Follow</p>
+          <p className="text-xs uppercase tracking-[0.2em] text-slate-300">Follow</p>
           <div className="mt-4 flex items-center gap-3 text-slate-300">
             <a
               href={linkedInUrl}
@@ -100,7 +100,7 @@ export async function SiteFooter() {
         </div>
       </div>
 
-      <div className="relative overflow-hidden border-t border-white/10">
+      <div aria-hidden="true" className="relative overflow-hidden border-t border-white/10">
         <p className="mx-auto max-w-7xl px-4 py-2 text-[72px] font-black uppercase tracking-[0.16em] text-white/8 sm:text-[96px] lg:px-8 lg:text-[124px]">
           AI STRATEGY
         </p>
