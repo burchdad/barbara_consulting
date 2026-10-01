@@ -86,7 +86,6 @@ export default function SewpViPage() {
             <dl className="mt-6 divide-y divide-white/10">
               {contractDetails.map(([label, value]) => <div key={label} className="grid gap-2 py-4 sm:grid-cols-2"><dt className="text-sm text-slate-400">{label}</dt><dd className="break-words text-base font-semibold text-white">{value}</dd></div>)}
             </dl>
-            <a className={`${linkStyle} mt-6`} href="https://www.sewp.nasa.gov/sewp6public/contractholders#/detail/01" target="_blank" rel="noopener noreferrer">SEWP contract holder information <ArrowUpRight size={16} aria-hidden="true" /><span className="sr-only"> (opens in a new tab)</span></a>
           </div>
         </div>
       </Section>
