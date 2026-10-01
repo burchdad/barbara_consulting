@@ -43,7 +43,7 @@ const linkStyle = "inline-flex items-center gap-2 text-sm font-bold text-cyan-20
 
 export default function SewpViPage() {
   return (
-    <main id="sewp-main" tabIndex={-1} className="overflow-hidden bg-[#050a12] [&_a:focus-visible]:outline-2 [&_a:focus-visible]:outline-offset-4 [&_a:focus-visible]:outline-cyan-200">
+    <main id="sewp-main" tabIndex={-1} className="scroll-mt-36 overflow-hidden bg-[#050a12] [&_a:focus-visible]:outline-2 [&_a:focus-visible]:outline-offset-4 [&_a:focus-visible]:outline-cyan-200">
       <div className="relative isolate border-b border-cyan-200/15 bg-[radial-gradient(ellipse_at_top_right,rgba(8,145,178,0.22),transparent_65%)]">
         <Section className="relative py-16 lg:py-24">
           <p className={eyebrow}>Federal acquisition / Category C</p>

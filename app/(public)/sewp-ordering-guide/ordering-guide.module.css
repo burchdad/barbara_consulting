@@ -1,4 +1,5 @@
-.page { background: #fff; color: #272727; font-family: Arial, Helvetica, sans-serif; }
+.page { background: #fff; color: #272727; font-family: Arial, Helvetica, sans-serif; scroll-margin-top: 9rem; }
+.guide [id] { scroll-margin-top: 9rem; }
 .toolbar { display: flex; justify-content: space-between; align-items: center; gap: 16px; flex-wrap: wrap; max-width: 1150px; margin: auto; padding: 20px 28px; font-size: 14px; }
 .toolbar button { cursor: pointer; border: 1px solid #19194e; padding: 10px 16px; border-radius: 4px; color: #19194e; font-weight: bold; }
 .toolbar button:hover { background: #f2f2fa; }
