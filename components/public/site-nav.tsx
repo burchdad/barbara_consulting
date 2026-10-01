@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { Menu, X } from "lucide-react";
 import { AnimatePresence, motion } from "framer-motion";
 import { useState } from "react";
@@ -29,6 +30,7 @@ type SiteNavProps = {
 };
 
 export function SiteNav({ brand, capabilityStatementHref }: SiteNavProps) {
+  const pathname = usePathname();
   const [open, setOpen] = useState(false);
   const brandLines = brand
     .replace(" - Sage Tech Solutions", " / SageTech Solutions")
@@ -36,6 +38,7 @@ export function SiteNav({ brand, capabilityStatementHref }: SiteNavProps) {
 
   return (
     <header className="sticky top-0 z-50 border-b border-white/10 bg-black/70 backdrop-blur-xl">
+      {(pathname === "/sewp-vi" || pathname === "/sewp-ordering-guide") && <a href="#sewp-main" className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-[60] focus:rounded focus:bg-white focus:px-4 focus:py-3 focus:text-black focus:outline-2 focus:outline-cyan-700">Skip to main content</a>}
       <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-red-400/60 to-transparent" />
       <div className="flex w-full items-center justify-between gap-6 px-4 py-4 sm:px-6 lg:px-10 xl:px-12 2xl:px-12">
         <Link href="/" className="shrink-0 font-black uppercase tracking-[0.12em] text-white">

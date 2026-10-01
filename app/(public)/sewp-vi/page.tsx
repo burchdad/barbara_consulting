@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { ArrowDown, ArrowUpRight, FileText, Mail, Phone } from "lucide-react";
+import sewp from "@/lib/content/sewp.json";
 import { Section } from "@/components/ui/section";
 
 export const metadata: Metadata = {
@@ -9,9 +10,9 @@ export const metadata: Metadata = {
 };
 
 const contractDetails = [
-  ["SEWP VI contract number", "80TECH26DXXXX"],
+  ["SEWP VI contract number", sewp.contractNumber],
   ["Awarded category", "C"],
-  ["Contract type", "GWAC"],
+  ["Contract type", "Multiple-award GWAC"],
   ["Period of performance", "Nov 2026 - Oct 2036"],
   ["SEWP surcharge", "0.34%"],
   ["UEI", "DRJDASA3SJJ3"],
@@ -26,15 +27,12 @@ const services = [
   ["Communications & training", "Technical communications and specialized training."],
 ];
 
-const contacts = [
-  { name: "Christa Moyer", role: "SEWP VI Program Manager", email: "Cmoyer@graymatterstech.com", phone: "410-725-1155", tel: "+14107251155" },
-  { name: "Barbara A. Gray", role: "SEWP Deputy Program Manager", email: "Bgray@graymatterstech.com", phone: "202-420-1767", tel: "+12024201767" },
-];
+const contacts = sewp.contacts;
 
 const sectionLinks = [
   ["contract", "Contract information"],
   ["services", "Category C services"],
-  ["contacts", "Program contacts"],
+  ["contacts", "Quotes, support & contacts"],
   ["fair-opportunity", "Fair opportunity"],
   ["resources", "Ordering & resources"],
 ];
@@ -45,7 +43,7 @@ const linkStyle = "inline-flex items-center gap-2 text-sm font-bold text-cyan-20
 
 export default function SewpViPage() {
   return (
-    <main className="overflow-hidden bg-[#050a12]">
+    <main id="sewp-main" tabIndex={-1} className="overflow-hidden bg-[#050a12] [&_a:focus-visible]:outline-2 [&_a:focus-visible]:outline-offset-4 [&_a:focus-visible]:outline-cyan-200">
       <div className="relative isolate border-b border-cyan-200/15 bg-[radial-gradient(ellipse_at_top_right,rgba(8,145,178,0.22),transparent_65%)]">
         <Section className="relative py-16 lg:py-24">
           <p className={eyebrow}>Federal acquisition / Category C</p>
@@ -76,13 +74,12 @@ export default function SewpViPage() {
             <p className={eyebrow}>Understanding the contract</p>
             <h2 className={heading}>An evolving acquisition pathway.</h2>
             <div className="mt-6 space-y-5 text-base leading-8 text-slate-300">
-              <p>NASA SEWP (Solutions for Enterprise-Wide Procurement), pronounced &quot;soup,&quot; provides the latest Information Technology, Communication, and Audio-Visual (ITC/AV) solutions and services for all federal agencies and their approved contractors.</p>
-              <p>Originally, the contract vehicle provided only technology products for NASA and all other agencies. SEWP has continually evolved over the past 30 years, expanding its scope to meet the requests of its customers.</p>
-              <p>The SEWP vehicle represents acquisition innovation within the Federal Government. The program is self-funded through usage fees (0.34%) and provides all federal agencies with acquisition support for more than 50,000 orders a year.</p>
+              {sewp.overview.map((paragraph) => <p key={paragraph}>{paragraph}</p>)}
             </div>
           </div>
           <div className="border border-cyan-200/20 bg-white/[0.025] p-6 sm:p-8">
             <h3 className="text-xl font-bold text-white">GMTS contract information</h3>
+            <p className="mt-5 text-base leading-7 text-slate-300">{sewp.multiAward}</p>
             <dl className="mt-6 divide-y divide-white/10">
               {contractDetails.map(([label, value]) => <div key={label} className="grid gap-2 py-4 sm:grid-cols-2"><dt className="text-sm text-slate-400">{label}</dt><dd className="break-words text-base font-semibold text-white">{value}</dd></div>)}
             </dl>
@@ -99,8 +96,12 @@ export default function SewpViPage() {
       </Section>
 
       <Section id="contacts" className="scroll-mt-32 border-t border-white/10">
-        <p className={eyebrow}>GMTS program management</p>
-        <h2 className={heading}>Your SEWP VI contacts.</h2>
+        <p className={eyebrow}>GMTS sales and support</p>
+        <h2 className={heading}>Quotes, support, and order issues.</h2>
+        <div className="mt-8 max-w-5xl space-y-6 text-base leading-8 text-slate-300">
+          {sewp.support.map((item) => <div key={item.title}><h3 className="text-xl font-bold text-white">{item.title}</h3><p className="mt-2">{item.text}</p></div>)}
+        </div>
+        <h3 className="mt-10 text-2xl font-bold text-white">SEWP VI sales and support contacts</h3>
         <div className="mt-10 grid gap-5 lg:grid-cols-2">
           {contacts.map((contact) => <article key={contact.email} className="min-w-0 border border-cyan-200/20 bg-cyan-200/[0.04] p-6 sm:p-8"><p className={eyebrow}>{contact.role}</p><h3 className="mt-4 text-3xl font-bold text-white">{contact.name}</h3><div className="mt-6 flex flex-col items-start gap-4"><a href={`mailto:${contact.email}`} className={`${linkStyle} break-all`}><Mail size={18} className="shrink-0" aria-hidden="true" />{contact.email}</a><a href={`tel:${contact.tel}`} className={linkStyle}><Phone size={18} aria-hidden="true" />{contact.phone}</a></div></article>)}
         </div>
@@ -111,15 +112,7 @@ export default function SewpViPage() {
           <p className={eyebrow}>A.1.13</p>
           <h2 className={heading}>Fair opportunity and requests for quotes.</h2>
           <div className="mt-8 space-y-6 text-base leading-8 text-slate-300">
-            <p>Contractors will be provided a fair opportunity at the individual order level as appropriate per FAR Part 16.505(b), including the SEWP RFQ tools. No documentation for the order selection is required to be submitted with the order. All such documentation is to be maintained by the issuing procurement office.</p>
-            <p>The Contractor shall not market, quote or otherwise offer for sale, any IT Solutions not listed under this contract, until the said solutions are included in the SEWP database of record, and available to all Government end-users.</p>
-            <p>If the Government issues a Request For Information (RFI) as part of market research, the Contractor may provide items not yet listed on their SEWP contract as part of a market research quote if:</p>
-            <ol className="list-decimal space-y-3 pl-6 marker:text-cyan-300"><li>All such items are clearly marked as not yet available on their SEWP contract; and</li><li>The contractor submits a technology refreshment request to add those products to their contract.</li></ol>
-            <p>If the Government issues a Request For Quote (RFQ) or a Market Research Request (MRR), the Contractor may only respond with items available on their Contract and the price of each item shall be no greater than the price in Attachment F SEWP database of record at the time the quote is issued. If the Contractor has insufficient items on their contract to fully respond to the Formal RFQ, the Contractor must respond with a No Bid.</p>
-            <p>Unless the RFQ specifically allows for partial quotes, the Contractor must respond fully to all requirements specified in the RFQ.</p>
-            <p>When submitting a quote to a government end-user, the contractor must clearly state the length of time the quote is valid. The contractor shall honor any order submitted within the stated time period of a quote.</p>
-            <p>When responding to an RFI or RFQ issued from the NASA SEWP RFQ on-line quoting system, the Contractor must respond as outlined in <strong className="font-semibold text-white">Attachment C: Contract Holder User Manual (CHUM).</strong></p>
-            <p>Contract Holders are prohibited from using Government information posted on the NASA SEWP Contract Holder Only Page, such as RFQs, RFIs, etc., for purposes other than proposing on SEWP requirements. This includes Contract Holders providing third parties with SEWP information and requirements for the purpose of assisting companies, that are not SEWP Contract Holders, with providing unsolicited proposals to meet agency requirements already posted to the NASA SEWP RFQ on-line quoting system.</p>
+            {sewp.fairOpportunity.map((item, index) => typeof item.text === "string" ? <p key={index}>{item.text}</p> : <ol key={index} className="list-decimal space-y-3 pl-6 marker:text-cyan-300">{item.text.map((text) => <li key={text}>{text}</li>)}</ol>)}
           </div>
         </div>
       </Section>

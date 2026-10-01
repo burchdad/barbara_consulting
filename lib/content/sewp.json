@@ -1,0 +1,81 @@
+{
+  "contractNumber": "80TECH26D0902",
+  "multiAward": "Gray Matters Technology Services, LLC holds a Category C contract under NASA SEWP VI, a multiple-award Government-Wide Acquisition Contract (GWAC). Orders are placed under the Fair Opportunity provisions posted below.",
+  "overview": [
+    "NASA SEWP (Solutions for Enterprise-Wide Procurement), pronounced \"soup,\" provides the latest Information Technology, Communication, and Audio-Visual (ITC/AV) solutions and services for all federal agencies and their approved contractors.",
+    "Created in 1993, SEWP I was the first Government-Wide Acquisition Contract (GWAC) in the federal acquisition space.",
+    "Originally, the contract vehicle provided only technology products for NASA and all other agencies. SEWP has continually evolved over the past 30 years, expanding its scope to meet the requests of its customers.",
+    "The SEWP vehicle represents acquisition innovation within the Federal Government. The program is self-funded through usage fees (0.34%) and provides all federal agencies with acquisition support for more than 50,000 orders a year."
+  ],
+  "support": [
+    {
+      "title": "Obtaining a quote",
+      "text": "We provide IT services only and do not resell hardware or software. To request a quote for services, use the NASA SEWP Quote Request Tool (QRT) or contact our SEWP VI team below. Quotes state a validity period, and we honor orders submitted within that period."
+    },
+    {
+      "title": "Installation, warranty, and support",
+      "text": "Because we do not sell products, installation, basic and extended product warranties, and software support do not apply to our offerings. Service performance, acceptance, and support terms are defined in each delivery order. For any post-delivery question, contact the SEWP VI team below."
+    },
+    {
+      "title": "Troubleshooting an order",
+      "text": "Contact us with your contract number, delivery order number, and a brief description of the issue. If it is not resolved, contact the NASA SEWP Program Office at help@sewp.nasa.gov or (301) 286-1478, Monday-Friday, 7:30 AM-6 PM ET."
+    }
+  ],
+  "contacts": [
+    {
+      "name": "Christa Moyer",
+      "role": "SEWP VI Program Manager",
+      "email": "Cmoyer@graymatterstech.com",
+      "phone": "410-725-1155",
+      "tel": "+14107251155"
+    },
+    {
+      "name": "Barbara A. Gray",
+      "role": "SEWP Deputy Program Manager",
+      "email": "Bgray@graymatterstech.com",
+      "phone": "202-420-1767",
+      "tel": "+12024201767"
+    }
+  ],
+  "fairOpportunity": [
+    {
+      "type": "paragraph",
+      "text": "Contractors will be provided a fair opportunity at the individual order level as appropriate per FAR Part 16.505(b), including the SEWP RFQ tools. No documentation for the order selection is required to be submitted with the order. All such documentation is to be maintained by the issuing procurement office."
+    },
+    {
+      "type": "paragraph",
+      "text": "The Contractor shall not market, quote or otherwise offer for sale, any IT Solutions not listed under this contract, until the said solutions are included in the SEWP database of record, and available to all Government end-users."
+    },
+    {
+      "type": "paragraph",
+      "text": "If the Government issues a Request For Information (RFI) as part of market research, the Contractor may provide items not yet listed on their SEWP contract as part of a market research quote if:"
+    },
+    {
+      "type": "list",
+      "text": [
+        "All such items are clearly marked as not yet available on their SEWP contract; and",
+        "The contractor submits a technology refreshment request to add those products to their contract."
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "If the Government issues a Request For Quote (RFQ) or a Market Research Request (MRR), the Contractor may only respond with items available on their Contract and the price of each item shall be no greater than the price in Attachment F SEWP database of record at the time the quote is issued. If the Contractor has insufficient items on their contract to fully respond to the Formal RFQ, the Contractor must respond with a No Bid."
+    },
+    {
+      "type": "paragraph",
+      "text": "Unless the RFQ specifically allows for partial quotes, the Contractor must respond fully to all requirements specified in the RFQ."
+    },
+    {
+      "type": "paragraph",
+      "text": "When submitting a quote to a government end-user, the contractor must clearly state the length of time the quote is valid. The contractor shall honor any order submitted within the stated time period of a quote."
+    },
+    {
+      "type": "paragraph",
+      "text": "When responding to an RFI or RFQ issued from the NASA SEWP RFQ on-line quoting system, the Contractor must respond as outlined in Attachment C: Contract Holder User Manual (CHUM)."
+    },
+    {
+      "type": "paragraph",
+      "text": "Contract Holders are prohibited from using Government information posted on the NASA SEWP Contract Holder Only Page, such as RFQs, RFIs, etc., for purposes other than proposing on SEWP requirements. This includes Contract Holders providing third parties with SEWP information and requirements for the purpose of assisting companies, that are not SEWP Contract Holders, with providing unsolicited proposals to meet agency requirements already posted to the NASA SEWP RFQ on-line quoting system."
+    }
+  ]
+}
