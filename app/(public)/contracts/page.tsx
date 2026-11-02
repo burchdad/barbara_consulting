@@ -13,7 +13,7 @@ import { Section } from "@/components/ui/section";
 import { Reveal } from "@/components/public/reveal";
 import { siteConfig } from "@/lib/config/site";
 import { getPublicContractsPageData } from "@/lib/site-data";
-import { getContractStatus } from "@/lib/contract-period";
+import { getPublicContractStatus } from "@/lib/public-contracts";
 
 export const metadata: Metadata = {
   title: "Contract Vehicles",
@@ -242,7 +242,7 @@ export default async function ContractsPage() {
                       </div>
                       <div>
                         <dt className="text-xs font-bold uppercase tracking-[0.16em] text-slate-400">Period</dt>
-                        <dd className="mt-2 text-sm font-semibold leading-6 text-white">{getContractStatus(contract)}</dd>
+                        <dd className="mt-2 text-sm font-semibold leading-6 text-white">{getPublicContractStatus(contract)}</dd>
                       </div>
                       <div>
                         <dt className="text-xs font-bold uppercase tracking-[0.16em] text-slate-400">Summary</dt>

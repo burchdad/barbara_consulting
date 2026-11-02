@@ -117,16 +117,16 @@ function FloatingReadinessGraph() {
 
       <div className="absolute right-8 top-8 rounded-2xl border border-white/15 bg-black/60 p-5 shadow-2xl backdrop-blur">
         <p className="text-xs font-black uppercase tracking-[0.18em] text-slate-400">
-          Readiness
+          AI Readiness
         </p>
-        <p className="mt-2 text-4xl font-black text-white">84%</p>
+        <p className="mt-2 text-xl font-black text-white">Assess &amp; Plan</p>
       </div>
 
       <div className="absolute bottom-8 left-8 rounded-2xl border border-white/15 bg-black/60 p-5 shadow-2xl backdrop-blur">
         <p className="text-xs font-black uppercase tracking-[0.18em] text-slate-400">
-          Workflow Load
+          Workflow Automation
         </p>
-        <p className="mt-2 text-4xl font-black text-white">-32%</p>
+        <p className="mt-2 text-xl font-black text-white">Map &amp; Improve</p>
       </div>
     </div>
   );

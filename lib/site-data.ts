@@ -1,3 +1,4 @@
+import { normalizePublicContract } from "@/lib/public-contracts";
 import { prisma } from "@/lib/prisma";
 import { ensureContentBaseline } from "@/lib/content-baseline";
 import { ensurePartnershipContactCompatibility } from "@/lib/partnership-contact-compatibility";
@@ -46,7 +47,7 @@ export async function getPublishedData() {
         settings,
         services,
         partners,
-        contracts,
+        contracts: contracts.map(normalizePublicContract),
         cases,
         leadership,
         testimonials,
@@ -135,7 +136,7 @@ export async function getPublicContractsPageData() {
         prisma.globalSetting.findFirst(),
       ]);
 
-      return { contracts, settings };
+      return { contracts: contracts.map(normalizePublicContract), settings };
     },
     { contracts: [], settings: null },
   );
