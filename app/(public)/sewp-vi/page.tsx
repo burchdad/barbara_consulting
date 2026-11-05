@@ -60,6 +60,9 @@ export default function SewpViPage() {
             <div className="border-l-2 border-cyan-300/60 pl-6">
               <p className="text-lg leading-8 text-slate-200">Information technology, communication, and audio-visual solutions and services for federal agencies and their approved contractors.</p>
               <a href="#contacts" className="mt-6 inline-flex items-center gap-3 rounded-full bg-cyan-200 px-6 py-3 text-sm font-black uppercase tracking-wider text-slate-950 transition hover:bg-white">Contact our team <ArrowDown size={16} aria-hidden="true" /></a>
+              <div className="mt-4">
+                <a href="/capabilities/sewp-vi.pdf" download className={linkStyle}><FileText size={18} className="shrink-0" aria-hidden="true" />Download SEWP VI information (PDF)</a>
+              </div>
             </div>
           </div>
           <nav aria-label="On this page" className="mt-12 flex flex-wrap gap-x-6 gap-y-4 border-t border-white/10 pt-6">
@@ -134,7 +137,6 @@ export default function SewpViPage() {
             <ul className="mt-4 list-disc space-y-2 pl-5 text-slate-300 marker:text-cyan-300"><li>SEWP overview and fair opportunity</li><li>Contact information</li><li>What&apos;s in scope for SEWP VI</li><li>Ordering process</li></ul>
           </article>
         </div>
-        <a href="/capabilities/sewp-vi.pdf" download className={`${linkStyle} mt-8`}><FileText size={18} aria-hidden="true" />Download SEWP VI information (PDF)</a>
       </Section>
     </main>
   );
